@@ -36,6 +36,7 @@
     "react-youtube": "^10.1.0",
     "recharts": "^2.12.7",
     "sass": "^1.57.1",
+    "sharethis-reactjs": "^1.6.0",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^4.9.4",

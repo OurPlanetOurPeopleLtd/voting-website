@@ -6,6 +6,7 @@ import {
     FaLinkedin,
     FaShareAlt,
 } from "react-icons/fa";
+import {InlineShareButtons} from 'sharethis-reactjs';
 
 import "./SharingControls.scss";
 
@@ -26,7 +27,7 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
             return;
 
         const copyLink = document.getElementById('copy-link') as HTMLLinkElement;
-        if(!copyLink)
+        if (!copyLink)
             return;
 
         copyLink.addEventListener('click', (event) => {
@@ -36,8 +37,8 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
             const link = copyLink.href;
 
             navigator.share({
-                url:link, 
-                title:mainQuestionText,
+                url: link,
+                title: mainQuestionText,
                 text: `Please vote! ${logoUrl}`
             })
 
@@ -45,7 +46,8 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
         setLinkAdded(true);
     })
 
-    function record(text: string) {}
+    function record(text: string) {
+    }
 
     const openSocialWindow = (url: string) => {
         const left = (window.screen.width - 570) / 2;
@@ -53,7 +55,7 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
         const params = "menubar=no,toolbar=no,status=no,width=570,height=570,top=" + top + ",left=" + left;
         window.open(url, "NewWindow", params);
     };
-    
+
     const handleShare = (platform: string) => {
         const pageUrl = encodeURIComponent(window.location.href);
         let url = "";
@@ -61,23 +63,25 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
         switch (platform) {
             case "facebook":
                 url = `https://www.facebook.com/sharer.php?u=${pageUrl}`;
-            break;
+                break;
 
             case "twitter":
                 url = `https://twitter.com/intent/tweet?url=${pageUrl}&text=Check this out!`;
-            break;
+                break;
 
             case "linkedin":
                 url = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
-            break;
+                break;
 
             default:
-            return;
+                return;
         }
 
         openSocialWindow(url);
     };
-    
+
+
+
     return (
         <>
             <Row className={"verticalFrameCentre justify-content-center"}>
@@ -85,32 +89,38 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
             </Row>
 
             <Row>
-                <Col className={"squashToRow  sharingControls"}>
-                    <div className={"verticalFrameCentre"}>
-                        <div className="sharing-icons__top">
-                            <button type="button">
-                                <FaFacebook onClick={(e) => { e.preventDefault(); handleShare("facebook")}} style={{ fontSize: '3rem'}}/>
-                                <span className="visually-hidden">Share on Facebook</span>
-                            </button>
+             
+                        <InlineShareButtons
+                            config={{
+                                alignment: 'center',  // alignment of buttons (left, center, right)
+                                color: 'social',      // set the color of buttons (social, white)
+                                enabled: true,        // show/hide buttons (true, false)
+                                font_size: 16,        // font size for the buttons
+                                labels: 'cta',        // button labels (cta, counts, null)
+                                language: 'en',       // which language to use (see LANGUAGES)
+                                networks: [           // which networks to include (see SHARING NETWORKS)
+                                    'whatsapp',                                    
+                                    'facebook',
+                                    'twitter',
+                                    'linkedin',
+                                    'messenger',
+                                ],
+                                padding: 12,          // padding within buttons (INTEGER)
+                                radius: 4,            // the corner radius on each button (INTEGER)
+                                show_total: true,
+                                size: 40,             // the size of each button (INTEGER)
 
-                            <button type="button">
-                                <FaTwitter onClick={(e) => { e.preventDefault(); handleShare("twitter")}} style={{ fontSize: '3rem'}}/>
-                                <span className="visually-hidden">Share on X</span>
-                            </button>
-
-                            <button type="button">
-                                <FaLinkedin onClick={(e) => { e.preventDefault(); handleShare("linkedin")}} style={{ fontSize: '3rem'}}/>
-                                <span className="visually-hidden">Share on Linkedin</span>
-                            </button>
-                        </div>
-
-                        <h3 className="sharing-icons__subheading">{shareSubHeading}</h3>
-                        <a id="copy-link" href="https://wwww.ourplanetourpeople.com">
-                            <FaShareAlt onClick={() => record("Copy")} />
-                            <span className="visually-hidden">Share with contacts</span>
-                        </a>
-                    </div>
-                </Col>
+                                // OPTIONAL PARAMETERS
+                              //  url: 'https://www.sharethis.com', // (defaults to current url)
+                           //     image: 'https://bit.ly/2CMhCMC',  // (defaults to og:image or twitter:image)
+                            //    description: 'custom text',       // (defaults to og:description or twitter:description)
+                            //    title: 'custom title',            // (defaults to og:title or twitter:title)
+                                message: 'custom email text',     // (only for email sharing)
+                                subject: 'custom email subject',  // (only for email sharing)
+                                username: 'custom twitter handle' // (only for twitter sharing)
+                            }}
+                        />
+            
             </Row>
         </>
     )
