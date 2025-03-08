@@ -5,6 +5,7 @@ import {
     FaTwitter,
     FaLinkedin,
     FaShareAlt,
+    FaWhatsapp,
 } from "react-icons/fa";
 
 import "./SharingControls.scss";
@@ -71,6 +72,10 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
                 url = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
             break;
 
+            case "whatsapp":
+                url = `https://api.whatsapp.com/send?text=${pageUrl}`;
+            break;
+
             default:
             return;
         }
@@ -102,13 +107,17 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
                                 <FaLinkedin onClick={(e) => { e.preventDefault(); handleShare("linkedin")}} style={{ fontSize: '3rem'}}/>
                                 <span className="visually-hidden">Share on Linkedin</span>
                             </button>
-                        </div>
 
-                        <h3 className="sharing-icons__subheading">{shareSubHeading}</h3>
-                        <a id="copy-link" href="https://wwww.ourplanetourpeople.com">
-                            <FaShareAlt onClick={() => record("Copy")} />
-                            <span className="visually-hidden">Share with contacts</span>
-                        </a>
+                            <button type="button">
+                                <FaWhatsapp onClick={(e) => { e.preventDefault(); handleShare("whatsapp")}} style={{ fontSize: '3rem'}}/>
+                                <span className="visually-hidden">Share on WhatsApp</span>
+                            </button>
+
+                            <a id="copy-link" href="https://wwww.ourplanetourpeople.com">
+                                <FaShareAlt onClick={() => record("Copy")} />
+                                <span className="visually-hidden">Share with contacts</span>
+                            </a>
+                        </div>
                     </div>
                 </Col>
             </Row>
