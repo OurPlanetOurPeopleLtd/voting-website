@@ -26,6 +26,20 @@
   .voteVideo {
     max-width: 50%;
   }
+
+  .intro-content {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .intro-content__text {
+    width: 55%;
+  }
+
+  .intro-content__image {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .row {
