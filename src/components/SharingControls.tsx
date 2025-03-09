@@ -11,8 +11,8 @@ import {
 import "./SharingControls.scss";
 
 export interface ISharingControls {
-    voted: boolean;
-    shareHeading: string;
+    voted?: boolean;
+    shareHeading?: string;
     shareSubHeading?: string;
     shareButtonText?: string;
     className?: string;

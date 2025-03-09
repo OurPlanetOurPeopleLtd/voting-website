@@ -32,5 +32,7 @@ export const ArticlePage = (props: TArticlePage) => {
     }, [slug, fetchData]);
 
     const includedDonateButton = slug.includes("donate"); // todo: we should power this via dato
-    return (<PageData {...data} includeDonateButton={includedDonateButton}/>)
+    return (
+        <PageData {...data} includeDonateButton={includedDonateButton}/>
+    )
 };
