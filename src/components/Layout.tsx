@@ -9,8 +9,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import {footerComponentId, headerComponentId} from "../Routing";
 
 import React, {PropsWithChildren, useEffect, useState} from "react";
-
-
 import {CookieConsent, getCookieConsentValue} from "react-cookie-consent";
 
 import {Analytics} from 'aws-amplify';
@@ -82,10 +80,8 @@ export const LayoutTs = ({children, locale} : ILayout) => {
     else
         DisableAnalytics();
 
-
     return (
         <>
-
             <Navbar expanded={expanded} collapseOnSelect expand="lg" fixed="top">
                 <Container style={{position: "relative"}}>
                     <Link to={`${locale}/?stage=1`} className="navbar-brand">
