@@ -61,7 +61,7 @@ export const DynamicNavList = (props: TDynamicNav) => {
                         case ContentTypes.VotingPage:
                             return (
                                 <>
-                                <Nav.Link onClick={onSelect} as={NavLink} key={key} to={slugPrefix  + (navItem.slug ?? "")}
+                                <Nav.Link onClick={onSelect} as={NavLink} key={key} to={slugPrefix  + (navItem.slug ?? "?stage=1")}
                                           >
                                     {navItem.cardTitle}
                                 </Nav.Link>
