@@ -2,17 +2,19 @@
 import Donation from "../../components/Donation";
 import {SharingControls} from "../../components/SharingControls";
 import {TVotingPageExtended} from "../VotingPage";
-import {Button, Col, Container, Fade, Row} from "react-bootstrap";
+import {Button, Container, Fade} from "react-bootstrap";
 import {QuestionComponent} from "../../components/QuestionComponent";
 import {Choice} from "../../models";
 import {StructuredText} from "react-datocms";
 import {TStagedFlowProps} from "./TStagedFlowProps";
-import { VideoControl } from "../../components/VideoControl";
+import {VideoControl} from "../../components/VideoControl";
 import {VideoWithReference} from "../VideoWithReference";
-import { getReferences } from "../../repositories/References/request";
+import {getReferences} from "../../repositories/References/request";
+import {useSearchParams} from "react-router-dom";
+
+import cryingEarth from "../../crying-earth.png";
 
 import "../VotingPage.scss";
-import {useSearchParams} from "react-router-dom";
 
 const StagedFlow = (props: TStagedFlowProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -78,13 +80,17 @@ const StagedFlow = (props: TStagedFlowProps) => {
                         </Fade>
 
                         <Fade in={stage === openingStage} unmountOnExit>
-                            <div>
-                                <div className={"verticalFrameCentre"} >
+                            <div className="landing-content">
+                                <div className={"verticalFrameCentre landing-content__text"}>
                                     <div style={{fontSize:"1.5rem"}}>
                                         <StructuredText data={props.openingText}/>
                                     </div>
                                     
                                     <Button className="btn btn--white" onClick={nextStage}>Next</Button>
+                                </div>
+
+                                <div className="landing-content__image">
+                                    <img src={cryingEarth} alt="" />
                                 </div>
                             </div>
                         </Fade>
@@ -122,18 +128,18 @@ const StagedFlow = (props: TStagedFlowProps) => {
                         <Fade in={stage === detailStage} unmountOnExit>
                             <div>
                                 <div className={"verticalFrameCentre"}>
-                                <VideoWithReference
-                                    references={getReferences( props.videos?.detailVideo?.video.id, "en")}
-                                    locale={props.locale}
-                                    fullScreenOnClick={true}
-                                    datoVideo={props.videos?.detailVideo?.video?.video}
-                                    onFinish={() => {
-                                        if (props.watchedCallBack)
-                                            props.watchedCallBack();
-                                        nextStage();
-                                    }}
-                                    videoThumbnail={props.videos?.detailVideo.thumbnailImage?.responsiveImage.src}
-                                    currentTimeStamp={0}/>
+                                    <VideoWithReference
+                                        references={getReferences( props.videos?.detailVideo?.video.id, "en")}
+                                        locale={props.locale}
+                                        fullScreenOnClick={true}
+                                        datoVideo={props.videos?.detailVideo?.video?.video}
+                                        onFinish={() => {
+                                            if (props.watchedCallBack)
+                                                props.watchedCallBack();
+                                            nextStage();
+                                        }}
+                                        videoThumbnail={props.videos?.detailVideo.thumbnailImage?.responsiveImage.src}
+                                        currentTimeStamp={0}/>
                                 </div>
                             </div>
                         </Fade>
