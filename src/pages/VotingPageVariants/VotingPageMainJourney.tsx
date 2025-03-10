@@ -35,7 +35,6 @@ const StagedFlow = (props: TStagedFlowProps) => {
     const donateStage = detailStage + 1;
     const totalStages = donateStage+1; // Number of steps in the flow
     
-    
     const updateSearchParams = (newStage:number): number => {
         searchParams.set("stage", newStage.toString());
         setSearchParams({ showNavigation:showNavigationControls.toString(), stage: newStage.toString() });
