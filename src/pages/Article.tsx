@@ -20,6 +20,7 @@ export const ArticlePage = (props: TArticlePage) => {
 
     const [data, setData] = useState<TPage>({
         header: "...",
+        locale:"en",
         richText: null,
         includeDonateButton: true,
     });

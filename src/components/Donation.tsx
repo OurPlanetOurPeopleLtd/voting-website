@@ -2,7 +2,11 @@ import React from "react";
 import "./Donation.scss";
 import {Button, Col, Row} from "react-bootstrap";
 
-const Donation = () => {
+
+export interface TDonationProps {
+    locale: string;
+}
+const Donation= (props: TDonationProps) => {
 
 
     const whyDontate = true;
@@ -17,7 +21,7 @@ const Donation = () => {
                 // Calculate the top position
                 const top = window.innerHeight * 0.10;
 
-                window.open("https://whydonate.com/en/donate/save-our-planet", "newWindow", `width=${width}, height=${height}, left=${left}, top=${top}`);
+                window.open(`https://whydonate.com/${props.locale}/donate/save-our-planet`, "newWindow", `width=${width}, height=${height}, left=${left}, top=${top}`);
 
             }}>Donate</Button>
         </>)

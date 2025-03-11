@@ -152,7 +152,7 @@ const StagedFlow = (props: TStagedFlowProps) => {
                                         <div style={{textAlign: "center" }}>
                                             <StructuredText data={props.donateText}/>
                                         </div>
-                                        <Donation/>
+                                        <Donation locale={props.locale}/>
                                     </div>
                                 </div>
                             </div>

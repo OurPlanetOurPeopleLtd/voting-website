@@ -8,6 +8,7 @@ export interface TPage {
     heroImageAltText?: string;
     richText: ReactNode;
     includeDonateButton?: boolean;
+    locale:string;
 }
 
 export const PageData = (data: TPage) => {
@@ -26,7 +27,7 @@ export const PageData = (data: TPage) => {
                     </div>
 
                     <div>{data.richText ? data.richText : <p>...</p>}</div>
-                    {includeDonateButton ? <Donation></Donation> : null}
+                    {includeDonateButton ? <Donation locale={data.locale}></Donation> : null}
                 </div>
 
                 {includeDonateButton && (

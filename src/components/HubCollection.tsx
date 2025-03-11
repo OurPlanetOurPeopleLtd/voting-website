@@ -4,6 +4,7 @@ import "./HubCollection.scss";
 import {ContentTypes, NavigationItem} from "../repositories/Navigation/types";
 import {Video} from "react-datocms";
 import {VideoControl} from "./VideoControl";
+import {TVideoThumbnail} from "../repositories/Common/types";
 
 export type THubCollection = {
     items: NavigationItem[]
@@ -18,16 +19,16 @@ export type THubCard =
     {
         cardTitle?: string;
         pageTitle: string;
-        
+        pageImageSrc?:string;
         link: string;
         uniqueKey: string;
     }
-export type TVidoHubCard = THubCard &
+export type TVideoHubCard = THubCard &
     {        
 
         videoThumbnail:{responsiveImage:{src:string}}
    
-        mainVideo: { id: string, video:{video: Video | undefined} } | undefined;
+        mainVideo: TVideoThumbnail | undefined;
     }
 
 function getOverrideFontSize(title: string): string | undefined {
@@ -44,6 +45,7 @@ function getOverrideFontSize(title: string): string | undefined {
 
 export const HubCard = (props: THubCard) => {
     const title = props.cardTitle ?? "";
+    
     const overrideFontSizeTo = getOverrideFontSize(title);
 
     return (
@@ -53,26 +55,26 @@ export const HubCard = (props: THubCard) => {
                     ? <h2 className="card-title" font-overridded={!!overrideFontSizeTo}
                           style={{fontSize: overrideFontSizeTo}}>{title}</h2>
                     : <h2 className="card-title">{title}</h2>}
+                {props.pageImageSrc ? <img src={props.pageImageSrc}/> : null }
             </div>
         </a>)
 }
-export const VideoHubCard = (props: TVidoHubCard) => {
+export const VideoHubCard = (props: TVideoHubCard) => {
     const title = props.cardTitle ?? "";
 
-    const overrideFontSizeTo = getOverrideFontSize(title);
-
-  
 
     return (
-        <a href={props.link} className={"card"} key={props.uniqueKey}>
+        <div className={"card"} key={props.uniqueKey}>
+        <a href={props.link} >{title}</a>
         <div className="video-card">
             <div className="card-content" key={props.uniqueKey}>
 
                 <VideoControl fullScreenOnClick={true} datoVideo={props.mainVideo?.video?.video} pageTitle={props.pageTitle}
-                              videoTitle={props.mainVideo?.video?.video?.title ?? ""} videoThumbnail={props.videoThumbnail?.responsiveImage?.src}/>
+                              videoThumbnail={props.mainVideo?.thumbnailImage.responsiveImage.src}
+                              videoTitle={props.mainVideo?.video?.video?.title ?? ""} />
 
             </div>
-        </div></a>)
+        </div></div>)
 }
 export const HubCollection = (props: THubCollection) => {
     let subHubCollections: any[] = [];
@@ -107,7 +109,7 @@ export const HubCollection = (props: THubCollection) => {
                     if (props.showVideoThumbNails) {
                         mainHubCards.push(
                             <VideoHubCard key={key} pageTitle={pageTitle} cardTitle={x.title} link={link}
-                                          videoThumbnail={x.videoThumbnail}
+                                          videoThumbnail={x.thumbnail}
                                             
                                            uniqueKey={key} mainVideo={x.mainVideo}/>
                         )
@@ -120,6 +122,11 @@ export const HubCollection = (props: THubCollection) => {
                 case ContentTypes.VotingPage:
                     mainHubCards.push(
                         <HubCard key={key} pageTitle={pageTitle} cardTitle={x.cardTitle} link={link} uniqueKey={key}/>
+                    )
+                    break;
+                case ContentTypes.PdfWrapper:
+                    mainHubCards.push(
+                        <HubCard key={key} pageTitle={pageTitle} pageImageSrc={x.thumbnail.responsiveImage.src} cardTitle={x.title} link={x.pdf.url} uniqueKey={key}/>
                     )
                     break;
                 default:

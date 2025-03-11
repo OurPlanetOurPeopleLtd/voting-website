@@ -3,6 +3,8 @@
 //graphqlplayground
 //2EASI81WCZEAsg9bRP370U
 
+import {ContentTypes} from "../Navigation/types";
+
 const blogPost = `title
             slug`;
 
@@ -89,11 +91,22 @@ const votingPage = `
 const basicNavItems = `
           __typename
           
+          ... on ${ContentTypes.PdfWrapper} {
+            title
+               id 
+               thumbnail${imgBlock}
+               pdf
+                {
+                  url
+                }
+          }
           ... on VideoPageModelRecord {
             title
                id 
                slug
-               mainVideo{video${videoBlock}}
+               mainVideo{
+                video${videoBlock}
+                thumbnailImage${imgBlock}}
           }
           ... on BlogPostModelRecord {
              title

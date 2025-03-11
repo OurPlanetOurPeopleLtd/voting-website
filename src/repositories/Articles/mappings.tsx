@@ -98,7 +98,7 @@ function datoRichTextToReactNode(content: TStructuredText): ReactNode {
 }
 
 
-export function mapBlogPost(actualPost: Item | undefined) {
+export function mapBlogPost(actualPost: Item | undefined, locale:string) {
     if (!actualPost) {
         throw new Error("no blog post")
     }
@@ -115,17 +115,18 @@ export function mapBlogPost(actualPost: Item | undefined) {
         heroImageUrl: actualPost.image?.url,
         heroImageAltText: actualPost.image?.description,
         richText: react,
+        locale:locale
     };
     return model;
 }
 
-export async function mapBlogData(result: QueryResult): Promise<TPage | null> {
+export async function mapBlogData(result: QueryResult, locale:string): Promise<TPage | null> {
 
     const actualPost = result.data.allBlogPostModels.shift();
     if(!actualPost)
         return null;
 
-    return mapBlogPost(actualPost);
+    return mapBlogPost(actualPost,locale);
 }
 
 

@@ -1,5 +1,6 @@
 import {Video} from "react-datocms/dist/types/VideoPlayer";
 import {StructuredTextDocument} from "react-datocms";
+import {TVideoThumbnail} from "../Common/types";
 
 
 export interface QueryResult {
@@ -22,8 +23,8 @@ export enum ContentTypes {
     NavigationGroup = "NavigationGroupModelRecord",
     ExternalLink = "ExternalLinkModelRecord",
     VotingResult = "VotingResultModelRecord",
-    PdfAndVideo = "InformationSourceRecord"
-    
+    PdfAndVideo = "InformationSourceRecord",
+    PdfWrapper = "PdfWrapperModelRecord"
 }
 
 export enum AssetTypes {
@@ -49,9 +50,9 @@ export interface TQuestionBlock {
 
 export interface NavigationItem extends NavigationGroup {
 
-    mainVideo: { id: string, video:{video: Video | undefined} } | undefined;
+    mainVideo: TVideoThumbnail | undefined;
     
-    videoThumbnail: { responsiveImage: { src: string } };
+    
     cardTitle: string;
     title: string;
     url: string;
@@ -59,7 +60,9 @@ export interface NavigationItem extends NavigationGroup {
     slug: string;
     __typename: ContentTypes
     showVideoThumbnailsInHub?: boolean
-    
+
+
+    thumbnail: { responsiveImage: { src: string } };
     pdf:{url:string}
     video:{slug:string}
 }
