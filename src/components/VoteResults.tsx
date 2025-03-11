@@ -100,8 +100,18 @@ export const VoteResults = ({questionId}: { questionId: string }) => {
         </Row>
         <Row>
             <Col>
+                <label htmlFor="NoVotes">Yes</label>
+                <div id="NoVotes">{yesVotes}</div>
+            </Col>
+            <Col>
+                <label htmlFor="NoVotes">No</label>
+                <div id="NoVotes">{noVotes}</div>
+            </Col>
+        </Row>
+        <Row>
+            <Col>
                 <div className={"chart-container"} data-hovered={isHovered.toString()}>
-
+                    
                     <Doughnut className={"chart"} data={chartData} options={chartOptions}
                               data-hovered={isHovered.toString()} onMouseEnter={() => setIsHovered(true)}
                               onMouseLeave={() => setIsHovered(false)}/>
