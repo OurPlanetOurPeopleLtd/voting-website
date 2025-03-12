@@ -47,6 +47,12 @@ export interface TQuestionBlock {
     textBelowVoting: string,
     
 }
+export type TPdfWrapper = 
+{
+    title: string;
+    thumbnail: { responsiveImage: { src: string } };
+    pdf:{url:string}
+}
 
 export interface NavigationItem extends NavigationGroup {
 
@@ -61,7 +67,7 @@ export interface NavigationItem extends NavigationGroup {
     __typename: ContentTypes
     showVideoThumbnailsInHub?: boolean
 
-
+   
     thumbnail: { responsiveImage: { src: string } };
     pdf:{url:string}
     video:{slug:string}
