@@ -6,6 +6,40 @@ import {Button, Col, Row} from "react-bootstrap";
 export interface TDonationProps {
     locale: string;
 }
+
+function GetWhyDonateLink(locale:string)
+{
+  
+    const supportedLanguageCodesInWeDontate: string[] = [
+        "en",
+        "de",
+        "bg",
+        "el",
+        "de",
+        "es",
+        "it",
+        "hu",
+        "da",
+        "pl",
+        "sv",
+        "fi",
+        "nl",
+        "ro",
+        "pt",
+        "sk",
+        "fr",
+        "hr",
+        "cz",
+        "uk",
+    ];
+    //if not supported by WeDontate, fall back to english
+    if(!supportedLanguageCodesInWeDontate.includes(locale))
+    {
+        locale = "en";
+    }
+    return `https://whydonate.com/${locale}/donate/save-our-planet`
+    
+}
 const Donation= (props: TDonationProps) => {
 
 
@@ -21,7 +55,7 @@ const Donation= (props: TDonationProps) => {
                 // Calculate the top position
                 const top = window.innerHeight * 0.10;
 
-                window.open(`https://whydonate.com/${props.locale}/donate/save-our-planet`, "newWindow", `width=${width}, height=${height}, left=${left}, top=${top}`);
+                window.open(GetWhyDonateLink(props.locale), "newWindow", `width=${width}, height=${height}, left=${left}, top=${top}`);
 
             }}>Donate</Button>
         </>)
