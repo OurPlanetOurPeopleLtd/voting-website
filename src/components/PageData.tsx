@@ -1,6 +1,7 @@
 import {ReactNode} from "react";
 import Donation from "./Donation";
 import { SharingControls } from "./SharingControls";
+import {getShareText} from "../repositories/utils/extraTranslations";
 
 export interface TPage {
     header: string;
@@ -32,7 +33,7 @@ export const PageData = (data: TPage) => {
 
                 {includeDonateButton && (
                     <div className="donate-container__share">
-                        <h2>And/or share via social media</h2>
+                        <h2>{getShareText(data.locale)}</h2>
                         <SharingControls />
                     </div>
                 )}

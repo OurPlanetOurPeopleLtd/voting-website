@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./Donation.scss";
 import {Button, Col, Row} from "react-bootstrap";
+import {getSupportedLocales} from "../languages";
 
 
 export interface TDonationProps {
@@ -42,7 +43,12 @@ function GetWhyDonateLink(locale:string)
 }
 const Donation= (props: TDonationProps) => {
 
-
+    useEffect(() =>
+    {
+        console.log("supported locales are")
+        console.log(getSupportedLocales())
+    })
+    
     return (<>
             <Button id="donate-button" className="btn btn--dark" onClick={() => {
                 const width = window.innerWidth * 0.9;

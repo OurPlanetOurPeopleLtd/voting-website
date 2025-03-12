@@ -32,6 +32,7 @@ let supportedLanguages: string[] = [];
 let supportedCountries:CountryFlag[] =[];
 export const defaultFlag = {code:"en", flag:countryCodeToFlagEmoji("en")}
 
+
 export const getSupportedLocales = (): string[] => {
     if (supportedLanguages.length === 0) {
         
