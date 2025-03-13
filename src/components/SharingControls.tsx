@@ -56,8 +56,8 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
     };
     
     const handleShare = (platform: string) => {
-        const cleanUrl = window.location.origin + window.location.pathname;
-        const pageUrl = encodeURIComponent(cleanUrl);
+      //  const cleanUrl = window.location.origin + window.location.pathname;
+        const pageUrl = "https://www.ourplanetourpeople.com";//encodeURIComponent(cleanUrl);
         let url = "";
 
         switch (platform) {
@@ -114,7 +114,7 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
                                 <span className="visually-hidden">Share via WhatsApp</span>
                             </button>
 
-                            <a id="copy-link" href="https://wwww.ourplanetourpeople.com">
+                            <a id="copy-link" href={pageUrl}>
                                 <FaShareAlt onClick={() => record("Copy")} />
                                 <span className="visually-hidden">Share with contacts</span>
                             </a>
