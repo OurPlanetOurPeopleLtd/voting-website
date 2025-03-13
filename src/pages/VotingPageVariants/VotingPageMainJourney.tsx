@@ -106,10 +106,7 @@ const StagedFlow = (props: TStagedFlowProps) => {
                                     <VideoControl locale={props.locale} fullScreenOnClick={true}
                                                 datoVideo={ props.videos?.prop1?.video?.video  }
                                                         leftShift={-50}
-                                                onFinish={() => {
-                                                    if (props.watchedCallBack) props.watchedCallBack();
-                                                    nextStage();
-                                                }}
+                                             
                                                 videoThumbnail={ props.videos?.prop1.thumbnailImage?.responsiveImage.src} />
                                 </div>
                             </div>
