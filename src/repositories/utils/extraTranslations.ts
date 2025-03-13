@@ -13,7 +13,7 @@ export function getShareText(locale:string)
         "pt": "E/ou compartilhar através das redes sociais",
         "no": "Og/eller del via sosiale medier",
     };
-     
+      
 
     const translation = socialShareTranslations[locale];
 
