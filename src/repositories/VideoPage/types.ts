@@ -13,14 +13,13 @@ export interface Data {
 
 export interface VideoItem {
 
-    mainVideo: TVideoThumbnail,//{ id: string, video:{video: Video | undefined} } | undefined;
+    mainVideo: TVideoThumbnail,
     sys: Sys
     __typename: string
     slug: string
     title: string
     introText?: string,
-//    video: { ytembedUrl: string, autoPlay: boolean, title: string }
- //   videoThumbnail:{responsiveImage:{src:string}}
+
 }
 
 
