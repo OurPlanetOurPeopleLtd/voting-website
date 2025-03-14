@@ -1,7 +1,4 @@
-//generate by
-//https://app.contentful.com/spaces/fojlfyn3xufg/environments/staging/entries/1n9FMvYa8MWstVI19atW2w
-//graphqlplayground
-//2EASI81WCZEAsg9bRP370U
+
 
 import {ContentTypes} from "../Navigation/types";
 
