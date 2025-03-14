@@ -13,6 +13,7 @@ export interface TVideoThumbnail {
 export interface Data {
     allVideoPageModels: NavigationItem[]
     allBlogPostModels: NavigationItem[];
+    allVideoWithPdfs: NavigationItem[];
     votingPageModel: NavigationItem;
 }
 
@@ -21,5 +22,18 @@ export type TArticlePage = {
     title?: string;
     locale: string;
 };
+export interface Sys {
+    id: string
+}
+
+export type TPdfWrapper =
+    {
+        title: string;
+        description: string;
+        createdDate?:Date;
+        thumbnail: { responsiveImage: { src: string } };
+        pdf:{url:string, size:number, _createdAt:string}
+    }
+
 
 

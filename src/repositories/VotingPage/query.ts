@@ -1,6 +1,3 @@
-//generate by
-//https://app.contentful.com/spaces/fojlfyn3xufg/environments/staging/entries/1n9FMvYa8MWstVI19atW2w
-//graphqlplayground
 
 import {getPreview} from "../utils/preview";
 import {LogQuery} from "../utils/utilities";

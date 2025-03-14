@@ -74,6 +74,7 @@ export const DynamicNavList = (props: TDynamicNav) => {
                   
                         case ContentTypes.VideoPage:
                         case ContentTypes.BlogPost:
+                        case ContentTypes.VideoWithPdfs:
                             return (
                                 <Nav.Link onClick={onSelect} as={NavLink} key={key} to={slugPrefix + (navItem.slug ?? "")}>
                                     {navItem.title}

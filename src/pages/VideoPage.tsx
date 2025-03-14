@@ -7,13 +7,11 @@ import {VideoControl} from "../components/VideoControl";
 
 import "./Page.scss";
 
-export interface TVideoPage {
+export type TVideoPage = {
     mainVideo: TVideoThumbnail | undefined,//{ id: string, video:{video: Video | undefined} } | undefined;
     header: string
     introText?: string;
     videoTitle?: string;
- 
-
 }
 
 function getLastSlugPart(slug: string, separator: string = '/'): string | undefined {
@@ -54,7 +52,7 @@ export const VideoPage = (props: TArticlePage) => {
             <h1>{data.header}</h1>  
             {data.introText ? <p className="introText">{data.introText}</p> : null}
 
-            <VideoControl locale={locale} fullScreenOnClick={false} datoVideo={data?.mainVideo?.video?.video ?? undefined} pageTitle={props.title} videoTitle={data.videoTitle} videoThumbnail={data.mainVideo?.thumbnailImage.responsiveImage.src}  {...(slug.includes("detailed-introduction-video") ? { onFinish: () => { handleFinish() } } : {})}></VideoControl>
+                <VideoControl locale={locale} fullScreenOnClick={false} datoVideo={data?.mainVideo?.video?.video ?? undefined} pageTitle={props.title} videoTitle={data.videoTitle} videoThumbnail={data.mainVideo?.thumbnailImage.responsiveImage.src}  {...(slug.includes("detailed-introduction-video") ? { onFinish: () => { handleFinish() } } : {})}></VideoControl>
         </>
     );
 };

@@ -1,6 +1,6 @@
 import {Video} from "react-datocms/dist/types/VideoPlayer";
 import {StructuredTextDocument} from "react-datocms";
-import {TVideoThumbnail} from "../Common/types";
+import {TPdfWrapper, TVideoThumbnail} from "../Common/types";
 
 
 export interface QueryResult {
@@ -24,7 +24,8 @@ export enum ContentTypes {
     ExternalLink = "ExternalLinkModelRecord",
     VotingResult = "VotingResultModelRecord",
     PdfAndVideo = "InformationSourceRecord",
-    PdfWrapper = "PdfWrapperModelRecord"
+    PdfWrapper = "PdfWrapperModelRecord",
+    VideoWithPdfs = "VideoWithPdfRecord"
 }
 
 export enum AssetTypes {
@@ -47,12 +48,7 @@ export interface TQuestionBlock {
     textBelowVoting: string,
     
 }
-export type TPdfWrapper = 
-{
-    title: string;
-    thumbnail: { responsiveImage: { src: string } };
-    pdf:{url:string}
-}
+
 
 export interface NavigationItem extends NavigationGroup {
 
@@ -69,7 +65,8 @@ export interface NavigationItem extends NavigationGroup {
 
    
     thumbnail: { responsiveImage: { src: string } };
-    pdf:{url:string}
+    pdf:{url:string}  
+    pdfs:TPdfWrapper[]
     video:{slug:string}
 }
 

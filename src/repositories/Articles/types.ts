@@ -1,4 +1,6 @@
 import type {StructuredText as TStructuredText} from 'datocms-structured-text-utils';
+import {Sys} from "../Common/types";
+
 
 export interface QueryResult {
     data: Data;
@@ -25,9 +27,6 @@ export interface Item {
     body: TStructuredText;
 }
 
-export interface Sys {
-    id: string;
-}
 
 export interface Author {
     name: string;

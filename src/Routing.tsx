@@ -19,6 +19,7 @@ import {RouteChangeListener} from "./RouteChangeListener";
 import {VideoPage} from "./pages/VideoPage";
 import {ArticlePage} from "./pages/Article";
 import {VotingResultsFrame} from "./pages/VotingResultsFrame";
+import {VideoWithPdfsPage} from "./pages/VideoWithPdfPage";
 
 
 export const headerComponentId = "UW2LLARmS3Oryu_9BT0IBQ"; //todo this is a bit rubbish
@@ -50,18 +51,16 @@ function Routing() {
     const [data, setData] = useState<NavigationItem[]>();
     const [dataLoaded, setDataLoaded] = useState(false);
     
-    async function fetchData() {
-
-    
+    async function fetchData() {       
         let links = await getAllNavData(); //todo we should probably just split this into the 3 arrays, save switching on typename below
 
-        if (process.env.NODE_ENV === "development" && DEBUG_QUERY) {
+        if (process.env.NODE_ENV === "development" && DEBUG_QUERY) 
+        {
             LogLinks(links, "routing");
         }
   
         setData(links);
-        setDataLoaded(true);
-       
+        setDataLoaded(true);  
     }
 
     
@@ -117,7 +116,8 @@ function Routing() {
                                         />
                             </>
                                 );
-
+           
+                                
                             case ContentTypes.BlogPost:
 
                                 return (
@@ -139,6 +139,13 @@ function Routing() {
                                         element={<VideoPage locale={locale} slug={prefix + navItem.slug ?? "video"}/>}
                                     />
                                 );
+
+                            case ContentTypes.VideoWithPdfs:
+
+                                return <Route
+                                    key={keyId+"results"}
+                                    path={prefix + navItem.slug ?? "vpdf" }
+                                    element={<VideoWithPdfsPage  locale={locale} slug={prefix + navItem.slug ?? "vpdf"}></VideoWithPdfsPage>} />
 
                             default:
                                 return null;
