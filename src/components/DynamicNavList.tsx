@@ -23,8 +23,6 @@ export const DynamicNavList = (props: TDynamicNav) => {
     const fetchData = useCallback(async () => {
         let dataFetched = await getNavigationJson(id, locale ?? "en");
         setData(dataFetched);
-        console.log("header is");
-        console.log(dataFetched);
     }, [id])
 
     const [data, setData] = useState<NavigationItem[]>(itemGroup ?? []);
