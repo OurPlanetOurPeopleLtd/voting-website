@@ -22,7 +22,8 @@ export interface ISharingControls {
 export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText}: ISharingControls) => {
     const [linkAdded, setLinkAdded] = useState(false);
     const [pageUrl, setPageUrl] = useState( "https://www.ourplanetourpeople.com");
-
+    
+   
  
     
     const logoUrl = "https://ourplanetourpeople.com/logo.png";
@@ -33,6 +34,13 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
         const copyLink = document.getElementById('copy-link') as HTMLLinkElement;
         if(!copyLink)
             return;
+
+        function getCurrentPage():string
+        {
+              const cleanUrl = window.location.origin + window.location.pathname;
+              return encodeURIComponent(cleanUrl);        
+        }
+        
 
         copyLink.addEventListener('click', (event) => {
             event.preventDefault(); // Prevent default link behavior
@@ -48,9 +56,6 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
 
         });
         setLinkAdded(true);
-
-        //  const cleanUrl = window.location.origin + window.location.pathname;
-        //setPageUrl(encodeURIComponent(cleanUrl));
     })
 
     function record(text: string) {}
