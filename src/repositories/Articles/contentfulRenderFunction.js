@@ -3,8 +3,9 @@ import {BLOCKS, INLINES} from "@contentful/rich-text-types";
 import {createAnchorLinkFromTitle} from "../utils/utilities";
 import {HubCollection} from "../../components/HubCollection";
 import {VideoEmbed} from "../../components/VideoEmbed";
-import {AssetTypes, ContentTypes} from "../Navigation/types";
+import {AssetTypes, ContentTypes, NavigationItem} from "../Navigation/types";
 import {getLogger} from "../../utils/logger";
+import {VideoWithPdfs} from "../../pages/VideoWithPdfs";
 
 function renderOptions(links) {
 
@@ -63,6 +64,13 @@ function renderOptions(links) {
                     return <HubCollection pageTitle={entry}
                                           showVideoThumbNails={entry.showVideoThumbnailsInHub ?? false}
                                           items={entry.navigationItemCollection.items}></HubCollection>
+                } 
+                if (entry.__typename === ContentTypes.VideoWithPdfs) {
+                    
+                    
+                    return <VideoWithPdfs  datoVideo={entry.mainVideo?.video}  
+                                           fullScreenOnClick={false} 
+                                           pdfWrappers={entry.pdfs}></VideoWithPdfs>
                 }
                 if (entry.__typename === ContentTypes.BlogPost || entry.__typename === ContentTypes.VideoPage) {
                     return (

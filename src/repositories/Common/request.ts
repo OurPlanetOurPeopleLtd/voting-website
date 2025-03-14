@@ -9,12 +9,22 @@ function generateAllPagesForNavQuery() {
     const query = `query pageQuery {
       allBlogPostModels {
        __typename   
-       ${QueryBlocks.BlogPost}  	
-    
+     
+        id
+      slug	
   }
   allVideoPageModels{
          __typename
-      ${QueryBlocks.VideoPost}  	
+
+      id
+      slug	
+    
+  }
+  allVideoWithPdfs{
+         __typename
+   
+      id
+      slug
     
   }
   votingPageModel{
@@ -29,6 +39,7 @@ function generateAllPagesForNavQuery() {
 
 function mapAllSlugs(root: QueryResult): NavigationItem[] {
     return root?.data?.allVideoPageModels
+        .concat(root.data.allVideoWithPdfs)
         .concat(root.data.allBlogPostModels)
         .concat(root.data.votingPageModel);
 }

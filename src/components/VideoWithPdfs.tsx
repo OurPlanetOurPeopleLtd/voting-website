@@ -1,22 +1,22 @@
 import React from "react";
 
 import {TVideoProps, VideoControl} from "../components/VideoControl";
-
-
 import "./VideoWithPdfs.scss";
-import {TPdfWrapper} from "../repositories/Navigation/types";
-import {HubCard} from "../components/HubCollection";
-
+import {TPdfWrapper} from "../repositories/Common/types";
 type TPdfs = {pdfWrappers:TPdfWrapper[]}
 type TVideoPdfs = TPdfs & TVideoProps;
 
 export const VideoWithPdfs = (props: TVideoPdfs) => {
 
    
-
     //if no pdfs just treat as normal control
     if(!props.pdfWrappers || props.pdfWrappers.length === 0){
         return <VideoControl {...props}  />
+    }
+
+    function bytesToKilobytesString(bytes: number): string {
+        const kilobytes = Math.floor(bytes / 1024);
+        return kilobytes.toString() + "kb";
     }
     
     return (
@@ -27,13 +27,13 @@ export const VideoWithPdfs = (props: TVideoPdfs) => {
 
             <div className="reference-container">
                 <ul>
-                {props.pdfWrappers.map((pdfWrapper, index) => 
-                    <li>
-                        {/* feel free to use pure html with the same data*/}
-                        <HubCard pageImageSrc={pdfWrapper.thumbnail.responsiveImage.src} 
-                                 pageTitle={pdfWrapper.title} 
-                                 link={pdfWrapper.pdf.url}
-                                 uniqueKey={pdfWrapper.title + index}/>                            
+                {props.pdfWrappers.map((pdfWrapper, index) =>
+                    <li key={"list_"+index}>                                   
+                        <a href={pdfWrapper.pdf.url}>
+                        <img src={pdfWrapper.thumbnail.responsiveImage.src}/>
+                        </a>
+                        <p>{bytesToKilobytesString(pdfWrapper.pdf?.size)}</p>
+                        <p> {pdfWrapper.description}</p>
                         
                     </li>
                 )}

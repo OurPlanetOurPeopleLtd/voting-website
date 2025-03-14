@@ -24,6 +24,20 @@ const videoBlock = `{
 const imgBlock = `{responsiveImage
         {src}}`;
 
+const pdfWrapperBlock = `{
+            title
+            description
+               id 
+               thumbnail${imgBlock}
+               pdf
+                {
+                  url
+                  size
+                  _createdAt
+                }
+          }`
+
+
 const videoPage = `
                 id
                 slug
@@ -33,6 +47,13 @@ const videoPage = `
                 thumbnailImage${imgBlock}
                 }    
             `;
+const videoWithPdfPage = videoPage + ` 
+            followOnLink {      
+            url
+          }
+            pdfs
+             ${pdfWrapperBlock}`;
+    
 const questionBlock = `
     id,
     questionTitleSt{  
@@ -88,18 +109,25 @@ const votingPage = `
             postVoteVideo${videoBlock}
             mainVideo${videoBlock}`;
 
+
+
+
+    
 const basicNavItems = `
           __typename
           
-          ... on ${ContentTypes.PdfWrapper} {
+          ... on ${ContentTypes.PdfWrapper} ${pdfWrapperBlock}
+          ... on ${ContentTypes.VideoWithPdfs} {
             title
-               id 
-               thumbnail${imgBlock}
-               pdf
-                {
-                  url
-                }
+            slug
+            pdfs
+             ${pdfWrapperBlock}
+             mainVideo{
+                video${videoBlock}
+                thumbnailImage${imgBlock}}
+                
           }
+ 
           ... on VideoPageModelRecord {
             title
                id 
@@ -139,6 +167,7 @@ export const QueryBlocks =
     {
         BasicNavigationItems: basicNavItems,
         BlogPost: blogPost,
+        VideoWithPdfPage: videoWithPdfPage,
         VideoPost: videoPage,
         VotingPage: votingPage,
         VideoComponent: videoPage,

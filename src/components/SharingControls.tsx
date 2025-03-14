@@ -21,6 +21,10 @@ export interface ISharingControls {
 
 export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText}: ISharingControls) => {
     const [linkAdded, setLinkAdded] = useState(false);
+    const [pageUrl, setPageUrl] = useState( "https://www.ourplanetourpeople.com");
+
+ 
+    
     const logoUrl = "https://ourplanetourpeople.com/logo.png";
     useEffect(() => {
         if (linkAdded)
@@ -44,6 +48,9 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
 
         });
         setLinkAdded(true);
+
+        //  const cleanUrl = window.location.origin + window.location.pathname;
+        //setPageUrl(encodeURIComponent(cleanUrl));
     })
 
     function record(text: string) {}
@@ -56,8 +63,7 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
     };
     
     const handleShare = (platform: string) => {
-      //  const cleanUrl = window.location.origin + window.location.pathname;
-        const pageUrl = "https://www.ourplanetourpeople.com";//encodeURIComponent(cleanUrl);
+   
         let url = "";
 
         switch (platform) {

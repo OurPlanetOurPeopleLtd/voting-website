@@ -23,6 +23,8 @@ export const DynamicNavList = (props: TDynamicNav) => {
     const fetchData = useCallback(async () => {
         let dataFetched = await getNavigationJson(id, locale ?? "en");
         setData(dataFetched);
+        console.log("header is");
+        console.log(dataFetched);
     }, [id])
 
     const [data, setData] = useState<NavigationItem[]>(itemGroup ?? []);
@@ -74,6 +76,7 @@ export const DynamicNavList = (props: TDynamicNav) => {
                   
                         case ContentTypes.VideoPage:
                         case ContentTypes.BlogPost:
+                        case ContentTypes.VideoWithPdfs:
                             return (
                                 <Nav.Link onClick={onSelect} as={NavLink} key={key} to={slugPrefix + (navItem.slug ?? "")}>
                                     {navItem.title}

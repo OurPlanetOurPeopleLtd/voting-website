@@ -67,8 +67,10 @@ export function LogException(ex: string) {
 
 }
 
-export function LogQuery(query: string) {
-    if (process.env.NODE_ENV !== "development" || !DEBUG_QUERY) return;
+export function LogQuery(query: string, force:boolean= false) {
+    
+    
+    if (!force && (process.env.NODE_ENV !== "development" || !DEBUG_QUERY)) return;
 
     const logger = getLogger('Query Log');
     logger.info("Query called is:")
