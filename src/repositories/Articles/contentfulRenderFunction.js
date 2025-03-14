@@ -3,7 +3,7 @@ import {BLOCKS, INLINES} from "@contentful/rich-text-types";
 import {createAnchorLinkFromTitle} from "../utils/utilities";
 import {HubCollection} from "../../components/HubCollection";
 import {VideoEmbed} from "../../components/VideoEmbed";
-import {AssetTypes, ContentTypes, NavigationItem} from "../Navigation/types";
+import {AssetTypes, ContentTypes} from "../Navigation/types";
 import {getLogger} from "../../utils/logger";
 import {VideoWithPdfs} from "../../pages/VideoWithPdfs";
 
