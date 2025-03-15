@@ -1,20 +1,19 @@
 ﻿import React, {useCallback, useEffect, useState} from "react";
+
 import {useNavigate} from "react-router-dom";
 import {TArticlePage} from "../repositories/Common/types";
-import "./Page.scss";
 import {TPdfWrapper} from "../repositories/Common/types";
 import {TVideoPage} from "./VideoPage";
 import {getVideoWithPdfPageJson} from "../repositories/VideoWithPdfsPage/request";
 import {VideoWithPdfs} from "../components/VideoWithPdfs";
 
+import "./Page.scss";
 
 export type TVideoWithPdfsPage = TVideoPage & 
 {
     followOnLink: string,
     pdfs: TPdfWrapper[];
 }
-
- 
 
 function getLastSlugPart(slug: string, separator: string = '/'): string | undefined {
     if (!slug) {
@@ -38,7 +37,6 @@ export const VideoWithPdfsPage = (props: TArticlePage) => {
     });
     
     const handleFinish = () => {
-       
         if(data.followOnLink)
         {
             let link = data.followOnLink;
@@ -53,10 +51,7 @@ export const VideoWithPdfsPage = (props: TArticlePage) => {
         }
     };
 
-    
-
     const fetchData = useCallback(async () => {
-       
         const videoName = getLastSlugPart(slug);
         const dataFetched = await getVideoWithPdfPageJson(videoName ?? "", locale);
 
@@ -64,7 +59,6 @@ export const VideoWithPdfsPage = (props: TArticlePage) => {
     }, [slug])
 
 
-    
     useEffect(() => {
         fetchData().catch(console.error);
     }, [slug, fetchData]);
@@ -74,7 +68,7 @@ export const VideoWithPdfsPage = (props: TArticlePage) => {
             <h1>{data.header}</h1>  
             {data.introText ? <p className="introText">{data.introText}</p> : null}
 
-                <VideoWithPdfs pdfWrappers={data.pdfs} locale={locale} fullScreenOnClick={false} datoVideo={data?.mainVideo?.video?.video ?? undefined} pageTitle={props.title} videoTitle={data.videoTitle} videoThumbnail={data.mainVideo?.thumbnailImage.responsiveImage.src}  {...(slug.includes("detailed-introduction-video") ? { onFinish: () => { handleFinish() } } : {})}></VideoWithPdfs>
+            <VideoWithPdfs pdfWrappers={data.pdfs} locale={locale} fullScreenOnClick={false} datoVideo={data?.mainVideo?.video?.video ?? undefined} pageTitle={props.title} videoTitle={data.videoTitle} videoThumbnail={data.mainVideo?.thumbnailImage.responsiveImage.src}  {...(slug.includes("detailed-introduction-video") ? { onFinish: () => { handleFinish() } } : {})}></VideoWithPdfs>
         </>
     );
 };
