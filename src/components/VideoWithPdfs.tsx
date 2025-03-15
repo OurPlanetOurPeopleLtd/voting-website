@@ -27,7 +27,7 @@ export const VideoWithPdfs = (props: TVideoPdfs) => {
                                 
                                 <div>
                                     <h3>{pdfWrapper.description}</h3>
-                                    <p>Lanaguage: English</p>
+                                    <p>Language: English</p>
                                 </div>
                             </a>
                         </li>
