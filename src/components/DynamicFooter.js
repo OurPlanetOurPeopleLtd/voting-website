@@ -18,7 +18,7 @@ export const DynamicFooter = ({id,locale}) => {
     }, [fetchData]);
 
     return showFooter
-        ? (<footer className="bg-light">
+        ? (<footer>
             <ul>
                 {links && links.map((x, index) => {
                     return (
