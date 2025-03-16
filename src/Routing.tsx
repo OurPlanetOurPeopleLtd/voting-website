@@ -20,6 +20,7 @@ import {VideoPage} from "./pages/VideoPage";
 import {ArticlePage} from "./pages/Article";
 import {VotingResultsFrame} from "./pages/VotingResultsFrame";
 import {VideoWithPdfsPage} from "./pages/VideoWithPdfPage";
+import {RegistrationPage} from "./pages/RegistrationPage";
 
 
 export const headerComponentId = "UW2LLARmS3Oryu_9BT0IBQ"; //todo this is a bit rubbish
@@ -103,15 +104,11 @@ function Routing() {
                                     />
                                         <Route
                                             key={keyId+"results"}
-
-                                            path={prefix + "results"}
-                                            
-                                            element={
-                                           
+                                            path={prefix + "results"}                                            
+                                            element={                                           
                                                 <VotingResultsFrame
                                                     questionId={"UwO6qO8AQL2tLD7tBPGP7A"}
-                                                />
-                                             
+                                                />                                             
                                             }
                                         />
                             </>
@@ -156,6 +153,14 @@ function Routing() {
                     key={prefix + "blog_list"}
                     path={prefix +"blog_list"}
                     element={<BlogList locale={locale}/>}
+                />
+                <Route
+                    key={"registration_page"}
+                    path={"registration"}
+                    element={
+                        <RegistrationPage
+                        />
+                    }
                 />
             </>
         );

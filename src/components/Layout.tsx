@@ -1,6 +1,6 @@
 ﻿import logo from "../logo.png";
 
-import {Link, Outlet} from "react-router-dom";
+import {Link, NavLink, Outlet} from "react-router-dom";
 import '@aws-amplify/ui-react/styles.css';
 import "./Layout.scss";
 import Container from 'react-bootstrap/Container';
@@ -102,7 +102,14 @@ export const LayoutTs = ({children, locale} : ILayout) => {
                                 setExpanded(false)
                                 return {}
                             }}></DynamicNavList>
-
+                            <div>
+                                <Nav.Link onClick={() => {
+                                    setExpanded(false)
+                                    return {}
+                                }} as={NavLink} key={"registration"} to={ "registration"}>
+                                    Register
+                                </Nav.Link>
+                            </div>
                             <div className="main-nav__language">
                                 <FlagSelect currentLocale={locale ?? defaultLanguage}></FlagSelect>
                             </div>

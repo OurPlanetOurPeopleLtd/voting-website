@@ -5,9 +5,8 @@
  **************************************************************************/
 
 import * as React from "react";
-import {GridProps, TextAreaFieldProps, TextFieldProps} from "@aws-amplify/ui-react";
-import {Event} from "../models";
-
+import { GridProps, TextAreaFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { Event } from "../models";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
