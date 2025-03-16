@@ -67,6 +67,11 @@ const StagedFlow = (props: TStagedFlowProps) => {
                         {/* Stage Video */}
                         <Fade in={stage === videoStage} unmountOnExit>
                             <div>
+                                <div className="frame__intro">
+                                    <h1>Thanks for voting</h1>
+                                    <p>Please watch the video below and help the cause by sharing.</p>
+                                </div>
+
                                 <div className={"verticalFrameCentre"}>
                                     <VideoControl locale={props.locale} fullScreenOnClick={true}
                                             datoVideo={props.videos?.thankYouVideo?.video?.video}

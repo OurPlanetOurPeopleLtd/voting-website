@@ -93,6 +93,19 @@ main .container {
   }
 }
 
+.frame__intro {
+  margin-top: -2.5rem;
+
+  h1 {
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
 img {
   display: block;
   margin-left: auto;
