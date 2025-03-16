@@ -32,93 +32,85 @@ export const DynamicNavList = (props: TDynamicNav) => {
             fetchData().catch(console.error);
     }, [fetchData]);
 
-  
-   
-    
     const gslugPrefix = props.locale ? `${locale}/` :"";
     return (
         <>
-            {data &&
-                data.map((navItem: NavigationItem, index) => {
-                    let slugPrefix = navItem.slug?.includes( gslugPrefix) ? "" : gslugPrefix;
-                    if(navItem.slug?.startsWith("/") && slugPrefix?.endsWith("/"))
-                        slugPrefix = props.locale ?? ""
+            {data && data.map((navItem: NavigationItem, index) => {
+                let slugPrefix = navItem.slug?.includes( gslugPrefix) ? "" : gslugPrefix;
+                if(navItem.slug?.startsWith("/") && slugPrefix?.endsWith("/"))
+                    slugPrefix = props.locale ?? ""
 
-                    const key =index +  (props.locale ?? "");
+                const key =index +  (props.locale ?? "");
 
-                    switch (navItem.__typename) {
-                        case ContentTypes.ExternalLink:
-                            return (
+                switch (navItem.__typename) {
+                    case ContentTypes.ExternalLink:
+                        return (
+                            <a
+                                key={key}
+                                href={navItem.url ?? ""}
+                                className="nav-link"
+                                data-test="full link"
+                            >
+                                {navItem.title}
+                            </a>
+                        );
+                    case ContentTypes.VotingPage:
+                        return (
+                            <>
+                            <Nav.Link onClick={onSelect} as={NavLink} key={key} to={slugPrefix  + (navItem.slug ?? "?stage=1")}>
+                                {navItem.cardTitle}
+                            </Nav.Link>
+                            <Nav.Link onClick={onSelect} as={NavLink} key={key+"results"} to={ slugPrefix  +  "results"}>
+                                Voting Results
+                            </Nav.Link>
+                            </>
+                        );
+                
+                    case ContentTypes.VideoPage:
+                    case ContentTypes.BlogPost:
+                    case ContentTypes.VideoWithPdfs:
+                        return (
+                            <Nav.Link onClick={onSelect} as={NavLink} key={key} to={slugPrefix + (navItem.slug ?? "")}>
+                                {navItem.title}
+                            </Nav.Link>
+                        );
+                    case ContentTypes.PdfAndVideo:
+                        return (
+                            <NavDropdown title={navItem.title ?? "_"} id={`basic-nav-dropdown-${navItem.id}`}>
+                                <button type="button" className="navigation-back" onClick={(e) => {e.preventDefault(); e.currentTarget.parentElement?.parentElement?.click()}}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 320 512" aria-hidden="true"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
+                                    Back
+                                </button>
+
+                                <Nav.Link onClick={onSelect} as={NavLink} key={key+"-video"} to={slugPrefix + (navItem.video?.slug ?? "")}>
+                                    {"Video format"}
+                                </Nav.Link>
+                                
                                 <a
-                                    key={key}
-                                    href={navItem.url ?? ""}
+                                    key={key+"-pdf"}
+                                    href={navItem.pdf?.url ?? ""}
                                     className="nav-link"
-                                    data-test="full link"
-                                >
-                                    {navItem.title}
-                                </a>
-                            );
-                        case ContentTypes.VotingPage:
-                            return (
-                                <>
-                                <Nav.Link onClick={onSelect} as={NavLink} key={key} to={slugPrefix  + (navItem.slug ?? "?stage=1")}
-                                          >
-                                    {navItem.cardTitle}
-                                </Nav.Link>
-                                <Nav.Link onClick={onSelect} as={NavLink} key={key+"results"} to={ slugPrefix  +  "results"}
-                                          >
-                                    Voting Results
-                                </Nav.Link>
-                                </>
-                            );
-                  
-                        case ContentTypes.VideoPage:
-                        case ContentTypes.BlogPost:
-                        case ContentTypes.VideoWithPdfs:
-                            return (
-                                <Nav.Link onClick={onSelect} as={NavLink} key={key} to={slugPrefix + (navItem.slug ?? "")}>
-                                    {navItem.title}
-                                </Nav.Link>
-                            );
-                        case ContentTypes.PdfAndVideo:
-                            return (
-                                <NavDropdown title={navItem.title ?? "_"} id={`basic-nav-dropdown-${navItem.id}`}>
-                                    <button type="button" className="navigation-back" onClick={(e) => {e.preventDefault(); e.currentTarget.parentElement?.parentElement?.click()}}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 320 512" aria-hidden="true"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
-                                        Back
-                                    </button>
+                                    data-test="full link">
+                                    {"PDF format"}
+                                </a> 
+                            </NavDropdown>
+                        );
+                        
+                    case ContentTypes.NavigationGroup:
+                        return (
+                            <NavDropdown title={navItem.title ?? "_"} id={`basic-nav-dropdown-${navItem.id}`}>
+                                <button type="button" className="navigation-back" onClick={(e) => {e.preventDefault(); e.currentTarget.parentElement?.parentElement?.click()}}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 320 512" aria-hidden="true"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
+                                    Back
+                                </button>
 
-                                    <Nav.Link onClick={onSelect} as={NavLink} key={key+"-video"} to={slugPrefix + (navItem.video?.slug ?? "")}>
-                                        {"Video format"}
-                                    </Nav.Link>
-                                    
-                                    <a
-                                        key={key+"-pdf"}
-                                        href={navItem.pdf?.url ?? ""}
-                                        className="nav-link"
-                                        data-test="full link"
-                                    >
-                                        {"PDF format"}
-                                    </a> 
-                                </NavDropdown>
-                            );
-                           
-                        case ContentTypes.NavigationGroup:
-                            return (
-                                <NavDropdown title={navItem.title ?? "_"} id={`basic-nav-dropdown-${navItem.id}`}>
-                                    <button type="button" className="navigation-back" onClick={(e) => {e.preventDefault(); e.currentTarget.parentElement?.parentElement?.click()}}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 320 512" aria-hidden="true"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>
-                                        Back
-                                    </button>
-
-                                    <DynamicNavList key={key} onSelect={onSelect} itemGroup={(navItem).navigationItem} locale={props.locale} id={navItem?.id ?? "123"}></DynamicNavList>
-                                </NavDropdown>
-                            );
-                        default:
-                            return <></>;
-                    }
-                })}
-            
+                                <DynamicNavList key={key} onSelect={onSelect} itemGroup={(navItem).navigationItem} locale={props.locale} id={navItem?.id ?? "123"}></DynamicNavList>
+                            </NavDropdown>
+                        );
+                    default:
+                        return <></>;
+                }
+            })}
         </>
     );
 };  

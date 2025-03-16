@@ -93,55 +93,48 @@ export const LayoutTs = ({children, locale} : ILayout) => {
                             }}
                         />
                     </Link>
-                    <Navbar.Toggle onClick={toggleExpanded} aria-controls="responsive-navbar-nav"/>
+
+                    <Navbar.Toggle onClick={toggleExpanded} aria-controls="responsive-navbar-nav" />
+
                     <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="me-auto">
+                        <Nav className="main-nav">
                             <DynamicNavList id={headerComponentId} locale={locale} onSelect={() => {
                                 setExpanded(false)
                                 return {}
                             }}></DynamicNavList>
-                            <FlagSelect currentLocale={locale ?? defaultLanguage}></FlagSelect>
 
+                            <div className="main-nav__language">
+                                <FlagSelect currentLocale={locale ?? defaultLanguage}></FlagSelect>
+                            </div>
                         </Nav>
-                        
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
 
-            
             <main>
                 {children}
                 <Container>
-
-                    
                     <Outlet/>
-
                 </Container>
-
             </main>
+
             <CookieConsent
                 location="bottom"
                 buttonText="Ok I Accept"
                 cookieName="OurPeopleOurPlanetAnalyticsAcceptance"
                 declineButtonText={"No Thank You"}
-                // buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
-                // declineButtonStyle={{ color: "#4e503b", fontSize: "13px" }}
                 expires={150}
                 enableDeclineButton
                 onDecline={() => {
                     setAnalyticsEnabled(false)
                 }}
                 onAccept={(acceptedByScrolling) => {
-
                     setAnalyticsEnabled(true)
-                }}
-            >
+                }}>
                 This website uses cookies to enhance the user experience.{" "}
-
             </CookieConsent>
-            <DynamicFooter id={footerComponentId} locale={locale}></DynamicFooter>
-          
 
+            <DynamicFooter id={footerComponentId} locale={locale}></DynamicFooter>
         </>
     );
 };

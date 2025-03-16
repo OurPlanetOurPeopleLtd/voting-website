@@ -155,3 +155,18 @@ img {
     padding-inline: 1rem;
   }
 }
+
+@media screen and (min-width: 968px) {
+  .main-nav {
+    flex: 1;
+    align-items: center;
+  }
+
+  .main-nav__language {
+    margin-left: auto;
+
+    select {
+      padding-inline: 0;
+    }
+  }
+}
