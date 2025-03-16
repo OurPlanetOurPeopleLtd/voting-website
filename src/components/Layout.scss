@@ -65,18 +65,23 @@ nav {
   }
 
   .nav-link {
-    font-weight: bold;
-    padding: 1rem;
+    font-weight: 600;
+    padding: .8rem 1rem;
+    border-radius: 8px;
 
     @media (min-width: 768px) {
       margin: 0 .5rem;
     }
 
+    &:focus-visible {
+      outline-color: var(--tertiary);
+      outline-width: 4px;
+    }
+
     &:hover,
-    &:focus {
-      background-color: var(--primary);
-      transition: background-color ease-in-out .5s;
-      color: white; /* TODO: Active dropdown and dropdown options also need white font */
+    &.active {
+      background-color: var(--tertiary);
+      color: white !important;
     }
   }
 }
