@@ -110,17 +110,18 @@ img {
   position: relative;
   text-align: center;
   color: var(--white);
+  margin-bottom: 1.5rem;
 
   img {
-    max-height: 300px;
+    max-height: 600px;
     object-fit: cover;
   }
 
   /* Bottom left text */
   h1 {
     position: absolute;
-    bottom: 8px;
-    left: 16px;
+    bottom: 1rem;
+    left: 1rem;
   }
 }
 
