@@ -17,4 +17,11 @@ type Vote @model @auth(rules: [{allow: public}]) {
   questionId: String
   country: String
 }
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  email: AWSEmail
+  name:String
+  voterId: ID
+}
  

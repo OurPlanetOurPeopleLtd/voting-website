@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -21,34 +21,31 @@ export declare type ValidationResponse = {
     errorMessage?: string;
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
-export declare type VoteCreateFormInputValues = {
+export declare type UserCreateFormInputValues = {
+    email?: string;
+    name?: string;
     voterId?: string;
-    choice?: string;
-    questionId?: string;
-    country?: string;
 };
-export declare type VoteCreateFormValidationValues = {
+export declare type UserCreateFormValidationValues = {
+    email?: ValidationFunction<string>;
+    name?: ValidationFunction<string>;
     voterId?: ValidationFunction<string>;
-    choice?: ValidationFunction<string>;
-    questionId?: ValidationFunction<string>;
-    country?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type VoteCreateFormOverridesProps = {
-    VoteCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+export declare type UserCreateFormOverridesProps = {
+    UserCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
+    email?: PrimitiveOverrideProps<TextFieldProps>;
+    name?: PrimitiveOverrideProps<TextFieldProps>;
     voterId?: PrimitiveOverrideProps<TextFieldProps>;
-    choice?: PrimitiveOverrideProps<SelectFieldProps>;
-    questionId?: PrimitiveOverrideProps<TextFieldProps>;
-    country?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
-export declare type VoteCreateFormProps = React.PropsWithChildren<{
-    overrides?: VoteCreateFormOverridesProps | undefined | null;
+export declare type UserCreateFormProps = React.PropsWithChildren<{
+    overrides?: UserCreateFormOverridesProps | undefined | null;
 } & {
     clearOnSuccess?: boolean;
-    onSubmit?: (fields: VoteCreateFormInputValues) => VoteCreateFormInputValues;
-    onSuccess?: (fields: VoteCreateFormInputValues) => void;
-    onError?: (fields: VoteCreateFormInputValues, errorMessage: string) => void;
-    onChange?: (fields: VoteCreateFormInputValues) => VoteCreateFormInputValues;
-    onValidate?: VoteCreateFormValidationValues;
+    onSubmit?: (fields: UserCreateFormInputValues) => UserCreateFormInputValues;
+    onSuccess?: (fields: UserCreateFormInputValues) => void;
+    onError?: (fields: UserCreateFormInputValues, errorMessage: string) => void;
+    onChange?: (fields: UserCreateFormInputValues) => UserCreateFormInputValues;
+    onValidate?: UserCreateFormValidationValues;
 } & React.CSSProperties>;
-export default function VoteCreateForm(props: VoteCreateFormProps): React.ReactElement;
+export default function UserCreateForm(props: UserCreateFormProps): React.ReactElement;

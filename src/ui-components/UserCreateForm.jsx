@@ -6,17 +6,11 @@
 
 /* eslint-disable */
 import * as React from "react";
-import {
-  Button,
-  Flex,
-  Grid,
-  TextAreaField,
-  TextField,
-} from "@aws-amplify/ui-react";
-import { Event } from "../models";
+import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import { User } from "../models";
 import { fetchByPath, getOverrideProps, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
-export default function EventCreateForm(props) {
+export default function UserCreateForm(props) {
   const {
     clearOnSuccess = true,
     onSuccess,
@@ -28,24 +22,24 @@ export default function EventCreateForm(props) {
     ...rest
   } = props;
   const initialValues = {
-    userId: "",
-    eventName: "",
-    attributes: "",
+    email: "",
+    name: "",
+    voterId: "",
   };
-  const [userId, setUserId] = React.useState(initialValues.userId);
-  const [eventName, setEventName] = React.useState(initialValues.eventName);
-  const [attributes, setAttributes] = React.useState(initialValues.attributes);
+  const [email, setEmail] = React.useState(initialValues.email);
+  const [name, setName] = React.useState(initialValues.name);
+  const [voterId, setVoterId] = React.useState(initialValues.voterId);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
-    setUserId(initialValues.userId);
-    setEventName(initialValues.eventName);
-    setAttributes(initialValues.attributes);
+    setEmail(initialValues.email);
+    setName(initialValues.name);
+    setVoterId(initialValues.voterId);
     setErrors({});
   };
   const validations = {
-    userId: [],
-    eventName: [],
-    attributes: [{ type: "JSON" }],
+    email: [{ type: "Email" }],
+    name: [],
+    voterId: [],
   };
   const runValidationTasks = async (
     fieldName,
@@ -73,9 +67,9 @@ export default function EventCreateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          userId,
-          eventName,
-          attributes,
+          email,
+          name,
+          voterId,
         };
         const validationResponses = await Promise.all(
           Object.keys(validations).reduce((promises, fieldName) => {
@@ -105,7 +99,7 @@ export default function EventCreateForm(props) {
               modelFields[key] = null;
             }
           });
-          await DataStore.save(new Event(modelFields));
+          await DataStore.save(new User(modelFields));
           if (onSuccess) {
             onSuccess(modelFields);
           }
@@ -118,86 +112,87 @@ export default function EventCreateForm(props) {
           }
         }
       }}
-      {...getOverrideProps(overrides, "EventCreateForm")}
+      {...getOverrideProps(overrides, "UserCreateForm")}
       {...rest}
     >
       <TextField
-        label="User id"
+        label="Email"
         isRequired={false}
         isReadOnly={false}
-        value={userId}
+        value={email}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              userId: value,
-              eventName,
-              attributes,
+              email: value,
+              name,
+              voterId,
             };
             const result = onChange(modelFields);
-            value = result?.userId ?? value;
+            value = result?.email ?? value;
           }
-          if (errors.userId?.hasError) {
-            runValidationTasks("userId", value);
+          if (errors.email?.hasError) {
+            runValidationTasks("email", value);
           }
-          setUserId(value);
+          setEmail(value);
         }}
-        onBlur={() => runValidationTasks("userId", userId)}
-        errorMessage={errors.userId?.errorMessage}
-        hasError={errors.userId?.hasError}
-        {...getOverrideProps(overrides, "userId")}
+        onBlur={() => runValidationTasks("email", email)}
+        errorMessage={errors.email?.errorMessage}
+        hasError={errors.email?.hasError}
+        {...getOverrideProps(overrides, "email")}
       ></TextField>
       <TextField
-        label="Event name"
+        label="Name"
         isRequired={false}
         isReadOnly={false}
-        value={eventName}
+        value={name}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              userId,
-              eventName: value,
-              attributes,
+              email,
+              name: value,
+              voterId,
             };
             const result = onChange(modelFields);
-            value = result?.eventName ?? value;
+            value = result?.name ?? value;
           }
-          if (errors.eventName?.hasError) {
-            runValidationTasks("eventName", value);
+          if (errors.name?.hasError) {
+            runValidationTasks("name", value);
           }
-          setEventName(value);
+          setName(value);
         }}
-        onBlur={() => runValidationTasks("eventName", eventName)}
-        errorMessage={errors.eventName?.errorMessage}
-        hasError={errors.eventName?.hasError}
-        {...getOverrideProps(overrides, "eventName")}
+        onBlur={() => runValidationTasks("name", name)}
+        errorMessage={errors.name?.errorMessage}
+        hasError={errors.name?.hasError}
+        {...getOverrideProps(overrides, "name")}
       ></TextField>
-      <TextAreaField
-        label="Attributes"
+      <TextField
+        label="Voter id"
         isRequired={false}
         isReadOnly={false}
+        value={voterId}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
             const modelFields = {
-              userId,
-              eventName,
-              attributes: value,
+              email,
+              name,
+              voterId: value,
             };
             const result = onChange(modelFields);
-            value = result?.attributes ?? value;
+            value = result?.voterId ?? value;
           }
-          if (errors.attributes?.hasError) {
-            runValidationTasks("attributes", value);
+          if (errors.voterId?.hasError) {
+            runValidationTasks("voterId", value);
           }
-          setAttributes(value);
+          setVoterId(value);
         }}
-        onBlur={() => runValidationTasks("attributes", attributes)}
-        errorMessage={errors.attributes?.errorMessage}
-        hasError={errors.attributes?.hasError}
-        {...getOverrideProps(overrides, "attributes")}
-      ></TextAreaField>
+        onBlur={() => runValidationTasks("voterId", voterId)}
+        errorMessage={errors.voterId?.errorMessage}
+        hasError={errors.voterId?.hasError}
+        {...getOverrideProps(overrides, "voterId")}
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

@@ -47,6 +47,8 @@ export const VideoWithPdfsPage = (props: TArticlePage) => {
                 const internalSlug = getLastSlugPart(link);
                 link = `/${locale}/${internalSlug}`;
             }
+            console.log("link is")
+            console.log(link)
             navigate(link)
         }
     };
