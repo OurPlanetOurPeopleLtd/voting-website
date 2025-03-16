@@ -10,6 +10,14 @@ export const RegistrationPage = () => {
     const [emailExistsError, setEmailExists] = useState(false);
     const [thankYouForRegister, setThankYouRegister] = useState(false);
   
+    const Deregister = async (email:string) => {
+        const existingUser = await DataStore.query(User, (v) => v.and(v => [v.email?.eq(email)]))
+        const aExistingUser = existingUser.shift();
+        const idAlreadyExists = !!aExistingUser;
+        if(!idAlreadyExists)
+            return;
+        await DataStore.delete(aExistingUser);
+    }
     const SaveUserToDB = async (name:string, email:string) => {
         let localGuid = localStorage.getItem(localStorageVotingIdKey);
 
