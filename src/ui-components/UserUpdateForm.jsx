@@ -24,10 +24,12 @@ export default function UserUpdateForm(props) {
   } = props;
   const initialValues = {
     email: "",
+    comment: "",
     name: "",
     voterId: "",
   };
   const [email, setEmail] = React.useState(initialValues.email);
+  const [comment, setComment] = React.useState(initialValues.comment);
   const [name, setName] = React.useState(initialValues.name);
   const [voterId, setVoterId] = React.useState(initialValues.voterId);
   const [errors, setErrors] = React.useState({});
@@ -36,6 +38,7 @@ export default function UserUpdateForm(props) {
       ? { ...initialValues, ...userRecord }
       : initialValues;
     setEmail(cleanValues.email);
+    setComment(cleanValues.comment);
     setName(cleanValues.name);
     setVoterId(cleanValues.voterId);
     setErrors({});
@@ -53,6 +56,7 @@ export default function UserUpdateForm(props) {
   React.useEffect(resetStateValues, [userRecord]);
   const validations = {
     email: [{ type: "Email" }],
+    comment: [],
     name: [],
     voterId: [],
   };
@@ -83,6 +87,7 @@ export default function UserUpdateForm(props) {
         event.preventDefault();
         let modelFields = {
           email,
+          comment,
           name,
           voterId,
         };
@@ -141,6 +146,7 @@ export default function UserUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               email: value,
+              comment,
               name,
               voterId,
             };
@@ -158,6 +164,33 @@ export default function UserUpdateForm(props) {
         {...getOverrideProps(overrides, "email")}
       ></TextField>
       <TextField
+        label="Comment"
+        isRequired={false}
+        isReadOnly={false}
+        value={comment}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              email,
+              comment: value,
+              name,
+              voterId,
+            };
+            const result = onChange(modelFields);
+            value = result?.comment ?? value;
+          }
+          if (errors.comment?.hasError) {
+            runValidationTasks("comment", value);
+          }
+          setComment(value);
+        }}
+        onBlur={() => runValidationTasks("comment", comment)}
+        errorMessage={errors.comment?.errorMessage}
+        hasError={errors.comment?.hasError}
+        {...getOverrideProps(overrides, "comment")}
+      ></TextField>
+      <TextField
         label="Name"
         isRequired={false}
         isReadOnly={false}
@@ -167,6 +200,7 @@ export default function UserUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               email,
+              comment,
               name: value,
               voterId,
             };
@@ -193,6 +227,7 @@ export default function UserUpdateForm(props) {
           if (onChange) {
             const modelFields = {
               email,
+              comment,
               name,
               voterId: value,
             };
