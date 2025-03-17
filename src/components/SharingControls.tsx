@@ -37,8 +37,8 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
 
         function getCurrentPage():string
         {
-              const cleanUrl = window.location.origin + window.location.pathname;
-              return encodeURIComponent(cleanUrl);        
+            const cleanUrl = window.location.origin + window.location.pathname;
+            return encodeURIComponent(cleanUrl);        
         }
         
 
@@ -68,7 +68,6 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
     };
     
     const handleShare = (platform: string) => {
-   
         let url = "";
 
         switch (platform) {
@@ -98,7 +97,7 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
     return (
         <>
             <Row className={"verticalFrameCentre justify-content-center"}>
-                <h2>{shareHeading}</h2>
+                <h1 className="frame__heading">{shareHeading}</h1>
             </Row>
 
             <Row>

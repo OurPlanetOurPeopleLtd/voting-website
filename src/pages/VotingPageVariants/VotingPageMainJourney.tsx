@@ -87,7 +87,9 @@ const StagedFlow = (props: TStagedFlowProps) => {
                         <Fade in={stage === openingStage} unmountOnExit>
                             <div className="landing-content">
                                 <div className={"verticalFrameCentre landing-content__text"}>
-                                    <div style={{fontSize:"1.5rem"}}>
+                                    <h1 className="frame__heading">We have a big problem and need to do something about it</h1>
+
+                                    <div style={{fontSize:"1.2rem"}}>
                                         <StructuredText data={props.openingText}/>
                                     </div>
                                     
@@ -104,6 +106,7 @@ const StagedFlow = (props: TStagedFlowProps) => {
                         <Fade in={stage === questionStage } unmountOnExit>
                             <div className={"vote-controls question-controls"}>
                                 <div className={"contentColumn"}>
+                                    <h1 className="frame__heading" style={{paddingLeft: "1rem"}}>It's time to take action</h1>
                                     <QuestionComponent {...props} {...questionOne} voteChangedCallBack={extendedVoteCallback}/>
                                 </div>
         
