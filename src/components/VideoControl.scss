@@ -4,6 +4,11 @@ mux-player {
   --seek-forward-button: none;
 }
 
+#dato-video-player {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
 /* Prevent .fullscreen styles on mobile */
 @media (min-width: 768px) {
   #dato-video-player {

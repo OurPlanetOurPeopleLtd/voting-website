@@ -14,63 +14,12 @@ h1 {
 }
 
 main .container {
-  padding: 2rem 0;
+  padding: .5rem 0;
 }
 
 .frame {
   background-color: var(--tertiary);
-  top: 1.25rem;
-
-  &::before,
-  &::after {
-    display: none;
-    content: "";
-    position: absolute;
-  }
-
-  &::before {
-    transform: skew(3deg, -1deg);
-    background-color: var(--secondary);
-    width: 85%;
-    height: calc(95% - 50px);
-    top: 0.5rem;
-    left: 1.5rem;
-    
-    @media (min-width: 540px) {
-      width: 95%;
-    }
-    
-    @media (min-width: 768px) {
-      display: block;
-      transform: skew(2deg, -1deg);
-      height: calc(90% - 50px);
-      width: 85%;
-      top: -.5rem;
-      left: 2rem;
-    }
-  }
-
-  &::after {
-    transform: skew(-2deg);
-    background-color: var(--tertiary);
-    top: 1rem;
-    height: calc(90% - 50px);
-    width: 85%;
-    left: 1rem;
-
-    @media (min-width: 540px) {
-      width: 95%;
-    }
-
-    @media (min-width: 768px) {
-      transform: skew(-4deg);
-      height: calc(85% - 50px);
-      display: block;
-      width: 90%;
-      top: 0;
-      left: 2rem;
-    }
-  }
+  border-radius: 12px;
 
   .frame-content {
     color: var(--white);
@@ -78,16 +27,7 @@ main .container {
     position: relative;
     
     @media (min-width: 768px) {
-      padding: 2.5rem 5rem 6rem 5rem;
-    }
-  }
-
-  @media screen and (min-width: 768px) {
-    background-color: transparent;
-
-    &::before,
-    &::after {
-      display: block;
+      padding: 1.5rem 1.5rem .5rem;
     }
   }
 }
@@ -124,10 +64,6 @@ main .container {
       text-decoration: underline;
       padding: 0;
     }
-  }
-  
-  @media screen and (min-width: 768px) {
-    margin-top: -2.5rem;
   }
 }
 
