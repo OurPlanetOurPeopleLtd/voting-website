@@ -7,10 +7,12 @@ import {QuestionComponent} from "../../components/QuestionComponent";
 import {Choice} from "../../models";
 import {StructuredText} from "react-datocms";
 import {TStagedFlowProps} from "./TStagedFlowProps";
+import {TQuestionBlock} from "../../repositories/Navigation/types";
 import {VideoControl} from "../../components/VideoControl";
 import {VideoWithReference} from "../VideoWithReference";
 import {getReferences} from "../../repositories/References/request";
 import {useSearchParams} from "react-router-dom";
+import {VoteControls} from "../../components/VoteControls";
 
 import cryingEarth from "../../crying-earth.png";
 
@@ -22,7 +24,7 @@ const StagedFlow = (props: TStagedFlowProps) => {
     const stageAsString = searchParams.get("stage");
     const showNavigationControlsAsString = searchParams.get("showNavigation");
    
-    const showNavigationControls = showNavigationControlsAsString != undefined ? showNavigationControlsAsString !== "false" : false;
+    const showNavigationControls = showNavigationControlsAsString !== undefined ? showNavigationControlsAsString !== "false" : false;
     const stageFromUrl = stageAsString ? parseInt(stageAsString) : undefined;
 
     const [stage, setStage] = useState(stageFromUrl?? 0);
@@ -37,7 +39,7 @@ const StagedFlow = (props: TStagedFlowProps) => {
     const donateStage = detailStage + 1;
     const totalStages = donateStage+1; // Number of steps in the flow
     
-    const updateSearchParams = (newStage:number): number => {
+    const updateSearchParams = (newStage: number): number => {
         searchParams.set("stage", newStage.toString());
         setSearchParams({ showNavigation:showNavigationControls.toString(), stage: newStage.toString() });
         return newStage;
@@ -69,7 +71,9 @@ const StagedFlow = (props: TStagedFlowProps) => {
                             <div>
                                 <div className="frame__intro">
                                     <h1>Thanks for voting</h1>
-                                    <p>Please watch the video below and help the cause by sharing.</p>
+                                    <p>Please watch the short video below and help the <button onClick={nextStage}>cause by sharing</button>.</p>
+
+                                    <p>Or find out more by <a href="/in-depth">visiting our In Depth page</a>.</p>
                                 </div>
 
                                 <div className={"verticalFrameCentre"}>
@@ -116,6 +120,7 @@ const StagedFlow = (props: TStagedFlowProps) => {
                                                         leftShift={-50}
                                              
                                                 videoThumbnail={ props.videos?.prop1.thumbnailImage?.responsiveImage.src} />
+                               
                                 </div>
                             </div>
                         </Fade>
@@ -164,23 +169,6 @@ const StagedFlow = (props: TStagedFlowProps) => {
                         </Fade>
                     </div>
                 </div>
-
-                {/* Navigation Buttons */}
-                { showNavigationControls ? 
-                <div className="d-flex align-items-center justify-content-center gap-3 w-100 page-navigation">
-                    <Button variant="secondary" onClick={prevStage} aria-disabled={stage === 0} disabled={stage === 0}>
-                        <i className="bi bi-arrow-left" aria-hidden="true">←</i>
-                        <span className="visually-hidden">Previous page</span>
-                    </Button>
-
-                    <p className="page-navigation__number">{stage+1}/{totalStages}</p>
-
-                    <Button variant="primary" onClick={nextStage} aria-disabled={stage === totalStages - 1} disabled={stage === totalStages - 1}>
-                        <i className="bi bi-arrow-right" aria-hidden="true">→</i>
-                        <span className="visually-hidden">Next page</span>
-                    </Button>
-                </div> : null
-                  }
         </Container>
     );
 };

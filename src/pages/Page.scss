@@ -106,7 +106,24 @@ main .container {
   
   p {
     font-size: 1.25rem;
-    margin-bottom: 1.5rem;
+    margin-block: 1.5rem;
+
+    a,
+    button {
+      color: #fff;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    button {
+      appearance: none;
+      background-color: transparent;
+      border: 0;
+      text-decoration: underline;
+      padding: 0;
+    }
   }
   
   @media screen and (min-width: 768px) {
