@@ -82,6 +82,7 @@ type EagerUser = {
   };
   readonly id: string;
   readonly email?: string | null;
+  readonly comment?: string | null;
   readonly name?: string | null;
   readonly voterId?: string | null;
   readonly createdAt?: string | null;
@@ -95,6 +96,7 @@ type LazyUser = {
   };
   readonly id: string;
   readonly email?: string | null;
+  readonly comment?: string | null;
   readonly name?: string | null;
   readonly voterId?: string | null;
   readonly createdAt?: string | null;
