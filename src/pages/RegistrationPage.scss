@@ -1,0 +1,30 @@
+.register-form {
+    > div + div {
+        margin-top: 1rem;
+    }
+
+    label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: .5rem;
+    }
+
+    input,
+    textarea {
+        color: var(--tertiary);
+        padding-inline: 5px;
+        width: 100%;
+    }
+
+    input,
+    textarea {
+        border-radius: 8px;
+        border: 2px solid var(--tertiary);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .register-form {
+        max-width: 50%;
+    }
+}

@@ -1,12 +1,13 @@
-import "./RegistrationPage.scss";
 import React, {useState} from "react";
 import {DataStore} from "@aws-amplify/datastore";
 import {User, Vote} from "../models";
 import {localStorageVotingIdKey} from "../pages/VotingPage";
 import {v4 as generateGuid} from "uuid";
 import {recordUse} from "../utils/analytics";
-export const RegistrationPage = () => {
 
+import "./RegistrationPage.scss";
+
+export const RegistrationPage = () => {
     const [emailExistsError, setEmailExists] = useState(false);
     const [thankYouForRegister, setThankYouRegister] = useState(false);
   
@@ -18,6 +19,7 @@ export const RegistrationPage = () => {
             return;
         await DataStore.delete(aExistingUser);
     }
+
     const SaveUserToDB = async (name:string, email:string, comment:string) => {
         let localGuid = localStorage.getItem(localStorageVotingIdKey);
 
@@ -26,7 +28,6 @@ export const RegistrationPage = () => {
             localStorage.setItem(localStorageVotingIdKey, localGuid);
         }
 
-        
         const existingUser = await DataStore.query(User, (v) => v.and(v => [v.email?.eq(email)]))
         const aExistingUser = existingUser.shift();
         const idAlreadyExists = !!aExistingUser;
@@ -37,7 +38,7 @@ export const RegistrationPage = () => {
             return;
         } 
         
-        /// Analytics
+        // Analytics
         try {
             recordUse({
                 name: 'Registered',
@@ -48,7 +49,6 @@ export const RegistrationPage = () => {
                 }
             }, localGuid)
         } catch (e) {
-
             console.log(e);
         }
         
@@ -80,28 +80,56 @@ export const RegistrationPage = () => {
 
     return (
         <div>
+            <div className="hero">
+                <h1>Registration</h1>
+                <p>Be part of our future</p>
+            </div>
+
             {emailExistsError ? <div>email already exists </div> : null }
-            {thankYouForRegister ? <div>Thank you for registering</div> :
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Name:</label>
-            <input
-                id="name"
-                type="text"
-                value={name}
-                onChange={handleNameChange}
-            />
-            <br />
-            <label htmlFor="email">Email:</label>
-            <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={handleEmailChange}
-            />
-            <br />
-            <button type="submit">Submit</button>
-        </form>}
-            
+
+            {
+                thankYouForRegister ? <div>Thank you for registering</div> :
+
+                <form className="register-form" onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="name">Name:</label>
+
+                        <input
+                            id="name"
+                            type="text"
+                            value={name}
+                            onChange={handleNameChange}
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="email">Email:</label>
+
+                        <input
+                            id="email"
+                            type="email"
+                            value={email}
+                            onChange={handleEmailChange}
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="comments">Comments (optional)</label>
+
+                        <textarea
+                            id="comment"
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                        />
+                    </div>
+
+                    <div>
+                        <button className="btn" type="submit">Submit</button>
+                    </div>
+                </form>
+            }
         </div>
     );
 }
