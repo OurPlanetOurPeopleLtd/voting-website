@@ -44,6 +44,7 @@ export const LayoutTs = ({children, locale} : ILayout) => {
     {
         //console.log(getCookieConsentValue("OurPeopleOurPlanetAnalyticsAcceptance"));
         //InitAnalytics();
+        console.log("heder locale changed to " + locale)
     }
     useEffect(() => {
         let userGuid = localStorage.getItem(localStorageVotingIdKey);

@@ -21,16 +21,24 @@ export const DynamicNavList = (props: TDynamicNav) => {
     let {id, itemGroup, locale, onSelect} = props;
 
     const fetchData = useCallback(async () => {
+        console.log("getting navigation titles for " + locale)
         let dataFetched = await getNavigationJson(id, locale ?? "en");
         setData(dataFetched);
-    }, [id])
+    }, [id,locale])
 
     const [data, setData] = useState<NavigationItem[]>(itemGroup ?? []);
 
     useEffect(() => {
+        
         if (!data.length)
             fetchData().catch(console.error);
     }, [fetchData]);
+
+    useEffect(() => {
+
+        //if (!data.length)
+            fetchData().catch(console.error);
+    }, [locale]);
 
     const gslugPrefix = props.locale ? `${locale}/` :"";
     return (

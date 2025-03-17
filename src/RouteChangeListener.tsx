@@ -12,6 +12,8 @@ export const RouteChangeListener = ({onSetLocale}: IRouteListener) => {
     const [locale, setLocale] = useState(defaultLanguage)
 
     const SetLocale = (locale: string) => {
+        console.log("ok locale is")
+        console.log(locale);
         setLocale(locale);
         onSetLocale(locale);
     }
