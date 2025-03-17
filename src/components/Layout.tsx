@@ -102,14 +102,14 @@ export const LayoutTs = ({children, locale} : ILayout) => {
                                 setExpanded(false)
                                 return {}
                             }}></DynamicNavList>
-                            <div>
+                            {/*<div>
                                 <Nav.Link onClick={() => {
                                     setExpanded(false)
                                     return {}
                                 }} as={NavLink} key={"registration"} to={ "registration"}>
                                     Register
                                 </Nav.Link>
-                            </div>
+                            </div>*/}
                             <div className="main-nav__language">
                                 <FlagSelect currentLocale={locale ?? defaultLanguage}></FlagSelect>
                             </div>
