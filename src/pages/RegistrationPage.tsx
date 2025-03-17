@@ -18,7 +18,7 @@ export const RegistrationPage = () => {
             return;
         await DataStore.delete(aExistingUser);
     }
-    const SaveUserToDB = async (name:string, email:string) => {
+    const SaveUserToDB = async (name:string, email:string, comment:string) => {
         let localGuid = localStorage.getItem(localStorageVotingIdKey);
 
         if (!localGuid) {
@@ -54,7 +54,7 @@ export const RegistrationPage = () => {
         
         // Save to database
         await DataStore.save(
-            new User({email: email, voterId: localGuid, name: name})
+            new User({email: email, voterId: localGuid, name: name, comment: comment})
         ).then((x) => {
             setThankYouRegister(true)
         });
@@ -63,6 +63,7 @@ export const RegistrationPage = () => {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [comment, setComment] = useState('');
 
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
@@ -74,7 +75,7 @@ export const RegistrationPage = () => {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        SaveUserToDB(name,email);
+        SaveUserToDB(name,email,comment);
     };
 
     return (
