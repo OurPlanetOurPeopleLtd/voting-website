@@ -11,6 +11,10 @@ export interface TStagedFlowProps {
     watchedCallBack?: () => void,
     mainVideo: { id: string, video: Video };
     shareHeading: string;
+    landingHeading?: string;
+    votingHeading?: string;
+    thanksHeading?: string;
+    resultsHeading?: string;
     shareSubHeading: string;
 
     voteResultCallBack?: (voted: boolean) => void,

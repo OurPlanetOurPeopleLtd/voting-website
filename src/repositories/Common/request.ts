@@ -5,9 +5,9 @@ import {LogErrors} from "../utils/utilities";
 import {QueryBlocks} from "./query";
 
 
-function generateAllPagesForNavQuery() {
+function generateAllPagesForNavQuery(locale:string) {
     const query = `query pageQuery {
-      allBlogPostModels {
+      allBlogPostModels(locale:${locale}, fallbackLocales:[en]) {
        __typename   
      
         id
@@ -44,8 +44,8 @@ function mapAllSlugs(root: QueryResult): NavigationItem[] {
         .concat(root.data.votingPageModel);
 }
 
-export const getAllNavData = () => {
-    const query = generateAllPagesForNavQuery();
+export const getAllNavData = (locale:string) => {
+    const query = generateAllPagesForNavQuery(locale);
     return fetchDataDato<QueryResult>(query).then((root: QueryResult) => {
 
        

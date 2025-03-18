@@ -24,3 +24,172 @@ export function getShareText(locale:string)
         return socialShareTranslations["en"]; // Fallback to English
     }
 }
+
+const resultTranslations: { [key: string]: string } = {
+    "en": "Result",
+    "fr": "Résultat",
+    "nl": "Resultaat",
+    "sr": "Rezultat",
+    "hi": "परिणाम",
+    "ja": "結果",
+    "zh": "结果",
+    "es": "Resultado",
+    "pt": "Resultado",
+    "no": "Resultat",
+    "de": "Ergebnis", //Added German
+    "it": "Risultato", //Added Italian
+    "ru": "Результат", //Added Russian
+    "ko": "결과", // Added Korean
+    "ar": "نتيجة", //Added Arabic
+    "sv": "Resultat", // Added Swedish
+    "da": "Resultat", // Added Danish
+    "fi": "Tulos", // Added Finnish
+    "pl": "Wynik", // Added Polish
+    "tr": "Sonuç" //Added Turkish
+};
+
+// Example usage:
+export function getResultTranslation(languageCode: string): string {
+    return resultTranslations[languageCode] || resultTranslations["en"]; // Default to English if not found
+}
+
+const nextTranslations: { [key: string]: string } = {
+    "en": "Next",
+    "fr": "Suivant",
+    "nl": "Volgende",
+    "sr": "Sledeći",
+    "hi": "अगला",
+    "ja": "次へ",
+    "zh": "下一个",
+    "es": "Siguiente",
+    "pt": "Próximo",
+    "no": "Neste",
+    "de": "Nächste",
+    "it": "Prossimo",
+    "ru": "Следующий",
+    "ko": "다음",
+    "ar": "التالي",
+    "sv": "Nästa",
+    "da": "Næste",
+    "fi": "Seuraava",
+    "pl": "Następny",
+    "tr": "Sonraki",
+    "el": "Επόμενο", // Added Greek
+    "id": "Selanjutnya", // Added Indonesian
+    "uk": "Наступний", // Added Ukrainian
+    "vi": "Tiếp theo", // Added Vietnamese
+    "th": "ถัดไป", // Added Thai
+    "he": "הבא", // Added Hebrew
+    "hu": "Következő", // Added Hungarian
+    "ro": "Următorul", // Added Romanian
+    "cs": "Další", // Added Czech
+    "sk": "Ďalší" // Added Slovak
+};
+
+export function getNextTranslation(languageCode: string): string {
+    return nextTranslations[languageCode] || nextTranslations["en"];
+}
+
+interface CountryResultsTranslations {
+    [languageCode: string]: string;
+}
+
+const countryResultsTranslations: CountryResultsTranslations = {
+    "en": "All Countries Results",
+    "fr": "Résultats de tous les pays",
+    "nl": "Resultaten van alle landen",
+    "sr": "Rezultati svih zemalja",
+    "hi": "सभी देशों के परिणाम",
+    "ja": "すべての国の結果",
+    "zh": "所有国家的结果",
+    "es": "Resultados de todos los países",
+    "pt": "Resultados de todos os países",
+    "no": "Resultater for alle land"
+};
+
+export function getCountryResultsTranslation(languageCode: string): string {
+    return countryResultsTranslations[languageCode] || countryResultsTranslations["en"];
+}
+
+
+interface LanguageTranslations {
+    [key: string]: string; // Allows any string key with a string value
+}
+
+interface Translations {
+    [languageCode: string]: LanguageTranslations;
+}
+
+const microCopyTranslations: Translations = {
+    "en": {
+        "videoPrompt": "Please watch the short video below and help the",
+        "shareButton": "cause by sharing",
+        "inDepthLink": "visiting our In Depth page",
+        "orFindOutMore": "Or find out more by"
+    },
+    "fr": {
+        "videoPrompt": "Veuillez regarder la courte vidéo ci-dessous et aider la",
+        "shareButton": "cause en partageant",
+        "inDepthLink": "visitant notre page Approfondie",
+        "orFindOutMore": "Ou en savoir plus en"
+    },
+        
+        "nl": {
+        "videoPrompt": "Bekijk de korte video hieronder en help de",
+            "shareButton": "zaak door te delen",
+            "inDepthLink": "onze In Depth-pagina te bezoeken",
+            "orFindOutMore": "Of kom meer te weten door"
+    },
+    "sr": {
+        "videoPrompt": "Molimo vas da pogledate kratki video ispod i pomognete",
+            "shareButton": "cilju deljenjem",
+            "inDepthLink": "posetom naše In Depth stranice",
+            "orFindOutMore": "Ili saznajte više tako što ćete"
+    },
+    "hi": {
+        "videoPrompt": "कृपया नीचे दिया गया छोटा वीडियो देखें और मदद करें",
+            "shareButton": "साझा करके कारण",
+            "inDepthLink": "हमारे इन डेप्थ पेज पर जाकर",
+            "orFindOutMore": "या हमारे इन डेप्थ पेज पर जाकर अधिक जानकारी प्राप्त करें।"
+    },
+    "ja": {
+        "videoPrompt": "下の短いビデオを見て、助けてください",
+            "shareButton": "共有して原因",
+            "inDepthLink": "詳細ページをご覧ください",
+            "orFindOutMore": "詳細ページをご覧ください。"
+    },
+    "zh": {
+        "videoPrompt": "请观看下面的短片并帮助",
+            "shareButton": "通过分享原因",
+            "inDepthLink": "访问我们的深入页面",
+            "orFindOutMore": "或访问我们的深入页面了解更多信息。"
+    },
+    "es": {
+        "videoPrompt": "Por favor, vea el breve video a continuación y ayude a",
+            "shareButton": "la causa compartiendo",
+            "inDepthLink": "visitando nuestra página En profundidad",
+            "orFindOutMore": "O infórmese más visitando nuestra página En profundidad."
+    },
+    "pt": {
+        "videoPrompt": "Por favor, assista ao pequeno vídeo abaixo e ajude a",
+            "shareButton": "causa compartilhando",
+            "inDepthLink": "visitando nossa página Detalhada",
+            "orFindOutMore": "Ou saiba mais visitando nossa página Detalhada."
+    },
+    "no": {
+        "videoPrompt": "Vennligst se den korte videoen nedenfor og hjelp",
+            "shareButton": "saken ved å dele",
+            "inDepthLink": "ved å besøke vår In Depth-side",
+            "orFindOutMore": "Eller finn ut mer ved å besøke vår In Depth-side."
+    }
+    
+};
+
+export function getTranslation(languageCode: string, key: string): string {
+    console.log("trying micropy for " + languageCode)
+    const languageTranslations = microCopyTranslations[languageCode];
+    if (languageTranslations && languageTranslations[key]) {
+        return languageTranslations[key];
+    }
+    return microCopyTranslations["en"][key]; // Fallback to English
+}

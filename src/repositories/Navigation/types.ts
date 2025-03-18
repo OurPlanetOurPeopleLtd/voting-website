@@ -68,5 +68,8 @@ export interface NavigationItem extends NavigationGroup {
     pdf:{url:string}  
     pdfs:TPdfWrapper[]
     video:{slug:string}
+
+
+    resultsHeading?: string,
 }
 

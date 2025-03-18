@@ -6,9 +6,10 @@ import {Doughnut} from "react-chartjs-2";
 import "./VoteResults.scss";
 import {ArcElement, Chart as ChartJS, Tooltip} from 'chart.js';
 import {Col, Row} from "react-bootstrap";
+import {getCountryResultsTranslation} from "../repositories/utils/extraTranslations";
 
 
-export const VoteResults = ({questionId}: { questionId: string }) => {
+export const VoteResults = ({questionId, locale}: { questionId: string, locale?: string }) => {
 
     const [yesVotes, setYesVotes] = useState(0);
     const [noVotes, setNoVotes] = useState(0);
@@ -84,7 +85,7 @@ export const VoteResults = ({questionId}: { questionId: string }) => {
                             </option>
                         </> :
                         <option
-                            value={undefined}> {`All Countries Results`}</option>}
+                            value={undefined}> {getCountryResultsTranslation(locale ?? "en")}</option>}
 
 
                     {Object.entries(countries).map(([countryCode, countryName]) => {

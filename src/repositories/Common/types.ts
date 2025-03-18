@@ -34,6 +34,3 @@ export type TPdfWrapper =
         thumbnail: { responsiveImage: { src: string } };
         pdf:{url:string, size:number, _createdAt:string}
     }
-
-
-

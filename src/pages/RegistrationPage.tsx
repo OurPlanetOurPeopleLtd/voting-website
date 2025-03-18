@@ -6,6 +6,7 @@ import {v4 as generateGuid} from "uuid";
 import {recordUse} from "../utils/analytics";
 
 import "./RegistrationPage.scss";
+import {VideoControl} from "../components/VideoControl";
 
 export const RegistrationPage = () => {
     const [emailExistsError, setEmailExists] = useState(false);
@@ -83,6 +84,9 @@ export const RegistrationPage = () => {
             <div className="hero">
                 <h1>Registration</h1>
                 <p>Be part of our future</p>
+                <VideoControl datoVideo={{muxPlaybackId: "SRqn02V02YrHbSI2VHCKbbiiIijD2N4wp9"}}
+                              fullScreenOnClick={false}></VideoControl>
+                
             </div>
 
             {emailExistsError ? <div>email already exists </div> : null }
