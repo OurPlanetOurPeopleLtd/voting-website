@@ -36,6 +36,10 @@ export interface VotingPageData {
     introductionText?: string;
     
     shareHeading?: string;
+    landingHeading?: string;
+    votingHeading?: string;
+    thanksHeading?: string;
+    resultsHeading?: string;
     shareSubheading?: string;
     title?: string;
     url?: string;

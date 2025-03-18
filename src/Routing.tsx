@@ -107,6 +107,7 @@ function Routing() {
                                             element={                                           
                                                 <VotingResultsFrame
                                                     questionId={"UwO6qO8AQL2tLD7tBPGP7A"}
+                                                    locale={locale}
                                                 />                                             
                                             }
                                         />
