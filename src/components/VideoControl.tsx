@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import "./VideoControl.scss"
 import {Video} from "react-datocms/dist/types/VideoPlayer";
 import {VideoPlayer} from "react-datocms";
+import {getUserGuid} from "../repositories/utils/utilities";
+import {recordUse} from "../utils/analytics";
 
 export type TVideoProps = {
     onFinish?: () => void,
@@ -69,14 +71,36 @@ export const VideoControl = ({
 
         }
     }
-    const onVideoProgress = (event: any) =>
-    {
+
+    let lastReportedTime = -5;
+    const onVideoProgress = (event: any) => {
+        const currentTime = Math.floor(event.target.currentTime);
+        const duration = event.target.duration;
+        const percentage = duration ?  Math.floor((currentTime / duration) * 100) : undefined;
+
         if(onProgress)
             onProgress(event.target.currentTime);
-    }
-    const onVideoPlay = () =>
-    {        
-        const videoPlayer = document.getElementById('dato-video-player');
+        
+        //record every 5 seconds of video watched
+        if (currentTime % 5 === 0 && currentTime !== lastReportedTime) {
+            lastReportedTime = currentTime;
+
+            // Your recordUse function here
+            recordUse({
+                name: "Video_Watched_Time",
+                attributes: {
+                    page: window.location.pathname,
+                    userGuid: getUserGuid(),
+                    video: datoVideo?.title ?? "",
+                    time: currentTime.toString(),
+                    percentage:percentage?.toString() ?? "",
+                },
+            });
+        }
+    };
+    const onVideoPlay = (event: any) =>
+    {       
+       
         if(goFullScreenOnClick) {
             goFullScreen();     
             setGoFullScreenOnClick(false);
@@ -84,25 +108,25 @@ export const VideoControl = ({
         
         if(onPlay)
             onPlay();
+
+        recordUse({name: "Video_Played", attributes: {page: window.location.pathname, userGuid:getUserGuid(), video:datoVideo?.title ??"", time:event.target.currentTime}});
+
     }
-    const onVideoEnd = () =>
-    {
-        const videoPlayer = document.getElementById('dato-video-player');
-        videoPlayer?.classList.remove('fullscreen');
-        
+    const onVideoEnd = (event: any) =>
+    {        
         if(onFinish)
             onFinish();
+
+        recordUse({name: "Video_Watched_To_End", attributes: {page: window.location.pathname, userGuid:getUserGuid(), video:datoVideo?.title ??"", time:event.target.currentTime}});
+
     }
 
-    const onVideoPause = () =>
+    const onVideoPause = (event: any) =>
     {
-        const videoPlayer = document.getElementById('dato-video-player');
-        
-
         if(onPause)
-            onPause();
+            onPause();    
+        recordUse({name: "Video_Paused", attributes: {page: window.location.pathname, userGuid:getUserGuid(), video:datoVideo?.title ??"", time:event.target.currentTime}});
         
-        return videoPlayer;
     }
     const forcePause  = () =>
     {
@@ -120,8 +144,8 @@ export const VideoControl = ({
     
    if(datoVideo)
     {
-        datoVideo["default_subtitles_lang"] = "es";
-        datoVideo["defaultsubtitles"]="es";
+        datoVideo["default_subtitles_lang"] = locale;
+        datoVideo["defaultsubtitles"]=locale;
     }
     useEffect(() => {
         
