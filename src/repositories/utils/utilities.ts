@@ -3,6 +3,8 @@ import {ContentTypes, NavigationItem} from "../Navigation/types";
 import {getNavigationJson} from "../Navigation/request";
 import {DEBUG_QUERY} from "./preview";
 import {getLogger} from "../../utils/logger";
+import {localStorageVotingIdKey} from "../../pages/VotingPage";
+import {v4 as generateGuid} from "uuid";
 
 function isEmptyOrSpaces(str: string) {
     return str === null || str.match(/^ *$/) !== null;
@@ -76,10 +78,18 @@ export function LogQuery(query: string, force:boolean= false) {
     logger.info("Query called is:")
     logger.info(query);
     logger.info("EOF Query")
-
-
 }
 
+export function getUserGuid()
+{
+    let localGuid = localStorage.getItem(localStorageVotingIdKey);
+
+    if (!localGuid) {
+        localGuid = generateGuid();
+        localStorage.setItem(localStorageVotingIdKey, localGuid);
+    }
+    return localGuid;
+}
 
 export function HandleErrors(result: any) {
     const logger = getLogger('Query Error');

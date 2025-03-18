@@ -1,7 +1,9 @@
 import React, {useEffect} from "react";
 import "./Donation.scss";
-import {Button, Col, Row} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import {getSupportedLocales} from "../languages";
+import {recordUse} from "../utils/analytics";
+import {getUserGuid} from "../repositories/utils/utilities";
 
 
 export interface TDonationProps {
@@ -43,11 +45,7 @@ function GetWhyDonateLink(locale:string)
 }
 const Donation= (props: TDonationProps) => {
 
-    useEffect(() =>
-    {
-        console.log("supported locales are")
-        console.log(getSupportedLocales())
-    })
+
     
     return (<>
             <Button id="donate-button" className="btn btn--dark" onClick={() => {
@@ -58,7 +56,8 @@ const Donation= (props: TDonationProps) => {
                 const left = window.innerWidth * 0.05;
                 // Calculate the top position
                 const top = window.innerHeight * 0.10;
-
+                const userGuid = getUserGuid();
+                recordUse({name: "Donate_Clicked", attributes: {page: window.location.pathname, userGuid}});
                 window.open(GetWhyDonateLink(props.locale), "newWindow", `width=${width}, height=${height}, left=${left}, top=${top}`);
 
             }}>Donate</Button>

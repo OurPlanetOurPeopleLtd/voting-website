@@ -8,6 +8,7 @@ import {localStorageVotingIdKey} from "../pages/VotingPage";
 
 import {recordUse} from "../utils/analytics";
 import {getCountry} from "../repositories/utils/country";
+import {getUserGuid} from "../repositories/utils/utilities";
 
 
 export interface TVoteControls {
@@ -105,12 +106,7 @@ export const VoteControls = ({
     }, [fetchVoteCounts]);
 
     const SaveVoteToDb = async (choice: Choice) => {
-        let localGuid = localStorage.getItem(localStorageVotingIdKey);
-
-        if (!localGuid) {
-            localGuid = generateGuid();
-            localStorage.setItem(localStorageVotingIdKey, localGuid);
-        }
+        const localGuid = getUserGuid();
 
         if (!voted || choice !== voteChoice) {
             const existingVotes = await DataStore.query(Vote, (v) => v.and(v => [v.voterId?.eq(localGuid), v.questionId?.eq(questionId)]))

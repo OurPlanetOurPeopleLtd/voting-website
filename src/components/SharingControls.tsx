@@ -9,6 +9,8 @@ import {
 } from "react-icons/fa";
 
 import "./SharingControls.scss";
+import {getUserGuid} from "../repositories/utils/utilities";
+import {recordUse} from "../utils/analytics";
 
 export interface ISharingControls {
     voted?: boolean;
@@ -58,7 +60,10 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
         setLinkAdded(true);
     })
 
-    function record(text: string) {}
+    function record(text: string) {
+        const userGuid = getUserGuid();
+        recordUse({name: "Share_Clicked", attributes: {page: window.location.pathname, userGuid, social:"Custom"}});
+    }
 
     const openSocialWindow = (url: string) => {
         const left = (window.screen.width - 570) / 2;
@@ -91,6 +96,9 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
             return;
         }
 
+        const userGuid = getUserGuid();
+        recordUse({name: "Share_Clicked", attributes: {page: window.location.pathname, userGuid, social:platform}});
+        
         openSocialWindow(url);
     };
     
