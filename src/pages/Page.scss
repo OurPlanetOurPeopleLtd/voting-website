@@ -14,7 +14,12 @@ h1 {
 }
 
 main .container {
-  padding: .5rem 0 1.5rem;
+  padding: 1.5rem 0;
+
+  @media screen and (min-width: 768px) {
+    padding: .5rem 0 1.5rem;
+    
+  }
 }
 
 .frame {
