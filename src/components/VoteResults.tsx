@@ -23,8 +23,8 @@ export const VoteResults = ({questionId, locale}: { questionId: string, locale?:
     useEffect(() => {
 
         async function fetchVotes(country: string | undefined) {
-            const no = (await DataStore.query(Vote, (v) => v.and(v => [v.choice.eq(Choice.NO), v.questionId.eq(questionId), country ? v.country.eq(country) : v.country.notContains(null)]))).length;
-            const yes = (await DataStore.query(Vote, (v) => v.and(v => [v.choice.eq(Choice.YES), v.questionId.eq(questionId), country ? v.country.eq(country) : v.country.notContains(null)]))).length;
+            const no = (await DataStore.query(Vote, (v) => v.and(v => [v.choice.eq(Choice.NO),  country ? v.country.eq(country) : v.country.notContains(null)]))).length;
+            const yes = (await DataStore.query(Vote, (v) => v.and(v => [v.choice.eq(Choice.YES), country ? v.country.eq(country) : v.country.notContains(null)]))).length;
             setYesVotes(yes);
             setNoVotes(no);
         }
