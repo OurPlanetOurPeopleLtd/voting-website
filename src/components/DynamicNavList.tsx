@@ -8,6 +8,7 @@ import FlagSelect from "./FlagSelect";
 import {defaultLanguage} from "../languages";
 
 import "./MegaMenu.scss";
+import {getResultTranslation} from "../repositories/utils/extraTranslations";
 
 export type TDynamicNav = {
     id: string;
@@ -18,19 +19,24 @@ export type TDynamicNav = {
 
 
 export const DynamicNavList = (props: TDynamicNav) => {
-    let {id, itemGroup, locale, onSelect} = props;
+    const {id, itemGroup, locale, onSelect} = props;
 
     const fetchData = useCallback(async () => {
-        let dataFetched = await getNavigationJson(id, locale ?? "en");
+        const dataFetched = await getNavigationJson(id, locale ?? "en");
         setData(dataFetched);
-    }, [id])
+    }, [id,locale])
 
     const [data, setData] = useState<NavigationItem[]>(itemGroup ?? []);
 
     useEffect(() => {
+        
         if (!data.length)
             fetchData().catch(console.error);
     }, [fetchData]);
+
+    useEffect(() => {
+            fetchData().catch(console.error);
+    }, [locale]);
 
     const gslugPrefix = props.locale ? `${locale}/` :"";
     return (
@@ -61,7 +67,7 @@ export const DynamicNavList = (props: TDynamicNav) => {
                                 {navItem.cardTitle}
                             </Nav.Link>
                             <Nav.Link onClick={onSelect} as={NavLink} key={key+"results"} to={ slugPrefix  +  "results"}>
-                                Voting Results
+                                {navItem.resultsHeading ?? getResultTranslation(locale ?? "en")}
                             </Nav.Link>
                             </>
                         );

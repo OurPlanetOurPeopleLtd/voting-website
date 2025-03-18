@@ -94,6 +94,10 @@ const votingPage = `
             
             openingText{value},
             shareHeading,
+            landingHeading,
+            votingHeading,
+            thanksHeading,
+            resultsHeading,
             shareSubheading,
             donateText{value},
             slug,

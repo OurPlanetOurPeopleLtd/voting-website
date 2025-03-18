@@ -7,16 +7,15 @@ import {QuestionComponent} from "../../components/QuestionComponent";
 import {Choice} from "../../models";
 import {StructuredText} from "react-datocms";
 import {TStagedFlowProps} from "./TStagedFlowProps";
-import {TQuestionBlock} from "../../repositories/Navigation/types";
 import {VideoControl} from "../../components/VideoControl";
 import {VideoWithReference} from "../VideoWithReference";
 import {getReferences} from "../../repositories/References/request";
 import {useSearchParams} from "react-router-dom";
-import {VoteControls} from "../../components/VoteControls";
 
 import cryingEarth from "../../crying-earth.png";
 
 import "../VotingPage.scss";
+import {getNextTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
 
 const StagedFlow = (props: TStagedFlowProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -70,17 +69,28 @@ const StagedFlow = (props: TStagedFlowProps) => {
                         <Fade in={stage === videoStage} unmountOnExit>
                             <div>
                                 <div className="frame__intro">
-                                    <h1>Thanks for voting</h1>
-                                    <p>Please watch the short video below and help the <button onClick={nextStage}>cause by sharing</button>.</p>
-
-                                    <p>Or find out more by <a href="/in-depth">visiting our In Depth page</a>.</p>
+                                    <h1>{props.thanksHeading}</h1>
+                       
+                                    <p>
+                                        {getTranslation(props.locale, "videoPrompt")}{" "}
+                                        <button onClick={nextStage}>
+                                            {getTranslation(props.locale, "shareButton")}
+                                        </button>
+                                        .
+                                    </p>
+                                    <p>
+                                        {getTranslation(props.locale, "orFindOutMore")}{" "}
+                                        <a href="/in-depth">
+                                            {getTranslation(props.locale, "inDepthLink")}
+                                        </a>{"."}
+                                    </p>
                                 </div>
 
                                 <div className={"verticalFrameCentre"}>
                                     <VideoControl locale={props.locale} fullScreenOnClick={true}
-                                            datoVideo={props.videos?.thankYouVideo?.video?.video}
-                                            onFinish={() => {
-                                                if (props.watchedCallBack) props.watchedCallBack();
+                                                  datoVideo={props.videos?.thankYouVideo?.video?.video}
+                                                  onFinish={() => {
+                                                      if (props.watchedCallBack) props.watchedCallBack();
                                                 nextStage();
                                             }} 
                                             videoThumbnail={props.videos?.thankYouVideo.thumbnailImage?.responsiveImage.src}/>
@@ -91,13 +101,13 @@ const StagedFlow = (props: TStagedFlowProps) => {
                         <Fade in={stage === openingStage} unmountOnExit>
                             <div className="landing-content">
                                 <div className={"verticalFrameCentre landing-content__text"}>
-                                    <h1 className="frame__heading">We have a big problem and need to do something about it</h1>
+                                    <h1 className="frame__heading">{props.landingHeading}</h1>
 
                                     <div style={{fontSize:"1.2rem"}}>
                                         <StructuredText data={props.openingText}/>
                                     </div>
                                     
-                                    <Button className="btn btn--white" onClick={nextStage}>Next</Button>
+                                    <Button className="btn btn--white" onClick={nextStage}>{getNextTranslation(props.locale)}</Button>
                                 </div>
 
                                 <div className="landing-content__image">
@@ -110,7 +120,7 @@ const StagedFlow = (props: TStagedFlowProps) => {
                         <Fade in={stage === questionStage } unmountOnExit>
                             <div className={"vote-controls question-controls"}>
                                 <div className={"contentColumn"}>
-                                    <h1 className="frame__heading" style={{paddingLeft: "1rem"}}>It's time to take action</h1>
+                                    <h1 className="frame__heading" style={{paddingLeft: "1rem"}}>{props.votingHeading}</h1>
                                     <QuestionComponent {...props} {...questionOne} voteChangedCallBack={extendedVoteCallback}/>
                                 </div>
         

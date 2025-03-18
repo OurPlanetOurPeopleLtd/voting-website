@@ -1,13 +1,11 @@
 import {QueryResult} from "./types";
 
-import votingPage, {TVotingPage} from "../../pages/VotingPage";
-import {extractYoutubeVideoId} from "../utils/utilities";
+import {TVotingPage} from "../../pages/VotingPage";
 
 export async function mapVotingPage(result: QueryResult): Promise<TVotingPage> {
 
     
-    const votingPage = result?.data?.votingPageModel;
-    
+    const votingPage = result?.data?.votingPageModel;    
 
     if (!votingPage) {
         throw new Error("no voting data");
@@ -25,6 +23,12 @@ export async function mapVotingPage(result: QueryResult): Promise<TVotingPage> {
             },
              
             donateText: votingPage.donateText,
+
+            landingHeading: votingPage.landingHeading ?? "",
+            votingHeading: votingPage.votingHeading ?? "",
+            thanksHeading: votingPage.thanksHeading ?? "",
+            resultsHeading: votingPage.resultsHeading ?? "",
+            
             openingText: votingPage.openingText,
             heading: votingPage.heading,
             introText: votingPage.introductionText ?? "",

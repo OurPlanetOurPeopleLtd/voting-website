@@ -39,6 +39,10 @@ export interface TVotingPage {
     questions?: TQuestionBlock[];
 
     shareHeading: string;
+    landingHeading?: string;
+    votingHeading?: string;
+    thanksHeading?: string;
+    resultsHeading?: string;
     shareSubHeading: string;
 
     showIntroVideo: boolean;
@@ -123,7 +127,7 @@ const VotingPage = (queryProps: TVotingQueryProps) => {
     }
     
     const fullData:TVotingPageExtended = {
-        locale: "",
+        locale: queryProps.locale,
         voteChangedCallBack: voteChanged,
         voteResultCallBack: setVoted,    
         watchedCallBack: onWatched,

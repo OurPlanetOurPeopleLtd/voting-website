@@ -53,7 +53,7 @@ function Routing() {
     const [dataLoaded, setDataLoaded] = useState(false);
     
     async function fetchData() {       
-        let links = await getAllNavData(); //todo we should probably just split this into the 3 arrays, save switching on typename below
+        const links = await getAllNavData(locale); //todo we should probably just split this into the 3 arrays, save switching on typename below
 
         if (process.env.NODE_ENV === "development" && DEBUG_QUERY) 
         {
@@ -63,9 +63,6 @@ function Routing() {
         setData(links);
         setDataLoaded(true);  
     }
-
-    
-
 
     refreshPreview();
 
@@ -108,6 +105,7 @@ function Routing() {
                                             element={                                           
                                                 <VotingResultsFrame
                                                     questionId={"UwO6qO8AQL2tLD7tBPGP7A"}
+                                                    locale={locale}
                                                 />                                             
                                             }
                                         />
@@ -169,7 +167,7 @@ function Routing() {
     const [locale, setLocale] = useState(defaultLanguage);
    
     const OnLocaleChanged = (locale:string) =>
-    {        
+    {
         setLocale(locale)
     }
     return (
