@@ -22,7 +22,6 @@ export const DynamicNavList = (props: TDynamicNav) => {
     const {id, itemGroup, locale, onSelect} = props;
 
     const fetchData = useCallback(async () => {
-        console.log("getting navigation titles for " + locale)
         const dataFetched = await getNavigationJson(id, locale ?? "en");
         setData(dataFetched);
     }, [id,locale])

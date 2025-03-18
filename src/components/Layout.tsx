@@ -42,9 +42,7 @@ export const LayoutTs = ({children, locale} : ILayout) => {
     useEffect(() => {
     }, [locale])
     {
-        //console.log(getCookieConsentValue("OurPeopleOurPlanetAnalyticsAcceptance"));
-        //InitAnalytics();
-        console.log("heder locale changed to " + locale)
+
     }
     useEffect(() => {
         let userGuid = localStorage.getItem(localStorageVotingIdKey);

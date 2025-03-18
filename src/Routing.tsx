@@ -53,9 +53,7 @@ function Routing() {
     const [dataLoaded, setDataLoaded] = useState(false);
     
     async function fetchData() {       
-        console.log("Getting nav data")
-        console.log("with locale " + locale)
-        let links = await getAllNavData(locale); //todo we should probably just split this into the 3 arrays, save switching on typename below
+        const links = await getAllNavData(locale); //todo we should probably just split this into the 3 arrays, save switching on typename below
 
         if (process.env.NODE_ENV === "development" && DEBUG_QUERY) 
         {
@@ -169,8 +167,7 @@ function Routing() {
     const [locale, setLocale] = useState(defaultLanguage);
    
     const OnLocaleChanged = (locale:string) =>
-    {     
-        console.log("locale changed")
+    {
         setLocale(locale)
     }
     return (
