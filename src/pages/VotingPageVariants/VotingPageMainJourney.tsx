@@ -67,7 +67,7 @@ const StagedFlow = (props: TStagedFlowProps) => {
                     <div className="frame-content vote-controls">
                         {/* Stage Video */}
                         <Fade in={stage === videoStage} unmountOnExit>
-                            <div>
+                            <div className="thank-you-content">
                                 <div className="frame__intro">
                                     <h1>{props.thanksHeading}</h1>
                        
@@ -78,6 +78,7 @@ const StagedFlow = (props: TStagedFlowProps) => {
                                         </button>
                                         .
                                     </p>
+                                    
                                     <p>
                                         {getTranslation(props.locale, "orFindOutMore")}{" "}
                                         <a href="/in-depth">

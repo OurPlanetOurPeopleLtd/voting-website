@@ -122,8 +122,8 @@ interface Translations {
 
 const microCopyTranslations: Translations = {
     "en": {
-        "videoPrompt": "Please watch the short video below and help the",
-        "shareButton": "cause by sharing",
+        "videoPrompt": "Please watch the short video to find out about sharing the cause. And/or go directly to the",
+        "shareButton": "sharing page",
         "inDepthLink": "visiting our In Depth page",
         "orFindOutMore": "Or find out more by"
     },
