@@ -53,6 +53,89 @@ export function getResultTranslation(languageCode: string): string {
     return resultTranslations[languageCode] || resultTranslations["en"]; // Default to English if not found
 }
 
+const yesTranslations: { [key: string]: string } = {
+    "en": "Yes",
+    "fr": "Oui",
+    "nl": "Ja",
+    "sr": "Da",
+    "hi": "हाँ",
+    "ja": "はい",
+    "zh": "是",
+    "es": "Sí",
+    "pt": "Sim",
+    "no": "Ja",
+    "de": "Ja",
+    "it": "Sì",
+    "ru": "Да",
+    "ko": "예",
+    "ar": "نعم",
+    "sv": "Ja",
+    "da": "Ja",
+    "fi": "Kyllä",
+    "pl": "Tak",
+    "tr": "Evet"
+};
+
+const noTranslations: { [key: string]: string } = {
+    "en": "No",
+    "fr": "Non",
+    "nl": "Nee",
+    "sr": "Ne",
+    "hi": "नहीं",
+    "ja": "いいえ",
+    "zh": "否",
+    "es": "No",
+    "pt": "Não",
+    "no": "Nei",
+    "de": "Nein",
+    "it": "No",
+    "ru": "Нет",
+    "ko": "아니요",
+    "ar": "لا",
+    "sv": "Nej",
+    "da": "Nej",
+    "fi": "Ei",
+    "pl": "Nie",
+    "tr": "Hayır"
+};
+
+export function getYesTranslation(languageCode: string): string {
+    return yesTranslations[languageCode] || yesTranslations["en"];
+}
+
+export function getNoTranslation(languageCode: string): string {
+    return noTranslations[languageCode] || noTranslations["en"];
+}
+
+const donateTranslations: { [key: string]: string } = {
+    "en": "Donate",
+    "fr": "Faire un don",
+    "nl": "Doneren",
+    "sr": "Doniraj",
+    "hi": "दान करें",
+    "ja": "寄付する",
+    "zh": "捐赠",
+    "es": "Donar",
+    "pt": "Doar",
+    "no": "Doner",
+    "de": "Spenden",
+    "it": "Donare",
+    "ru": "Пожертвовать",
+    "ko": "기부하다",
+    "ar": "تبرع",
+    "sv": "Donera",
+    "da": "Donér",
+    "fi": "Lahjoita",
+    "pl": "Podaruj",
+    "tr": "Bağış Yap"
+};
+
+// Example usage:
+export function getDonateTranslation(languageCode: string): string {
+    return donateTranslations[languageCode] || donateTranslations["en"]; // Default to English if not found
+}
+
+
 const nextTranslations: { [key: string]: string } = {
     "en": "Next",
     "fr": "Suivant",

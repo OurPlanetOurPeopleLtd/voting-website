@@ -6,14 +6,19 @@ import {Doughnut} from "react-chartjs-2";
 import "./VoteResults.scss";
 import {ArcElement, Chart as ChartJS, Tooltip} from 'chart.js';
 import {Col, Row} from "react-bootstrap";
-import {getCountryResultsTranslation} from "../repositories/utils/extraTranslations";
+import {
+    getCountryResultsTranslation,
+    getNoTranslation,
+    getYesTranslation
+} from "../repositories/utils/extraTranslations";
 
 
 export const VoteResults = ({questionId, locale}: { questionId: string, locale?: string }) => {
 
     const [yesVotes, setYesVotes] = useState(0);
     const [noVotes, setNoVotes] = useState(0);
-
+    const yesText = getYesTranslation(locale ?? "en");
+    const noText = getNoTranslation(locale ?? "en");
     const [selectedCountry, setSelectedCountry] = useState<string>('');
 
     const handleCountryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -52,7 +57,7 @@ export const VoteResults = ({questionId, locale}: { questionId: string, locale?:
 
             },
         ],
-        labels: ['No', 'Yes'],
+        labels: [noText, yesText],
 
     };
 
@@ -101,11 +106,11 @@ export const VoteResults = ({questionId, locale}: { questionId: string, locale?:
         </Row>
         <Row>
             <Col>
-                <label htmlFor="NoVotes">Yes</label>
+                <label htmlFor="NoVotes">{yesText}</label>
                 <div id="NoVotes">{yesVotes}</div>
             </Col>
             <Col>
-                <label htmlFor="NoVotes">No</label>
+                <label htmlFor="NoVotes">{noText}</label>
                 <div id="NoVotes">{noVotes}</div>
             </Col>
         </Row>

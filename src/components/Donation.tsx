@@ -4,6 +4,7 @@ import {Button} from "react-bootstrap";
 import {getSupportedLocales} from "../languages";
 import {recordUse} from "../utils/analytics";
 import {getUserGuid} from "../repositories/utils/utilities";
+import {getDonateTranslation} from "../repositories/utils/extraTranslations";
 
 
 export interface TDonationProps {
@@ -60,7 +61,7 @@ const Donation= (props: TDonationProps) => {
                 recordUse({name: "Donate_Clicked", attributes: {page: window.location.pathname, userGuid}});
                 window.open(GetWhyDonateLink(props.locale), "newWindow", `width=${width}, height=${height}, left=${left}, top=${top}`);
 
-            }}>Donate</Button>
+            }}>{getDonateTranslation(props.locale)}</Button>
         </>)
 
 };
