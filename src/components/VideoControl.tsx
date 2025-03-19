@@ -144,8 +144,8 @@ export const VideoControl = ({
     
    if(datoVideo)
     {
-        datoVideo["default_subtitles_lang"] = locale;
-        datoVideo["defaultsubtitles"]=locale;
+       // datoVideo["default_subtitles_lang"] = locale;
+       // datoVideo["defaultsubtitles"]=locale;
     }
     useEffect(() => {
         
@@ -180,7 +180,7 @@ export const VideoControl = ({
             if(!videoPlayer)
                 return;
                             
-            videoPlayer.src += `&default_subtitles_lang=${locale}`;
+            //videoPlayer.src += `&default_subtitles_lang=${locale}`;
             //forcePause();
             clearInterval(intervalId); // Stop polling when element is found            
         }, 500); // Adjust polling interval as needed
