@@ -26,7 +26,8 @@ select {
   /* Make it transparent */
   background-color: transparent;
   /* Remove borders */
-  border: none;
+  border: 1px solid #fff;
+  border-radius: 8px;
   /* Remove default shadow */
   box-shadow: none;
   /* Adjust padding for spacing (optional) */
@@ -35,10 +36,8 @@ select {
   color: inherit;
   /* Indicate interactivity (optional) */
   cursor: pointer;
-  /* Optional: Add a subtle rounded corner */
-  border-radius: 2px;
   text-align: center;
-  width: 99%;
+  width: max-content;
 }
 
 /* Style the dropdown options (optional) */
