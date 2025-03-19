@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {flattenNavigationRoute, LogLinks} from "../repositories/utils/utilities";
+import {cleanUrl, flattenNavigationRoute, LogLinks} from "../repositories/utils/utilities";
 
 export const DynamicFooter = ({id,locale}) => {
     const [links, setLinks] = useState([]);
@@ -11,19 +11,29 @@ export const DynamicFooter = ({id,locale}) => {
         setLinks(sentLinks);
 
         LogLinks(sentLinks)
-    }, [id])
+    }, [id,locale])
 
     useEffect(() => {
         fetchData().catch(console.error);
-    }, [fetchData]);
+    }, [fetchData,locale]);
 
+    const gslugPrefix = locale ? `${locale}/` :"";
+    
     return showFooter
         ? (<footer>
             <ul>
                 {links && links.map((x, index) => {
+
+                    let slugPrefix = x.link?.includes( gslugPrefix) ? "" : gslugPrefix;
+                    if(x.link?.startsWith("/") && slugPrefix?.endsWith("/"))
+                        slugPrefix = locale ?? ""
+
+                    const key =index +  (locale ?? "");
+                    console.log("locale is " + locale)
+                    console.log("Slug is" + slugPrefix)
                     return (
-                        <li key={index}>
-                            <Link to={`/${x.link}`} className="nav-link">
+                        <li key={locale+index}>
+                            <Link to={cleanUrl(slugPrefix  +`/${x.link}`)} className="nav-link">
                                 {x.title}
                             </Link>
                         </li>);

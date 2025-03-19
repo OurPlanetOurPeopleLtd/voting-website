@@ -118,4 +118,6 @@ export async function flattenNavigationRoute(
     }
     return dataFetched;
 }
-
+export function cleanUrl(url: string): string {
+    return url.replace(/([^:]\/)\/+/g, '$1');
+}

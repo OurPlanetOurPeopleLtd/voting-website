@@ -72,19 +72,7 @@ export interface TVotingQueryProps
 
 const VotingPage = (queryProps: TVotingQueryProps) => {
 
-    const [searchParams] = useSearchParams();
-    const reset = searchParams.get("reset");
-    const realVariant = searchParams.get("variant") ?? "Original";
-    let variant = realVariant?.toLowerCase() ?? "";
-    
-    
-    if(reset)
-    {
-        console.log("User has chosen to reset", searchParams.get("reset"));
-        
-        localStorage.clear()
-        window.location.href = "/";        
-    }
+
     const initialState: TVotingPage =
         {
             videos: undefined,
@@ -140,18 +128,17 @@ const VotingPage = (queryProps: TVotingQueryProps) => {
  
     const fetchData = useCallback(async () => {
 
-        console.log("Fetching voter data...");
-        console.log("Varient is " + variant)
-        let dataFetched = await getVotingPageJson(variant, queryProps.locale);
+
+        let dataFetched = await getVotingPageJson("Original", queryProps.locale);
 
         setData(dataFetched);
-    }, [queryProps,variant]);
+    }, [queryProps]);
 
     useEffect(() => {
         fetchData().catch(console.error);
 
 
-    }, [queryProps,variant]);
+    }, [queryProps]);
        
 
     const RenderComponent = VotingPageMainJourney;
