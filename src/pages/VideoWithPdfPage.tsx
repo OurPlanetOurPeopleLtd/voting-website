@@ -37,8 +37,7 @@ export const VideoWithPdfsPage = (props: TArticlePage) => {
     });
     
     const handleFinish = () => {
-        console.log("video finished")
-        console.log(data.followOnLink)
+   
         if(data.followOnLink)
         {
             let link = data.followOnLink;
@@ -49,8 +48,7 @@ export const VideoWithPdfsPage = (props: TArticlePage) => {
                 const internalSlug = getLastSlugPart(link);
                 link = `/${locale}/${internalSlug}`;
             }
-            console.log("link is")
-            console.log(link)
+     
             navigate(link)
         }
     };

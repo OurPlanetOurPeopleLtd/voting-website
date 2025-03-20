@@ -10,23 +10,28 @@ import {TStagedFlowProps} from "./TStagedFlowProps";
 import {VideoControl} from "../../components/VideoControl";
 import {VideoWithReference} from "../VideoWithReference";
 import {getReferences} from "../../repositories/References/request";
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 import cryingEarth from "../../crying-earth.png";
 
 import "../VotingPage.scss";
 import {getNextTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
 
-const StagedFlow = (props: TStagedFlowProps) => {
+export const StagedFlow = (props: TStagedFlowProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
-    
-    const stageAsString = searchParams.get("stage");
+    const navigate = useNavigate();
 
-   
+    const stageAsString = props.forceStage ? props.forceStage : searchParams.get("stage");
+     
 
     const stageFromUrl = stageAsString ? parseInt(stageAsString) : undefined;
 
     const [stage, setStage] = useState(stageFromUrl?? 0);
+
+    useEffect(() => {
+        if(props.forceStage)
+            setStage(parseInt(props.forceStage))
+    }, [props.forceStage]);
    
     const totalQuestions = 1;//(props.questions?.length ?? 0); (todo decide if we are making this dynamic)   
        
@@ -39,6 +44,19 @@ const StagedFlow = (props: TStagedFlowProps) => {
     const totalStages = donateStage+1; // Number of steps in the flow
     
     const updateSearchParams = (newStage: number): number => {
+        
+        if(newStage == shareStage) //todo use the query to do this
+        {
+                
+            navigate(`/${props.locale}/share`);
+            return shareStage
+        }
+        if(newStage == questionStage) //todo use the query to do this
+        {
+
+            navigate(`/${props.locale}/voting`);
+            return shareStage
+        }
         searchParams.set("stage", newStage.toString());
         setSearchParams({  stage: newStage.toString() });
         return newStage;
@@ -185,15 +203,7 @@ const StagedFlow = (props: TStagedFlowProps) => {
 };
 
 export const VotingPageMainJourney = (props: TVotingPageExtended) => {
-    const {voted, watched} = props;
-    const [showOverlay, setShowOverlay] = useState(false);
 
-    useEffect(() => {
-        if (voted) {
-            const targetHeading = document.getElementById('share-heading');
-            console.log("targetHeading 2", targetHeading);
-            //targetHeading?.scrollIntoView({behavior: 'smooth'});
-        }}, [showOverlay]);
 
     return (
         <>

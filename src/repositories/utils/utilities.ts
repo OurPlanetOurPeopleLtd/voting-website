@@ -1,5 +1,5 @@
 import {APP_CONTENTFUL_ACCESS_TOKEN, APP_CONTENTFUL_ENVIRONMENT, CONTENT_URL, node_env} from "./graphQLfetch";
-import {ContentTypes, NavigationItem} from "../Navigation/types";
+import {ContentType, NavigationItem} from "../Navigation/types";
 import {getNavigationJson} from "../Navigation/request";
 import {DEBUG_QUERY} from "./preview";
 import {getLogger} from "../../utils/logger";
@@ -110,7 +110,7 @@ export async function flattenNavigationRoute(
 
     let dataFetched = await getNavigationJson(id,locale);
     let childIds: string[] = dataFetched
-        .filter((x) => x.__typename === ContentTypes.NavigationGroup)
+        .filter((x) => x.__typename === ContentType.NavigationGroup)
         .map((x) => x?.id ?? "INVALID")
         .filter((x) => x !== "INVALID");
     for (const childId of childIds) {

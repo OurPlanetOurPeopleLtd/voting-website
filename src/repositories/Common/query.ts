@@ -1,6 +1,6 @@
 
 
-import {ContentTypes} from "../Navigation/types";
+import {AllContentTypes, AllContentTypesInNavigation, ContentType} from "../Navigation/types";
 
 const blogPost = `title
             slug`;
@@ -126,14 +126,28 @@ const votingPage = `
             mainVideo${videoBlock}`;
 
 
+const getNavBlock = (contentType:ContentType) =>
+{
+    switch(contentType)
+    {
+ 
+        case ContentType.PdfAndVideo:
+            return `... on InformationSourceRecord{  title}`
+        default:
+            return `... on ${contentType}{id, slug, title}`
+            
+    }
+}
 
+//AllContentTypes
 
+const basicNavItems = `__typename ${AllContentTypesInNavigation.map(contentType =>getNavBlock(contentType as ContentType) )}`
     
-const basicNavItems = `
+const basicNavItemsOld = `
           __typename
-          ... on ${ContentTypes.RegistrationPage}{id, slug, title}
-          ... on ${ContentTypes.PdfWrapper} ${pdfWrapperBlock}
-          ... on ${ContentTypes.VideoWithPdfs} {
+          ... on ${ContentType.RegistrationPage}{id, slug, title}
+          ... on ${ContentType.PdfWrapper} ${pdfWrapperBlock}
+          ... on ${ContentType.VideoWithPdfs} {
             title
             slug
             pdfs

@@ -13,7 +13,7 @@ import {
 
 import "./VoteResults.scss";
 
-export const VoteResults = ({questionId, locale}: { questionId: string, locale?: string }) => {
+export const VoteResults = ({ locale}: {locale?: string }) => {
     const [yesVotes, setYesVotes] = useState(0);
     const [noVotes, setNoVotes] = useState(0);
     const yesText = getYesTranslation(locale ?? "en");
@@ -32,12 +32,10 @@ export const VoteResults = ({questionId, locale}: { questionId: string, locale?:
             setNoVotes(no);
         }
 
-        if (selectedCountry === "All") {
-            console.log("getting all results")
+        if (selectedCountry === "All") {           
             //get all votes
             fetchVotes(undefined);
-        } else {
-            console.log("getting results for " + selectedCountry)
+        } else {            
             fetchVotes(selectedCountry);
         }
     }, [selectedCountry]);

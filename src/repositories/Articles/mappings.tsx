@@ -5,7 +5,7 @@ import {getLogger} from "../../utils/logger";
 import {renderNodeRule, StructuredText} from 'react-datocms';
 import type {StructuredText as TStructuredText} from 'datocms-structured-text-utils';
 import {isParagraph} from 'datocms-structured-text-utils';
-import {ContentTypes, NavigationItem} from "../Navigation/types";
+import {ContentType, NavigationItem} from "../Navigation/types";
 import {HubCollection} from "../../components/HubCollection";
 import {TArticlePage} from "../Common/types";
 import {TPage} from "../../components/PageData";
@@ -13,8 +13,7 @@ import {TPage} from "../../components/PageData";
 
 function datoRichTextToReactNode(content: TStructuredText): ReactNode {
 
-    console.log("hello world i am the render")
-    console.log(content.links);
+
     //see https://github.com/datocms/react-datocms/blob/master/docs/structured-text.md for documentation
     return (
         <StructuredText
@@ -26,7 +25,7 @@ function datoRichTextToReactNode(content: TStructuredText): ReactNode {
                     ({adapter: {renderNode}, node, children, key}) => {
                         // If the paragraph contains an inline record, remove the surrounding p tags
                         if (node.children[0]?.type === 'inlineItem') {
-                            console.log("is inline item")
+                            
                             return (
                                 <React.Fragment key={key}>
                                     {children}
@@ -34,8 +33,7 @@ function datoRichTextToReactNode(content: TStructuredText): ReactNode {
                             );
                         } else {
                             // Otherwise render the p tags
-                            console.log("is item")
-                            console.log(node.children[0]?.type)
+                       
                             return renderNode(
                                 'p',
                                 {
@@ -50,14 +48,14 @@ function datoRichTextToReactNode(content: TStructuredText): ReactNode {
             renderInlineRecord={({record}) => {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const {__typename, id, ...props} = record;
-                console.log("is record " + id)
-                if (__typename === ContentTypes.NavigationGroup) {
+               
+                if (__typename === ContentType.NavigationGroup) {
                     const navItem = record as unknown as NavigationItem;
                     return (<HubCollection pageTitle={record.id}
                                            showVideoThumbNails={navItem?.showVideoThumbnailsInHub ?? false}
                                            items={navItem.navigationItem}></HubCollection>);
                 }
-                if (__typename === ContentTypes.BlogPost || record.__typename === ContentTypes.VideoPage) {
+                if (__typename === ContentType.BlogPost || record.__typename === ContentType.VideoPage) {
                     const page = record as unknown as TArticlePage;
                     return (
                         <a href={page.slug} className={"card"}>
@@ -74,7 +72,7 @@ function datoRichTextToReactNode(content: TStructuredText): ReactNode {
             renderBlock={({record}) => {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const {__typename, id, ...props} = record;
-                console.log("is block " + id)
+              
                 switch (__typename) {
                     case 'ContentTableRecord': {
                         const table = (props.htmlTable as string).replace(

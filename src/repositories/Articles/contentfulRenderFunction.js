@@ -3,7 +3,7 @@ import {BLOCKS, INLINES} from "@contentful/rich-text-types";
 import {createAnchorLinkFromTitle} from "../utils/utilities";
 import {HubCollection} from "../../components/HubCollection";
 import {VideoEmbed} from "../../components/VideoEmbed";
-import {AssetTypes, ContentTypes} from "../Navigation/types";
+import {AssetTypes, ContentType} from "../Navigation/types";
 import {getLogger} from "../../utils/logger";
 import {VideoWithPdfs} from "../../pages/VideoWithPdfs";
 
@@ -29,8 +29,7 @@ function renderOptions(links) {
         entryMap.set(entry.sys.id, entry);
     }
     const entryBlockMap = entryMap;
-
-    console.log("hello world!")
+    
 
     return {
         // other options...
@@ -40,9 +39,7 @@ function renderOptions(links) {
             [INLINES.EMBEDDED_ENTRY]: (node, children) => {
                 // find the entry in the entryMap by ID
                 //currently not an option
-                console.log("test")
-                console.log(node)
-                console.log(children)
+ 
             },
             [BLOCKS.HEADING_2]: (node, children) => {
                 let text = createAnchorLinkFromTitle(children);
@@ -58,21 +55,20 @@ function renderOptions(links) {
             [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
                 // find the entry in the entryMap by ID
                 const entry = entryBlockMap.get(node.data.target.sys.id);
-
-                console.log(entry)
-                if (entry.__typename === ContentTypes.NavigationGroup) {
+          
+                if (entry.__typename === ContentType.NavigationGroup) {
                     return <HubCollection pageTitle={entry}
                                           showVideoThumbNails={entry.showVideoThumbnailsInHub ?? false}
                                           items={entry.navigationItemCollection.items}></HubCollection>
                 } 
-                if (entry.__typename === ContentTypes.VideoWithPdfs) {
+                if (entry.__typename === ContentType.VideoWithPdfs) {
                     
                     
                     return <VideoWithPdfs  datoVideo={entry.mainVideo?.video}  
                                            fullScreenOnClick={false} 
                                            pdfWrappers={entry.pdfs}></VideoWithPdfs>
                 }
-                if (entry.__typename === ContentTypes.BlogPost || entry.__typename === ContentTypes.VideoPage) {
+                if (entry.__typename === ContentType.BlogPost || entry.__typename === ContentType.VideoPage) {
                     return (
                         <a href={entry.slug} className={"card"}>
                             <div className="card-content">
