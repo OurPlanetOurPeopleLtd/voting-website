@@ -138,7 +138,7 @@ function Routing() {
                     key={key}
                     path={prefix +path}
                     element={
-                        <LayoutTs locale={locale} >
+                        <LayoutTs locale={locale} title={navItem.title}  >
                             <RouteChangeListener onSetLocale={OnLocaleChanged}/>
                             <TypeElement {...navItem} slug={path} id={navItem.id} locale={locale}/>
                         </LayoutTs>
@@ -163,7 +163,7 @@ function Routing() {
                     <Route
                         key="nopage" path="*"
                         element={
-                            <LayoutTs locale={locale} >
+                            <LayoutTs locale={locale} title={"Unknown Page"} >
                                 <RouteChangeListener onSetLocale={OnLocaleChanged}/>
                                 <NoPage/>
                             </LayoutTs>

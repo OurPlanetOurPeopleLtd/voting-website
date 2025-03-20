@@ -21,14 +21,16 @@ import {DynamicNavList} from "./DynamicNavList";
 import {DynamicFooter} from "./DynamicFooter";
 import {defaultLanguage} from "../languages";
 import FlagSelect from "./FlagSelect";
+import {Helmet} from "react-helmet-async";
 
 
 export interface ILayout extends PropsWithChildren
 {
     locale:string;
+    title:string;
 }
 
-export const LayoutTs = ({children, locale} : ILayout) => {
+export const LayoutTs = ({children, locale, title} : ILayout) => {
     
     
     const [expanded, setExpanded] = useState(false);
@@ -81,6 +83,9 @@ export const LayoutTs = ({children, locale} : ILayout) => {
 
     return (
         <>
+            <Helmet>
+                <title>{title ?? "Home"} - Our Planet Our People</title>
+            </Helmet>
             <Navbar expanded={expanded} collapseOnSelect expand="lg" fixed="top">
                 <Container style={{position: "relative"}}>
                     <Link to={`/${locale}`} className="navbar-brand">
