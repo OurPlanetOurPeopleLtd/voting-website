@@ -71,6 +71,23 @@ function Routing() {
     }, []);
 
 
+    
+    function getElementForType(type: ContentTypes) {
+        switch (type) {
+            case ContentTypes.RegistrationPage:
+                return RegistrationPage ;
+            case ContentTypes.VotingPage:
+                return VotingPage;
+            case ContentTypes.BlogPost:
+                return ArticlePage;
+            case ContentTypes.VideoPage:
+                return VideoPage;
+            case ContentTypes.VideoWithPdfs:
+                return VideoWithPdfsPage;
+            default:
+                return null;
+        }
+    }
     const createDynamicRoutes = (lang:string | undefined, uid:number) => {
         const prefix = lang ? `${lang}/` : '';
         const locale = lang ?? defaultLanguage;
@@ -181,6 +198,19 @@ function Routing() {
     {
         setLocale(locale)
     }
+    const GetRoute = (navItem:NavigationItem, key:string, path:string) =>
+    {
+        const prefix = lang ? `${lang}/` : '';
+        const locale = lang ?? defaultLanguage;
+        const element = getElementForType(navItem.__typename);
+        return <Route
+
+            key={prefix + "blog_list"}
+            path={prefix +"blog_list"}
+            element={<element locale={locale}/>}
+        />
+    }
+    
     return (
         <BrowserRouter>
             <Routes>
