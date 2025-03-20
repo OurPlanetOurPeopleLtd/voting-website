@@ -53,7 +53,7 @@ function mapAllSlugs(root: QueryResult): NavigationItem[] {
 
 export const getAllNavData = (locale:string) => {
     const query = generateAllPagesForNavQuery(locale);
-    console.log(query);
+    
     return fetchDataDato<QueryResult>(query).then((root: QueryResult) => {
 
        

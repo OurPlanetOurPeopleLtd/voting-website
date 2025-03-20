@@ -23,7 +23,6 @@ export const DynamicNavList = (props: TDynamicNav) => {
 
     const fetchData = useCallback(async () => {
         const dataFetched = await getNavigationJson(id, locale ?? "en");
-        console.log(dataFetched);
         setData(dataFetched);
     }, [id,locale])
 
