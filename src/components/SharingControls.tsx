@@ -84,10 +84,6 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
                 url = `https://twitter.com/intent/tweet?url=${pageUrl}&text=Check this out!`;
             break;
 
-            case "linkedin":
-                url = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
-            break;
-
             case "whatsapp":
                 url = `https://api.whatsapp.com/send?text=${pageUrl}`;
             break;
@@ -113,6 +109,11 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
                     <div className={"verticalFrameCentre"}>
                         <div className="sharing-icons__top">
                             <button type="button">
+                                <FaWhatsapp onClick={(e) => { e.preventDefault(); handleShare("whatsapp")}} style={{ fontSize: '3rem'}}/>
+                                <span className="visually-hidden">Share via WhatsApp</span>
+                            </button>
+
+                            <button type="button">
                                 <FaFacebook onClick={(e) => { e.preventDefault(); handleShare("facebook")}} style={{ fontSize: '3rem'}}/>
                                 <span className="visually-hidden">Share on Facebook</span>
                             </button>
@@ -120,16 +121,6 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
                             <button type="button">
                                 <FaTwitter onClick={(e) => { e.preventDefault(); handleShare("twitter")}} style={{ fontSize: '3rem'}}/>
                                 <span className="visually-hidden">Share on X</span>
-                            </button>
-
-                            <button type="button">
-                                <FaLinkedin onClick={(e) => { e.preventDefault(); handleShare("linkedin")}} style={{ fontSize: '3rem'}}/>
-                                <span className="visually-hidden">Share on Linkedin</span>
-                            </button>
-
-                            <button type="button">
-                                <FaWhatsapp onClick={(e) => { e.preventDefault(); handleShare("whatsapp")}} style={{ fontSize: '3rem'}}/>
-                                <span className="visually-hidden">Share via WhatsApp</span>
                             </button>
 
                             <a id="copy-link" href={pageUrl}>
