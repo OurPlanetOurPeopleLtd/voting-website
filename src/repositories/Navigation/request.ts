@@ -12,4 +12,3 @@ export const getNavigationJson = (id: string, locale:string) => {
         return mapNavData(root);
     });
 };
-
