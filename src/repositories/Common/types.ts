@@ -11,7 +11,8 @@ export interface TVideoThumbnail {
     video: { id: string, video: Video };
 }
 export interface Data {
-    allVideoPageModels: NavigationItem[]
+    registrationPage: NavigationItem;
+    allVideoPageModels: NavigationItem[];
     allBlogPostModels: NavigationItem[];
     allVideoWithPdfs: NavigationItem[];
     votingPageModel: NavigationItem;

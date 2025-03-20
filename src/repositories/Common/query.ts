@@ -44,6 +44,21 @@ const videoPage = `
                 thumbnailImage${imgBlock}
                 }    
             `;
+
+const registrationPage = `
+                title
+                slug
+                commentsLabel
+                emailLabel
+                nameLabel
+                submit
+                thankYou
+                emailValidation
+                mainVideo{
+                video${videoBlock}
+                thumbnailImage${imgBlock}
+                }    
+            `;
 const videoWithPdfPage = videoPage + ` 
             followOnLink {      
             url
@@ -116,7 +131,7 @@ const votingPage = `
     
 const basicNavItems = `
           __typename
-          
+          ... on ${ContentTypes.RegistrationPage}{id, slug, title}
           ... on ${ContentTypes.PdfWrapper} ${pdfWrapperBlock}
           ... on ${ContentTypes.VideoWithPdfs} {
             title
@@ -171,6 +186,8 @@ export const QueryBlocks =
         VideoWithPdfPage: videoWithPdfPage,
         VideoPost: videoPage,
         VotingPage: votingPage,
-        VideoComponent: videoPage,
+        VideoComponent: videoPage, 
+        RegistrationPage: registrationPage
+
     }
 

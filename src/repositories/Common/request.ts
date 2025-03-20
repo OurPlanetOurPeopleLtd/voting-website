@@ -13,6 +13,12 @@ function generateAllPagesForNavQuery(locale:string) {
         id
       slug	
   }
+  registrationPage{
+  __typename
+    id
+    title
+    slug
+  }
   allVideoPageModels{
          __typename
 
@@ -39,6 +45,7 @@ function generateAllPagesForNavQuery(locale:string) {
 
 function mapAllSlugs(root: QueryResult): NavigationItem[] {
     return root?.data?.allVideoPageModels
+        .concat(root.data.registrationPage)
         .concat(root.data.allVideoWithPdfs)
         .concat(root.data.allBlogPostModels)
         .concat(root.data.votingPageModel);
@@ -46,6 +53,7 @@ function mapAllSlugs(root: QueryResult): NavigationItem[] {
 
 export const getAllNavData = (locale:string) => {
     const query = generateAllPagesForNavQuery(locale);
+    console.log(query);
     return fetchDataDato<QueryResult>(query).then((root: QueryResult) => {
 
        

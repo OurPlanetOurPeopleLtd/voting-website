@@ -23,6 +23,7 @@ export const DynamicNavList = (props: TDynamicNav) => {
 
     const fetchData = useCallback(async () => {
         const dataFetched = await getNavigationJson(id, locale ?? "en");
+        console.log(dataFetched);
         setData(dataFetched);
     }, [id,locale])
 
@@ -71,7 +72,12 @@ export const DynamicNavList = (props: TDynamicNav) => {
                             </Nav.Link>
                             </>
                         );
-                
+                    case ContentTypes.RegistrationPage:
+                        return (
+                            <Nav.Link onClick={onSelect} as={NavLink} key={key} to={slugPrefix + "registration"}>                            
+                                {navItem.title}
+                            </Nav.Link>
+                        );
                     case ContentTypes.VideoPage:
                     case ContentTypes.BlogPost:
                     case ContentTypes.VideoWithPdfs:

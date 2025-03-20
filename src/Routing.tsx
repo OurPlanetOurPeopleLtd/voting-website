@@ -81,6 +81,17 @@ function Routing() {
                     data.map((navItem, index) => {
                         const keyId =uid + "-" + locale + "-" + index
                         switch (navItem.__typename) {
+                            case ContentTypes.RegistrationPage:
+                                return (
+                                    <Route
+                                        key={keyId}
+                                        path={prefix +  "registration"}
+                                        element={
+
+                                            <RegistrationPage locale={locale}/>
+                                        }
+                                    />
+                                );
                             case ContentTypes.VotingPage:
                           
                                 return (
@@ -156,7 +167,7 @@ function Routing() {
                     key={"registration_page"}
                     path={"registration"}
                     element={
-                        <RegistrationPage
+                        <RegistrationPage locale={locale}
                         />
                     }
                 />

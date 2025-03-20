@@ -17,6 +17,7 @@ export interface NavigationGroup {
 }
 
 export enum ContentTypes {
+    RegistrationPage = "RegistrationPageRecord",
     VotingPage = "VotingPageModelRecord",
     BlogPost = "BlogPostModelRecord",
     VideoPage = "VideoPageModelRecord",
@@ -52,8 +53,7 @@ export interface TQuestionBlock {
 
 export interface NavigationItem extends NavigationGroup {
 
-    mainVideo: TVideoThumbnail | undefined;
-    
+    mainVideo: TVideoThumbnail | undefined;    
     
     cardTitle: string;
     title: string;
@@ -62,14 +62,10 @@ export interface NavigationItem extends NavigationGroup {
     slug: string;
     __typename: ContentTypes
     showVideoThumbnailsInHub?: boolean
-
-   
     thumbnail: { responsiveImage: { src: string } };
     pdf:{url:string}  
     pdfs:TPdfWrapper[]
     video:{slug:string}
-
-
     resultsHeading?: string,
 }
 
