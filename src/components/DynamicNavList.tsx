@@ -1,14 +1,11 @@
 import {getNavigationJson} from "../repositories/Navigation/request";
 import React, {useCallback, useEffect, useState} from "react";
-import {ContentTypes, NavigationItem} from "../repositories/Navigation/types";
+import {ContentType, NavigationItem} from "../repositories/Navigation/types";
 import Nav from "react-bootstrap/Nav";
 import {NavDropdown} from "react-bootstrap";
-import {NavLink, useLocation} from "react-router-dom";
-import FlagSelect from "./FlagSelect";
-import {defaultLanguage} from "../languages";
-
+import {NavLink} from "react-router-dom";
 import "./MegaMenu.scss";
-import {getResultTranslation} from "../repositories/utils/extraTranslations";
+
 
 export type TDynamicNav = {
     id: string;
@@ -23,6 +20,7 @@ export const DynamicNavList = (props: TDynamicNav) => {
 
     const fetchData = useCallback(async () => {
         const dataFetched = await getNavigationJson(id, locale ?? "en");
+
         setData(dataFetched);
     }, [id,locale])
 
@@ -38,18 +36,19 @@ export const DynamicNavList = (props: TDynamicNav) => {
             fetchData().catch(console.error);
     }, [locale]);
 
-    const gslugPrefix = props.locale ? `${locale}/` :"";
+    const gslugPrefix = props.locale ? `/${locale}/` :"/";
     return (
         <>
             {data && data.map((navItem: NavigationItem, index) => {
-                let slugPrefix = navItem.slug?.includes( gslugPrefix) ? "" : gslugPrefix;
-                if(navItem.slug?.startsWith("/") && slugPrefix?.endsWith("/"))
-                    slugPrefix = props.locale ?? ""
+                let slugPrefix = navItem.slug?.includes( gslugPrefix) ? "/" : gslugPrefix;
+           
+                if(slugPrefix?.endsWith("//"))
+                    slugPrefix = props.locale ?? "/"
 
-                const key =index +  (props.locale ?? "");
+                const key =index +  (props.locale ?? "");                     
 
                 switch (navItem.__typename) {
-                    case ContentTypes.ExternalLink:
+                    case ContentType.ExternalLink:
                         return (
                             <a
                                 key={key}
@@ -60,27 +59,8 @@ export const DynamicNavList = (props: TDynamicNav) => {
                                 {navItem.title}
                             </a>
                         );
-                    case ContentTypes.VotingPage:
-                        return (
-                            <>
-                            <Nav.Link onClick={onSelect} as={NavLink} key={key} to={slugPrefix  + (navItem.slug ?? "?stage=1")}>
-                                {navItem.cardTitle}
-                            </Nav.Link>
-                            <Nav.Link onClick={onSelect} as={NavLink} key={key+"results"} to={ slugPrefix  +  "results"}>
-                                {navItem.resultsHeading ?? getResultTranslation(locale ?? "en")}
-                            </Nav.Link>
-                            </>
-                        );
-                
-                    case ContentTypes.VideoPage:
-                    case ContentTypes.BlogPost:
-                    case ContentTypes.VideoWithPdfs:
-                        return (
-                            <Nav.Link onClick={onSelect} as={NavLink} key={key} to={slugPrefix + (navItem.slug ?? "")}>
-                                {navItem.title}
-                            </Nav.Link>
-                        );
-                    case ContentTypes.PdfAndVideo:
+                  
+                    case ContentType.PdfAndVideo:
                         return (
                             <NavDropdown title={navItem.title ?? "_"} id={`basic-nav-dropdown-${navItem.id}`}>
                                 <button type="button" className="navigation-back" onClick={(e) => {e.preventDefault(); e.currentTarget.parentElement?.parentElement?.click()}}>
@@ -102,7 +82,7 @@ export const DynamicNavList = (props: TDynamicNav) => {
                             </NavDropdown>
                         );
                         
-                    case ContentTypes.NavigationGroup:
+                    case ContentType.NavigationGroup:
                         return (
                             <NavDropdown title={navItem.title ?? "_"} id={`basic-nav-dropdown-${navItem.id}`}>
                                 <button type="button" className="navigation-back" onClick={(e) => {e.preventDefault(); e.currentTarget.parentElement?.parentElement?.click()}}>
@@ -113,8 +93,26 @@ export const DynamicNavList = (props: TDynamicNav) => {
                                 <DynamicNavList key={key} onSelect={onSelect} itemGroup={(navItem).navigationItem} locale={props.locale} id={navItem?.id ?? "123"}></DynamicNavList>
                             </NavDropdown>
                         );
+                    case ContentType.VotingPage:
+                        return (
+                            <Nav.Link onClick={onSelect} as={NavLink} key={key} to={slugPrefix}>
+                                {navItem.title ?? "error"}
+                            </Nav.Link>
+                        );
                     default:
-                        return <></>;
+                    case ContentType.SpecialPageRecord:
+                    case ContentType.RegistrationPage:                    
+                    case ContentType.VotingResult:
+                    case ContentType.VideoPage:
+                    case ContentType.BlogPost:
+                    case ContentType.VideoWithPdfs:
+                        return (
+                            <Nav.Link onClick={onSelect} as={NavLink} key={key} to={slugPrefix + (navItem.slug ?? "")}>
+                                {navItem.title ?? "error"}
+                            </Nav.Link>
+                        );
+                    
+                    
                 }
             })}
         </>

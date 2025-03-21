@@ -269,7 +269,7 @@ const microCopyTranslations: Translations = {
 };
 
 export function getTranslation(languageCode: string, key: string): string {
-    console.log("trying micropy for " + languageCode)
+   
     const languageTranslations = microCopyTranslations[languageCode];
     if (languageTranslations && languageTranslations[key]) {
         return languageTranslations[key];

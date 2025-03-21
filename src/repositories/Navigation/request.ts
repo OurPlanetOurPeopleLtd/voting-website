@@ -9,8 +9,6 @@ export const getNavigationJson = (id: string, locale:string) => {
 
     return fetchDataDato<QueryResult>(query).then((root: QueryResult) => {
 
-        //todo handle failure outside of function
         return mapNavData(root);
     });
 };
-

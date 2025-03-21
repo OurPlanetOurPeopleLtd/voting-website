@@ -45,8 +45,5 @@ export async function mapVotingPage(result: QueryResult): Promise<TVotingPage> {
 
         }
     
-    console.log("mapped data is")
-    console.log(data);
-
     return data;
 }

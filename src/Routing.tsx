@@ -2,17 +2,15 @@ import React, {useEffect, useState} from "react";
 
 import "./App.scss";
 
-import {ContentTypes, NavigationItem} from "./repositories/Navigation/types";
+import {ContentType, NavigationItem} from "./repositories/Navigation/types";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import VotingPage, {localStorageVotingIdKey, localStorageWatchedIdKey} from "./pages/VotingPage";
 
 import NoPage from "./pages/NoPage";
-import LoadingPage from "./pages/LoadingPage";
 import {DEBUG_QUERY, refreshPreview} from "./repositories/utils/preview";
 import {LogLinks} from "./repositories/utils/utilities";
 
 import {getAllNavData} from "./repositories/Common/request";
-import {BlogList} from "./components/BlogList";
 import {defaultLanguage, getSupportedLocales} from "./languages";
 import {LayoutTs} from "./components/Layout";
 import {RouteChangeListener} from "./RouteChangeListener";
@@ -21,7 +19,8 @@ import {ArticlePage} from "./pages/Article";
 import {VotingResultsFrame} from "./pages/VotingResultsFrame";
 import {VideoWithPdfsPage} from "./pages/VideoWithPdfPage";
 import {RegistrationPage} from "./pages/RegistrationPage";
-
+import {StagedPage} from "./pages/StagedPage";
+import PageTransition from "./PageTransition";
 
 export const headerComponentId = "UW2LLARmS3Oryu_9BT0IBQ"; //todo this is a bit rubbish
 export const footerComponentId = "QR1NY2zlRK-luRZZkbfB1w";  
@@ -47,21 +46,24 @@ const Reset = () => {
 
 
 
+
+
+
 function Routing() {
 
-    const [data, setData] = useState<NavigationItem[]>();
-    const [dataLoaded, setDataLoaded] = useState(false);
+    const [pageNavigateData, setPageNavigateData] = useState<NavigationItem[]>();
+
     
     async function fetchData() {       
-        const links = await getAllNavData(locale); //todo we should probably just split this into the 3 arrays, save switching on typename below
+        const links = await getAllNavData(locale); 
 
         if (process.env.NODE_ENV === "development" && DEBUG_QUERY) 
         {
             LogLinks(links, "routing");
         }
-  
-        setData(links);
-        setDataLoaded(true);  
+
+        setPageNavigateData(links);
+
     }
 
     refreshPreview();
@@ -71,98 +73,30 @@ function Routing() {
     }, []);
 
 
-    const createDynamicRoutes = (lang:string | undefined, uid:number) => {
-        const prefix = lang ? `${lang}/` : '';
-        const locale = lang ?? defaultLanguage;
-      
-        return (
-            <>
-                {data &&
-                    data.map((navItem, index) => {
-                        const keyId =uid + "-" + locale + "-" + index
-                        switch (navItem.__typename) {
-                            case ContentTypes.VotingPage:
-                          
-                                return (
-                                    <>
-                                    <Route
-                                        key={keyId}
+    
+    function getElementForType(type: ContentType) {
 
-                                        path={prefix + "/"}
-                                        index
-                                        element={
-                                      
-                                            <VotingPage
-                                                id={navItem.id}
-                                                locale={locale}
-                                            />
-                                       
-                                        }
-                                    />
-                                        <Route
-                                            key={keyId+"results"}
-                                            path={prefix + "results"}                                            
-                                            element={                                           
-                                                <VotingResultsFrame
-                                                    questionId={"UwO6qO8AQL2tLD7tBPGP7A"}
-                                                    locale={locale}
-                                                />                                             
-                                            }
-                                        />
-                            </>
-                                );
-           
-                                
-                            case ContentTypes.BlogPost:
+        const ErrorPage = () => <div>Could not find type</div>;
 
-                                return (
-                                    <Route
-                                        key={keyId}
-
-                                        path={prefix + navItem.slug ?? "blog"}
-                                        element={
-                                      
-                                        <ArticlePage locale={locale} slug={navItem.slug ?? "blog"}/>
-                                           }
-                                    />
-                                );
-                            case ContentTypes.VideoPage:
-                                return (
-                                    <Route
-                                        key={keyId}
-                                        path={prefix + navItem.slug ?? "video"}
-                                        element={<VideoPage locale={locale} slug={prefix + navItem.slug ?? "video"}/>}
-                                    />
-                                );
-
-                            case ContentTypes.VideoWithPdfs:
-
-                                return <Route
-                                    key={keyId+"results"}
-                                    path={prefix + navItem.slug ?? "vpdf" }
-                                    element={<VideoWithPdfsPage  locale={locale} slug={prefix + navItem.slug ?? "vpdf"}></VideoWithPdfsPage>} />
-
-                            default:
-                                return null;
-                        }
-                    })}
-                <Route
-
-                    key={prefix + "blog_list"}
-                    path={prefix +"blog_list"}
-                    element={<BlogList locale={locale}/>}
-                />
-                <Route
-                    key={"registration_page"}
-                    path={"registration"}
-                    element={
-                        <RegistrationPage
-                        />
-                    }
-                />
-            </>
-        );
-    };
+        switch (type) {
+            case ContentType.RegistrationPage:
+                return RegistrationPage;
+            case ContentType.VotingPage:
+                return VotingPage;
+            case ContentType.BlogPost:
+                return ArticlePage;
+            case ContentType.VideoPage:
+                return VideoPage;
+            case ContentType.VideoWithPdfs:
+                return VideoWithPdfsPage;
+            case ContentType.VotingResult: 
+                return VotingResultsFrame;
+            case ContentType.SpecialPageRecord:
+                return StagedPage;
+            default:
+                return ErrorPage;
+        }
+    } 
 
     const [locale, setLocale] = useState(defaultLanguage);
    
@@ -170,19 +104,76 @@ function Routing() {
     {
         setLocale(locale)
     }
+
+    function getPath(navItem: NavigationItem) :string {
+        const type = navItem.__typename;
+        
+        switch (type) {
+            case ContentType.VotingPage:
+                return "";
+            default:
+            case ContentType.RegistrationPage:
+            case ContentType.BlogPost:
+            case ContentType.VideoPage:                    
+            case ContentType.VideoWithPdfs:
+            case ContentType.VotingResult:
+            case ContentType.SpecialPageRecord:
+                return navItem.slug;           
+              
+        }        
+    }
+   
+    
+    const getRoute = (navItem:NavigationItem, key:string, lang?:string) =>
+    {       
+        const prefix = lang ? `${lang}/` : '';
+        const locale = lang ?? defaultLanguage;
+        const TypeElement = getElementForType(navItem.__typename);
+        const path = getPath(navItem);
+
+        return(
+            
+                
+                <Route
+                    key={key}
+                    path={prefix +path}
+                    element={
+                        <LayoutTs locale={locale} title={navItem.title}  >
+                            <RouteChangeListener onSetLocale={OnLocaleChanged}/>
+                            <TypeElement {...navItem} slug={path} id={navItem.id} locale={locale}/>
+                        </LayoutTs>
+                    }
+                />               
+               
+            )
+    }
+    const generatePageRoutesForLanguage = ( lang_index:number, lang?:string) => pageNavigateData?.map((navItem, index)  => getRoute(navItem, `${lang_index+index}`, lang))
+
+    const languageArray = [undefined, ...getSupportedLocales()];
+
     return (
         <BrowserRouter>
-            <Routes>
-                
-                
-                <Route key="root" path={"/"}   element={<LayoutTs locale={locale} ><RouteChangeListener onSetLocale={OnLocaleChanged}/></LayoutTs>} >
+            <PageTransition>
+            <Routes>                                
+             
                     
-                    {[undefined, ...getSupportedLocales()].map((locale,index) => createDynamicRoutes(locale,index))}
-                    {dataLoaded ? <Route key="loading" path="*" element={<LoadingPage/>}/> : <Route key="nopage" path="*" element={<NoPage/>}/>}
-                    <Route key="api" path="/reset/patrickonly/277205bc-fdf9-4bcb-be07-14a3a3bcc7f4" element={<Reset/>}></Route>
-                </Route>)
-                   
+                    {languageArray.map((locale,index) => generatePageRoutesForLanguage(index, locale))}
+                
+
+                    <Route
+                        key="nopage" path="*"
+                        element={
+                            <LayoutTs locale={locale} title={"Unknown Page"} >
+                                <RouteChangeListener onSetLocale={OnLocaleChanged}/>
+                                <NoPage/>
+                            </LayoutTs>
+                        }
+                    />
+
+                <Route key="api" path="/reset/patrickonly/277205bc-fdf9-4bcb-be07-14a3a3bcc7f4" element={<Reset/>}></Route>
+                             
             </Routes>
+                </PageTransition>
         </BrowserRouter>
     );
 }

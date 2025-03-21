@@ -1,5 +1,5 @@
-import React, {useState, ChangeEvent} from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState, ChangeEvent, useEffect} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
 import {CountryFlag, defaultFlag, getSupportedCountries} from "../languages";
 
 
@@ -8,6 +8,11 @@ const FlagSelect = ({currentLocale}: {currentLocale:string}) => {
     const defaultCountryFlag: CountryFlag = (supportedCountries.find(country => country.code === currentLocale)) ?? defaultFlag ;
     const [selectedCountry, setSelectedCountry] = useState(defaultCountryFlag);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        setSelectedCountry(defaultCountryFlag)
+    }, [currentLocale]);
 
     const handleCountryChange = (event : ChangeEvent<HTMLSelectElement>) => {
         const selectedCountryCode = event.target.value;
@@ -15,7 +20,19 @@ const FlagSelect = ({currentLocale}: {currentLocale:string}) => {
 
         if (selectedCountry) {
             setSelectedCountry(selectedCountry);
-            navigate(`/${selectedCountry.code}`);
+
+
+            // Extract current path and replace country code
+            const pathSegments = location.pathname.split('/').filter(Boolean); // Remove empty segments
+
+            if (pathSegments.length > 0) {
+                if(pathSegments[0].length !== 2) //if for whatever reason we dont already have lang code, insert it
+                    pathSegments.unshift( selectedCountry.code)
+                else
+                    pathSegments[0] = selectedCountry.code; // Replace country code
+            }
+
+            navigate(`/${pathSegments.join('/')}`);     
         }
     };
 

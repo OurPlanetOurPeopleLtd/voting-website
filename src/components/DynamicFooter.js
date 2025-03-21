@@ -29,8 +29,7 @@ export const DynamicFooter = ({id,locale}) => {
                         slugPrefix = locale ?? ""
 
                     const key =index +  (locale ?? "");
-                    console.log("locale is " + locale)
-                    console.log("Slug is" + slugPrefix)
+                   
                     return (
                         <li key={locale+index}>
                             <Link to={cleanUrl(slugPrefix  +`/${x.link}`)} className="nav-link">

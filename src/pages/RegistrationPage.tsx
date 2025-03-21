@@ -1,17 +1,46 @@
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {DataStore} from "@aws-amplify/datastore";
 import {User, Vote} from "../models";
 import {localStorageVotingIdKey} from "../pages/VotingPage";
 import {v4 as generateGuid} from "uuid";
 import {recordUse} from "../utils/analytics";
-
 import "./RegistrationPage.scss";
 import {VideoControl} from "../components/VideoControl";
+import { TVideoThumbnail} from "../repositories/Common/types";
+import {getRegistrationPage} from "../repositories/Registration/request";
 
-export const RegistrationPage = () => {
+export type TRegistrationPage =
+{
+    title:string,
+    subtitle:string,
+    commentsLabel: string,
+    submit: string,
+    emailLabel: string,
+    nameLabel: string
+    mainVideo: TVideoThumbnail,
+    emailValidation: string
+    thankYou: string
+}
+export type TRegistrationProps =
+{
+    locale:string
+}
+
+export const RegistrationPage = ({locale}: TRegistrationProps) => {
     const [emailExistsError, setEmailExists] = useState(false);
     const [thankYouForRegister, setThankYouRegister] = useState(false);
-  
+
+    const fetchData = useCallback(async () => {     
+        let dataFetched = await getRegistrationPage(locale);
+        setData(dataFetched);
+    }, [locale])
+    
+    useEffect(() => {
+        fetchData().catch(console.error);
+    }, [fetchData]);
+
+    const [data, setData] = useState<TRegistrationPage | undefined>(undefined);
+        
     const Deregister = async (email:string) => {
         const existingUser = await DataStore.query(User, (v) => v.and(v => [v.email?.eq(email)]))
         const aExistingUser = existingUser.shift();
@@ -78,25 +107,30 @@ export const RegistrationPage = () => {
         event.preventDefault();
         SaveUserToDB(name,email,comment);
     };
+    
+    if(!data)
+    {
+        return <></>
+    }
 
     return (
         <div>
             <div className="hero">
-                <h1>Registration</h1>
-                <p>Be part of our future</p>
-                <VideoControl datoVideo={{muxPlaybackId: "SRqn02V02YrHbSI2VHCKbbiiIijD2N4wp9"}}
+                <h1>{data.title}</h1>
+                <p>{data.subtitle}</p>
+                <VideoControl datoVideo={data.mainVideo}
                               fullScreenOnClick={false}></VideoControl>
                 
             </div>
 
-            {emailExistsError ? <div>email already exists </div> : null }
+            {emailExistsError ? <div>{data.emailValidation}</div> : null }
 
             {
-                thankYouForRegister ? <div>Thank you for registering</div> :
+                thankYouForRegister ? <div>{data.thankYou}</div> :
 
                 <form className="register-form" onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="name">Name:</label>
+                        <label htmlFor="name">{data.nameLabel}:</label>
 
                         <input
                             id="name"
@@ -108,7 +142,7 @@ export const RegistrationPage = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="email">Email:</label>
+                        <label htmlFor="email">{data.emailLabel}:</label>
 
                         <input
                             id="email"
@@ -120,7 +154,7 @@ export const RegistrationPage = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="comments">Comments (optional)</label>
+                        <label htmlFor="comments">{data.commentsLabel}</label>
 
                         <textarea
                             id="comment"
@@ -130,7 +164,7 @@ export const RegistrationPage = () => {
                     </div>
 
                     <div>
-                        <button className="btn" type="submit">Submit</button>
+                        <button className="btn" type="submit">{data.submit}</button>
                     </div>
                 </form>
             }

@@ -1,7 +1,7 @@
 import {createAnchorLinkFromTitle} from "../repositories/utils/utilities";
 import "./HubCollection.scss";
 
-import {ContentTypes, NavigationItem} from "../repositories/Navigation/types";
+import {ContentType, NavigationItem} from "../repositories/Navigation/types";
 import {Video} from "react-datocms";
 import {VideoControl} from "./VideoControl";
 import {TVideoThumbnail} from "../repositories/Common/types";
@@ -92,7 +92,7 @@ export const HubCollection = (props: THubCollection) => {
             const key = `${x.title}-card-${i}`;
 
             switch (x.__typename) {
-                case ContentTypes.NavigationGroup:
+                case ContentType.NavigationGroup:
                     //add card that will link to new hub
                     mainHubCards.push(
                         <HubCard pageTitle={pageTitle} cardTitle={x.title} link={link} uniqueKey={key} key={key}/>
@@ -104,7 +104,7 @@ export const HubCollection = (props: THubCollection) => {
                                                           parentTitle={props.title} title={x.title}
                                                           items={x.navigationItem} uniqueKey={"subhub" + key}/>)
                     break;
-                case ContentTypes.VideoPage:
+                case ContentType.VideoPage:
 
                     if (props.showVideoThumbNails) {
                         mainHubCards.push(
@@ -119,12 +119,12 @@ export const HubCollection = (props: THubCollection) => {
                         )
                     }
                     break;
-                case ContentTypes.VotingPage:
+                case ContentType.VotingPage:
                     mainHubCards.push(
                         <HubCard key={key} pageTitle={pageTitle} cardTitle={x.cardTitle} link={link} uniqueKey={key}/>
                     )
                     break;
-                case ContentTypes.PdfWrapper:
+                case ContentType.PdfWrapper:
                     mainHubCards.push(
                         <HubCard key={key} pageTitle={pageTitle} pageImageSrc={x.thumbnail.responsiveImage.src} cardTitle={x.title} link={x.pdf.url} uniqueKey={key}/>
                     )

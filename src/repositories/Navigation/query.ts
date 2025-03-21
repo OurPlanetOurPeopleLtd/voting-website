@@ -15,9 +15,6 @@ function buildNavigationGroup(levels: number): string {
         id
  
         navigationItem {
-            
-        
-    
           ${QueryBlocks.BasicNavigationItems}
           ... on ExternalLinkModelRecord {
             title
@@ -38,16 +35,15 @@ export const navigationGroup = buildNavigationGroup(3)
 
 export function generateNavQuery(id: string,locale:string) {
 
-    const isPreview = getPreview();
-    const query = `
-  query findNavById{
-    allNavigationGroupModels(filter:{id: {eq:"${id}"}} , locale:${locale},fallbackLocales:[en]) {
  
-      ${navigationGroup}
-      
-    }
-  }`;
-
+    const query = `
+      query findNavById{
+        allNavigationGroupModels(filter:{id: {eq:"${id}"}} , locale:${locale},fallbackLocales:[en]) {
+     
+          ${navigationGroup}
+          
+        }
+      }`;
 
     LogQuery(query)
     return query;

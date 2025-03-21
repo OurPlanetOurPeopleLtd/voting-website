@@ -10,12 +10,26 @@ export interface TVideoThumbnail {
     thumbnailImage: {responsiveImage: {src: string}};
     video: { id: string, video: Video };
 }
-export interface Data {
-    allVideoPageModels: NavigationItem[]
-    allBlogPostModels: NavigationItem[];
-    allVideoWithPdfs: NavigationItem[];
-    votingPageModel: NavigationItem;
+export type Data =  {
+    registrationPage: NavigationItem,
+    allVideoPageModels: NavigationItem[],
+    allBlogPostModels: NavigationItem[],
+    allVideoWithPdfs: NavigationItem[],
+    allSpecialPages: NavigationItem[],
+    votingPageModel: NavigationItem,
+    votingResult: NavigationItem,
 }
+
+// Get keys
+export const allNavigationParts  = [
+    "registrationPage",
+    "allVideoPageModels",
+    "allBlogPostModels",
+    "allVideoWithPdfs",
+    "allSpecialPages",
+    "votingPageModel",
+    "votingResult",
+];
 
 export type TArticlePage = {
     slug: string;

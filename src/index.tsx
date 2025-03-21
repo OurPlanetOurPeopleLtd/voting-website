@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 
+import { HelmetProvider } from "react-helmet-async";
+
 import "../src/fonts/RNS Sans/RNSSanz-Normal.woff";
 import "../src/fonts/RNS Sans/RNSSanz-Normal.woff2";
 import "../src/fonts/RNS Sans/RNSSanz-Light.woff";
@@ -19,8 +21,9 @@ const root = ReactDOM.createRoot(rootElement);
 
 root.render(
     <React.StrictMode>
-
-        <App></App>
+        <HelmetProvider>    
+            <App></App>
+        </HelmetProvider>
     </React.StrictMode>
 );
 

@@ -21,14 +21,16 @@ import {DynamicNavList} from "./DynamicNavList";
 import {DynamicFooter} from "./DynamicFooter";
 import {defaultLanguage} from "../languages";
 import FlagSelect from "./FlagSelect";
+import {Helmet} from "react-helmet-async";
 
 
 export interface ILayout extends PropsWithChildren
 {
     locale:string;
+    title:string;
 }
 
-export const LayoutTs = ({children, locale} : ILayout) => {
+export const LayoutTs = ({children, locale, title} : ILayout) => {
     
     
     const [expanded, setExpanded] = useState(false);
@@ -81,9 +83,12 @@ export const LayoutTs = ({children, locale} : ILayout) => {
 
     return (
         <>
+            <Helmet>
+                <title>{title ?? "Home"} - Our Planet Our People</title>
+            </Helmet>
             <Navbar expanded={expanded} collapseOnSelect expand="lg" fixed="top">
                 <Container style={{position: "relative"}}>
-                    <Link to={`${locale}/?stage=1`} className="navbar-brand">
+                    <Link to={`/${locale}`} className="navbar-brand">
                         <img
                             alt="Our Planet Our People"
                             src={logo}
@@ -101,14 +106,7 @@ export const LayoutTs = ({children, locale} : ILayout) => {
                                 setExpanded(false)
                                 return {}
                             }}></DynamicNavList>
-                            {/*<div>
-                                <Nav.Link onClick={() => {
-                                    setExpanded(false)
-                                    return {}
-                                }} as={NavLink} key={"registration"} to={ "registration"}>
-                                    Register
-                                </Nav.Link>
-                            </div>*/}
+                            
                             <div className="main-nav__language">
                                 <FlagSelect currentLocale={locale ?? defaultLanguage}></FlagSelect>
                             </div>

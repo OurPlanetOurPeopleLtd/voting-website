@@ -1,6 +1,6 @@
 
 
-import {ContentTypes} from "../Navigation/types";
+import {AllContentTypes, AllContentTypesInNavigation, ContentType} from "../Navigation/types";
 
 const blogPost = `title
             slug`;
@@ -39,6 +39,21 @@ const videoPage = `
                 id
                 slug
                 title
+                mainVideo{
+                video${videoBlock}
+                thumbnailImage${imgBlock}
+                }    
+            `;
+
+const registrationPage = `
+                title
+                slug
+                commentsLabel
+                emailLabel
+                nameLabel
+                submit
+                thankYou
+                emailValidation
                 mainVideo{
                 video${videoBlock}
                 thumbnailImage${imgBlock}
@@ -111,66 +126,31 @@ const votingPage = `
             mainVideo${videoBlock}`;
 
 
-
-
-    
-const basicNavItems = `
-          __typename
-          
-          ... on ${ContentTypes.PdfWrapper} ${pdfWrapperBlock}
-          ... on ${ContentTypes.VideoWithPdfs} {
-            title
-            slug
-            pdfs
-             ${pdfWrapperBlock}
-             mainVideo{
-                video${videoBlock}
-                thumbnailImage${imgBlock}}
-                
-          }
- 
-          ... on VideoPageModelRecord {
-            title
-               id 
-               slug
-               mainVideo{
-                video${videoBlock}
-                thumbnailImage${imgBlock}}
-          }
-          ... on BlogPostModelRecord {
-             title
-            slug
-            id
-          }
-              
-          ... on VotingPageModelRecord{
-            cardTitle
-            id
-          }
-          
-          ... on InformationSourceRecord{
-          title
-            video
-            {
-              ... on VideoPageModelRecord {
-                  slug
-                  }
-                }
-            pdf
-            {
-              url
-            }
-          }
-          
-          `
-
-export const QueryBlocks =
+const getNavBlock = (contentType:ContentType) =>
+{
+    switch(contentType)
     {
-        BasicNavigationItems: basicNavItems,
-        BlogPost: blogPost,
-        VideoWithPdfPage: videoWithPdfPage,
-        VideoPost: videoPage,
-        VotingPage: votingPage,
-        VideoComponent: videoPage,
+ 
+        case ContentType.PdfAndVideo:
+            return `... on InformationSourceRecord{  title}`
+        default:
+            return `... on ${contentType}{id, slug, title}`
+            
     }
+}
 
+//AllContentTypes
+
+const basicNavItems = `__typename ${AllContentTypesInNavigation.map(contentType =>getNavBlock(contentType as ContentType) )}`
+    
+export const QueryBlocks =
+{
+    BasicNavigationItems: basicNavItems,
+    BlogPost: blogPost,
+    VideoWithPdfPage: videoWithPdfPage,
+    VideoPost: videoPage,
+    VotingPage: votingPage,
+    VideoComponent: videoPage, 
+    RegistrationPage: registrationPage
+
+}
