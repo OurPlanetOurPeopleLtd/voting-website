@@ -8,7 +8,7 @@ const PageTransition = ({ children }: { children: React.ReactNode }) => {
 
     useEffect(() => {
         setVisible(false);
-        setTimeout(() => setVisible(true), 100); // Delay to trigger CSS transition
+        setTimeout(() => setVisible(true), 400); // Delay to trigger CSS transition
     }, [location.pathname]); // Runs when route changes
 
     return <div className={`page ${visible ? "fade-in" : "fade-out"}`}>{children}</div>;

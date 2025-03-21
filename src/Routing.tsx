@@ -51,18 +51,18 @@ const Reset = () => {
 
 function Routing() {
 
-    const [data, setData] = useState<NavigationItem[]>();
+    const [pageNavigateData, setPageNavigateData] = useState<NavigationItem[]>();
 
     
     async function fetchData() {       
-        const links = await getAllNavData(locale); //todo we should probably just split this into the 3 arrays, save switching on typename below
+        const links = await getAllNavData(locale); 
 
         if (process.env.NODE_ENV === "development" && DEBUG_QUERY) 
         {
             LogLinks(links, "routing");
         }
 
-        setData(links);
+        setPageNavigateData(links);
 
     }
 
@@ -147,7 +147,7 @@ function Routing() {
                
             )
     }
-    const getAllLanguageRoutes = ( lang_index:number, lang?:string) => data?.map((navItem, index)  => getRoute(navItem, `${lang_index+index}`, lang))
+    const generatePageRoutesForLanguage = ( lang_index:number, lang?:string) => pageNavigateData?.map((navItem, index)  => getRoute(navItem, `${lang_index+index}`, lang))
 
     const languageArray = [undefined, ...getSupportedLocales()];
 
@@ -157,7 +157,7 @@ function Routing() {
             <Routes>                                
              
                     
-                    {languageArray.map((locale,index) => getAllLanguageRoutes(index, locale))}
+                    {languageArray.map((locale,index) => generatePageRoutesForLanguage(index, locale))}
                 
 
                     <Route
