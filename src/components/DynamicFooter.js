@@ -17,7 +17,7 @@ export const DynamicFooter = ({id,locale}) => {
         fetchData().catch(console.error);
     }, [fetchData,locale]);
 
-    const gslugPrefix = locale ? `${locale}/` :"";
+    const gslugPrefix = locale ? `/${locale}/` :"/";
     
     return showFooter
         ? (<footer>
