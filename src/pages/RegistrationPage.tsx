@@ -61,8 +61,11 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
             localStorage.setItem(localStorageVotingIdKey, localGuid);
         }
 
-        const existingUser = await DataStore.query(User, (v) => v.and(v => [v.email?.eq(email)]))
-        const aExistingUser = existingUser.shift();
+        console.log("attempting to find email")
+
+        
+        const existingUser = await DataStore.query(User, v => v.email?.eq(email)).catch(e => console.log(e))
+        const aExistingUser = existingUser?.shift();
         const idAlreadyExists = !!aExistingUser;
      
 
@@ -78,19 +81,20 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                 immediate: true,
                 // Attribute values must be strings
                 attributes: {
-                    email: email, voterId: localGuid.toString(), name: name
+                    email: email, voterId: localGuid.toString(), name: name, comment:comment
                 }
             }, localGuid)
         } catch (e) {
+            
             console.log(e);
         }
-        
+        console.log("attempting to save")
         // Save to database
         await DataStore.save(
             new User({email: email, voterId: localGuid, name: name, comment: comment})
         ).then((x) => {
             setThankYouRegister(true)
-        });
+        }).catch(e => console.log("Error saving" + e.toString()));
         
     };
 
@@ -134,9 +138,9 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                 </div>
                 
             </div>
-            {showDeregisterMessage ? <div>{data.deregisterMessage}</div> : null}
+           
 
-            {emailExistsError ? <div>{data.emailValidation}</div> : null }
+         
 
             {
                 thankYouForRegister ? <div>{data.thankYou}</div> :
@@ -178,7 +182,7 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                                             onChange={(e) => setComment(e.target.value)}
                                         />
                                     </div>
-    
+                                    {emailExistsError ? <div>{data.emailValidation}</div> : null }
                                     <div>
                                         <button className="btn" type="submit">{data.submit}</button>
                                    
@@ -200,8 +204,8 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                                             required
                                         />
                                     </div>
-    
-                                   
+
+                                    {showDeregisterMessage ? <div>{data.deregisterMessage}</div> : null}
     
                                     <div>
                                         <button className="btn" type="submit">{data.submit}</button>
