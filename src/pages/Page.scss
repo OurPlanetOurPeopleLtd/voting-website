@@ -49,6 +49,14 @@ main .container {
     color: var(--white);
     z-index: 1;
     position: relative;
+
+    h1 {
+      font-weight: 600;
+    }
+
+    #results-heading {
+      margin-top: 1.5rem;
+    }
     
     @media (min-width: 768px) {
       padding: 1.5rem 1.5rem .5rem;

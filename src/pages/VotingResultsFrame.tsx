@@ -7,8 +7,7 @@ export const VotingResultsFrame = ({ locale}: {  locale?: string }) => {
     return (<Row key={`results-${locale}`}>
         <div className="frame">
             <div className="frame-content">
-                <h2 id="results-heading">{getResultTranslation(locale ?? "en")}</h2>
-                {/*<VoteControls questionId={questionId} showStatistics={true} allowVoting={false}/>*/}
+                <h1 id="results-heading">{getResultTranslation(locale ?? "en")}</h1>
                 <Row style={{paddingTop: 20}}>
                     <Col></Col>
                     <Col> <VoteResults locale={locale}/></Col>
