@@ -116,8 +116,8 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
             </Navbar>
 
             <main>
-                {children}
                 <Container>
+                    {children}
                     <Outlet/>
                 </Container>
             </main>
