@@ -41,13 +41,11 @@ export const DynamicNavList = (props: TDynamicNav) => {
         <>
             {data && data.map((navItem: NavigationItem, index) => {
                 let slugPrefix = navItem.slug?.includes( gslugPrefix) ? "/" : gslugPrefix;
-               // if(navItem.slug?.startsWith("/") && slugPrefix?.endsWith("/"))
-               //     slugPrefix = props.locale ?? "/"
+           
                 if(slugPrefix?.endsWith("//"))
                     slugPrefix = props.locale ?? "/"
 
-                const key =index +  (props.locale ?? "");
-                     
+                const key =index +  (props.locale ?? "");                     
 
                 switch (navItem.__typename) {
                     case ContentType.ExternalLink:
@@ -101,11 +99,9 @@ export const DynamicNavList = (props: TDynamicNav) => {
                                 {navItem.title ?? "error"}
                             </Nav.Link>
                         );
-                        break;
                     default:
                     case ContentType.SpecialPageRecord:
-                    case ContentType.RegistrationPage:
-                    
+                    case ContentType.RegistrationPage:                    
                     case ContentType.VotingResult:
                     case ContentType.VideoPage:
                     case ContentType.BlogPost:
