@@ -61,7 +61,7 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
             localStorage.setItem(localStorageVotingIdKey, localGuid);
         }
 
-        console.log("attempting to find email")
+     
 
         
         const existingUser = await DataStore.query(User, v => v.email?.eq(email)).catch(e => console.log(e))
@@ -88,7 +88,7 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
             
             console.log(e);
         }
-        console.log("attempting to save")
+
         // Save to database
         await DataStore.save(
             new User({email: email, voterId: localGuid, name: name, comment: comment})
