@@ -8,7 +8,6 @@ const PageTransition = ({ children }: { children: React.ReactNode }) => {
 
     useEffect(() => {
         //scroll to top
-        console.log("scroll to top")
         window.scrollTo(0, 0);
         setVisible(false);
         setTimeout(() => setVisible(true), 300); // Delay to trigger CSS transition
