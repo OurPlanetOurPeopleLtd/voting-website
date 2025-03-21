@@ -110,7 +110,7 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
     
     if(!data)
     {
-        return <>loading...</>
+        return <></>
     }
 
     return (
