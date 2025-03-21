@@ -6,9 +6,10 @@ import {v4 as generateGuid} from "uuid";
 import {recordUse} from "../utils/analytics";
 import {VideoControl} from "../components/VideoControl";
 import { TVideoThumbnail} from "../repositories/Common/types";
-import {getRegistrationPage} from "../repositories/Registration/request";
+
 
 import "./RegistrationPage.scss";
+import {getRegistrationPage} from "../repositories/Registration/request";
 
 export type TRegistrationPage =
 {
