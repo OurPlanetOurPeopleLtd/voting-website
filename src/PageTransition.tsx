@@ -7,9 +7,16 @@ const PageTransition = ({ children }: { children: React.ReactNode }) => {
     const location = useLocation();
 
     useEffect(() => {
+        //scroll to top
+        console.log("scroll to top")
+        window.scrollTo(0, 0);
         setVisible(false);
         setTimeout(() => setVisible(true), 300); // Delay to trigger CSS transition
+        
     }, [location.pathname]); // Runs when route changes
+
+    const { pathname } = useLocation();
+
 
     return <div className={`page ${visible ? "fade-in" : "fade-out"}`}>{children}</div>;
 };
