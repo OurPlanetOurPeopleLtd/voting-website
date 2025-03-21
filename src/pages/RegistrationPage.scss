@@ -23,6 +23,33 @@
         border: 2px solid var(--tertiary);
     }
 }
+.reg-video
+{
+    
+
+}
+
+.form-container {
+    display: flex;
+
+    margin: 20px auto; /* Center the container */
+    border: 1px solid #ccc; /* Optional: Add a border for visual separation */
+    padding: 10px;
+    
+}
+
+.form-left, .form-right {
+    flex: 1; /* Equal width for both forms */
+    padding: 10px;
+    box-sizing: border-box;
+
+}
+
+.vertical-rule {
+    border-left: 1px solid #ccc; /* Vertical rule */
+    margin: 0 10px; /* Spacing around the rule */
+}
+
 
 @media screen and (min-width: 768px) {
     .register-form {

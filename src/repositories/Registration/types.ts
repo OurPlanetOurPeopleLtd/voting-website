@@ -19,4 +19,5 @@ export type TRegistrationItem = {
     emailValidation: string,
     thankYou: string,
     submit: string,
+    deregisterMessage: string,
 }

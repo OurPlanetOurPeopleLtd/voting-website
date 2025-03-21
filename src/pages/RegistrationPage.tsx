@@ -20,6 +20,7 @@ export type TRegistrationPage =
     mainVideo: TVideoThumbnail,
     emailValidation: string
     thankYou: string
+    deregisterMessage:string
 }
 export type TRegistrationProps =
 {
@@ -29,7 +30,9 @@ export type TRegistrationProps =
 export const RegistrationPage = ({locale}: TRegistrationProps) => {
     const [emailExistsError, setEmailExists] = useState(false);
     const [thankYouForRegister, setThankYouRegister] = useState(false);
+    const [showDeregisterMessage, setDeregisterMessage] = useState(false);
 
+    
     const fetchData = useCallback(async () => {     
         let dataFetched = await getRegistrationPage(locale);
         setData(dataFetched);
@@ -107,6 +110,12 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
         event.preventDefault();
         SaveUserToDB(name,email,comment);
     };
+    const handleDeregisterSubmit =(event: React.FormEvent) => {
+        event.preventDefault();
+        Deregister(email);
+        setDeregisterMessage(true);
+    }
+    
     
     if(!data)
     {
@@ -118,56 +127,94 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
             <div className="hero">
                 <h1>{data.title}</h1>
                 <p>{data.subtitle}</p>
-                <VideoControl datoVideo={data.mainVideo}
-                              fullScreenOnClick={false}></VideoControl>
+                <div className="reg-video">
+                        <VideoControl fullScreenOnClick={false} datoVideo={data.mainVideo?.video?.video} pageTitle={data.title}
+                              videoThumbnail={data.mainVideo?.thumbnailImage.responsiveImage.src}
+                              videoTitle={data.mainVideo?.video?.video?.title ?? ""} />
+                </div>
                 
             </div>
+            {showDeregisterMessage ? <div>{data.deregisterMessage}</div> : null}
 
             {emailExistsError ? <div>{data.emailValidation}</div> : null }
 
             {
                 thankYouForRegister ? <div>{data.thankYou}</div> :
 
-                <form className="register-form" onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="name">{data.nameLabel}:</label>
+                    (<div className={"form-container"}>
+                            <div className="form-left">
+                                <h2>Register</h2>
+                                <form className="register-form" onSubmit={handleSubmit}>
+                                    <div>
+                                        <label htmlFor="name">{data.nameLabel}:</label>
+    
+                                        <input
+                                            id="name"
+                                            type="text"
+                                            value={name}
+                                            onChange={handleNameChange}
+                                            required
+                                        />
+                                    </div>
+    
+                                    <div>
+                                        <label htmlFor="email">{data.emailLabel}:</label>
+    
+                                        <input
+                                            id="email"
+                                            type="email"
+                                            value={email}
+                                            onChange={handleEmailChange}
+                                            required
+                                        />
+                                    </div>
+    
+                                    <div>
+                                        <label htmlFor="comments">{data.commentsLabel}</label>
+    
+                                        <textarea
+                                            id="comment"
+                                            value={comment}
+                                            onChange={(e) => setComment(e.target.value)}
+                                        />
+                                    </div>
+    
+                                    <div>
+                                        <button className="btn" type="submit">{data.submit}</button>
+                                   
+                                    </div>
+                                </form>
+                            </div>
+                            <div className="form-right">
+                                <h2>Deregister</h2>
+                                <form className="register-form" onSubmit={handleDeregisterSubmit}>                                   
+    
+                                    <div>
+                                        <label htmlFor="email">{data.emailLabel}:</label>
+    
+                                        <input
+                                            id="email"
+                                            type="email"
+                                            value={email}
+                                            onChange={handleEmailChange}
+                                            required
+                                        />
+                                    </div>
+    
+                                   
+    
+                                    <div>
+                                        <button className="btn" type="submit">{data.submit}</button>
+                                      
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    )
 
-                        <input
-                            id="name"
-                            type="text"
-                            value={name}
-                            onChange={handleNameChange}
-                            required
-                        />
-                    </div>
 
-                    <div>
-                        <label htmlFor="email">{data.emailLabel}:</label>
-
-                        <input
-                            id="email"
-                            type="email"
-                            value={email}
-                            onChange={handleEmailChange}
-                            required
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="comments">{data.commentsLabel}</label>
-
-                        <textarea
-                            id="comment"
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                        />
-                    </div>
-
-                    <div>
-                        <button className="btn" type="submit">{data.submit}</button>
-                    </div>
-                </form>
             }
         </div>
-    );
+    )
+    ;
 }
