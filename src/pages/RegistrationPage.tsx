@@ -1,18 +1,19 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {DataStore} from "@aws-amplify/datastore";
-import {User, Vote} from "../models";
+import {User} from "../models";
 import {localStorageVotingIdKey} from "../pages/VotingPage";
 import {v4 as generateGuid} from "uuid";
 import {recordUse} from "../utils/analytics";
-import "./RegistrationPage.scss";
 import {VideoControl} from "../components/VideoControl";
 import { TVideoThumbnail} from "../repositories/Common/types";
 import {getRegistrationPage} from "../repositories/Registration/request";
 
+import "./RegistrationPage.scss";
+
 export type TRegistrationPage =
 {
-    title:string,
-    subtitle:string,
+    title: string,
+    subtitle: string,
     commentsLabel: string,
     submit: string,
     emailLabel: string,
@@ -20,10 +21,10 @@ export type TRegistrationPage =
     mainVideo: TVideoThumbnail,
     emailValidation: string
     thankYou: string
-    deregisterMessage:string
+    deregisterMessage: string
 }
-export type TRegistrationProps =
-{
+
+export type TRegistrationProps = {
     locale:string
 }
 
@@ -32,7 +33,6 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
     const [thankYouForRegister, setThankYouRegister] = useState(false);
     const [showDeregisterMessage, setDeregisterMessage] = useState(false);
 
-    
     const fetchData = useCallback(async () => {     
         let dataFetched = await getRegistrationPage(locale);
         setData(dataFetched);
@@ -61,14 +61,10 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
             localStorage.setItem(localStorageVotingIdKey, localGuid);
         }
 
-     
-
-        
         const existingUser = await DataStore.query(User, v => v.email?.eq(email)).catch(e => console.log(e))
         const aExistingUser = existingUser?.shift();
         const idAlreadyExists = !!aExistingUser;
      
-
         if (idAlreadyExists) {
             setEmailExists(true);
             return;
@@ -85,7 +81,6 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                 }
             }, localGuid)
         } catch (e) {
-            
             console.log(e);
         }
 
@@ -114,15 +109,14 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
         event.preventDefault();
         SaveUserToDB(name,email,comment);
     };
+
     const handleDeregisterSubmit =(event: React.FormEvent) => {
         event.preventDefault();
         Deregister(email);
         setDeregisterMessage(true);
     }
     
-    
-    if(!data)
-    {
+    if(!data) {
         return <></>
     }
 
@@ -131,26 +125,27 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
             <div className="hero">
                 <h1>{data.title}</h1>
                 <p>{data.subtitle}</p>
+
                 <div className="reg-video">
                         <VideoControl fullScreenOnClick={false} datoVideo={data.mainVideo?.video?.video} pageTitle={data.title}
                               videoThumbnail={data.mainVideo?.thumbnailImage.responsiveImage.src}
                               videoTitle={data.mainVideo?.video?.video?.title ?? ""} />
                 </div>
-                
             </div>
-           
-
-         
 
             {
                 thankYouForRegister ? <div>{data.thankYou}</div> :
-
                     (<div className={"form-container"}>
                             <div className="form-left">
                                 <h2>Register</h2>
+
+                                <div className="form-status-message">
+                                    {emailExistsError ? <div aria-live="polite"><svg xmlns="http://www.w3.org/2000/svg" width={30} height={30} viewBox="0 0 512 512" aria-hidden="true"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>{data.emailValidation}</div> : <div aria-live="polite"></div> }
+                                </div>
+
                                 <form className="register-form" onSubmit={handleSubmit}>
                                     <div>
-                                        <label htmlFor="name">{data.nameLabel}:</label>
+                                        <label htmlFor="name">{data.nameLabel}</label>
     
                                         <input
                                             id="name"
@@ -162,7 +157,7 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                                     </div>
     
                                     <div>
-                                        <label htmlFor="email">{data.emailLabel}:</label>
+                                        <label htmlFor="email">{data.emailLabel}</label>
     
                                         <input
                                             id="email"
@@ -177,48 +172,48 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                                         <label htmlFor="comments">{data.commentsLabel}</label>
     
                                         <textarea
-                                            id="comment"
+                                            id="comments"
                                             value={comment}
+                                            rows={6}
                                             onChange={(e) => setComment(e.target.value)}
                                         />
                                     </div>
-                                    {emailExistsError ? <div>{data.emailValidation}</div> : null }
+
+
                                     <div>
                                         <button className="btn" type="submit">{data.submit}</button>
-                                   
                                     </div>
                                 </form>
                             </div>
+
                             <div className="form-right">
                                 <h2>Deregister</h2>
+
                                 <form className="register-form" onSubmit={handleDeregisterSubmit}>                                   
-    
+                                    <div className="form-status-message">
+                                        {showDeregisterMessage ? <div aria-live="polite"><svg xmlns="http://www.w3.org/2000/svg" width={30} height={30} viewBox="0 0 512 512" aria-hidden="true"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>{data.deregisterMessage}</div> : <div aria-live="polite"></div>}
+                                    </div>
+
                                     <div>
-                                        <label htmlFor="email">{data.emailLabel}:</label>
+                                        <label htmlFor="deregister-email">{data.emailLabel}</label>
     
                                         <input
-                                            id="email"
+                                            id="deregister-email"
                                             type="email"
                                             value={email}
                                             onChange={handleEmailChange}
                                             required
                                         />
                                     </div>
-
-                                    {showDeregisterMessage ? <div>{data.deregisterMessage}</div> : null}
-    
+                                    
                                     <div>
                                         <button className="btn" type="submit">{data.submit}</button>
-                                      
                                     </div>
                                 </form>
                             </div>
                         </div>
                     )
-
-
             }
         </div>
-    )
-    ;
+    );
 }
