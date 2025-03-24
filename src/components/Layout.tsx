@@ -45,7 +45,7 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
     useEffect(() => {
     }, [locale])
     {
-        setCookieText(getCookieBannerText(locale));
+       // setCookieText(getCookieBannerText(locale));
     }
     useEffect(() => {
         let userGuid = localStorage.getItem(localStorageVotingIdKey);
