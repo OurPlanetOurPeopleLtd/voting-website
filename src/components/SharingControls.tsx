@@ -101,7 +101,9 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
     return (
         <>
             <Row className={"verticalFrameCentre justify-content-center"}>
-                <h1 className="frame__heading">{shareHeading}</h1>
+                {shareHeading &&
+                    <h1 className="frame__heading">{shareHeading}</h1>
+                }
             </Row>
 
             <Row>
