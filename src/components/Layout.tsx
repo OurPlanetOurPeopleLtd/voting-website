@@ -40,13 +40,13 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
    
     const toggleExpanded = () => setExpanded(!expanded);
 
-    const [cookieText, setCookieText] = useState(getCookieBannerText("en")) 
-    
+   // const [cookieText, setCookieText] = (getCookieBannerText("en")) 
+    const cookieText = (getCookieBannerText("en"));
     useEffect(() => {
+        
+      //  setCookieText(getCookieBannerText(locale));
     }, [locale])
-    {
-       // setCookieText(getCookieBannerText(locale));
-    }
+  
     useEffect(() => {
         let userGuid = localStorage.getItem(localStorageVotingIdKey);
         if (!userGuid || userGuid.length < 1) {
