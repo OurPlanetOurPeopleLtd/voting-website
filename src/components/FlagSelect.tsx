@@ -25,12 +25,11 @@ const FlagSelect = ({currentLocale}: {currentLocale:string}) => {
             // Extract current path and replace country code
             const pathSegments = location.pathname.split('/').filter(Boolean); // Remove empty segments
 
-            if (pathSegments.length > 0) {
-                if(pathSegments[0].length !== 2) //if for whatever reason we dont already have lang code, insert it
-                    pathSegments.unshift( selectedCountry.code)
-                else
-                    pathSegments[0] = selectedCountry.code; // Replace country code
-            }
+            if(!pathSegments.length  || pathSegments[0].length !== 2) //if for whatever reason we dont already have lang code, insert it
+                pathSegments.unshift( selectedCountry.code)
+            else
+                pathSegments[0] = selectedCountry.code; // Replace country code
+       
 
             navigate(`/${pathSegments.join('/')}`);     
         }

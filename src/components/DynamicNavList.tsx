@@ -17,7 +17,7 @@ export type TDynamicNav = {
 
 export const DynamicNavList = (props: TDynamicNav) => {
     const {id, itemGroup, locale, onSelect} = props;
-
+    
     const fetchData = useCallback(async () => {
         const dataFetched = await getNavigationJson(id, locale ?? "en");
 
