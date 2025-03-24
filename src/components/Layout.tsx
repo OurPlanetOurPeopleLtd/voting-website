@@ -22,6 +22,7 @@ import {DynamicFooter} from "./DynamicFooter";
 import {defaultLanguage} from "../languages";
 import FlagSelect from "./FlagSelect";
 import {Helmet} from "react-helmet-async";
+import {getCookieBannerText} from "../repositories/utils/extraTranslations";
 
 
 export interface ILayout extends PropsWithChildren
@@ -39,12 +40,12 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
    
     const toggleExpanded = () => setExpanded(!expanded);
 
-    
+    const [cookieText, setCookieText] = useState(getCookieBannerText("en")) 
     
     useEffect(() => {
     }, [locale])
     {
-
+        setCookieText(getCookieBannerText(locale));
     }
     useEffect(() => {
         let userGuid = localStorage.getItem(localStorageVotingIdKey);
@@ -124,9 +125,9 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
 
             <CookieConsent
                 location="bottom"
-                buttonText="Ok I Accept"
+                buttonText={cookieText.approveText}
                 cookieName="OurPeopleOurPlanetAnalyticsAcceptance"
-                declineButtonText={"No Thank You"}
+                declineButtonText={cookieText.declineText}
                 expires={150}
                 enableDeclineButton
                 onDecline={() => {
@@ -135,7 +136,7 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                 onAccept={(acceptedByScrolling) => {
                     setAnalyticsEnabled(true)
                 }}>
-                This website uses cookies to enhance the user experience.{" "}
+                {cookieText.mainText}
             </CookieConsent>
 
             <DynamicFooter id={footerComponentId} locale={locale}></DynamicFooter>

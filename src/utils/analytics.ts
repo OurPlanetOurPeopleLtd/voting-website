@@ -64,6 +64,9 @@ export function InitAnalytics() {
     }
 }
 
+
+
+
 export function DisableAnalytics() {
     if (typeof window !== 'undefined') {
         gtag('consent', 'update', {
