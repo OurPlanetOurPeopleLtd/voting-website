@@ -123,6 +123,7 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                 </Container>
             </main>
 
+            
             <CookieConsent
                 location="bottom"
                 buttonText={cookieText.approveText}
@@ -136,7 +137,9 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                 onAccept={(acceptedByScrolling) => {
                     setAnalyticsEnabled(true)
                 }}>
-                {cookieText.mainText}
+                <h2>{cookieText.headerText}</h2>           
+                {cookieText.mainText}{" "}
+                (<a style={{color:"grey"}} href={"Privacy"}>{cookieText.privacyLinkText}</a>)
             </CookieConsent>
 
             <DynamicFooter id={footerComponentId} locale={locale}></DynamicFooter>
