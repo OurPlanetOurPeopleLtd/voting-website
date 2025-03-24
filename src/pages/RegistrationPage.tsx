@@ -180,6 +180,16 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                                         />
                                     </div>
 
+                                    <div className="register-form__privacy">
+                                        <label className="register-form__privacy-label">
+                                            <input type="checkbox" name="privacy_policy" required />
+                                            Accept Privacy Policy
+                                        </label>
+
+                                        <p>I am providing my email address solely so that I can receive communications about the project.</p>
+
+                                        <p>For full details, <a href="/privacy">view our privacy policy</a>.</p>
+                                    </div>
 
                                     <div>
                                         <button className="btn" type="submit">{data.submit}</button>
