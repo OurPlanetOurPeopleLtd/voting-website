@@ -188,7 +188,7 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
 
                                         <p>I am providing my email address solely so that I can receive communications about the project.</p>
 
-                                        <p>For full details, <a href="/privacy">view our privacy policy</a>.</p>
+                                        <p>For full details, <a href={`/${locale}/privacy`}>view our privacy policy</a>.</p>
                                     </div>
 
                                     <div>
