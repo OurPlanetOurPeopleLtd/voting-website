@@ -40,11 +40,11 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
    
     const toggleExpanded = () => setExpanded(!expanded);
 
-   // const [cookieText, setCookieText] = (getCookieBannerText("en")) 
-    const cookieText = (getCookieBannerText("en"));
+    const [cookieText, setCookieText] = useState(getCookieBannerText(locale));
+
     useEffect(() => {
-        
-      //  setCookieText(getCookieBannerText(locale));
+            
+        setCookieText(getCookieBannerText(locale));
     }, [locale])
   
     useEffect(() => {
