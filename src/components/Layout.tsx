@@ -139,7 +139,7 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                 }}>
                 <h2>{cookieText.headerText}</h2>           
                 {cookieText.mainText}{" "}
-                (<a style={{color:"grey"}} href={"Privacy"}>{cookieText.privacyLinkText}</a>)
+                (<a style={{color:"grey"}} href={`${locale}/privacy`}>{cookieText.privacyLinkText}</a>)
             </CookieConsent>
 
             <DynamicFooter id={footerComponentId} locale={locale}></DynamicFooter>
