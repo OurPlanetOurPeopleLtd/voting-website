@@ -16,6 +16,7 @@ export async function mapRegistration(result: QueryResult): Promise<TRegistratio
         nameLabel: rec.nameLabel,
         mainVideo: rec.mainVideo,
         submit: rec.submit,
+        noEmailValidation: rec.noEmailValidation,
         deregisterMessage: rec.deregisterMessage,
         privacyPolicyLinkText: rec.privacyPolicyLinkText,
         privacyPolicyText: rec.privacyPolicyText,

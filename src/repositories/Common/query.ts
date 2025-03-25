@@ -54,6 +54,7 @@ const registrationPage = `
                 submit
                 thankYou
                 emailValidation
+                noEmailValidation
                 deregisterMessage
                 mainVideo{
                 video${videoBlock}

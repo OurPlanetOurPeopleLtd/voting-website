@@ -10,6 +10,7 @@ export interface Data {
 }
 
 export type TRegistrationItem = {
+    
     title:string,
     commentsLabel: string,
     emailLabel: string,
@@ -17,6 +18,7 @@ export type TRegistrationItem = {
     subtitle:string,
     mainVideo: TVideoThumbnail,
     emailValidation: string,
+    noEmailValidation: string;
     thankYou: string,
     submit: string,
     deregisterMessage: string,
