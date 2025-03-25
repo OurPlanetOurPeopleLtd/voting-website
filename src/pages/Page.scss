@@ -173,6 +173,13 @@ img {
   }
 }
 
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+  .frame__heading {
+    margin-block-start: 1.5rem;
+  }
+}
+
+
 @media screen and (min-width: 968px) {
   .main-nav {
     flex: 1;
