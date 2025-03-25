@@ -20,4 +20,11 @@ export type TRegistrationItem = {
     thankYou: string,
     submit: string,
     deregisterMessage: string,
+
+    privacyPolicyLinkText: string,
+    privacyPolicyText: string,
+    privacyPolicyLabel: string,
+    deregisterHeading: string,
+    registrationHeading: string
+    
 }

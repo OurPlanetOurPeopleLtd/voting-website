@@ -7,7 +7,6 @@ import {recordUse} from "../utils/analytics";
 import {VideoControl} from "../components/VideoControl";
 import { TVideoThumbnail} from "../repositories/Common/types";
 
-
 import "./RegistrationPage.scss";
 import {getRegistrationPage} from "../repositories/Registration/request";
 
@@ -22,7 +21,12 @@ export type TRegistrationPage =
     mainVideo: TVideoThumbnail,
     emailValidation: string
     thankYou: string
-    deregisterMessage: string
+    deregisterMessage: string,
+    privacyPolicyLinkText: string
+    privacyPolicyText: string
+    privacyPolicyLabel: string
+    deregisterHeading: string
+    registrationHeading: string
 }
 
 export type TRegistrationProps = {
@@ -96,6 +100,7 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [deRegEmail, setDeRegEmail] = useState('');
     const [comment, setComment] = useState('');
 
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,6 +111,10 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
         setEmail(event.target.value);
     };
 
+    const handleDeRegEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setDeRegEmail(event.target.value);
+    };
+    
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         SaveUserToDB(name,email,comment);
@@ -138,7 +147,7 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                 thankYouForRegister ? <div className="form-status-message" style={{marginTop: "1rem"}}><div style={{color: "#298e33", borderColor: "#298e33", fontWeight: "600"}}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={40} height={40} aria-hidden="true" fill="#298e33"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg><h2>{data.thankYou}</h2></div></div> :
                     (<div className={"form-container"}>
                             <div className="form-left">
-                                <h2>Register</h2>
+                                <h2>{data.registrationHeading}</h2>
 
                                 <div className="form-status-message">
                                     {emailExistsError ? <div aria-live="polite"><svg xmlns="http://www.w3.org/2000/svg" width={30} height={30} viewBox="0 0 512 512" aria-hidden="true"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>{data.emailValidation}</div> : <div aria-live="polite"></div> }
@@ -183,12 +192,10 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                                     <div className="register-form__privacy">
                                         <label className="register-form__privacy-label">
                                             <input type="checkbox" name="privacy_policy" required />
-                                            Accept Privacy Policy
+                                            {data.privacyPolicyLabel}
                                         </label>
 
-                                        <p>I am providing my email address solely so that I can receive communications about the project.</p>
-
-                                        <p>For full details, <a href={`/${locale}/privacy`}>view our privacy policy</a>.</p>
+                                        <p>{data.privacyPolicyText} <a href={`/${locale}/privacy`}>{data.privacyPolicyLinkText}</a>.</p>
                                     </div>
 
                                     <div>
@@ -198,7 +205,7 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                             </div>
 
                             <div className="form-right">
-                                <h2>Deregister</h2>
+                                <h2>{data.deregisterHeading}</h2>
 
                                 <form className="register-form" onSubmit={handleDeregisterSubmit}>                                   
                                     <div className="form-status-message">
@@ -211,8 +218,8 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                                         <input
                                             id="deregister-email"
                                             type="email"
-                                            value={email}
-                                            onChange={handleEmailChange}
+                                            value={deRegEmail}
+                                            onChange={handleDeRegEmailChange}
                                             required
                                         />
                                     </div>

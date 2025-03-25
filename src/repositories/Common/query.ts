@@ -58,7 +58,14 @@ const registrationPage = `
                 mainVideo{
                 video${videoBlock}
                 thumbnailImage${imgBlock}
-                }    
+                } 
+                
+                privacyPolicyLinkText
+                privacyPolicyText
+                privacyPolicyLabel
+                deregisterHeading
+                registrationHeading
+                   
             `;
 const videoWithPdfPage = videoPage + ` 
             followOnLink {      

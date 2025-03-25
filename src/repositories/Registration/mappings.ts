@@ -16,7 +16,12 @@ export async function mapRegistration(result: QueryResult): Promise<TRegistratio
         nameLabel: rec.nameLabel,
         mainVideo: rec.mainVideo,
         submit: rec.submit,
-        deregisterMessage: rec.deregisterMessage
+        deregisterMessage: rec.deregisterMessage,
+        privacyPolicyLinkText: rec.privacyPolicyLinkText,
+        privacyPolicyText: rec.privacyPolicyText,
+        privacyPolicyLabel: rec.privacyPolicyLabel,
+        deregisterHeading: rec.deregisterHeading,
+        registrationHeading: rec.registrationHeading,
     }
     
     return data;
