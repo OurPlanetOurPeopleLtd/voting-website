@@ -117,8 +117,15 @@ export const VideoControl = ({
         if(onFinish)
             onFinish();
 
-        recordUse({name: "Video_Watched_To_End", attributes: {page: window.location.pathname, userGuid:getUserGuid(), video:datoVideo?.title ??"", time:event.target.currentTime}});
-
+        recordUse({
+            name: "Video_Watched_To_End",
+            attributes: {
+                page: window.location.pathname,
+                userGuid: getUserGuid(),
+                video: datoVideo?.title ?? "",
+                time: event.target.currentTime
+            }
+        });
     }
 
     const onVideoPause = (event: any) =>
