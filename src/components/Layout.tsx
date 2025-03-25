@@ -87,6 +87,7 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
             <Helmet>
                 <title>{title ?? "Home"} - Our Planet Our People</title>
             </Helmet>
+
             <Navbar expanded={expanded} collapseOnSelect expand="lg" fixed="top">
                 <Container style={{position: "relative"}}>
                     <Link to={`/${locale}`} className="navbar-brand">
@@ -123,7 +124,6 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                 </Container>
             </main>
 
-            
             <CookieConsent
                 location="bottom"
                 buttonText={cookieText.approveText}

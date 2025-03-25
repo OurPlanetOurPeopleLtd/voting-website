@@ -7,7 +7,19 @@
 
   button {
     background-color: var(--secondary) !important;
-    color: white !important;
+    color: var(--white) !important;
+    border-radius: 8px !important;
+    font-weight: 600;
+
+    &:first-of-type {
+      background-color: var(--white) !important;
+      color: var(--tertiary) !important;
+    }
+
+    &:hover {
+      background-color: var(--tertiary) !important;
+      color: var(--white) !important;
+    }
   }
 
   @media screen and (min-width: 768px) {
