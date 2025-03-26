@@ -24,6 +24,8 @@ import FlagSelect from "./FlagSelect";
 import {Helmet} from "react-helmet-async";
 import {getCookieBannerText} from "../repositories/utils/extraTranslations";
 
+import {Button} from "react-bootstrap";
+
 
 export interface ILayout extends PropsWithChildren
 {
@@ -82,6 +84,28 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
     else
         DisableAnalytics();
 
+    function resetCookie(name: string, path?: string, domain?: string): void {
+        let cookieString = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+
+        if (path) {
+            cookieString += ` path=${path};`;
+        } else {
+            cookieString += ' path=/;'; // Default to root path if not provided
+        }
+
+        if (domain) {
+            cookieString += ` domain=${domain};`;
+        }
+
+        document.cookie = cookieString;
+        window.location.reload();
+    }
+ 
+// Example usage:
+    const cookieName = "OurPeopleOurPlanetAnalyticsAcceptance";
+
+    const onPrivacyPage = title.startsWith("Privacy"); //bit gross
+    const cookieExists = getCookieConsentValue(cookieName) !== undefined;
     return (
         <>
             <Helmet>
@@ -125,23 +149,47 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
             </main>
 
             <CookieConsent
-                location="bottom"
+                location="bottom"                
                 buttonText={cookieText.approveText}
-                cookieName="OurPeopleOurPlanetAnalyticsAcceptance"
+                cookieName={cookieName}
                 declineButtonText={cookieText.declineText}
                 expires={150}
+                
                 enableDeclineButton
                 onDecline={() => {
                     setAnalyticsEnabled(false)
                 }}
                 onAccept={(acceptedByScrolling) => {
                     setAnalyticsEnabled(true)
-                }}>
+                }}
+      
+                
+                >
                 <h2>{cookieText.headerText}</h2>           
                 {cookieText.mainText}{" "}
                 (<a style={{color:"grey"}} href={`${locale}/privacy`}>{cookieText.privacyLinkText}</a>)
             </CookieConsent>
-
+            {onPrivacyPage && cookieExists ? (
+                <div
+                    style={{
+                        position: 'fixed', // Stick to the bottom
+                        bottom: 0,
+                        left: 0,
+                        width: '100%', // Full width
+                        display: 'flex',
+                        justifyContent: 'center', // Center horizontally
+                        alignItems: 'center', // Center vertically (if needed)
+                       
+                        padding: '10px 0', // Optional padding
+                    }}
+                    className={"CookieConsent"}
+                >
+                                    
+                    <Button onClick={() => resetCookie(cookieName)}>
+                        {cookieText.resetText}
+                    </Button>                    
+                </div>
+            ) : null}
             <DynamicFooter id={footerComponentId} locale={locale}></DynamicFooter>
         </>
     );

@@ -55,6 +55,7 @@ export type TCookieBannerText = {
     declineText: string;
     headerText?:string;
     privacyLinkText?:string;
+    resetText?:string;
 }
 export const getCookieBannerText = (locale: string): TCookieBannerText => {
    /* const englishMainText = "We use a single cookie for the sole purpose of protecting against misuse of the voting process.\n" +
@@ -73,140 +74,160 @@ export const getCookieBannerText = (locale: string): TCookieBannerText => {
             declineText: englishDeclineText,
             mainText: englishMainText,
             headerText: englishHeaderText,
-            privacyLinkText: englishPrivacyText
+            privacyLinkText: englishPrivacyText,
+            resetText: "Reset Cookies"
         },
         "fr": {
             approveText: "Accepter les cookies non essentiels",
             declineText: "Refuser les cookies non essentiels",
             mainText: "Nous utilisons des cookies pour vous offrir la meilleure expérience en ligne. Les cookies strictement nécessaires sont activés par défaut. Les cookies supplémentaires sont désactivés par défaut.",
             headerText: "Cookies sur OurPlanetOurPeople",
-            privacyLinkText: "Voir la politique de confidentialité pour plus de détails"
+            privacyLinkText: "Voir la politique de confidentialité pour plus de détails",
+            resetText: "Réinitialiser les cookies"
         },
         "nl": {
             approveText: "Niet-essentiële cookies accepteren",
             declineText: "Niet-essentiële cookies weigeren",
             mainText: "We gebruiken cookies om u de beste online ervaring te bieden. Strikt noodzakelijke cookies zijn standaard ingeschakeld. Aanvullende cookies zijn standaard uitgeschakeld.",
             headerText: "Cookies op OurPlanetOurPeople",
-            privacyLinkText: "Zie privacybeleid voor details"
+            privacyLinkText: "Zie privacybeleid voor details",
+            resetText: "Cookies resetten"
         },
         "sr": {
             approveText: "Prihvati nebitne kolačiće",
             declineText: "Odbij nebitne kolačiće",
             mainText: "Koristimo kolačiće kako bismo vam pružili najbolje online iskustvo. Strogo neophodni kolačići su uključeni po zadanom. Dodatni kolačići su isključeni po zadanom.",
             headerText: "Kolačići na OurPlanetOurPeople",
-            privacyLinkText: "Pogledajte politiku privatnosti za detalje"
+            privacyLinkText: "Pogledajte politiku privatnosti za detalje",
+            resetText: "Resetuj kolačiće"
         },
         "hi": {
             approveText: "गैर-आवश्यक कुकीज़ स्वीकार करें",
             declineText: "गैर-आवश्यक कुकीज़ अस्वीकार करें",
             mainText: "हम आपको सर्वोत्तम ऑनलाइन अनुभव देने के लिए कुकीज़ का उपयोग करते हैं। सख्ती से आवश्यक कुकीज़ डिफ़ॉल्ट रूप से चालू हैं। अतिरिक्त कुकीज़ डिफ़ॉल्ट रूप से बंद हैं।",
             headerText: "OurPlanetOurPeople पर कुकीज़",
-            privacyLinkText: "विवरण के लिए गोपनीयता नीति देखें"
+            privacyLinkText: "विवरण के लिए गोपनीयता नीति देखें",
+            resetText: "कुकीज़ रीसेट करें"
         },
         "ja": {
             approveText: "不要なCookieを受け入れる",
             declineText: "不要なCookieを拒否する",
             mainText: "最高のオンライン体験を提供するためにCookieを使用します。厳密に必要なCookieはデフォルトでオンになっています。追加のCookieはデフォルトでオフになっています。",
             headerText: "OurPlanetOurPeopleのCookie",
-            privacyLinkText: "詳細についてはプライバシーポリシーをご覧ください"
+            privacyLinkText: "詳細についてはプライバシーポリシーをご覧ください",
+            resetText: "Cookieをリセット"
         },
         "zh": {
             approveText: "接受非必要 Cookie",
             declineText: "拒绝非必要 Cookie",
             mainText: "我们使用 Cookie 为您提供最佳的在线体验。严格必要的 Cookie 默认开启。额外的 Cookie 默认关闭。",
             headerText: "OurPlanetOurPeople 上的 Cookie",
-            privacyLinkText: "（有关详细信息，请参阅隐私政策）"
+            privacyLinkText: "（有关详细信息，请参阅隐私政策）",
+            resetText: "重置 Cookie"
         },
         "es": {
             approveText: "Aceptar cookies no esenciales",
             declineText: "Rechazar cookies no esenciales",
             mainText: "Utilizamos cookies para ofrecerle la mejor experiencia en línea. Las cookies estrictamente necesarias están activadas de forma predeterminada. Las cookies adicionales están desactivadas de forma predeterminada.",
             headerText: "Cookies en OurPlanetOurPeople",
-            privacyLinkText: "Consulte la política de privacidad para obtener más detalles"
+            privacyLinkText: "Consulte la política de privacidad para obtener más detalles",
+            resetText: "Restablecer cookies"
         },
         "pt": {
             approveText: "Aceitar cookies não essenciais",
             declineText: "Rejeitar cookies não essenciais",
             mainText: "Usamos cookies para lhe proporcionar a melhor experiência online. Os cookies estritamente necessários estão ativados por padrão. Os cookies adicionais estão desativados por padrão.",
             headerText: "Cookies no OurPlanetOurPeople",
-            privacyLinkText: "Consulte a política de privacidade para obter detalhes"
+            privacyLinkText: "Consulte a política de privacidade para obter detalhes",
+            resetText: "Redefinir cookies"
         },
         "no": {
             approveText: "Godta ikke-essensielle informasjonskapsler",
             declineText: "Avvis ikke-essensielle informasjonskapsler",
             mainText: "Vi bruker informasjonskapsler for å gi deg den beste online opplevelsen. Strengt nødvendige informasjonskapsler er slått på som standard. Ytterligere informasjonskapsler er slått av som standard.",
             headerText: "Informasjonskapsler på OurPlanetOurPeople",
-            privacyLinkText: "Se personvernerklæringen for detaljer"
+            privacyLinkText: "Se personvernerklæringen for detaljer",
+            resetText: "Tilbakestill informasjonskapsler"
         },
         "de": {
             approveText: "Nicht notwendige Cookies akzeptieren",
             declineText: "Nicht notwendige Cookies ablehnen",
             mainText: "Wir verwenden Cookies, um Ihnen die beste Online-Erfahrung zu bieten. Unbedingt erforderliche Cookies sind standardmäßig aktiviert. Zusätzliche Cookies sind standardmäßig deaktiviert.",
             headerText: "Cookies auf OurPlanetOurPeople",
-            privacyLinkText: "Weitere Informationen finden Sie in der Datenschutzerklärung"
+            privacyLinkText: "Weitere Informationen finden Sie in der Datenschutzerklärung",
+            resetText: "Cookies zurücksetzen"
         },
         "it": {
             approveText: "Accetta cookie non essenziali",
             declineText: "Rifiuta cookie non essenziali",
             mainText: "Utilizziamo i cookie per offrirti la migliore esperienza online. I cookie strettamente necessari sono attivati per impostazione predefinita. I cookie aggiuntivi sono disattivati per impostazione predefinita.",
             headerText: "Cookie su OurPlanetOurPeople",
-            privacyLinkText: "Consulta l'informativa sulla privacy per i dettagli"
+            privacyLinkText: "Consulta l'informativa sulla privacy per i dettagli",
+            resetText: "Ripristina cookie"
         },
         "ru": {
             approveText: "Принять необязательные файлы cookie",
             declineText: "Отклонить необязательные файлы cookie",
             mainText: "Мы используем файлы cookie, чтобы предоставить вам лучший онлайн-опыт. Строго необходимые файлы cookie включены по умолчанию. Дополнительные файлы cookie отключены по умолчанию.",
             headerText: "Файлы cookie на OurPlanetOurPeople",
-            privacyLinkText: "Подробности см. в политике конфиденциальности"
+            privacyLinkText: "Подробности см. в политике конфиденциальности",
+            resetText: "Сбросить файлы cookie"
         },
         "ko": {
             approveText: "필수적이지 않은 쿠키 허용",
             declineText: "필수적이지 않은 쿠키 거부",
             mainText: "최고의 온라인 경험을 제공하기 위해 쿠키를 사용합니다. 엄격히 필요한 쿠키는 기본적으로 활성화되어 있습니다. 추가 쿠키는 기본적으로 비활성화되어 있습니다.",
             headerText: "OurPlanetOurPeople의 쿠키",
-            privacyLinkText: "자세한 내용은 개인 정보 보호 정책을 참조하십시오."
+            privacyLinkText: "자세한 내용은 개인 정보 보호 정책을 참조하십시오.",
+            resetText: "쿠키 재설정"
         },
         "ar": {
             approveText: "قبول ملفات تعريف الارتباط غير الضرورية",
             declineText: "رفض ملفات تعريف الارتباط غير الضرورية",
             mainText: "نستخدم ملفات تعريف الارتباط لنمنحك أفضل تجربة عبر الإنترنت. يتم تشغيل ملفات تعريف الارتباط الضرورية للغاية افتراضيًا. يتم إيقاف تشغيل ملفات تعريف الارتباط الإضافية افتراضيًا.",
             headerText: "ملفات تعريف الارتباط على OurPlanetOurPeople",
-            privacyLinkText: "راجع سياسة الخصوصية للحصول على التفاصيل"
+            privacyLinkText: "راجع سياسة الخصوصية للحصول على التفاصيل",
+            resetText: "إعادة تعيين ملفات تعريف الارتباط"
         },
         "sv": {
             approveText: "Acceptera icke-nödvändiga cookies",
             declineText: "Avvisa icke-nödvändiga cookies",
             mainText: "Vi använder cookies för att ge dig den bästa onlineupplevelsen. Strikt nödvändiga cookies är aktiverade som standard. Ytterligare cookies är inaktiverade som standard.",
             headerText: "Cookies på OurPlanetOurPeople",
-            privacyLinkText: "Se integritetspolicyn för mer information"
+            privacyLinkText: "Se integritetspolicyn för mer information",
+            resetText: "Återställ cookies"
         },
         "da": {
             approveText: "Accepter ikke-væsentlige cookies",
             declineText: "Afvis ikke-væsentlige cookies",
             mainText: "Vi bruger cookies for at give dig den bedste onlineoplevelse. Strengt nødvendige cookies er slået til som standard. Yderligere cookies er slået fra som standard.",
             headerText: "Cookies på OurPlanetOurPeople",
-            privacyLinkText: "Se privatlivspolitikken for detaljer"
+            privacyLinkText: "Se privatlivspolitikken for detaljer",
+            resetText: "Nulstil cookies"
         },
         "fi": {
             approveText: "Hyväksy ei-välttämättömät evästeet",
             declineText: "Hylkää ei-välttämättömät evästeet",
             mainText: "Käytämme evästeitä tarjotaksemme sinulle parhaan mahdollisen verkkokokemuksen. Välttämättömät evästeet ovat oletusarvoisesti käytössä. Lisäevästeet ovat oletusarvoisesti poissa käytöstä.",
             headerText: "Evästeet sivustolla OurPlanetOurPeople",
-            privacyLinkText: "Katso lisätietoja tietosuojakäytännöstä"
+            privacyLinkText: "Katso lisätietoja tietosuojakäytännöstä",
+            resetText: "Nollaa evästeet"
         },
         "pl": {
             approveText: "Zaakceptuj nieistotne pliki cookie",
             declineText: "Odrzuć nieistotne pliki cookie",
             mainText: "Używamy plików cookie, aby zapewnić Ci najlepsze wrażenia online. Ściśle niezbędne pliki cookie są domyślnie włączone. Dodatkowe pliki cookie są domyślnie wyłączone.",
             headerText: "Pliki cookie na OurPlanetOurPeople",
-            privacyLinkText: "Zobacz politykę prywatności, aby uzyskać szczegółowe informacje"
+            privacyLinkText: "Zobacz politykę prywatności, aby uzyskać szczegółowe informacje",
+            resetText: "Zresetuj pliki cookie"
         },
         "tr": {
             approveText: "Gerekli olmayan çerezleri kabul et",
             declineText: "Gerekli olmayan çerezleri reddet",
             mainText: "Size en iyi çevrimiçi deneyimi sunmak için çerezleri kullanıyoruz. Kesinlikle gerekli çerezler varsayılan olarak açıktır. Ek çerezler varsayılan olarak kapalıdır.",
             headerText: "OurPlanetOurPeople'daki Çerezler",
-            privacyLinkText: "Ayrıntılar için gizlilik politikasına bakın"
+            privacyLinkText: "Ayrıntılar için gizlilik politikasına bakın",
+            resetText: "Çerezleri sıfırla"
         }
     };
 
