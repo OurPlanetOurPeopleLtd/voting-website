@@ -9,7 +9,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import {footerComponentId, headerComponentId} from "../Routing";
 
 import React, {PropsWithChildren, useEffect, useState} from "react";
-import {CookieConsent, Cookies, getCookieConsentValue} from "react-cookie-consent";
+import {CookieConsent, getCookieConsentValue} from "react-cookie-consent";
 
 import {Analytics} from 'aws-amplify';
 
@@ -23,7 +23,7 @@ import {defaultLanguage} from "../languages";
 import FlagSelect from "./FlagSelect";
 import {Helmet} from "react-helmet-async";
 import {getCookieBannerText} from "../repositories/utils/extraTranslations";
-import {resetCookieConsentValue} from "react-cookie-consent/src/utilities";
+
 import {Button} from "react-bootstrap";
 
 
@@ -84,6 +84,22 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
     else
         DisableAnalytics();
 
+    function resetCookie(name: string, path?: string, domain?: string): void {
+        let cookieString = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+
+        if (path) {
+            cookieString += ` path=${path};`;
+        } else {
+            cookieString += ' path=/;'; // Default to root path if not provided
+        }
+
+        if (domain) {
+            cookieString += ` domain=${domain};`;
+        }
+
+        document.cookie = cookieString;
+        window.location.reload();
+    }
  
 // Example usage:
     const cookieName = "OurPeopleOurPlanetAnalyticsAcceptance";
@@ -146,8 +162,7 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                 onAccept={(acceptedByScrolling) => {
                     setAnalyticsEnabled(true)
                 }}
-                hideOnAccept={false}
-                hideOnDecline={false}
+      
                 
                 >
                 <h2>{cookieText.headerText}</h2>           
@@ -169,10 +184,10 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                     }}
                     className={"CookieConsent"}
                 >
-                    <Button onClick={() => resetCookieConsentValue(cookieName)}>
-                        
+                                    
+                    <Button onClick={() => resetCookie(cookieName)}>
                         {cookieText.resetText}
-                    </Button>
+                    </Button>                    
                 </div>
             ) : null}
             <DynamicFooter id={footerComponentId} locale={locale}></DynamicFooter>
