@@ -22,6 +22,14 @@ main .container {
   }
 }
 
+a:not([id]):not([class]) {
+  color: var(--tertiary);
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .select-wrap {
   position: relative;
   display: flex;
