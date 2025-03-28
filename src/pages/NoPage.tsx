@@ -9,7 +9,7 @@ const NoPage = () => {
     const [pageNavigateData, setPageNavigateData] = useState<NavigationItem[]>();
     const [pageExists, setPageExists] = useState(false)
     const location = useLocation();
-    const [hasRefreshed, setHasRefreshed] = useState(false);
+    const [hasLoaded, setHasLoaded] = useState(false);
     const [redirect, setRedirect] = useState<string>("");
     async function fetchData() {
         const links = await getAllNavData("en");
@@ -20,18 +20,19 @@ const NoPage = () => {
         const findSlug = allSlugs.filter( x => getLastSlugPart(x) === currentWindowSlug );
         const pageActuallyExists = findSlug.length > 0
 
-   
+        setRedirect(location.pathname);
         setPageExists(pageActuallyExists);
-
+        setHasLoaded(true)
     }
     useEffect(() => {
         fetchData().catch(console.error);
     }, []);
     
-    
-    
+    if(!hasLoaded)
+        return <></>
+        
     return <div>
-        {!pageExists ? <span >Page does not exist</span> : <Navigate to={"Privacy"} replace></Navigate>}
+        {!pageExists ? <span >Page does not exist</span> : <Navigate to={redirect} replace></Navigate>}
     </div>;
 };
 
