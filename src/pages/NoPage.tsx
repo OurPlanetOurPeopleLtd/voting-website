@@ -32,7 +32,7 @@ const NoPage = () => {
         return <></>
         
     return <div>
-        {!pageExists ? <span >Page does not exist</span> : <Navigate to={redirect} replace></Navigate>}
+        {!pageExists ? <span >Page does not exist</span> : <Navigate to={"Voting"} replace></Navigate>}
     </div>;
 };
 
