@@ -176,8 +176,7 @@ function Routing() {
             <PageTransition>
                 <Routes>                                
                         
-                        
-                        {languageArray.map((locale,index) => generatePageRoutesForLanguage(index, locale))}
+                    {languageArray.map((locale,index) => generatePageRoutesForLanguage(index, locale))}
 
                     {loading ? <></> : 
                         <Route
