@@ -8,6 +8,7 @@ import {getVideoWithPdfPageJson} from "../repositories/VideoWithPdfsPage/request
 import {VideoWithPdfs} from "../components/VideoWithPdfs";
 
 import "./Page.scss";
+import { getLastSlugPart } from "../repositories/utils/utilities";
 
 export type TVideoWithPdfsPage = TVideoPage & 
 {
@@ -15,13 +16,7 @@ export type TVideoWithPdfsPage = TVideoPage &
     pdfs: TPdfWrapper[];
 }
 
-function getLastSlugPart(slug: string, separator: string = '/'): string | undefined {
-    if (!slug) {
-        return undefined; // Handle empty or null slugs
-    }
-    const parts = slug.split(separator);
-    return parts.pop();
-}
+
 
 export const VideoWithPdfsPage = (props: TArticlePage) => {
     const {slug, locale} = props;

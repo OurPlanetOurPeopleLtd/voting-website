@@ -69,6 +69,15 @@ export function LogException(ex: string) {
 
 }
 
+export function getLastSlugPart(slug: string, separator: string = '/'): string | undefined {
+    if (!slug) {
+        return undefined; // Handle empty or null slugs
+    }
+    const parts = slug.split(separator);
+    return parts.pop();
+}
+
+
 export function LogQuery(query: string, force:boolean= false) {
     
     

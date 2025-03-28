@@ -51,27 +51,47 @@ const Reset = () => {
 
 function Routing() {
 
-    const [pageNavigateData, setPageNavigateData] = useState<NavigationItem[]>();
+    const [pageNavigateData, setPageNavigateData] = useState<NavigationItem[] | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [locale, setLocale] = useState(defaultLanguage);
 
-    
-    async function fetchData() {       
-        const links = await getAllNavData(locale); 
+    async function fetchData() {
+        try {
+            const links = await getAllNavData(locale);
 
-        if (process.env.NODE_ENV === "development" && DEBUG_QUERY) 
-        {
-            LogLinks(links, "routing");
+            if (process.env.NODE_ENV === "development" && DEBUG_QUERY) {
+                LogLinks(links, "routing");
+            }
+
+            setPageNavigateData(links);
+            setLoading(false); // Data loaded successfully
+        } catch (err) {
+            console.error("Error fetching navigation data:", err);
+            setError(true)
+            //setError(err);
+            setLoading(false); // Loading failed
+            // Consider providing fallback data here if appropriate
         }
-
-        setPageNavigateData(links);
-
     }
 
     refreshPreview();
 
     useEffect(() => {
-        fetchData().catch(console.error);
+        fetchData().catch(console.error); 
     }, []);
 
+    if (loading) {
+        return <div>Loading navigation data...</div>; // Show loading indicator
+    }
+
+    if (error) {
+        return <div>Error loading navigation data. Please try again later.</div>; // Show error message
+    }
+
+    if (!pageNavigateData) {
+        return <div>Unexpected error, navigation data is missing.</div>;
+    }
 
     
     function getElementForType(type: ContentType) {
@@ -98,7 +118,7 @@ function Routing() {
         }
     } 
 
-    const [locale, setLocale] = useState(defaultLanguage);
+    
    
     const OnLocaleChanged = (locale:string) =>
     {
