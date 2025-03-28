@@ -81,7 +81,7 @@ function Routing() {
         fetchData().catch(console.error); 
     }, []);
 
-    if (loading) {
+   /* if (loading) {
         return <div>Loading navigation data...</div>; // Show loading indicator
     }
 
@@ -91,7 +91,7 @@ function Routing() {
 
     if (!pageNavigateData) {
         return <div>Unexpected error, navigation data is missing.</div>;
-    }
+    }*/
 
     
     function getElementForType(type: ContentType) {
@@ -174,25 +174,26 @@ function Routing() {
     return (
         <BrowserRouter>
             <PageTransition>
-            <Routes>                                
-             
-                    
-                    {languageArray.map((locale,index) => generatePageRoutesForLanguage(index, locale))}
-                
+                <Routes>                                
+                        
+                        
+                        {languageArray.map((locale,index) => generatePageRoutesForLanguage(index, locale))}
 
-                    <Route
-                        key="nopage" path="*"
-                        element={
-                            <LayoutTs locale={locale} title={"Unknown Page"} >
-                                <RouteChangeListener onSetLocale={OnLocaleChanged}/>
-                                <NoPage/>
-                            </LayoutTs>
-                        }
-                    />
-
-                <Route key="api" path="/reset/patrickonly/277205bc-fdf9-4bcb-be07-14a3a3bcc7f4" element={<Reset/>}></Route>
-                             
-            </Routes>
+                    {loading ? <></> : 
+                        <Route
+                            key="nopage" path="*"
+                            element={
+                                <LayoutTs locale={locale} title={"Unknown Page"} >
+                                    <RouteChangeListener onSetLocale={OnLocaleChanged}/>
+                                    <NoPage/>
+                                </LayoutTs>
+                            }
+                        />
+                    }
+    
+                    <Route key="api" path="/reset/patrickonly/277205bc-fdf9-4bcb-be07-14a3a3bcc7f4" element={<Reset/>}></Route>
+                                 
+                </Routes>
                 </PageTransition>
         </BrowserRouter>
     );
