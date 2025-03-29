@@ -42,8 +42,9 @@ export const pushToGaDatalayer = (name: string, userId: string, eventData?: Even
 
 export function EnableAnalytics() {
     window.gaEnabled = true;
-
+    
     if (typeof window !== 'undefined') {
+        console.log("Enablng analytics")
         gtag('consent', 'update', {
             analytics_storage: 'granted',
             ad_storage: 'granted'
@@ -69,6 +70,7 @@ export function InitAnalytics() {
 
 export function DisableAnalytics() {
     if (typeof window !== 'undefined') {
+        console.log("Disabling analytics")
         gtag('consent', 'update', {
             analytics_storage: 'denied',
             ad_storage: 'denied'

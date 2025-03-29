@@ -74,15 +74,16 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                 return window.location.origin + window.location.pathname;
             }
         });
+        if (analyticsEnabled)
+            EnableAnalytics()
+        else
+            DisableAnalytics();
 
 
         recordUse({name: "Page_View", attributes: {page: window.location.pathname, userGuid}});
     }, [analyticsEnabled]);
 
-    if (analyticsEnabled)
-        EnableAnalytics()
-    else
-        DisableAnalytics();
+  
 
     function resetCookie(name: string, path?: string, domain?: string): void {
         let cookieString = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
