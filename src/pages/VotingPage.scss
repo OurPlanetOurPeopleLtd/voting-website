@@ -49,6 +49,10 @@
     display: flex;
     gap: 2rem;
 
+    a:not([id]):not([class]) {
+      color: #fff;
+    }
+
     @media screen and (min-width: 1024px) {
       > * {
         width: 50%;
