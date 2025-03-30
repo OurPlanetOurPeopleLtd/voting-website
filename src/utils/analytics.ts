@@ -87,7 +87,7 @@ export function DisableAnalytics() {
 
 export function recordUse(e: AnalyticsEvent, userId?: string | null) {
 
-    pushToGaDatalayer(e.name, userId ?? "unknown_user", e.attributes)
+    pushToGaDatalayer(e.name, userId ?? e?.attributes?.userGuid ?? "unknown_user", e.attributes)
     Analytics.record(e)
 
     if (window.gaEnabled) {

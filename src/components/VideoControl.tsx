@@ -78,14 +78,15 @@ export const VideoControl = ({
         const duration = event.target.duration;
         const percentage = duration ?  Math.floor((currentTime / duration) * 100) : undefined;
 
+        
         if(onProgress)
             onProgress(event.target.currentTime);
         
         //record every 5 seconds of video watched
         if (currentTime % 5 === 0 && currentTime !== lastReportedTime) {
             lastReportedTime = currentTime;
-
-            // Your recordUse function here
+ 
+             // Your recordUse function here
             recordUse({
                 name: "Video_Watched_Time",
                 attributes: {
@@ -123,7 +124,8 @@ export const VideoControl = ({
                 page: window.location.pathname,
                 userGuid: getUserGuid(),
                 video: datoVideo?.title ?? "",
-                time: event.target.currentTime
+                time: event.target.currentTime,
+                percentage: "100",
             }
         });
     }
@@ -131,9 +133,22 @@ export const VideoControl = ({
     const onVideoPause = (event: any) =>
     {
         if(onPause)
-            onPause();    
-        recordUse({name: "Video_Paused", attributes: {page: window.location.pathname, userGuid:getUserGuid(), video:datoVideo?.title ??"", time:event.target.currentTime}});
+            onPause();
+
+        const currentTime = Math.floor(event.target.currentTime);
+        const duration = event.target.duration;
+        const percentage = duration ?  Math.floor((currentTime / duration) * 100) : undefined;
         
+        recordUse({
+            name: "Video_Paused",
+            attributes: {
+                page: window.location.pathname,
+                userGuid: getUserGuid(),
+                video: datoVideo?.title ?? "",
+                time: event.target.currentTime,
+                percentage:percentage?.toString() ?? "",
+            }
+        });
     }
     const forcePause  = () =>
     {

@@ -110,7 +110,7 @@ const VotingPage = (queryProps: TVotingQueryProps) => {
     }
     function voteChanged(choice:Choice)
     {
-        console.log("show overlay")
+       
         
     }
     
