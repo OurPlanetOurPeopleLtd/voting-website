@@ -4,6 +4,7 @@ import {EventAttributes} from "@aws-amplify/analytics/src/types/Analytics";
 import gtag from "./gtag";
 import {DataStore} from '@aws-amplify/datastore';
 import {Event} from '../models';
+import {getUserGuid} from "../repositories/utils/utilities";
 
 type TTrackingItem = {
 
@@ -51,6 +52,8 @@ export function EnableAnalytics() {
             ad_user_data: 'granted',
             ad_personalization: 'granted',
         });
+        const userGuid = getUserGuid();
+        recordUse({name: "Tracking_Consent_Changed", attributes: {status: 'granted', userGuid}});
     }
 
     Analytics.enable();
@@ -79,6 +82,8 @@ export function DisableAnalytics() {
             ad_user_data: 'denied',
             ad_personalization: 'denied',
         });
+        const userGuid = getUserGuid();
+        recordUse({name: "Tracking_Consent_Changed", attributes: {status: 'denied', userGuid}});
     }
 
     window.gaEnabled = false;
