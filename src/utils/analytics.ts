@@ -6,6 +6,8 @@ import {DataStore} from '@aws-amplify/datastore';
 import {Event} from '../models';
 import {getUserGuid} from "../repositories/utils/utilities";
 
+
+
 type TTrackingItem = {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

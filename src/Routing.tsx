@@ -22,6 +22,9 @@ import {RegistrationPage} from "./pages/RegistrationPage";
 import {StagedPage} from "./pages/StagedPage";
 import PageTransition from "./PageTransition";
 
+import {ReportPage} from "./components/Reporting/ReportPage";
+
+
 export const headerComponentId = "UW2LLARmS3Oryu_9BT0IBQ"; //todo this is a bit rubbish
 export const footerComponentId = "QR1NY2zlRK-luRZZkbfB1w";  
 
@@ -189,7 +192,12 @@ function Routing() {
                             }
                         />
                     }
-    
+
+                    <Route key="report" path="/report/patrickonly/277205bc-fdf9-4bcb-be07-14a3a3bcc7f4" element={
+                        <LayoutTs locale={locale} title={"Unknown Page"} >
+                        <ReportPage/>
+                        </LayoutTs>
+                    }></Route>
                     <Route key="api" path="/reset/patrickonly/277205bc-fdf9-4bcb-be07-14a3a3bcc7f4" element={<Reset/>}></Route>
                                  
                 </Routes>

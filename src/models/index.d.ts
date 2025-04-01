@@ -22,6 +22,7 @@ type EagerEvent = {
   readonly updatedAt?: string | null;
 }
 
+
 type LazyEvent = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Event, 'id'>;
