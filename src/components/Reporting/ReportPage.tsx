@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {ReportData, ReportLogic, TDataSection} from "./ReportData";
 import {DataColumn} from "./DataColumn";
-import {Button, Row} from "react-bootstrap";
+import {Button, Col, Row} from "react-bootstrap";
 
 type TDatePair =
     {startDate: Date, endDate:Date}
@@ -112,7 +112,7 @@ export const ReportPage = () => {
         if (!dataColumns) return;
         return Object.entries(dataColumns).map(([key, sections]) => (
             refreshing && refreshing[key] ? 
-                <div> Column LOADING</div> :
+                <Col key={key+"column-load"}> Column LOADING</Col> :
             datePairColumns && datePairColumns[key] ?
                 
                 <DataColumn key={key+"column"}
