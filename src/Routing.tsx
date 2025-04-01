@@ -21,7 +21,8 @@ import {VideoWithPdfsPage} from "./pages/VideoWithPdfPage";
 import {RegistrationPage} from "./pages/RegistrationPage";
 import {StagedPage} from "./pages/StagedPage";
 import PageTransition from "./PageTransition";
-import {ReportPage} from "./components/Reporting/DataColumn";
+
+import {ReportPage} from "./components/Reporting/ReportPage";
 
 
 export const headerComponentId = "UW2LLARmS3Oryu_9BT0IBQ"; //todo this is a bit rubbish
