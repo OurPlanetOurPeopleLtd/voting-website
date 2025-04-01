@@ -216,7 +216,7 @@ export const VideoControl = ({
         <div className="video-overlay"onClick={forcePause}></div>
         <div className="video-frame" ></div>
 
-         <VideoPlayer
+             <VideoPlayer
               
                 thumbnailTime={0}
                 poster={videoThumbnail}

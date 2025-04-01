@@ -70,8 +70,7 @@ export class ReportLogic {
             {
                 sort: e => e.createdAt(SortDirection.ASCENDING)
             }); 
-        //const events: ReportData[] = [{id: "1", createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), userId: "user1", eventName: "Page_View", attributes: JSON.stringify({page: "home"})}, {id: "2", createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), userId: "user1", eventName: "Video_Played", attributes: JSON.stringify({video: "video1", percentage: 50})}, {id: "3", createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), userId: "user2", eventName: "Voted", attributes: JSON.stringify({choice: "YES"})}, {id: "4", createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), userId: "user2", eventName: "Video_Watched_To_End", attributes: JSON.stringify({video: "video1"})}] //Mock Data
-
+      
         const mappedData: ReportData[] = events.map((event) => ({
             id: event.id,
             createdAt: event.createdAt,
@@ -176,21 +175,29 @@ export class ReportLogic {
             
             const videoData = eventArray.map(([videoName, events]) => {
                 const watchedToEnd = events.filter((e) => e.eventName === 'Video_Watched_To_End');
-                const played = events.filter((e) => e.eventName === 'Video_Played');        
+                const played = events.filter((e) => e.eventName === 'Video_Played');
+                const videoWatchedEvents = events.filter((e) => e.eventName?.includes('Video')); //todo should it get all Video_Played, Video_Watched_To_End and Video_Watched_Time events
+                const timeOnVideo = removeDuplicatesByUserId(videoWatchedEvents, (a,b) => (b.attributes?.time ?? 0) > (a.attributes?.time ?? 0) );
                 const uniquePlays = removeDuplicatesByUserId(played, (a,b) => (b.attributes?.time ?? 0) > (a.attributes?.time ?? 0) );
                
+                console.log("video watched time for " + videoName)
+                console.log(videoWatchedEvents)
+                
                 const uniquePlayed = uniquePlays.length;
                 if(!uniquePlayed )
                     return null;
                 
-                const totalWatchTime = uniquePlays.reduce((sum, play) => sum + (play.attributes?.time ?? 0), 0);
+                const totalWatchTime = timeOnVideo.reduce((sum, play) => sum + (play.attributes?.time ?? 0), 0);
 
-                const averageWatchTime = totalWatchTime / uniquePlays.length;
+                const averageWatchTime = totalWatchTime / timeOnVideo.length;
+
+                const averageWatchTimeInMinutes =averageWatchTime / 60;
+             
+                
                 const uniqueWatchedToEnd = uniqueCounts(watchedToEnd);
                 const uniqueDidntWatchToEnd = uniquePlayed - uniqueWatchedToEnd;
                 
-
-                
+               
                 const section:TDataSection =
                     {
                         title: videoName,
@@ -210,8 +217,8 @@ export class ReportLogic {
                                 value: uniqueDidntWatchToEnd
                             },
                             {
-                                name:'Average Watch Time',
-                                value: averageWatchTime
+                                name:'Average Watch Time (minutes)',
+                                value: averageWatchTimeInMinutes
                             }
                         ]
                             
@@ -234,7 +241,17 @@ export class ReportLogic {
             userId: this.parseAttributes<VideoAttributes>(e.attributes)?.userGuid ?? e.userId ?? 'unknown',
             eventName: e.eventName,
             attributes: this.parseAttributes<VideoAttributes>(e.attributes),
+        })).map((video) => ({
+            ...video,
+            attributes: {...video?.attributes, time: typeof video?.attributes?.time === 'string'
+                    ? parseFloat(video.attributes.time)
+                    : video?.attributes?.time ?? 0,}
+        
         }));
+        
+        console.log("alll video times");
+        const allTimes = videoParsed.map(e => e?.attributes?.time ?? 0)
+        console.log(allTimes)   
 
         const votedYes = allVotes.filter((event) => this.parseAttributes<VoteAttributes>(event.attributes)?.choice === 'YES').length;
         const votedNo = allVotes.filter((event) => this.parseAttributes<VoteAttributes>(event.attributes)?.choice === 'NO').length;
