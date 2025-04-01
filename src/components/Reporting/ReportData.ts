@@ -83,22 +83,23 @@ export class ReportLogic {
         return mappedData;
     }
 
-    parseAttributes<T>(attributes: string | null | undefined): T | null {
+    parseAttributes<T extends CommonAttributes>(attributes: string | null | undefined): T | null {
         if (!attributes) return null;
         try {
-            return /*JSON.parse*/(attributes) as T;
+            return /*JSON.parse*/(attributes) as unknown as T;
         } catch (error) {
             console.error('Error parsing attributes:', error);
             return null;
         }
     }
 
-    parseEvent<T>(event: ReportData | null | undefined): ParsedEvent<T> | null {
+    parseEvent<T extends CommonAttributes>(event: ReportData | null | undefined): ParsedEvent<T > | null {
         if (!event || !event.attributes) return null;
         try {
-            const parsedAttributes = /*JSON.parse*/(event.attributes) as T;
+            const parsedAttributes = /*JSON.parse*/(event.attributes) as unknown as T;
             return {
                 ...event,
+                userId: event.userId ?? parsedAttributes.userGuid,
                 attributes: parsedAttributes,
             };
         } catch (error) {
