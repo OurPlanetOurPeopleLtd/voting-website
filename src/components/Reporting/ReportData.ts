@@ -109,22 +109,7 @@ export class ReportLogic {
     }
 
     async queryData(startDate: Date, endDate: Date): Promise<TDataSection[]> {
-        console.log('starting data query');
 
-        const reportData = await this.fetchEventData(startDate,endDate);
-        const allUsers = reportData.filter((e) => e.eventName === 'Page_View');
-        const uniqueUsers = Array.from(new Set(allUsers.map((event) => event.userId)));
-        const newUsers = allUsers.filter(
-            (event) => new Date(event.createdAt ?? '') >= startDate && new Date(event.createdAt ?? '') <= endDate
-        );
-        const uniqueNewUsers = Array.from(new Set(newUsers.map((event) => event.userId)));
-
-        console.log('getting event data');
-        const pageViews = allUsers;
-        const pagesVisted = pageViews.map((x) => this.parseEvent<PageAttributes>(x));
-
-        const pageViewsOn = (pageName: string) =>
-            pagesVisted.filter((x) => x?.attributes?.page.includes(pageName)).length;
 
         const removeDuplicatesByUserId = <T extends { readonly userId?: string | null }>(
             arr: T[],
@@ -140,10 +125,36 @@ export class ReportLogic {
                 }, new Map<string, T>()).values()
             );
         };
-
         const uniqueCounts = <T extends { readonly userId?: string | null }>(arr: T[],
                                                                              overwrite?: (existing: T, newItem: T) => boolean): number =>
             removeDuplicatesByUserId(arr,overwrite).length;
+        
+        console.log('starting data query');
+
+        const reportData = await this.fetchEventData(startDate,endDate);
+        const allUsers = removeDuplicatesByUserId(reportData/*.filter((e) => e.eventName === 'Page_View')*/, (a,b) => b?.createdAt == null ? false : a?.createdAt == null ? true : new Date(b.createdAt) > new Date(a.createdAt ));
+        console.log(removeDuplicatesByUserId(reportData));
+        const allUsersToDate = allUsers.filter(x => new Date(x.createdAt ?? '') < endDate);
+        const newUsers = allUsers.filter(
+            (event) => new Date(event.createdAt ?? '') >= startDate && new Date(event.createdAt ?? '') <= endDate
+        );
+        console.log('getting event data');
+        const pageViews = allUsersToDate;
+        const pagesVisted = pageViews.map((x) => this.parseEvent<PageAttributes>(x));
+        
+        const visitsPerUser = reportData.reduce((acc: UserVisitCounts, event) => {
+            acc[event.userId ?? 'unknown'] = (acc[event.userId ?? 'unknown'] || 0) + 1;
+            return acc;
+        }, {});
+        const singleVisits = Object.values(visitsPerUser).filter((count) => count === 1).length;
+        const multipleVisits = Object.values(visitsPerUser).filter((count) => count > 1).length;
+      
+        
+
+        const pageViewsOn = (pageName: string) =>
+            pagesVisted.filter((x) => x?.attributes?.page?.includes(pageName))?.length ?? 0;      
+
+       
 
         const groupByVideo = (videoParsed: any[]): Map<string, any[]> => {
             const grouped = new Map<string, any[]>();
@@ -212,12 +223,7 @@ export class ReportLogic {
             return videoData;
         };
 
-        const visitsPerUser = pageViews.reduce((acc: UserVisitCounts, event) => {
-            acc[event.userId ?? 'unknown'] = (acc[event.userId ?? 'unknown'] || 0) + 1;
-            return acc;
-        }, {});
-        const singleVisits = Object.values(visitsPerUser).filter((count) => count === 1).length;
-        const multipleVisits = Object.values(visitsPerUser).filter((count) => count > 1).length;
+        
 
         console.log('getting vote data');
         const allVotes = reportData.filter(e => e.eventName === "Voted" || e.eventName === "Changed_Vote");
@@ -248,6 +254,31 @@ export class ReportLogic {
 
         const groupedVideoData = groupByVideo(videoParsed);
         const videoExcelData = generateVideoEventData(groupedVideoData);
+        
+ 
+        const usersToDateSection : TDataSection =
+            {
+                title: "Users",
+                data: [
+                    {
+                        name:'New users',
+                        value: newUsers.length
+                    },
+                    {
+                        name:'Single visit',
+                        value: singleVisits
+                    },
+                    {
+                        name:'Multiple visits',
+                        value: multipleVisits
+                    }
+                    /*,
+                    {
+                        name:'Total to (end) date',
+                        value: allUsersToDate.length
+                    }*/
+                ]
+            }
         
         const votingSection : TDataSection =
                 {
@@ -308,8 +339,9 @@ export class ReportLogic {
             };
 
         const data = [
-            ...videoExcelData,
+            usersToDateSection,
             votingSection,
+            ...videoExcelData,
              shareSection,
             donateSection,
             regSection,

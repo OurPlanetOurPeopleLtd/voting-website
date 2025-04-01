@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {ReportData, ReportLogic, TDataSection} from "./ReportData";
 import {DataColumn} from "./DataColumn";
 import {Button, Row} from "react-bootstrap";
@@ -58,19 +58,10 @@ export const ReportPage = () => {
 
     const reportLogic = new ReportLogic();
 
-    /* useEffect(() => {
-         setLoading(true);
-         reportLogic.fetchData()
-             .then((data) => {
-                 setReportData(data);
-             })
-             .catch((e) => {
-                 setError(e.message || 'Failed to fetch data');
-             })
-             .finally(() => {
-                 setLoading(false);
-             });
-     }, [datePairColumns]);*/
+     useEffect(() => {
+         handleAddColumn().catch(e => console.log(e));
+         
+     }, []);
 
     const handleGenerateExcel = () => {
         reportLogic.downloadDataAsExcel().catch((e) => console.log(e));

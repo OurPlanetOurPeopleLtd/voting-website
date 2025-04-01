@@ -80,7 +80,7 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
             DisableAnalytics();
 
 
-        recordUse({name: "Page_View", attributes: {page: window.location.pathname, userGuid}});
+        
     }, [analyticsEnabled]);
 
   
