@@ -87,7 +87,7 @@ export class ReportLogic {
     parseAttributes<T>(attributes: string | null | undefined): T | null {
         if (!attributes) return null;
         try {
-            return JSON.parse(attributes) as T;
+            return /*JSON.parse*/(attributes) as T;
         } catch (error) {
             console.error('Error parsing attributes:', error);
             return null;
@@ -97,7 +97,7 @@ export class ReportLogic {
     parseEvent<T>(event: ReportData | null | undefined): ParsedEvent<T> | null {
         if (!event || !event.attributes) return null;
         try {
-            const parsedAttributes = JSON.parse(event.attributes) as T;
+            const parsedAttributes = /*JSON.parse*/(event.attributes) as T;
             return {
                 ...event,
                 attributes: parsedAttributes,
@@ -237,13 +237,13 @@ export class ReportLogic {
         
   
 
-        const shareClicks = reportData.filter((e) => e.eventName === 'Share_Clicked').length;
+        const shareClicks = uniqueCounts(reportData.filter((e) => e.eventName === 'Share_Clicked'));
         const sharePercent = (shareClicks / pageViewsOn('share')) * 100;
 
-        const donateClicks = reportData.filter((e) => e.eventName === 'Donate_Clicked').length;
+        const donateClicks = uniqueCounts(reportData.filter((e) => e.eventName === 'Donate_Clicked'));
         const donatePercent = (donateClicks / pageViewsOn('donate')) * 100;
 
-        const regClicks = reportData.filter((e) => e.eventName === 'Registered').length;
+        const regClicks = uniqueCounts(reportData.filter((e) => e.eventName === 'Registered'));
         const regPercent = (regClicks / pageViewsOn('registration')) * 100;
 
         const groupedVideoData = groupByVideo(videoParsed);

@@ -193,7 +193,11 @@ function Routing() {
                         />
                     }
 
-                    <Route key="report" path="/report/patrickonly/277205bc-fdf9-4bcb-be07-14a3a3bcc7f4" element={<ReportPage/>}></Route>
+                    <Route key="report" path="/report/patrickonly/277205bc-fdf9-4bcb-be07-14a3a3bcc7f4" element={
+                        <LayoutTs locale={locale} title={"Unknown Page"} >
+                        <ReportPage/>
+                        </LayoutTs>
+                    }></Route>
                     <Route key="api" path="/reset/patrickonly/277205bc-fdf9-4bcb-be07-14a3a3bcc7f4" element={<Reset/>}></Route>
                                  
                 </Routes>

@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {ReportData, ReportLogic, TDataSection} from "./ReportData";
 import {DataColumn} from "./DataColumn";
+import {Button, Row} from "react-bootstrap";
 
 type TDatePair =
     {startDate: Date, endDate:Date}
@@ -12,6 +13,10 @@ type DatePairDictionary = {
     [key: string]:TDatePair ;
 };
 
+type RefreshingDictionary = {
+    [key: string]:boolean ;
+};
+
 export const ReportPage = () => {
 
 
@@ -20,13 +25,20 @@ export const ReportPage = () => {
     sevenDaysAgo.setDate(today.getDate() - 7);
 
     //TDataColumn 
+    const [refreshing, setRefreshing] = useState<RefreshingDictionary>();
     const [dataColumns, setDataColumns] = useState<DataDictionary>();
     const [datePairColumns, setDatePairColumns] = useState<DatePairDictionary>();
     const [reportData, setReportData] = useState<ReportData[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
 
+    const updateRefreshing= (key: string, newState:boolean) => {
+        setRefreshing((prevData) => ({
+            ...prevData,
+            [key]: newState,
+        }));
+    };
     const updateData = (key: string, newData: TDataSection[]) => {
         setDataColumns((prevData) => ({
             ...prevData,
@@ -78,27 +90,42 @@ export const ReportPage = () => {
     };
 
     const handleAddColumn = async () => {
-        if (!dataColumns) return;
-
-        const label = getExcelColumnName(Object.keys(dataColumns).length);
+        console.log("Adding Column")
+        const colNumber = dataColumns ? Object.keys(dataColumns).length : 0;
+        const label = getExcelColumnName(colNumber);
         //updateData(label, []);
         //updateDatePair(label, {startDate:today, endDate:sevenDaysAgo});
-        await handleDateRangeChange(label, today, sevenDaysAgo);
+        await handleDateRangeChange(label, sevenDaysAgo, today );
     };
 
     const handleDateRangeChange = async (key: string, startDate: Date, endDate: Date) => {
-        setLoading(true);
+        
+        if(startDate > endDate)
+        {
+            setError(`Start Date for ${key} is ahead of end date! Please correct`)
+            return;
+        }
+        else {
+            setError(null)
+        }
+        setLoading(true);        
+        console.log("Adding Data")
+        updateRefreshing(key,true)
         updateDatePair(key, {startDate, endDate});
         updateData(key, await reportLogic.queryData(startDate, endDate));
+        updateRefreshing(key,false)
         setLoading(false);
     }
 
     const displayDataColumns = () => {
         if (!dataColumns) return;
         return Object.entries(dataColumns).map(([key, sections]) => (
+            refreshing && refreshing[key] ? 
+                <div> Column LOADING</div> :
             datePairColumns && datePairColumns[key] ?
-
-                <DataColumn title={key}
+                
+                <DataColumn key={key+"column"}
+                            title={key}
                             data={sections}
                             startDate={datePairColumns[key].startDate}
                             endDate={datePairColumns[key].endDate}
@@ -113,13 +140,19 @@ export const ReportPage = () => {
 
     return (
         <div>
+            <h1>Reporting Page</h1>
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error}</p>}
-            <button onClick={handleGenerateExcel}>Generate Excel</button>
-            <button onClick={handleAddColumn} disabled={loading}>
-                {loading ? 'Adding...' : 'Add Column'}
-            </button>
+            {/*<Button onClick={handleGenerateExcel}>Generate Excel</Button>*/}
+            <Button onClick={handleAddColumn} >
+                Add Column
+            </Button>
+            <Row style={{overflowX: "auto",
+                overflowY: "auto",
+                flexWrap: "nowrap",
+                justifyContent: "left"}}>
             {displayDataColumns()}
+            </Row>
         </div>
     );
 
