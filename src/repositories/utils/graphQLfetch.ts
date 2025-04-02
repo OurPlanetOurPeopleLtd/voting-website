@@ -51,7 +51,7 @@ class InMemoryCache {
 
 }
 
-const myCache = new InMemoryCache(10); // Cache entries for 10 seconds
+const myCache = new InMemoryCache( 86400); // Cache entries for the day
 export async function fetchDataDato<TType>(query: string): Promise<TType> {
   //  return async function(query: string, variables?: Record<string, any>): Promise<any> {
         const key = myCache.generateKey(query);
