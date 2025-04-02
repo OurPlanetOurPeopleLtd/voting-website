@@ -82,7 +82,7 @@ function Routing() {
 
     useEffect(() => {
         fetchData().catch(console.error); 
-    }, );
+    }, []);
 
    /* if (loading) {
         return <div>Loading navigation data...</div>; // Show loading indicator

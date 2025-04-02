@@ -18,6 +18,7 @@ class InMemoryCache {
     private ttl: number; // Time-to-live in seconds
 
     constructor(ttl: number = 60) {
+        console.log("creating in memory cache")
         this.cache = new Map();
         this.ttl = ttl;
     }
@@ -40,6 +41,7 @@ class InMemoryCache {
 
 
     generateKey(query: string): string {
+        console.log("generating key")
         let hash = 0;
         for (let i = 0; i < query.length; i++) {
             const char = query.charCodeAt(i);
