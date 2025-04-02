@@ -17,7 +17,7 @@ export function generateVideoWithPdfPageQuery(slug: string, locale:string) {
   }
 }`
 
-    LogQuery(query,true);
+    LogQuery(query);
 
     return query;
 }

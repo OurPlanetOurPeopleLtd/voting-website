@@ -82,8 +82,9 @@ function Routing() {
 
     useEffect(() => {
         fetchData().catch(console.error); 
-    }, []);
+    }, [locale]);
 
+    console.log("re render")
    /* if (loading) {
         return <div>Loading navigation data...</div>; // Show loading indicator
     }
