@@ -28,11 +28,11 @@ const NoPage = () => {
         fetchData().catch(console.error);
     }, []);
     
-    if(!hasLoaded)
+    if(!hasLoaded)  
         return <></>
         
     return <div>
-        {!pageExists ? <span >Page does not exist</span> : <Navigate to={"Voting"} replace></Navigate>}
+        {!pageExists ? <span >Page does not exist</span> : <Navigate to={redirect} replace></Navigate>}
     </div>;
 };
 

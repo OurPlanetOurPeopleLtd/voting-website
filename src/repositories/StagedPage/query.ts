@@ -19,6 +19,5 @@ export function generateSpecialPageQuery(slug: string, locale:string) {
 }`
 
     LogQuery(query);
-    console.log(query);
     return query;
 }

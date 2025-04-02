@@ -41,7 +41,7 @@ class InMemoryCache {
 
 
     generateKey(query: string): string {
-        console.log("generating key")
+      
         let hash = 0;
         for (let i = 0; i < query.length; i++) {
             const char = query.charCodeAt(i);

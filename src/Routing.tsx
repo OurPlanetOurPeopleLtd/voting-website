@@ -81,10 +81,16 @@ function Routing() {
     refreshPreview();
 
     useEffect(() => {
-        fetchData().catch(console.error); 
+        fetchData().catch(console.error);
+        
     }, [locale]);
 
-    console.log("re render")
+    useEffect(() => {
+        
+        if(!loading && pageNavigateData === null)
+            fetchData().catch(console.error);
+
+    });
    /* if (loading) {
         return <div>Loading navigation data...</div>; // Show loading indicator
     }
