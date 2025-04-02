@@ -54,11 +54,23 @@ class InMemoryCache {
 }
 
 const myCache = new InMemoryCache( 86400); // Cache entries for the day
+
+function getArraySize(cachedResult:any) {
+    if (cachedResult && typeof cachedResult === 'object') {
+        const keys = Object.keys(cachedResult);
+        for (const key of keys) {
+            if (Array.isArray(cachedResult[key])) {
+                return cachedResult[key].length;
+            }
+        }
+    }
+    return 0; // Or handle the case where no array is found differently
+}
 export async function fetchDataDato<TType>(query: string): Promise<TType> {
   //  return async function(query: string, variables?: Record<string, any>): Promise<any> {
         const key = myCache.generateKey(query);
         const cachedResult = myCache.get(key);
-        if (cachedResult) {
+        if (cachedResult &&  getArraySize(cachedResult) > 0) {
             return cachedResult;
         }
 
