@@ -17,7 +17,7 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
     const [showDeregisterMessage, setDeregisterMessage] = useState<TDeregisterState>("hide");
 
     const fetchData = useCallback(async () => {     
-        let dataFetched = await getRegistrationPage("",locale);
+        let dataFetched = await getRegistrationPage("registration",locale);
         setData(dataFetched);
     }, [locale])
     

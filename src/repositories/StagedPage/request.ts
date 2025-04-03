@@ -1,9 +1,10 @@
 import {generateSpecialPageQuery} from "./query";
-import {fetchDataDato} from "../utils/graphQLfetch";
+import {fetchDataDato, getStaticOrFetch} from "../utils/graphQLfetch";
 import {QueryResult} from "./types";
 import {mapSpecialPage} from "./mappings";
 import {getAllItems} from "../Navigation/request";
 import {ContentType} from "../Navigation/types";
+import {TStagePage} from "./model";
 
 
 export const getAllSlugs = async () =>
@@ -12,10 +13,10 @@ export const getAllSlugs = async () =>
     return items.filter(x => x.__typename === ContentType.SpecialPageRecord).map( x=> x.slug);
 }
 
-export const getSpecialPageJson = (slug: string, locale:string) => {
+export const getSpecialPageJson = (slug: string, locale:string, staticData:boolean = true) => {
     const query = generateSpecialPageQuery(slug, locale);
-    return fetchDataDato<QueryResult>(query).then((root: QueryResult) => {
-        return mapSpecialPage(root);
-    });
+    const apiPromise = fetchDataDato<QueryResult>(query).then(mapSpecialPage);
+
+    return getStaticOrFetch<TStagePage>("StagedPage", apiPromise, locale, slug, staticData);
 };
 

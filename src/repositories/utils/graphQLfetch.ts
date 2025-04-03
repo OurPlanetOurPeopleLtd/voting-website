@@ -13,16 +13,7 @@ const TOKEN = APP_CONTENTFUL_ACCESS_TOKEN;
 const ENVIRONMENT = "";// APP_CONTENTFUL_ENVIRONMENT;
 export const CONTENT_URL = 'https://graphql.datocms.com/'; //`https://graphql.contentful.com/content/v1/spaces/${SPACE}/environments/${ENVIRONMENT}`;
 
-export const fetchDataDato = <TType>(query: string) =>
-    fetchData<TType>(CONTENT_URL, query);
-
-let count = 0;
-export const fetchData = async <TType>(
-    url: string,
-    query: string
-): Promise<TType> => {
- 
-    console.log("Fetching data " + count++ );
+export const fetchDataDato = <TType>(query: string) => {
     const options = {
         method: "POST",
         headers: {
@@ -34,6 +25,18 @@ export const fetchData = async <TType>(
         body: JSON.stringify({query}),
     };
 
+    
+    return fetchData<TType>(CONTENT_URL, query, options);
+}
+
+const fetchData = async <TType>(
+    url: string,
+    query: string,
+    options: RequestInit
+): Promise<TType> => {
+ 
+    //console.log("Fetching data " + count++ );
+    
 
     return await fetch(url, options).then((res) => {
         const result = res.json();
@@ -41,3 +44,48 @@ export const fetchData = async <TType>(
         return result
     });
 };
+
+// Function to read JSON from the public/data directory
+interface Result<T> {
+    success: boolean;
+    data?: T;
+    error?: Error;
+}
+
+// Function to read JSON from the public/data directory
+async function readStaticJson<T>(filePath: string): Promise<Result<T>> {
+    try {
+        const response = await fetch(filePath);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json() as T;
+        return { success: true, data };
+    } catch (error) {
+        return { success: false, error: error as Error };
+    }
+}
+
+export async function getStaticOrFetch<T>(
+    fileNamePrefix: string,
+    apiPromise: Promise<T>,
+    locale: string,
+    slug: string,
+    staticData: boolean = false
+): Promise<T> {
+    if (staticData) {
+        
+        const fileName = `${fileNamePrefix}_${locale}_${slug}.json`;
+        const filePath = `/data/${fileName}`;
+
+        const staticResult = await readStaticJson<T>(filePath);
+
+        if (staticResult.success && staticResult?.data) {
+            return staticResult.data;
+        } else {
+            console.log('\x1b[33m%s\x1b[0m',`Falling back to API for ${fileName}:`, staticResult.error);
+        }
+    }
+
+    return apiPromise;
+}

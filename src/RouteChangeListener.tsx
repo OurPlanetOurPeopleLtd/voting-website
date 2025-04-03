@@ -9,10 +9,11 @@ export interface IRouteListener
 }
 export const RouteChangeListener = ({onSetLocale}: IRouteListener) => {
 
-    const [locale, setLocale] = useState(defaultLanguage)
+
     const [allLocales, setAllLocales] = useState<string[]>([]);
+    const location = useLocation();
+    
     const SetLocale = (locale: string) => {
-        setLocale(locale);
         onSetLocale(locale);
     }
 
@@ -21,12 +22,11 @@ export const RouteChangeListener = ({onSetLocale}: IRouteListener) => {
         return allLocales.includes(extractLocale) ? extractLocale : defaultLanguage;
     }
 
-    const location = useLocation();
-
     useEffect(() => {
-        getLocale(location.pathname).then(newLocale => setLocale(newLocale));
+        if(allLocales.length)
+            getLocale(location.pathname).then(newLocale => SetLocale(newLocale));
       
-    }, [location]);
+    }, [location.pathname,allLocales]);
     useEffect(() => {
         getSupportedLocales().then(loc => setAllLocales(loc))
     }, []);

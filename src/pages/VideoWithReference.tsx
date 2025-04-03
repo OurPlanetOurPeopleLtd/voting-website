@@ -1,10 +1,9 @@
-import {useRef, useState} from "react";
-import {Col, Row} from "react-bootstrap";
+import { useState} from "react";
 import {TVideoProps, VideoControl} from "../components/VideoControl";
-import {VideoReferenceControl} from "../components/VideoReferenceControl";
+import {TReferenceProps, VideoReferenceControl} from "../components/VideoReferenceControl";
 
 import "./VideoWithReference.scss";
-import {TReferenceProps} from "../repositories/References/model";
+
 
 type TVideoReference = TReferenceProps & TVideoProps;
 

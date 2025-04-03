@@ -1,7 +1,10 @@
-import {fetchDataDato} from "../utils/graphQLfetch";
+import {fetchDataDato, getStaticOrFetch} from "../utils/graphQLfetch";
 import {allNavigationParts, QueryResult} from "./types";
 import {NavigationItem} from "../Navigation/types";
 import {LogErrors} from "../utils/utilities";
+import {footerComponentId, headerComponentId} from "../utils/config";
+import {mapRegistration} from "../Registration/mappings";
+import {TRegistrationPage} from "../Registration/model";
 
 const getNavBlocks = (locale:string):string =>  allNavigationParts.map(name =>
       ` ${name}(locale:${locale}, fallbackLocales:[en]){
@@ -32,11 +35,16 @@ function mapAllSlugs(root: QueryResult): NavigationItem[] {
         .concat(root.data.votingResult);
 }
 
-export const getAllNavData = (locale:string) => {
-    const query = generateAllPagesForNavQuery(locale);
-    
-    return fetchDataDato<QueryResult>(query).then((root: QueryResult) => {
+export const getAllSlugs = async () =>
+{
+    //for navigation slug = id
+    return [undefined]
+}
 
+export const getAllNavData = (slug:string, locale:string, staticData:boolean = true) => {
+    const query = generateAllPagesForNavQuery(locale);
+
+    const apiPromise = fetchDataDato<QueryResult>(query).then((root: QueryResult) => {
        
         if (root.errors) {
             console.log(root.errors)
@@ -46,4 +54,8 @@ export const getAllNavData = (locale:string) => {
         return mapAllSlugs(root); //todo handle failure outside of function
 
     });
+
+    
+
+    return getStaticOrFetch<NavigationItem[]>("Common", apiPromise, locale, slug, staticData);
 };

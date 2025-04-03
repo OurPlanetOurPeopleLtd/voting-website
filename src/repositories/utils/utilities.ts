@@ -4,6 +4,7 @@ import {getNavigationJson} from "../Navigation/request";
 import {DEBUG_QUERY} from "./preview";
 import {getLogger} from "../../utils/logger";
 import {v4 as generateGuid} from "uuid";
+import {defaultLanguage} from "./languages";
 
 function isEmptyOrSpaces(str: string) {
     return str === null || str.match(/^ *$/) !== null;
@@ -64,8 +65,6 @@ export function LogException(ex: string) {
     logger.error("Exception called is:")
     logger.error(ex);
     logger.error("EOF Query")
-
-
 }
 
 export function getLastSlugPart(slug: string, separator: string = '/'): string | undefined {
@@ -75,6 +74,8 @@ export function getLastSlugPart(slug: string, separator: string = '/'): string |
     const parts = slug.split(separator);
     return parts.pop();
 }
+
+
 
 
 export function LogQuery(query: string, force:boolean= false) {

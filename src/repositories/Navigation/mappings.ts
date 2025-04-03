@@ -2,7 +2,7 @@ import {NavigationItem, QueryResult} from "./types";
 import {getLogger} from "../../utils/logger";
 
 
-export const mapNavData = (root: QueryResult) => {
+export const mapNavData = (root: QueryResult): NavigationItem[]  => {
 
 
     let validNavItems: NavigationItem[] = [];
