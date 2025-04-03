@@ -8,7 +8,6 @@ import {StructuredText} from "react-datocms";
 import {TStagedFlowProps} from "./TStagedFlowProps";
 import {VideoControl} from "../../components/VideoControl";
 import {VideoWithReference} from "../VideoWithReference";
-import {getReferences} from "../../repositories/References/request";
 import {useNavigate, useSearchParams} from "react-router-dom";
 
 import cryingEarth from "../../crying-earth.png";
@@ -16,6 +15,8 @@ import cryingEarth from "../../crying-earth.png";
 import "../VotingPage.scss";
 import {getNextTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
 import {TVotingPageExtended} from "../../repositories/VotingPage/model";
+
+
 
 export const StagedFlow = (props: TStagedFlowProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -168,7 +169,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                             <div>
                                 <div className={"verticalFrameCentre"}>
                                     <VideoWithReference
-                                        references={getReferences( props.videos?.detailVideo?.video.id, "en")}
+                                        references={[]}
                                         locale={props.locale}
                                         fullScreenOnClick={true}
                                         datoVideo={props.videos?.detailVideo?.video?.video}

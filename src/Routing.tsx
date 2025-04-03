@@ -11,7 +11,6 @@ import {DEBUG_QUERY, refreshPreview} from "./repositories/utils/preview";
 import {localStorageVotingIdKey, localStorageWatchedIdKey, LogLinks} from "./repositories/utils/utilities";
 
 import {getAllNavData} from "./repositories/Common/request";
-import {defaultLanguage, getSupportedLocales} from "./languages";
 import {LayoutTs} from "./components/Layout";
 import {RouteChangeListener} from "./RouteChangeListener";
 import {VideoPage} from "./pages/VideoPage";
@@ -23,10 +22,7 @@ import {StagedPage} from "./pages/StagedPage";
 import PageTransition from "./PageTransition";
 
 import {ReportPage} from "./components/Reporting/ReportPage";
-
-
-export const headerComponentId = "UW2LLARmS3Oryu_9BT0IBQ"; //todo this is a bit rubbish
-export const footerComponentId = "QR1NY2zlRK-luRZZkbfB1w";  
+import {defaultLanguage, getSupportedLocales} from "./repositories/utils/languages";
 
 
 const Reset = () => {
@@ -58,7 +54,8 @@ function Routing() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [locale, setLocale] = useState(defaultLanguage);
-
+    const [languageArray, setLanguageArray] = useState<(string | undefined)[]>([]);
+    
     async function fetchData() {
         try {
             const links = await getAllNavData(locale);
@@ -87,22 +84,17 @@ function Routing() {
 
     useEffect(() => {
         
-        if(!loading && pageNavigateData === null)
+        if(!loading && pageNavigateData === null) {
             fetchData().catch(console.error);
-
-    });
-   /* if (loading) {
-        return <div>Loading navigation data...</div>; // Show loading indicator
-    }
-
-    if (error) {
-        return <div>Error loading navigation data. Please try again later.</div>; // Show error message
-    }
-
-    if (!pageNavigateData) {
-        return <div>Unexpected error, navigation data is missing.</div>;
-    }*/
-
+            //languageArray
+            getSupportedLocales().then( (locales: string[]) => {
+                    const languageArray = [undefined, ...locales];
+                    setLanguageArray(languageArray)
+                }
+            )
+            
+        }
+    },[]);
     
     function getElementForType(type: ContentType) {
 
@@ -179,7 +171,7 @@ function Routing() {
     }
     const generatePageRoutesForLanguage = ( lang_index:number, lang?:string) => pageNavigateData?.map((navItem, index)  => getRoute(navItem, `${lang_index+index}`, lang))
 
-    const languageArray = [undefined, ...getSupportedLocales()];
+   
 
     return (
         <BrowserRouter>

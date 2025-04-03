@@ -124,8 +124,3 @@ const translatedVideoReferences: { [key: string]: { time: number; title: string;
 
 
 
-export function getReferences(id: string | undefined, languageCode?: string): TReference[]
-{
-    return [];
-    
-}
