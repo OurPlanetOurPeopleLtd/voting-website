@@ -80,7 +80,7 @@ async function generateStaticData() {
                 const jsonFilePath = path.join(publicDataPath, `${folderName}_${locale}_${finalSlug}.json`);
                 await fs.writeFile(jsonFilePath, JSON.stringify(data, null, 2));
   
-                console.log(`Generated ${folderName}.json`);
+                console.log(`Generated ${jsonFilePath}`);
               }
             }
           }
