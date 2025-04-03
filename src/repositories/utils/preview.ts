@@ -4,7 +4,7 @@ export function getPreview() {
     return preview
 }
 
-export function setPreview(value) {
+export function setPreview(value: boolean) {
     preview = value;
 }
 

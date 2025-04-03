@@ -4,7 +4,9 @@ import "../components/HubCollection.scss";
 import {getPageJson} from "../repositories/Articles/request";
 import {LogException} from "../repositories/utils/utilities";
 import {TArticlePage} from "../repositories/Common/types";
-import {PageData, TPage} from "../components/PageData";
+import {PageData} from "../components/PageData";
+
+import {TPage} from "../repositories/Articles/model";
 
 
 export const ArticlePage = (props: TArticlePage) => {
@@ -18,12 +20,7 @@ export const ArticlePage = (props: TArticlePage) => {
         }
     }, [slug,locale])
 
-    const [data, setData] = useState<TPage>({
-        header: "...",
-        locale:"en",
-        richText: null,
-        includeDonateButton: true,
-    });
+    const [data, setData] = useState<TPage | null>(null);
 
     useEffect(() => {
         fetchData().catch(reason => {
@@ -33,6 +30,11 @@ export const ArticlePage = (props: TArticlePage) => {
     }, [slug, fetchData]);
 
     const includedDonateButton = slug.includes("donate"); // todo: we should power this via dato
+    
+    if(!data)
+        return <></>
+    
+    
     return (
         <PageData {...data} includeDonateButton={includedDonateButton}/>
     )

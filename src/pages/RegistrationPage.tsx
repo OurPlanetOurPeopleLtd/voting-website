@@ -1,38 +1,14 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {DataStore} from "@aws-amplify/datastore";
 import {User} from "../models";
-import {localStorageVotingIdKey} from "../pages/VotingPage";
 import {v4 as generateGuid} from "uuid";
 import {recordUse} from "../utils/analytics";
 import {VideoControl} from "../components/VideoControl";
-import { TVideoThumbnail} from "../repositories/Common/types";
 
 import "./RegistrationPage.scss";
 import {getRegistrationPage} from "../repositories/Registration/request";
-
-export type TRegistrationPage =
-{
-    title: string,
-    subtitle: string,
-    commentsLabel: string,
-    submit: string,
-    emailLabel: string,
-    nameLabel: string
-    mainVideo: TVideoThumbnail,
-    emailValidation: string
-    thankYou: string
-    deregisterMessage: string,
-    noEmailValidation: string,
-    privacyPolicyLinkText: string
-    privacyPolicyText: string
-    privacyPolicyLabel: string
-    deregisterHeading: string
-    registrationHeading: string
-}
-
-export type TRegistrationProps = {
-    locale:string
-}
+import {TRegistrationPage, TRegistrationProps} from "../repositories/Registration/model";
+import {localStorageVotingIdKey} from "../repositories/utils/utilities";
 
 export const RegistrationPage = ({locale}: TRegistrationProps) => {
     const [emailExistsError, setEmailExists] = useState(false);

@@ -1,18 +1,8 @@
-import React, {useEffect, useState} from "react";
-import { ListGroup } from "react-bootstrap";
+import React from "react";
+import {ListGroup} from "react-bootstrap";
 import "./VideoControl.scss"
 import "./VideoReferenceControl.scss"
-export type TReferenceProps = {
-    currentTimeStamp: number,
-    references?: TReference[]
-}
-
-export type TReference = {
-    time: number;
-    title: string;
-    pdfLink: string;
-}
-
+import {TReferenceProps} from "../repositories/References/model";
 
 
 export const VideoReferenceControl = ({currentTimeStamp, references}: TReferenceProps) => {

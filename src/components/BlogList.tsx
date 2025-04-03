@@ -4,8 +4,10 @@ import "./HubCollection.scss";
 import {getPagesJson} from "../repositories/Articles/request";
 import {LogException} from "../repositories/utils/utilities";
 
-import {PageData, TPage} from "./PageData";
+import {PageData} from "./PageData";
 import {Button} from "react-bootstrap";
+
+import {TPage} from "../repositories/Articles/model";
 
 export const BlogList = ({locale}: { locale: string }) => {
 

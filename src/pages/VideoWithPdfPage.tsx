@@ -2,20 +2,12 @@
 
 import {useNavigate} from "react-router-dom";
 import {TArticlePage} from "../repositories/Common/types";
-import {TPdfWrapper} from "../repositories/Common/types";
-import {TVideoPage} from "./VideoPage";
 import {getVideoWithPdfPageJson} from "../repositories/VideoWithPdfsPage/request";
 import {VideoWithPdfs} from "../components/VideoWithPdfs";
 
 import "./Page.scss";
-import { getLastSlugPart } from "../repositories/utils/utilities";
-
-export type TVideoWithPdfsPage = TVideoPage & 
-{
-    followOnLink: string,
-    pdfs: TPdfWrapper[];
-}
-
+import {getLastSlugPart} from "../repositories/utils/utilities";
+import {TVideoWithPdfsPage} from "../repositories/VideoWithPdfsPage/model";
 
 
 export const VideoWithPdfsPage = (props: TArticlePage) => {

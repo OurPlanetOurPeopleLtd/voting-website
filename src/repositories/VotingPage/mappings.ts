@@ -1,6 +1,7 @@
 import {QueryResult} from "./types";
 
-import {TVotingPage} from "../../pages/VotingPage";
+
+import {TVotingPage} from "./model";
 
 export async function mapVotingPage(result: QueryResult): Promise<TVotingPage> {
 

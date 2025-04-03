@@ -3,7 +3,6 @@ import {ContentType, NavigationItem} from "../Navigation/types";
 import {getNavigationJson} from "../Navigation/request";
 import {DEBUG_QUERY} from "./preview";
 import {getLogger} from "../../utils/logger";
-import {localStorageVotingIdKey} from "../../pages/VotingPage";
 import {v4 as generateGuid} from "uuid";
 
 function isEmptyOrSpaces(str: string) {
@@ -88,6 +87,9 @@ export function LogQuery(query: string, force:boolean= false) {
     logger.info(query);
     logger.info("EOF Query")
 }
+
+export const localStorageVotingIdKey = "voterId";
+export const localStorageWatchedIdKey = "voterWatched";
 
 export function getUserGuid()
 {

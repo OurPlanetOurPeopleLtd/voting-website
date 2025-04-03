@@ -1,5 +1,6 @@
 import {QueryResult} from "./types";
-import {TRegistrationPage} from "../../pages/RegistrationPage";
+
+import {TRegistrationPage} from "./model";
 
 
 export async function mapRegistration(result: QueryResult): Promise<TRegistrationPage> {

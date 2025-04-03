@@ -4,11 +4,11 @@ import "./App.scss";
 
 import {ContentType, NavigationItem} from "./repositories/Navigation/types";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import VotingPage, {localStorageVotingIdKey, localStorageWatchedIdKey} from "./pages/VotingPage";
+import VotingPage from "./pages/VotingPage";
 
 import NoPage from "./pages/NoPage";
 import {DEBUG_QUERY, refreshPreview} from "./repositories/utils/preview";
-import {LogLinks} from "./repositories/utils/utilities";
+import {localStorageVotingIdKey, localStorageWatchedIdKey, LogLinks} from "./repositories/utils/utilities";
 
 import {getAllNavData} from "./repositories/Common/request";
 import {defaultLanguage, getSupportedLocales} from "./languages";

@@ -16,7 +16,6 @@ import {Analytics} from 'aws-amplify';
 import {v4 as generateGuid} from "uuid";
 import {DisableAnalytics, EnableAnalytics, recordUse} from "../utils/analytics";
 
-import {localStorageVotingIdKey} from "../pages/VotingPage";
 import {DynamicNavList} from "./DynamicNavList";
 import {DynamicFooter} from "./DynamicFooter";
 import {defaultLanguage} from "../languages";
@@ -25,6 +24,7 @@ import {Helmet} from "react-helmet-async";
 import {getCookieBannerText} from "../repositories/utils/extraTranslations";
 
 import {Button} from "react-bootstrap";
+import {localStorageVotingIdKey} from "../repositories/utils/utilities";
 
 
 export interface ILayout extends PropsWithChildren

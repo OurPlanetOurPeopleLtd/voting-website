@@ -2,17 +2,12 @@
 
 import {useNavigate} from "react-router-dom";
 import {getVideoPageJson} from "../repositories/VideoPage/request";
-import {TArticlePage, TVideoThumbnail} from "../repositories/Common/types";
+import {TArticlePage} from "../repositories/Common/types";
 import {VideoControl} from "../components/VideoControl";
 
 import "./Page.scss";
 
-export type TVideoPage = {
-    mainVideo: TVideoThumbnail | undefined,//{ id: string, video:{video: Video | undefined} } | undefined;
-    header: string
-    introText?: string;
-    videoTitle?: string;
-}
+import {TVideoPage} from "../repositories/VideoPage/model";
 
 function getLastSlugPart(slug: string, separator: string = '/'): string | undefined {
     if (!slug) {

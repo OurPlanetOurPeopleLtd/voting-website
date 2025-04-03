@@ -1,7 +1,6 @@
 ﻿import React, {useEffect, useState} from "react";
 import Donation from "../../components/Donation";
 import {SharingControls} from "../../components/SharingControls";
-import {TVotingPageExtended} from "../VotingPage";
 import {Button, Container, Fade} from "react-bootstrap";
 import {QuestionComponent} from "../../components/QuestionComponent";
 import {Choice} from "../../models";
@@ -16,6 +15,7 @@ import cryingEarth from "../../crying-earth.png";
 
 import "../VotingPage.scss";
 import {getNextTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
+import {TVotingPageExtended} from "../../repositories/VotingPage/model";
 
 export const StagedFlow = (props: TStagedFlowProps) => {
     const [searchParams, setSearchParams] = useSearchParams();

@@ -1,4 +1,4 @@
-import {TReference} from "../../components/VideoReferenceControl";
+import {TReference} from "./model";
 
 const frenchVideoReferences = [
     { time: 19, title: "Le pire des cas raisonnable", pdfLink: "https://www.datocms-assets.com/136385/1741096043-4499-1-the-reasonable-worst-case.pdf" },
