@@ -99,36 +99,41 @@ const ContentComponent = () => {
                 <h2 className="content-heading">Getting involved</h2>
 
                 <div style={styles.gridContainer}>
-                    <div className="hub-card-link" style={styles.card}>
+                    <a href="#" className="hub-card-link" style={styles.card}>
                         <h3 style={styles.cardTitle}>Understanding the Problem</h3>
-                        <p>A 15-minute video that shows how key climate factors interrelate...</p>
+                        <p>A 15 minute video that shows how the key climate change factors interrelate to create a pathway leading inexorably to disaster.</p>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" fill="currentColor"></path></svg>
-                    </div>
+                    </a>
                     
-                    <div style={{ ...styles.card }}>
+                    <a href="#" className="hub-card-link" style={{ ...styles.card }}>
                         <h3 style={styles.cardTitle}>Joining the Foundation</h3>
-                        <p>A link to the page for supporting the project.</p>
-                    </div>
+                        <p>A link to the page that allows those wishing to actively support the project to become members of the Foundation.</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" fill="currentColor"></path></svg>
+                    </a>
 
-                    <div style={styles.card}>
+                    <a href="#" className="hub-card-link" style={styles.card}>
                         <h3 style={styles.cardTitle}>Understanding the Solution</h3>
-                        <p>A 5-minute video explaining the need for investigation backed by documents.</p>
-                    </div>
+                        <p>A 5 minute video that explains the need for investigation backed by 3 documents (16 pages) that provide the scientific means of identifying the realistic worst case.</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" fill="currentColor"></path></svg>
+                    </a>
 
-                    <div style={styles.card}>
+                    <a href="#" className="hub-card-link" style={styles.card}>
                         <h3 style={styles.cardTitle}>Voting and Sharing</h3>
-                        <p>A link to vote for identifying the realistic worst case and sharing it.</p>
-                    </div>
+                        <p>A link to the pages that will allow any citizen to vote for (or against) identifying the realistic worst case and to then share the process with family members and friends.</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" fill="currentColor"></path></svg>
+                    </a>
 
-                    <div style={styles.card}>
+                    <a href="#" className="hub-card-link" style={styles.card}>
                         <h3 style={styles.cardTitle}>Understanding the Foundation’s Role</h3>
-                        <p>A 5-minute video explaining the role of the Foundation in the project.</p>
-                    </div>
+                        <p>A 5 minute video explaining the role of the Foundation that will own the project and provide a voice for and be answerable to the peoples of our planet.</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" fill="currentColor"></path></svg>
+                    </a>
 
-                    <div style={{ ...styles.card, display: 'flex', flexDirection: 'column' }}>
+                    <a href="#" className="hub-card-link" style={{ ...styles.card, display: 'flex', flexDirection: 'column' }}>
                         <h3 style={styles.cardTitle}>Donating</h3>
-                        <p>A link to the ‘Why Donate’ crowdfunding platform.</p>
-                    </div>
+                        <p>A link to the ‘Why Donate’ crowdfunding platform to enable those withing to make modest contributions to functioning of the Foundation.</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" fill="currentColor"></path></svg>
+                    </a>
                 </div>
             </div>
         </div>
