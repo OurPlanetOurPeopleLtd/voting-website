@@ -11,19 +11,17 @@ import {VideoControl} from "../../components/VideoControl";
 import {VideoWithReference} from "../VideoWithReference";
 import {getReferences} from "../../repositories/References/request";
 import {useNavigate, useSearchParams} from "react-router-dom";
+import {getNextTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
 
 import cryingEarth from "../../crying-earth.png";
-
 import "../VotingPage.scss";
-import {getNextTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
+import ContentComponent from "../../components/ContentCompoenent";
 
 export const StagedFlow = (props: TStagedFlowProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
 
     const stageAsString = props.forceStage ? props.forceStage : searchParams.get("stage");
-     
-
     const stageFromUrl = stageAsString ? parseInt(stageAsString) : undefined;
 
     const [stage, setStage] = useState(stageFromUrl?? 0);
@@ -36,7 +34,8 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     const totalQuestions = 1;//(props.questions?.length ?? 0); (todo decide if we are making this dynamic)   
        
     const openingStage = 0;
-    const questionStage = 1;    
+    const hubStage = 1
+    const questionStage = 2;    
     const videoStage = questionStage + totalQuestions;
     const shareStage = videoStage + 1;
     const detailStage = shareStage + 1;
@@ -51,7 +50,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
             navigate(`/${props.locale}/share`);
             return shareStage
         }
-        if(newStage == questionStage) //todo use the query to do this
+        if(newStage === questionStage) //todo use the query to do this
         {
 
             navigate(`/${props.locale}/voting`);
@@ -63,7 +62,6 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     };
     
     const nextStage = () => setStage((prev) => updateSearchParams(Math.min(prev + 1, totalStages - 1)));
-    const prevStage = () => setStage((prev) => updateSearchParams(Math.max(prev - 1, 0)));
     const originalVoteCallback = props.voteChangedCallBack;
     
     const questionOne = props.questions && props.questions.length >= 1 ? props.questions[0] : null;
@@ -135,6 +133,12 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                             </div>
                         </Fade>
 
+                        <Fade in={stage === hubStage} unmountOnExit>
+                            <div>
+                                <ContentComponent />
+                            </div>
+                        </Fade>
+
                         {/* Stage Questions */}
                         <Fade in={stage === questionStage } unmountOnExit>
                             <div className={"vote-controls question-controls"}>
@@ -146,8 +150,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                                 <div className={"videoColumn voteVideo"}>
                                     <VideoControl locale={props.locale} fullScreenOnClick={true}
                                                 datoVideo={ props.videos?.prop1?.video?.video  }
-                                                        leftShift={-50}
-                                             
+                                                leftShift={-50}
                                                 videoThumbnail={ props.videos?.prop1.thumbnailImage?.responsiveImage.src} />
                                
                                 </div>
