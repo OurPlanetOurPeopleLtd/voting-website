@@ -78,7 +78,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     }
 
     return (
-        <Container className="frame" style={{ position: "relative" }}>
+        <Container className={`frame ${stage === hubStage ? 'hub-page' : ''}`} style={{ position: "relative" }}>
                 <div>
                     <div className="frame-content vote-controls">
                         {/* Stage Video */}
