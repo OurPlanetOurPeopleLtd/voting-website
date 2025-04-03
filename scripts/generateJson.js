@@ -3,7 +3,7 @@ const path = require('path');
 const {getSupportedLocales} = require("./dist/repositories/utils/languages.js")
 async function generateStaticData() {
   const repositoriesPath = path.join(__dirname, 'dist', 'repositories');
-  const publicDataPath = path.join(__dirname, '../build', 'data'); // Changed to /public/data
+  const publicDataPath = path.join(__dirname, '..' ,'build', 'data'); // Changed to /public/data
 
   const locales =  await getSupportedLocales();
   console.log("----------------------")
