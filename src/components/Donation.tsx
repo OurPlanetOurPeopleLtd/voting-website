@@ -1,7 +1,6 @@
-import React, {useEffect} from "react";
+import React from "react";
 import "./Donation.scss";
 import {Button} from "react-bootstrap";
-import {getSupportedLocales} from "../languages";
 import {recordUse} from "../utils/analytics";
 import {getUserGuid} from "../repositories/utils/utilities";
 import {getDonateTranslation} from "../repositories/utils/extraTranslations";

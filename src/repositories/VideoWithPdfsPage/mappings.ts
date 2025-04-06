@@ -1,7 +1,7 @@
 import {QueryResult, VideoWithPdfItem} from "./types";
 
-import {TVideoWithPdfsPage} from "../../pages/VideoWithPdfPage";
 import {TPdfWrapper} from "../Common/types";
+import {TVideoWithPdfsPage} from "./model";
 
 
 export async function mapVideoWithPdfData(result: QueryResult): Promise<TVideoWithPdfsPage> {

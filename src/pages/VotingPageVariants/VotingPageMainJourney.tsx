@@ -1,7 +1,6 @@
 ﻿import React, {useEffect, useState} from "react";
 import Donation from "../../components/Donation";
 import {SharingControls} from "../../components/SharingControls";
-import {TVotingPageExtended} from "../VotingPage";
 import {Button, Container, Fade} from "react-bootstrap";
 import {QuestionComponent} from "../../components/QuestionComponent";
 import {Choice} from "../../models";
@@ -9,13 +8,13 @@ import {StructuredText} from "react-datocms";
 import {TStagedFlowProps} from "./TStagedFlowProps";
 import {VideoControl} from "../../components/VideoControl";
 import {VideoWithReference} from "../VideoWithReference";
-import {getReferences} from "../../repositories/References/request";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {getNextTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
 import HubComponent from "../../components/HubComponent";
 
 import cryingEarth from "../../crying-earth.png";
 import "../VotingPage.scss";
+import { TVotingPageExtended } from "../../repositories/VotingPage/model";
 
 export const StagedFlow = (props: TStagedFlowProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -171,7 +170,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                             <div>
                                 <div className={"verticalFrameCentre"}>
                                     <VideoWithReference
-                                        references={getReferences( props.videos?.detailVideo?.video.id, "en")}
+                                        references={[]}
                                         locale={props.locale}
                                         fullScreenOnClick={true}
                                         datoVideo={props.videos?.detailVideo?.video?.video}

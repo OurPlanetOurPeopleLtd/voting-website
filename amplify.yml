@@ -4,9 +4,11 @@ frontend:
     preBuild:
       commands:
         - npm ci
+        - npm run prebuild
     build:
       commands:
         - npm run build
+        - cp -r public/data build
   artifacts:
     baseDirectory: build
     files:
@@ -14,7 +16,10 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
-rewrites:
-  - from: '/*'
-    to: /index.html
-    status: 200
+  rewrites:
+    - from: "/data/<*>"
+      to: "/data/"
+      status: 200
+    - from: "<!.(css|gif|ico|jpg|jpeg|js|png|txt|svg|woff|woff2|ttf|json)$>"
+      to: "/index.html"
+      status: 200

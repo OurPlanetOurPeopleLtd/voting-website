@@ -1,12 +1,11 @@
 ﻿import logo from "../logo.png";
 
-import {Link, NavLink, Outlet} from "react-router-dom";
+import {Link,  Outlet} from "react-router-dom";
 import '@aws-amplify/ui-react/styles.css';
 import "./Layout.scss";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import {footerComponentId, headerComponentId} from "../Routing";
 
 import React, {PropsWithChildren, useEffect, useState} from "react";
 import {CookieConsent, getCookieConsentValue} from "react-cookie-consent";
@@ -16,15 +15,16 @@ import {Analytics} from 'aws-amplify';
 import {v4 as generateGuid} from "uuid";
 import {DisableAnalytics, EnableAnalytics, recordUse} from "../utils/analytics";
 
-import {localStorageVotingIdKey} from "../pages/VotingPage";
 import {DynamicNavList} from "./DynamicNavList";
 import {DynamicFooter} from "./DynamicFooter";
-import {defaultLanguage} from "../languages";
 import FlagSelect from "./FlagSelect";
 import {Helmet} from "react-helmet-async";
 import {getCookieBannerText} from "../repositories/utils/extraTranslations";
 
 import {Button} from "react-bootstrap";
+import {localStorageVotingIdKey} from "../repositories/utils/utilities";
+import {defaultLanguage} from "../repositories/utils/languages";
+import {footerComponentId, headerComponentId} from "../repositories/utils/config";
 
 
 export interface ILayout extends PropsWithChildren

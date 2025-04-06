@@ -5,10 +5,7 @@ import {getSpecialPageJson} from "../repositories/StagedPage/request";
 import {StagedFlow} from "./VotingPageVariants/VotingPageMainJourney";
 import {getVotingPageJson} from "../repositories/VotingPage/request";
 import {TStagedFlowProps} from "./VotingPageVariants/TStagedFlowProps";
-
-export type TStagePage = {
-    stage?:string
-}
+import {TStagePage} from "../repositories/StagedPage/model";
 
 export const StagedPage = (props: { slug:string, locale:string} ) => {
     const {slug, locale} = props;

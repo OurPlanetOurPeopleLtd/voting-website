@@ -1,8 +1,9 @@
-import {TVideos, TVotingPageExtended} from "../VotingPage";
+
 import {Video} from "react-datocms/dist/types/VideoPlayer";
 import {Choice} from "../../models";
 import {TQuestionBlock} from "../../repositories/Navigation/types";
 import {StructuredTextDocument} from "react-datocms";
+import {TVideos, TVotingPageExtended} from "../../repositories/VotingPage/model";
 
 export interface TStagedFlowProps extends TVotingPageExtended {
     locale: string;

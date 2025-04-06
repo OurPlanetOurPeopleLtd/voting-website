@@ -3,7 +3,8 @@ import "./TrackedYoutubeVideo.scss";
 import {useEffect, useState} from "react";
 import {recordUse} from "../utils/analytics";
 // @ts-ignore
-import {localStorageVotingIdKey} from "./VotingPage";
+
+import {localStorageVotingIdKey} from "../repositories/utils/utilities";
 
 export interface TrackedVideoProps {
     pageTitle: string;
