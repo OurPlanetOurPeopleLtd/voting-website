@@ -2,14 +2,10 @@ import {Video} from "react-datocms/dist/types/VideoPlayer";
 import {TQuestionBlock} from "../Navigation/types";
 import {StructuredTextDocument} from "react-datocms";
 import {TVideoThumbnail} from "../Common/types";
-
-
 export interface QueryResult {
     data: {votingPageModel:VotingPageData};
     errors: [];
 }
-
-
 
 export interface VotingPageData {
     id: string;
@@ -44,6 +40,4 @@ export interface VotingPageData {
     title?: string;
     url?: string;
     slug?: string; 
-    
 }
-

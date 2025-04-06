@@ -12,10 +12,10 @@ import {VideoWithReference} from "../VideoWithReference";
 import {getReferences} from "../../repositories/References/request";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {getNextTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
+import HubComponent from "../../components/HubComponent";
 
 import cryingEarth from "../../crying-earth.png";
 import "../VotingPage.scss";
-import ContentComponent from "../../components/ContentCompoenent";
 
 export const StagedFlow = (props: TStagedFlowProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -135,7 +135,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 
                         <Fade in={stage === hubStage} unmountOnExit>
                             <div>
-                                <ContentComponent />
+                                <HubComponent />
                             </div>
                         </Fade>
 
