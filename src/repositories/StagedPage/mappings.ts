@@ -1,5 +1,6 @@
 import {QueryResult} from "./types";
-import {TStagePage} from "../../pages/StagedPage";
+
+import {TStagePage} from "./model";
 
 
 export async function mapSpecialPage(result: QueryResult): Promise<TStagePage> {

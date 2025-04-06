@@ -4,11 +4,10 @@ import {useCallback, useEffect, useState} from "react";
 import {Button, Col, Row} from "react-bootstrap";
 import {v4 as generateGuid} from "uuid";
 import {FaThumbsDown, FaThumbsUp} from "react-icons/fa";
-import {localStorageVotingIdKey} from "../pages/VotingPage";
 
 import {recordUse} from "../utils/analytics";
 import {getCountry} from "../repositories/utils/country";
-import {getUserGuid} from "../repositories/utils/utilities";
+import {getUserGuid, localStorageVotingIdKey} from "../repositories/utils/utilities";
 
 
 export interface TVoteControls {

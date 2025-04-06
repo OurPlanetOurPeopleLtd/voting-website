@@ -6,13 +6,13 @@ import {getLastSlugPart, LogLinks} from "../repositories/utils/utilities";
 import {Navigate, useLocation} from "react-router-dom";
 
 const NoPage = () => {
-    const [pageNavigateData, setPageNavigateData] = useState<NavigationItem[]>();
-    const [pageExists, setPageExists] = useState(false)
+
+    /*const [pageExists, setPageExists] = useState(false)
     const location = useLocation();
     const [hasLoaded, setHasLoaded] = useState(false);
     const [redirect, setRedirect] = useState<string>("");
     async function fetchData() {
-        const links = await getAllNavData("en");
+       // const links = await getAllNavData("", "en");
         setPageNavigateData(links);
 
         const allSlugs = links.map(x => x.slug);
@@ -29,7 +29,9 @@ const NoPage = () => {
     }, []);
     
     if(!hasLoaded)  
-        return <></>
+        return <></>*/
+    const pageExists = false;
+    const redirect = "";
         
     return <div>
         {!pageExists ? <span >Page does not exist</span> : <Navigate to={redirect} replace></Navigate>}

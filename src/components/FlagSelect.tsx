@@ -1,18 +1,34 @@
 import React, {useState, ChangeEvent, useEffect} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
-import {CountryFlag, defaultFlag, getSupportedCountries} from "../languages";
+import {CountryFlag, defaultFlag, getSupportedCountries} from "../repositories/utils/languages";
+
 
 
 const FlagSelect = ({currentLocale}: {currentLocale:string}) => {
-    const supportedCountries = getSupportedCountries();
-    const defaultCountryFlag: CountryFlag = (supportedCountries.find(country => country.code === currentLocale)) ?? defaultFlag ;
-    const [selectedCountry, setSelectedCountry] = useState(defaultCountryFlag);
+    const [selectedCountry, setSelectedCountry] = useState<CountryFlag>();
+    const [supportedCountries, setSupportedCountries] = useState<CountryFlag[]>();
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
-        setSelectedCountry(defaultCountryFlag)
-    }, [currentLocale]);
+        getSupportedCountries().then(countries => {
+            const defaultCountryFlag: CountryFlag = (countries.find(country => country.code === currentLocale)) ?? defaultFlag;
+            setSupportedCountries(countries);
+            setSelectedCountry(defaultCountryFlag);
+        });
+    }, [])
+    useEffect(() => {        
+       
+        const defaultCountryFlag: CountryFlag = (supportedCountries?.find(country => country.code === currentLocale)) ?? defaultFlag;           
+        setSelectedCountry(defaultCountryFlag);
+      
+
+    }, [supportedCountries]);
+    
+    if(!supportedCountries)
+    {
+        return <></>
+    }
 
     const handleCountryChange = (event : ChangeEvent<HTMLSelectElement>) => {
         const selectedCountryCode = event.target.value;
@@ -38,9 +54,9 @@ const FlagSelect = ({currentLocale}: {currentLocale:string}) => {
     return (
         <div className="select-wrap">
             <label className="visually-hidden" htmlFor="country_select">Select language</label>
-            <select onChange={handleCountryChange} id="country_select" value={selectedCountry.code}>
+            <select onChange={handleCountryChange} id="country_select" value={selectedCountry?.code}>
                 {supportedCountries.map(country => (
-                    <option key={country.code} value={country.code}>
+                    <option key={country.code+"_option"} value={country.code}>
                         {country.flag}
                     </option>
                 ))}

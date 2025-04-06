@@ -4,14 +4,13 @@ import "./App.scss";
 
 import {ContentType, NavigationItem} from "./repositories/Navigation/types";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import VotingPage, {localStorageVotingIdKey, localStorageWatchedIdKey} from "./pages/VotingPage";
+import VotingPage from "./pages/VotingPage";
 
 import NoPage from "./pages/NoPage";
 import {DEBUG_QUERY, refreshPreview} from "./repositories/utils/preview";
-import {LogLinks} from "./repositories/utils/utilities";
+import {localStorageVotingIdKey, localStorageWatchedIdKey, LogLinks} from "./repositories/utils/utilities";
 
 import {getAllNavData} from "./repositories/Common/request";
-import {defaultLanguage, getSupportedLocales} from "./languages";
 import {LayoutTs} from "./components/Layout";
 import {RouteChangeListener} from "./RouteChangeListener";
 import {VideoPage} from "./pages/VideoPage";
@@ -23,10 +22,7 @@ import {StagedPage} from "./pages/StagedPage";
 import PageTransition from "./PageTransition";
 
 import {ReportPage} from "./components/Reporting/ReportPage";
-
-
-export const headerComponentId = "UW2LLARmS3Oryu_9BT0IBQ"; //todo this is a bit rubbish
-export const footerComponentId = "QR1NY2zlRK-luRZZkbfB1w";  
+import {defaultLanguage, getSupportedLocales} from "./repositories/utils/languages";
 
 
 const Reset = () => {
@@ -58,10 +54,13 @@ function Routing() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [locale, setLocale] = useState(defaultLanguage);
-
-    async function fetchData() {
+    const [languageArray, setLanguageArray] = useState<(string | undefined)[]>([]);
+    
+    async function fetchNavigationData(localeToUse:string) {
         try {
-            const links = await getAllNavData(locale);
+            
+            setLoading(true)            
+            const links = await getAllNavData("",localeToUse);
 
             if (process.env.NODE_ENV === "development" && DEBUG_QUERY) {
                 LogLinks(links, "routing");
@@ -71,38 +70,27 @@ function Routing() {
             setLoading(false); // Data loaded successfully
         } catch (err) {
             console.error("Error fetching navigation data:", err);
-            setError(true)
-            //setError(err);
+            setError(true)       
             setLoading(false); // Loading failed
-            // Consider providing fallback data here if appropriate
+    
         }
     }
 
     refreshPreview();
 
     useEffect(() => {
-        fetchData().catch(console.error);
-        
+        fetchNavigationData(locale).catch(console.error);        
     }, [locale]);
 
     useEffect(() => {
+
+        getSupportedLocales().then( (allLocales: string[]) => {               
+                const languageArray = [undefined, ...allLocales];
+                setLanguageArray(languageArray)
+            }
+        )           
         
-        if(!loading && pageNavigateData === null)
-            fetchData().catch(console.error);
-
-    });
-   /* if (loading) {
-        return <div>Loading navigation data...</div>; // Show loading indicator
-    }
-
-    if (error) {
-        return <div>Error loading navigation data. Please try again later.</div>; // Show error message
-    }
-
-    if (!pageNavigateData) {
-        return <div>Unexpected error, navigation data is missing.</div>;
-    }*/
-
+    },[]);
     
     function getElementForType(type: ContentType) {
 
@@ -127,13 +115,7 @@ function Routing() {
                 return ErrorPage;
         }
     } 
-
     
-   
-    const OnLocaleChanged = (locale:string) =>
-    {
-        setLocale(locale)
-    }
 
     function getPath(navItem: NavigationItem) :string {
         const type = navItem.__typename;
@@ -151,49 +133,71 @@ function Routing() {
                 return navItem.slug;           
               
         }        
-    }
-   
+    } 
     
-    const getRoute = (navItem:NavigationItem, key:string, lang?:string) =>
-    {       
+    const getRouteData = (navItem:NavigationItem, key:string, lang?:string) => {
         const prefix = lang ? `${lang}/` : '';
-        const locale = lang ?? defaultLanguage;
-        const TypeElement = getElementForType(navItem.__typename);
+        const locale = lang ?? defaultLanguage;        
         const path = getPath(navItem);
-
-        return(
-            
-                
-                <Route
-                    key={key}
-                    path={prefix +path}
-                    element={
-                        <LayoutTs locale={locale} title={navItem.title}  >
-                            <RouteChangeListener onSetLocale={OnLocaleChanged}/>
-                            <TypeElement {...navItem} slug={path} id={navItem.id} locale={locale}/>
-                        </LayoutTs>
-                    }
-                />               
-               
-            )
+        const TypeElement = getElementForType(navItem.__typename);
+        return {
+                path:prefix +path,
+                key:key,
+                navItem:navItem,
+                locale: locale,
+                title:navItem.title,
+                element: <TypeElement {...navItem} slug={path} id={navItem.id} locale={locale}/>,
+            }
+       
     }
-    const generatePageRoutesForLanguage = ( lang_index:number, lang?:string) => pageNavigateData?.map((navItem, index)  => getRoute(navItem, `${lang_index+index}`, lang))
 
-    const languageArray = [undefined, ...getSupportedLocales()];
+    const OnLocaleChanged = (locale:string) =>
+    {       
+        setLocale(locale)
+    }
+    
+    if(!pageNavigateData) {
+        console.log("Data was blank")
+        return <></>
+    }
+    if(!languageArray.length) {
+        console.log("languages were blank")
+        return <></>
+    }
 
+    const routeData = languageArray.flatMap((lang, lang_index) =>
+        pageNavigateData.map((navItem, index) =>
+            getRouteData(navItem, `${lang_index + index}`, lang)
+        )
+    );
+  
     return (
         <BrowserRouter>
             <PageTransition>
-                <Routes>                                
+                <RouteChangeListener onSetLocale={OnLocaleChanged}></RouteChangeListener>
+                <Routes>                              
                         
-                    {languageArray.map((localeElement,index) => generatePageRoutesForLanguage(index, localeElement))}
+                    
+                    {routeData.map( routeData =>
+                            (<Route
+                                key={routeData.key}
+                                path={routeData.path}
+                                element={
+                                    <LayoutTs locale={locale} title={routeData.title}  >
+                                       
+                                        {routeData.element}
+                                    </LayoutTs>
+                                }
+                            />)
+                        )
+                    }
 
                     {loading ? <></> : 
                         <Route
                             key="nopage" path="*"
                             element={
                                 <LayoutTs locale={locale} title={"Unknown Page"} >
-                                    <RouteChangeListener onSetLocale={OnLocaleChanged}/>
+                                   
                                     <NoPage/>
                                 </LayoutTs>
                             }

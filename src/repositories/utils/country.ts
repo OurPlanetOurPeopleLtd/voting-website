@@ -266,7 +266,7 @@ export function getCountry() {
         "Africa/Accra": {
             a: "Africa/Abidjan",
             c: ["GH"],
-            r: 1
+            r: 1    
         },
         "Africa/Addis_Ababa": {
             a: "Africa/Nairobi",
@@ -2863,15 +2863,37 @@ export function getCountry() {
         }
     };
 
+
+    
+    function getCountryVia(timezone: string): string | undefined {
+
+        interface TimezoneData {
+            u?: number;
+            a?: string;
+            c: string[];
+            r?: number;
+        }
+        
+        if (timezones.hasOwnProperty(timezone)) {
+            return (timezones[timezone as keyof typeof timezones] as TimezoneData).c[0];
+        }
+        return undefined;
+    }
+    function getCountryName(countryCode: string): string | undefined {
+        if (Object.keys(countries).includes(countryCode)) {
+            return countries[countryCode as keyof typeof countries];
+        }
+        return undefined;
+    }
+    
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     if (timezone === "" || !timezone) {
         return null;
     }
 
-    const _country = timezones[timezone].c[0];
-    const country = countries[_country];
-    return country;
+    const countryObject = getCountryVia(timezone);
+    return countryObject ? getCountryName(countryObject) : "United Kingdom";
 }
 
 function getState() {

@@ -13,88 +13,7 @@ const TOKEN = APP_CONTENTFUL_ACCESS_TOKEN;
 const ENVIRONMENT = "";// APP_CONTENTFUL_ENVIRONMENT;
 export const CONTENT_URL = 'https://graphql.datocms.com/'; //`https://graphql.contentful.com/content/v1/spaces/${SPACE}/environments/${ENVIRONMENT}`;
 
-class InMemoryCache {
-    private cache: Map<string, { value: any; expiry: number }>;
-    private ttl: number; // Time-to-live in seconds
-
-    constructor(ttl: number = 60) {
-        console.log("creating in memory cache")
-        this.cache = new Map();
-        this.ttl = ttl;
-    }
-
-    get(key: string): any | null {
-        const cached = this.cache.get(key);
-        if (cached) {
-            if (cached.expiry > Date.now()) {
-                return cached.value;
-            } else {
-                this.cache.delete(key); // Expired, remove from cache
-            }
-        }
-        return null;
-    }
-
-    set(key: string, value: any): void {
-        this.cache.set(key, { value, expiry: Date.now() + this.ttl * 1000 });
-    }
-
-
-    generateKey(query: string): string {
-      
-        let hash = 0;
-        for (let i = 0; i < query.length; i++) {
-            const char = query.charCodeAt(i);
-            hash = (hash << 5) - hash + char;
-            hash = hash & hash; // Convert to 32bit integer
-        }
-        return hash.toString(36); // Convert to base-36 string
-    }
-
-}
-
-const myCache = new InMemoryCache( 86400); // Cache entries for the day
-
-function getArraySize(cachedResult:any) {
-    if (cachedResult && typeof cachedResult === 'object') {
-        const keys = Object.keys(cachedResult);
-        for (const key of keys) {
-            if (Array.isArray(cachedResult[key])) {
-                return cachedResult[key].length;
-            }
-        }
-    }
-    return 0; // Or handle the case where no array is found differently
-}
-export async function fetchDataDato<TType>(query: string): Promise<TType> {
-  //  return async function(query: string, variables?: Record<string, any>): Promise<any> {
-        const key = myCache.generateKey(query);
-        const cachedResult = myCache.get(key);
-        if (cachedResult &&  getArraySize(cachedResult) > 0) {
-            return cachedResult;
-        }
-
-        const result = await fetchDataDatoReal<TType>(query); // Call the original GraphQL function
-
-         myCache.set(key, result);
-        return result;
- //   };
-}
-
-
-
-
-
-export const fetchDataDatoReal = <TType>(query: string) =>
-    fetchData<TType>(CONTENT_URL, query);
-
-let count = 0;
-export const fetchData = async <TType>(
-    url: string,
-    query: string
-): Promise<TType> => {
- 
-    console.log("Fetching data " + count++ );
+export const fetchDataDato = <TType>(query: string) => {
     const options = {
         method: "POST",
         headers: {
@@ -106,6 +25,18 @@ export const fetchData = async <TType>(
         body: JSON.stringify({query}),
     };
 
+    
+    return fetchData<TType>(CONTENT_URL, query, options);
+}
+
+const fetchData = async <TType>(
+    url: string,
+    query: string,
+    options: RequestInit
+): Promise<TType> => {
+ 
+    //console.log("Fetching data " + count++ );
+    
 
     return await fetch(url, options).then((res) => {
         const result = res.json();
@@ -113,3 +44,48 @@ export const fetchData = async <TType>(
         return result
     });
 };
+
+// Function to read JSON from the public/data directory
+interface Result<T> {
+    success: boolean;
+    data?: T;
+    error?: Error;
+}
+
+// Function to read JSON from the public/data directory
+async function readStaticJson<T>(filePath: string): Promise<Result<T>> {
+    try {
+        const response = await fetch(filePath);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json() as T;
+        return { success: true, data };
+    } catch (error) {
+        return { success: false, error: error as Error };
+    }
+}
+
+export async function getStaticOrFetch<T>(
+    fileNamePrefix: string,
+    apiPromise: Promise<T>,
+    locale: string,
+    slug: string,
+    staticData: boolean = false
+): Promise<T> {
+    if (staticData) {
+        
+        const fileName = `${fileNamePrefix}_${locale}_${slug}.json`;
+        const filePath = `/data/${fileName}`;
+
+        const staticResult = await readStaticJson<T>(filePath);
+
+        if (staticResult.success && staticResult?.data) {
+            return staticResult.data;
+        } else {
+            console.log('\x1b[33m%s\x1b[0m',`Falling back to API for ${fileName}:`, staticResult.error);
+        }
+    }
+
+    return apiPromise;
+}

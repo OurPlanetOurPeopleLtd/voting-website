@@ -1,74 +1,12 @@
 ﻿import "./VotingPage.scss";
-import {TQuestionBlock} from "../repositories/Navigation/types";
 import React, {useCallback, useEffect, useState} from "react";
-import {Video} from "react-datocms/dist/types/VideoPlayer";
-import { StructuredTextDocument} from "react-datocms";
-import {useSearchParams} from "react-router-dom";
 import {getVotingPageJson} from "../repositories/VotingPage/request";
 import {Choice} from "../models";
 import {v4 as generateGuid} from "uuid";
-import { VotingPageMainJourney } from "./VotingPageVariants/VotingPageMainJourney";
-import {TVideoThumbnail} from "../repositories/Common/types";
+import {VotingPageMainJourney} from "./VotingPageVariants/VotingPageMainJourney";
+import {TVotingPage, TVotingPageExtended, TVotingQueryProps} from "../repositories/VotingPage/model";
+import {localStorageVotingIdKey, localStorageWatchedIdKey} from "../repositories/utils/utilities";
 
-
-export const localStorageVotingIdKey = "voterId";
-export const localStorageWatchedIdKey = "voterWatched";
-
-
-export interface TVideos
-{
-    detailVideo: TVideoThumbnail;
-    thankYouVideo: TVideoThumbnail;
-    landingVideo: TVideoThumbnail;
-
-    prop1: TVideoThumbnail;
-    prop2: TVideoThumbnail;
-    prop3: TVideoThumbnail;
-}
-
-export interface TVotingPage {
-
-    videos?:TVideos;
-    donateText?: { value: StructuredTextDocument };
-    openingText?: { value: StructuredTextDocument };
-    heading?: string;
-    introText: string;
-    mainVideo: { id: string, video: Video };
-    postVoteVideo?: { id: string, video: Video };
-    postThankYou?: { id: string, video: Video };
-    questions?: TQuestionBlock[];
-
-    shareHeading: string;
-    landingHeading?: string;
-    votingHeading?: string;
-    thanksHeading?: string;
-    resultsHeading?: string;
-    shareSubHeading: string;
-
-    showIntroVideo: boolean;
-    showSharePanel: boolean;
-    showStatistics: boolean;
-    videoThumbnail: { responsiveImage: { src: string } } | undefined;
-    
-    
-}
-export interface TVotingPageExtended extends TVotingPage
-{
-    locale: string;
-   
-    voteResultCallBack?: (voted: boolean) => void,
-    voteChangedCallBack?: (choice: Choice) => void,
-    watchedCallBack?: () => void,
-    watched:boolean,
-    voted:boolean,
-}
-
-
-export interface TVotingQueryProps
-{
-    locale:string
-    id:string
-}
 
 const VotingPage = (queryProps: TVotingQueryProps) => {
 
