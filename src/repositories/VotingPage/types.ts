@@ -8,6 +8,22 @@ export interface QueryResult {
 }
 
 export interface VotingPageData {
+    hubId: string;
+    hubHeading: string;
+    hubSubheading: string;
+    hubIntroText: string;
+    hubSecondaryText: string;
+    hubVideo: TVideoThumbnail;
+    hubPanelLink: {
+        id: string;
+        linkTitle: string;
+        linkDescription: string;
+        linkDestination: {
+            slug: string;
+        };
+    }[];
+
+
     id: string;
     questions?: TQuestionBlock[];
     videoThumbnail:{responsiveImage:{src:string}}

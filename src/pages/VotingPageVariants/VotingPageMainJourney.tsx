@@ -10,11 +10,11 @@ import {VideoControl} from "../../components/VideoControl";
 import {VideoWithReference} from "../VideoWithReference";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {getNextTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
-import HubComponent from "../../components/HubComponent";
+import {HubComponent} from "../../components/HubComponent";
+import { TVotingPageExtended } from "../../repositories/VotingPage/model";
 
 import cryingEarth from "../../crying-earth.png";
 import "../VotingPage.scss";
-import { TVotingPageExtended } from "../../repositories/VotingPage/model";
 
 export const StagedFlow = (props: TStagedFlowProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -42,19 +42,16 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     const totalStages = donateStage+1; // Number of steps in the flow
     
     const updateSearchParams = (newStage: number): number => {
-        
-        if(newStage == shareStage) //todo use the query to do this
-        {
-                
+        if(newStage ===shareStage) { //todo use the query to do this
             navigate(`/${props.locale}/share`);
             return shareStage
         }
-        if(newStage === questionStage) //todo use the query to do this
-        {
 
+        if(newStage === questionStage) { //todo use the query to do this
             navigate(`/${props.locale}/voting`);
             return shareStage
         }
+
         searchParams.set("stage", newStage.toString());
         setSearchParams({  stage: newStage.toString() });
         return newStage;
@@ -68,7 +65,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     //add additional call to the callback
     const extendedVoteCallback = (voted: Choice) => {
         originalVoteCallback?.(voted); // Call the original function if it exists
-         nextStage(); // Call the additional function
+        nextStage(); // Call the additional function
     };
 
     if(!questionOne) {
@@ -88,6 +85,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                        
                                     <p>
                                         {getTranslation(props.locale, "videoPrompt")}{" "}
+
                                         <button onClick={nextStage}>
                                             {getTranslation(props.locale, "shareButton")}
                                         </button>
@@ -96,6 +94,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                                     
                                     <p>
                                         {getTranslation(props.locale, "orFindOutMore")}{" "}
+
                                         <a href="/in-depth">
                                             {getTranslation(props.locale, "inDepthLink")}
                                         </a>{"."}
@@ -205,8 +204,6 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 };
 
 export const VotingPageMainJourney = (props: TVotingPageExtended) => {
-
-
     return (
         <>
            <StagedFlow {...props}></StagedFlow>

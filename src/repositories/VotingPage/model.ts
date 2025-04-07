@@ -8,6 +8,7 @@ export interface TVideos {
     detailVideo: TVideoThumbnail;
     thankYouVideo: TVideoThumbnail;
     landingVideo: TVideoThumbnail;
+    hubVideo: TVideoThumbnail;
 
     prop1: TVideoThumbnail;
     prop2: TVideoThumbnail;
@@ -25,6 +26,19 @@ export interface TVotingPage {
     postVoteVideo?: { id: string, video: Video };
     postThankYou?: { id: string, video: Video };
     questions?: TQuestionBlock[];
+
+    hubHeading: string;
+    hubSubheading: string;
+    hubIntroText: string;
+    hubSecondaryText: string;
+    hubPanelLink: {
+        id: string;
+        linkTitle: string;
+        linkDescription: string;
+        linkDestination: {
+            slug: string;
+        };
+    }[];
 
     shareHeading: string;
     landingHeading?: string;

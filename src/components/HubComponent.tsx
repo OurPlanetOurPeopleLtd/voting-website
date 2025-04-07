@@ -61,7 +61,7 @@ const styles: Record<string, React.CSSProperties> = {
     },
 };
   
-const ContentComponent = () => {
+export const HubComponent = () => {
     return (
         <div style={styles.container}>
             <div style={styles.frame}>
@@ -139,5 +139,3 @@ const ContentComponent = () => {
         </div>
     );
 };
-
-export default ContentComponent;
