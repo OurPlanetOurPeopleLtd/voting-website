@@ -84,7 +84,35 @@ const questionBlock = `
         voteAgainstText
         textBelowVoting
     `
-const votingPage = ` 
+const votingPage = `
+    hubHeading
+    hubSubheading
+    hubIntroText
+    hubSecondaryText
+    hubVideo {
+      video {
+        id
+        video {
+          muxPlaybackId
+          title
+          width
+          height
+          blurUpThumb
+        }
+      }
+    }
+    hubPanelLink {
+      ... on HubLinkModelRecord {
+        id
+        linkTitle
+        linkDescription
+        linkDestination {
+          ... on VideoWithPdfRecord {
+            slug
+          }
+        }
+      }
+    } 
             id
             cardTitle,  
             showVoteStatistics,
