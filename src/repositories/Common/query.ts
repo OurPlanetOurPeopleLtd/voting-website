@@ -100,7 +100,13 @@ const votingPage = `
           blurUpThumb
         }
       }
+    thumbnailImage {
+        responsiveImage {
+          src
+        }
+      }
     }
+    hubLinksHeading
     hubPanelLink {
       ... on HubLinkModelRecord {
         id
@@ -109,6 +115,19 @@ const votingPage = `
         linkDestination {
           ... on VideoWithPdfRecord {
             slug
+          }
+            ...on RegistrationPageRecord {
+            slug
+          }
+          ... on VotingPageModelRecord {
+            slug
+          }
+          ... on BlogPostModelRecord {
+          	slug
+          }
+          ... on SpecialPageRecord {
+            slug
+            stage
           }
         }
       }

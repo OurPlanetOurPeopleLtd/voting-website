@@ -133,7 +133,16 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 
                         <Fade in={stage === hubStage} unmountOnExit>
                             <div>
-                                <HubComponent />
+                                <HubComponent 
+                                    id="hub-panel" 
+                                    heading={props.hubHeading} 
+                                    subheading={props.hubSubheading} 
+                                    introText={props.hubIntroText} 
+                                    secondaryText={props.hubSecondaryText} 
+                                    hubvideo={props.videos?.hubVideo ?? { video: { id: '', video: { url: '', thumbnail: '' } }, thumbnailImage: { responsiveImage: { src: '' } } }}
+                                    hubLinksHeading={props.hubLinksHeading}
+                                    panelLink={props.hubPanelLink} 
+                                />
                             </div>
                         </Fade>
 

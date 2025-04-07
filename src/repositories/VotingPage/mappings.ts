@@ -28,12 +28,14 @@ export async function mapVotingPage(result: QueryResult): Promise<TVotingPage> {
             hubSubheading: votingPage.hubSubheading ?? "",
             hubIntroText: votingPage.hubIntroText ?? "",
             hubSecondaryText: votingPage.hubSecondaryText ?? "",
+            hubLinksHeading: votingPage.hubLinksHeading ?? "",
             hubPanelLink: votingPage.hubPanelLink.map((link) => ({
                 id: link.id,
                 linkTitle: link.linkTitle,
                 linkDescription: link.linkDescription,
                 linkDestination: {
-                    slug: link.linkDestination.slug
+                    slug: link.linkDestination.slug,
+                    stage: link.linkDestination.stage ?? 0
                 }
             })),
              

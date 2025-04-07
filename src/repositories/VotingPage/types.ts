@@ -14,12 +14,14 @@ export interface VotingPageData {
     hubIntroText: string;
     hubSecondaryText: string;
     hubVideo: TVideoThumbnail;
+    hubLinksHeading: string;
     hubPanelLink: {
         id: string;
         linkTitle: string;
         linkDescription: string;
         linkDestination: {
             slug: string;
+            stage?: number;
         };
     }[];
 

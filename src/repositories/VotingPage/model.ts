@@ -31,12 +31,14 @@ export interface TVotingPage {
     hubSubheading: string;
     hubIntroText: string;
     hubSecondaryText: string;
+    hubLinksHeading: string;
     hubPanelLink: {
         id: string;
         linkTitle: string;
         linkDescription: string;
         linkDestination: {
             slug: string;
+            stage?: number;
         };
     }[];
 

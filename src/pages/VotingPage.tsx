@@ -26,6 +26,7 @@ const VotingPage = (queryProps: TVotingQueryProps) => {
         hubSubheading: "",
         hubIntroText: "",
         hubSecondaryText: "",
+        hubLinksHeading: "",
         hubPanelLink: [],
     }
 
