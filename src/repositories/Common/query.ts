@@ -129,6 +129,9 @@ const votingPage = `
             slug
             stage
           }
+          ... on ExternalLinkModelRecord {
+            url
+          }
         }
       }
     } 
