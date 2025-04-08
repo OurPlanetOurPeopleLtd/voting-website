@@ -84,7 +84,57 @@ const questionBlock = `
         voteAgainstText
         textBelowVoting
     `
-const votingPage = ` 
+const votingPage = `
+    hubHeading
+    hubSubheading
+    hubIntroText
+    hubSecondaryText
+    hubVideo {
+      video {
+        id
+        video {
+          muxPlaybackId
+          title
+          width
+          height
+          blurUpThumb
+        }
+      }
+    thumbnailImage {
+        responsiveImage {
+          src
+        }
+      }
+    }
+    hubLinksHeading
+    hubPanelLink {
+      ... on HubLinkModelRecord {
+        id
+        linkTitle
+        linkDescription
+        linkDestination {
+          ... on VideoWithPdfRecord {
+            slug
+          }
+            ...on RegistrationPageRecord {
+            slug
+          }
+          ... on VotingPageModelRecord {
+            slug
+          }
+          ... on BlogPostModelRecord {
+          	slug
+          }
+          ... on SpecialPageRecord {
+            slug
+            stage
+          }
+          ... on ExternalLinkModelRecord {
+            url
+          }
+        }
+      }
+    } 
             id
             cardTitle,  
             showVoteStatistics,

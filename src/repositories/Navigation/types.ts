@@ -38,12 +38,10 @@ export const AllContentTypesInNavigation: string[] = AllContentTypes.filter(
     (type) => !excludedTypes.includes(type as ContentType)
 );
 
-
 export enum AssetTypes {
     YoutubeVideoEmbed = "YoutubeVideoEmbed",
     GenericImage = "GenericImage",
 }
-
 export interface BasePage {
     __typename: ContentType
     slug: string
@@ -51,20 +49,15 @@ export interface BasePage {
 }
 
 export interface TQuestionBlock {
-
     id: string,
     questionTitleSt: {value: StructuredTextDocument},
     voteForText: string,
     voteAgainstText: string,
     textBelowVoting: string,
-    
 }
 
-
 export interface NavigationItem extends NavigationGroup {
-
-    mainVideo: TVideoThumbnail | undefined;    
-    
+    mainVideo: TVideoThumbnail | undefined;
     cardTitle: string;
     title: string;
     url: string;
@@ -78,4 +71,3 @@ export interface NavigationItem extends NavigationGroup {
     video:{slug:string}
     resultsHeading?: string,
 }
-

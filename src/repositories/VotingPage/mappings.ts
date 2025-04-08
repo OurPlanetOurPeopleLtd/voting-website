@@ -17,11 +17,27 @@ export async function mapVotingPage(result: QueryResult): Promise<TVotingPage> {
                 landingVideo: votingPage.landingVideo,
                 detailVideo: votingPage.detailVideo,
                 thankYouVideo: votingPage.thankYouVideo,
+                hubVideo: votingPage.hubVideo,
 
                 prop1: votingPage.proposition1,
                 prop2: votingPage.proposition2,
                 prop3: votingPage.proposition3,
             },
+
+            hubHeading: votingPage.hubHeading ?? "",
+            hubSubheading: votingPage.hubSubheading ?? "",
+            hubIntroText: votingPage.hubIntroText ?? "",
+            hubSecondaryText: votingPage.hubSecondaryText ?? "",
+            hubLinksHeading: votingPage.hubLinksHeading ?? "",
+            hubPanelLink: votingPage.hubPanelLink.map((link) => ({
+                id: link.id,
+                linkTitle: link.linkTitle,
+                linkDescription: link.linkDescription,
+                linkDestination: {
+                    slug: link.linkDestination.slug,
+                    stage: link.linkDestination.stage ?? 0
+                }
+            })),
              
             donateText: votingPage.donateText,
 

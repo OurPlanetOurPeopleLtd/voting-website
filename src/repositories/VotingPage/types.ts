@@ -2,16 +2,30 @@ import {Video} from "react-datocms/dist/types/VideoPlayer";
 import {TQuestionBlock} from "../Navigation/types";
 import {StructuredTextDocument} from "react-datocms";
 import {TVideoThumbnail} from "../Common/types";
-
-
 export interface QueryResult {
     data: {votingPageModel:VotingPageData};
     errors: [];
 }
 
-
-
 export interface VotingPageData {
+    hubId: string;
+    hubHeading: string;
+    hubSubheading: string;
+    hubIntroText: string;
+    hubSecondaryText: string;
+    hubVideo: TVideoThumbnail;
+    hubLinksHeading: string;
+    hubPanelLink: {
+        id: string;
+        linkTitle: string;
+        linkDescription: string;
+        linkDestination: {
+            slug: string;
+            stage?: number;
+        };
+    }[];
+
+
     id: string;
     questions?: TQuestionBlock[];
     videoThumbnail:{responsiveImage:{src:string}}
@@ -44,6 +58,4 @@ export interface VotingPageData {
     title?: string;
     url?: string;
     slug?: string; 
-    
 }
-

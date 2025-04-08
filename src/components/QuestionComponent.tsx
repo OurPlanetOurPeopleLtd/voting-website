@@ -5,11 +5,8 @@ import { VoteControls} from "./VoteControls";
 import {TQuestionBlock} from "../repositories/Navigation/types";
 
 export interface TQuestionProps extends TQuestionBlock {
-    
     voteResultCallBack?: (voted: boolean) => void,
     voteChangedCallBack?: (choice: Choice) => void,
-
-
 }
 
 // Example Question Component

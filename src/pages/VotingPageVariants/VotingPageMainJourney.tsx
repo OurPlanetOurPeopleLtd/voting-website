@@ -9,22 +9,18 @@ import {TStagedFlowProps} from "./TStagedFlowProps";
 import {VideoControl} from "../../components/VideoControl";
 import {VideoWithReference} from "../VideoWithReference";
 import {useNavigate, useSearchParams} from "react-router-dom";
+import {getNextTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
+import {HubComponent} from "../../components/HubComponent";
+import { TVotingPageExtended } from "../../repositories/VotingPage/model";
 
 import cryingEarth from "../../crying-earth.png";
-
 import "../VotingPage.scss";
-import {getNextTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
-import {TVotingPageExtended} from "../../repositories/VotingPage/model";
-
-
 
 export const StagedFlow = (props: TStagedFlowProps) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
 
     const stageAsString = props.forceStage ? props.forceStage : searchParams.get("stage");
-     
-
     const stageFromUrl = stageAsString ? parseInt(stageAsString) : undefined;
 
     const [stage, setStage] = useState(stageFromUrl?? 0);
@@ -37,7 +33,8 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     const totalQuestions = 1;//(props.questions?.length ?? 0); (todo decide if we are making this dynamic)   
        
     const openingStage = 0;
-    const questionStage = 1;    
+    const hubStage = 1
+    const questionStage = 2;    
     const videoStage = questionStage + totalQuestions;
     const shareStage = videoStage + 1;
     const detailStage = shareStage + 1;
@@ -45,26 +42,22 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     const totalStages = donateStage+1; // Number of steps in the flow
     
     const updateSearchParams = (newStage: number): number => {
-        
-        if(newStage == shareStage) //todo use the query to do this
-        {
-                
+        if(newStage ===shareStage) { //todo use the query to do this
             navigate(`/${props.locale}/share`);
             return shareStage
         }
-        if(newStage == questionStage) //todo use the query to do this
-        {
 
+        if(newStage === questionStage) { //todo use the query to do this
             navigate(`/${props.locale}/voting`);
             return shareStage
         }
+
         searchParams.set("stage", newStage.toString());
         setSearchParams({  stage: newStage.toString() });
         return newStage;
     };
     
     const nextStage = () => setStage((prev) => updateSearchParams(Math.min(prev + 1, totalStages - 1)));
-    const prevStage = () => setStage((prev) => updateSearchParams(Math.max(prev - 1, 0)));
     const originalVoteCallback = props.voteChangedCallBack;
     
     const questionOne = props.questions && props.questions.length >= 1 ? props.questions[0] : null;
@@ -72,7 +65,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     //add additional call to the callback
     const extendedVoteCallback = (voted: Choice) => {
         originalVoteCallback?.(voted); // Call the original function if it exists
-         nextStage(); // Call the additional function
+        nextStage(); // Call the additional function
     };
 
     if(!questionOne) {
@@ -81,7 +74,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     }
 
     return (
-        <Container className="frame" style={{ position: "relative" }}>
+        <Container className={`frame ${stage === hubStage ? 'hub-page' : ''}`} style={{ position: "relative" }}>
                 <div>
                     <div className="frame-content vote-controls">
                         {/* Stage Video */}
@@ -92,6 +85,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                        
                                     <p>
                                         {getTranslation(props.locale, "videoPrompt")}{" "}
+
                                         <button onClick={nextStage}>
                                             {getTranslation(props.locale, "shareButton")}
                                         </button>
@@ -100,6 +94,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                                     
                                     <p>
                                         {getTranslation(props.locale, "orFindOutMore")}{" "}
+
                                         <a href="/in-depth">
                                             {getTranslation(props.locale, "inDepthLink")}
                                         </a>{"."}
@@ -136,6 +131,21 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                             </div>
                         </Fade>
 
+                        <Fade in={stage === hubStage} unmountOnExit>
+                            <div>
+                                <HubComponent 
+                                    id="hub-panel" 
+                                    heading={props.hubHeading} 
+                                    subheading={props.hubSubheading} 
+                                    introText={props.hubIntroText} 
+                                    secondaryText={props.hubSecondaryText} 
+                                    hubvideo={props.videos?.hubVideo ?? { video: { id: '', video: { url: '', thumbnail: '' } }, thumbnailImage: { responsiveImage: { src: '' } } }}
+                                    hubLinksHeading={props.hubLinksHeading}
+                                    panelLink={props.hubPanelLink} 
+                                />
+                            </div>
+                        </Fade>
+
                         {/* Stage Questions */}
                         <Fade in={stage === questionStage } unmountOnExit>
                             <div className={"vote-controls question-controls"}>
@@ -147,8 +157,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                                 <div className={"videoColumn voteVideo"}>
                                     <VideoControl locale={props.locale} fullScreenOnClick={true}
                                                 datoVideo={ props.videos?.prop1?.video?.video  }
-                                                        leftShift={-50}
-                                             
+                                                leftShift={-50}
                                                 videoThumbnail={ props.videos?.prop1.thumbnailImage?.responsiveImage.src} />
                                
                                 </div>
@@ -204,8 +213,6 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 };
 
 export const VotingPageMainJourney = (props: TVotingPageExtended) => {
-
-
     return (
         <>
            <StagedFlow {...props}></StagedFlow>

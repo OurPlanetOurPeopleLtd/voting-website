@@ -1,5 +1,4 @@
-﻿import "./VotingPage.scss";
-import React, {useCallback, useEffect, useState} from "react";
+﻿import React, {useCallback, useEffect, useState} from "react";
 import {getVotingPageJson} from "../repositories/VotingPage/request";
 import {Choice} from "../models";
 import {v4 as generateGuid} from "uuid";
@@ -7,25 +6,30 @@ import {VotingPageMainJourney} from "./VotingPageVariants/VotingPageMainJourney"
 import {TVotingPage, TVotingPageExtended, TVotingQueryProps} from "../repositories/VotingPage/model";
 import {localStorageVotingIdKey, localStorageWatchedIdKey} from "../repositories/utils/utilities";
 
+import "./VotingPage.scss";
 
 const VotingPage = (queryProps: TVotingQueryProps) => {
+    const initialState: TVotingPage = {
+        videos: undefined,
+        donateText: undefined,
+        openingText: undefined,
+        postVoteVideo: undefined,
+        introText: "",
+        mainVideo: { id: "", video: {} },
+        showIntroVideo: false,
+        showSharePanel: false,
+        showStatistics: false,
+        videoThumbnail: undefined,
+        shareHeading: "",
+        shareSubHeading: "",
+        hubHeading: "",
+        hubSubheading: "",
+        hubIntroText: "",
+        hubSecondaryText: "",
+        hubLinksHeading: "",
+        hubPanelLink: [],
+    }
 
-
-    const initialState: TVotingPage =
-        {
-            videos: undefined,
-            donateText: undefined,
-            openingText: undefined,
-            postVoteVideo: undefined,
-            introText: "",
-            mainVideo: { id: "", video: {} },
-            showIntroVideo: false,
-            showSharePanel: false,
-            showStatistics: false,
-            videoThumbnail: undefined,
-            shareHeading: "",
-            shareSubHeading: ""
-        }
     const lwatchedString = localStorage.getItem(localStorageWatchedIdKey);
     const lwatched = lwatchedString ? lwatchedString === "true" : false;
 
@@ -43,15 +47,11 @@ const VotingPage = (queryProps: TVotingQueryProps) => {
 
     function onWatched() {
         setWatched(true);
-
         localStorage.setItem(localStorageWatchedIdKey, "true");
     }
-    function voteChanged(choice:Choice)
-    {
-       
-        
-    }
-    
+
+    function voteChanged(choice:Choice){}
+
     const fullData:TVotingPageExtended = {
         locale: queryProps.locale,
         voteChangedCallBack: voteChanged,
@@ -63,10 +63,7 @@ const VotingPage = (queryProps: TVotingQueryProps) => {
 
     }
     
- 
     const fetchData = useCallback(async () => {
-
-
         let dataFetched = await getVotingPageJson("Original", queryProps.locale);
 
         setData(dataFetched);
@@ -74,20 +71,15 @@ const VotingPage = (queryProps: TVotingQueryProps) => {
 
     useEffect(() => {
         fetchData().catch(console.error);
-
-
     }, [queryProps]);
        
-
     const RenderComponent = VotingPageMainJourney;
 
     return (
         <>
             <RenderComponent {...fullData}/>
-            
         </>
-    );  
-    
+    );
 };
 
 export default VotingPage;
