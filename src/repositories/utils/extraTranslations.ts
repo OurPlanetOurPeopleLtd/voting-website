@@ -323,36 +323,36 @@ export function getDonateTranslation(languageCode: string): string {
 
 
 const nextTranslations: { [key: string]: string } = {
-    "en": "Next",
-    "fr": "Suivant",
-    "nl": "Volgende",
-    "sr": "Sledeći",
-    "hi": "अगला",
-    "ja": "次へ",
-    "zh": "下一个",
-    "es": "Siguiente",
-    "pt": "Próximo",
-    "no": "Neste",
-    "de": "Nächste",
-    "it": "Prossimo",
-    "ru": "Следующий",
-    "ko": "다음",
-    "ar": "التالي",
-    "sv": "Nästa",
-    "da": "Næste",
-    "fi": "Seuraava",
-    "pl": "Następny",
-    "tr": "Sonraki",
-    "el": "Επόμενο", // Added Greek
-    "id": "Selanjutnya", // Added Indonesian
-    "uk": "Наступний", // Added Ukrainian
-    "vi": "Tiếp theo", // Added Vietnamese
-    "th": "ถัดไป", // Added Thai
-    "he": "הבא", // Added Hebrew
-    "hu": "Következő", // Added Hungarian
-    "ro": "Următorul", // Added Romanian
-    "cs": "Další", // Added Czech
-    "sk": "Ďalší" // Added Slovak
+    "en": "Get Started",
+    "fr": "Commencer",
+    "nl": "Beginnen",
+    "sr": "Почни",
+    "hi": "शुरू करें",
+    "ja": "開始する",
+    "zh": "开始使用",
+    "es": "Comenzar",
+    "pt": "Começar",
+    "no": "Kom i gang",
+    "de": "Loslegen",
+    "it": "Inizia",
+    "ru": "Начать",
+    "ko": "시작하기",
+    "ar": "ابدأ",
+    "sv": "Kom igång",
+    "da": "Kom i gang",
+    "fi": "Aloita",
+    "pl": "Rozpocznij",
+    "tr": "Başla",
+    "el": "Ξεκίνα",
+    "id": "Mulai",
+    "uk": "Почати",
+    "vi": "Bắt đầu",
+    "th": "เริ่มต้น",
+    "he": "התחל",
+    "hu": "Kezdés",
+    "ro": "Începe",
+    "cs": "Začít",
+    "sk": "Začať"
 };
 
 export function getNextTranslation(languageCode: string): string {
