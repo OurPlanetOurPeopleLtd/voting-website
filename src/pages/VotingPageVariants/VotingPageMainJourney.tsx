@@ -42,7 +42,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     const totalStages = donateStage+1; // Number of steps in the flow
     
     const updateSearchParams = (newStage: number): number => {
-        if(newStage ===shareStage) { //todo use the query to do this
+        if(newStage === shareStage) { //todo use the query to do this
             navigate(`/${props.locale}/share`);
             return shareStage
         }
@@ -141,7 +141,8 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                                     secondaryText={props.hubSecondaryText} 
                                     hubvideo={props.videos?.hubVideo ?? { video: { id: '', video: { url: '', thumbnail: '' } }, thumbnailImage: { responsiveImage: { src: '' } } }}
                                     hubLinksHeading={props.hubLinksHeading}
-                                    panelLink={props.hubPanelLink} 
+                                    panelLink={props.hubPanelLink}
+                                    locale={props.locale}
                                 />
                             </div>
                         </Fade>
