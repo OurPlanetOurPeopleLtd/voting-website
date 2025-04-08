@@ -56,7 +56,7 @@ export const VideoControl = ({
     function goFullScreen() {
         const player = document.querySelector("mux-player");
         const videoElement = player as unknown as MuxPlayer;
-        if(fullScreenOnClick != "force") return;
+        if(fullScreenOnClick !== "force") return;
         if(!videoElement)
         {
             return; 
