@@ -179,6 +179,10 @@ img {
   }
 }
 
+.article-inline-image {
+  margin-block: 1rem;
+}
+
 @media (max-width: 768px) {
   .container {
     padding-inline: 1rem;
@@ -191,6 +195,13 @@ img {
   }
 }
 
+@media screen and (min-width: 768px) {
+  .article-inline-image {
+    max-width: 500px;
+    margin-block: 10px;
+    margin-left: 1rem;
+  }
+}
 
 @media screen and (min-width: 968px) {
   .main-nav {
@@ -205,5 +216,9 @@ img {
       padding-inline: 0;
       font-size: 1.5rem;
     }
+  }
+
+  .article-inline-image {
+    float: right;
   }
 }

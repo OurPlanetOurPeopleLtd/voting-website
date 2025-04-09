@@ -43,8 +43,12 @@ function datoRichTextToReactNode(content: TStructuredText): ReactNode {
                 ),
             ]}
             renderInlineRecord={({record}) => {
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                const {__typename, id, ...props} = record;
+                // Check for undefined __typename and log it for debugging
+    const { __typename, id, ...props } = record;
+    
+    if (!__typename) {
+        console.warn("Record missing __typename:", record);
+    }
 
                 if (__typename === "VideoAndThumbnailRecord") {
                     const videoRecord = record as {
@@ -75,6 +79,24 @@ function datoRichTextToReactNode(content: TStructuredText): ReactNode {
                     }
                 }
 
+                if (__typename === "GenericImageModelRecord") {
+                    const { image, title } = record as {
+                        image?: {
+                            url: string;
+                            alt?: string | null;
+                        };
+                        title?: string | null;
+                    };
+                
+                    return (
+                        <img
+                            src={image?.url}
+                            alt={image?.alt || title || 'Image without alt text'}
+                            className="article-inline-image"
+                        />
+                    );
+                }
+
                 if (__typename === ContentType.NavigationGroup) {
                     const navItem = record as unknown as NavigationItem;
                     return (<HubCollection pageTitle={record.id}
@@ -92,7 +114,7 @@ function datoRichTextToReactNode(content: TStructuredText): ReactNode {
                     );
                 }
 
-                return <pre>props</pre>
+                return <pre>props</pre>;
             }}
 
             renderBlock={({record}) => {

@@ -57,11 +57,28 @@ function generatePostQueryFrom(locale:string, shortBlog: boolean, sentSlug: stri
           }
         }
                   
-                        ... on  GenericImageModelRecord{
+                        ... on GenericImageModelRecord {
                           __typename
-                          image{url}
-                          title
-                        }
+      id
+      image {
+        url
+        title
+        alt
+        responsiveImage {
+          srcSet
+          webpSrcSet
+          sizes
+          src
+          width
+          height
+          aspectRatio
+          alt
+          title
+          base64
+        }
+      }
+      title
+    }
                           
                         
 
