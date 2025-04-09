@@ -36,7 +36,9 @@ export async function mapVotingPage(result: QueryResult): Promise<TVotingPage> {
                 linkDestination: {
                     slug: link.linkDestination.slug,
                     stage: link.linkDestination.stage ?? 0
-                }
+                },
+                externalLink: link.externalLink,
+                externalLinkUrl: link.externalLinkUrl
             })),
              
             donateText: votingPage.donateText,

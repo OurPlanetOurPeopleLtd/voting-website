@@ -40,6 +40,8 @@ export interface TVotingPage {
             slug: string;
             stage?: number;
         };
+        externalLink: boolean;
+        externalLinkUrl: string;
     }[];
 
     shareHeading: string;
@@ -59,7 +61,6 @@ export interface TVotingPage {
 
 export interface TVotingPageExtended extends TVotingPage {
     locale: string;
-
     voteResultCallBack?: (voted: boolean) => void,
     voteChangedCallBack?: (choice: Choice) => void,
     watchedCallBack?: () => void,

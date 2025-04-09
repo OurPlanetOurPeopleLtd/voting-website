@@ -6,9 +6,7 @@ import {QueryBlocks} from "../Common/query";
 // if we decide to bring variants back, we need this
 const useVariants = false;
 export function generateVotingPageQuery(id: string, locale:string) {
-
     const isPreview = getPreview();
-    
     
     let variantFilter = id ? `filter: {variant: {eq:"${id}"}}, ` : "";
     if(!useVariants)

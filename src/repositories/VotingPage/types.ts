@@ -23,6 +23,8 @@ export interface VotingPageData {
             slug: string;
             stage?: number;
         };
+        externalLink: boolean;
+        externalLinkUrl: string;
     }[];
 
 

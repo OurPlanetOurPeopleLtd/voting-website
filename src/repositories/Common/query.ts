@@ -133,6 +133,8 @@ const votingPage = `
             url
           }
         }
+        externalLink
+        externalLinkUrl
       }
     } 
             id
