@@ -93,6 +93,7 @@ function datoRichTextToReactNode(content: TStructuredText): ReactNode {
                             src={image?.url}
                             alt={image?.alt || title || 'Image without alt text'}
                             className="article-inline-image"
+                            loading="lazy"
                         />
                     );
                 }
