@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 
+import "./App.scss";
 
 import {ContentType, NavigationItem} from "./repositories/Navigation/types";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
@@ -23,7 +24,6 @@ import PageTransition from "./PageTransition";
 import {ReportPage} from "./components/Reporting/ReportPage";
 import {defaultLanguage, getSupportedLocales} from "./repositories/utils/languages";
 
-import "./App.scss";
 
 const Reset = () => {
     useEffect(() => {
