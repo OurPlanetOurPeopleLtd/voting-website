@@ -47,7 +47,7 @@ export const VideoPage = (props: TArticlePage) => {
             <h1>{data.header}</h1>  
             {data.introText ? <p className="introText">{data.introText}</p> : null}
 
-                <VideoControl locale={locale} fullScreenOnClick={false} datoVideo={data?.mainVideo?.video?.video ?? undefined} pageTitle={props.title} videoTitle={data.videoTitle} videoThumbnail={data.mainVideo?.thumbnailImage.responsiveImage.src}  {...(slug.includes("detailed-introduction-video") ? { onFinish: () => { handleFinish() } } : {})}></VideoControl>
+            <VideoControl locale={locale} fullScreenOnClick={false} datoVideo={data?.mainVideo?.video?.video ?? undefined} pageTitle={props.title} videoTitle={data.videoTitle} videoThumbnail={data.mainVideo?.thumbnailImage.responsiveImage.src}  {...(slug.includes("detailed-introduction-video") ? { onFinish: () => { handleFinish() } } : {})}></VideoControl>
         </>
     );
 };

@@ -36,13 +36,35 @@ function generatePostQueryFrom(locale:string, shortBlog: boolean, sentSlug: stri
                         ... on  BlogPostModelRecord{                  
                           ${QueryBlocks.BlogPost}
                         }
+
+                                ... on VideoAndThumbnailRecord {
+                                __typename
+          id
+          video {
+            id
+            video {
+              muxPlaybackId
+              title
+              width
+              height
+              blurUpThumb
+            }
+          }
+          thumbnailImage {
+            responsiveImage {
+              src
+            }
+          }
+        }
                   
-                         ... on  GenericImageModelRecord{
+                        ... on  GenericImageModelRecord{
                           __typename
                           image{url}
                           title
-                          
                         }
+                          
+                        
+
                         ... on  NavigationGroupModelRecord{
                           __typename                 
                           title

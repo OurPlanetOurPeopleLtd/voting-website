@@ -7,6 +7,10 @@ mux-player {
 #dato-video-player {
   overflow: hidden;
   border-radius: 8px;
+
+  + h2 {
+    margin-top: 1.5rem;
+  }
 }
 
 /* Prevent .fullscreen styles on mobile */

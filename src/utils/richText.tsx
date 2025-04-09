@@ -4,8 +4,9 @@ import {renderNodeRule, StructuredText} from "react-datocms";
 import {isParagraph} from "datocms-structured-text-utils";
 import {ContentType, NavigationItem} from "../repositories/Navigation/types";
 import {HubCollection} from "../components/HubCollection";
-import {TArticlePage} from "../repositories/Common/types";
+import {TArticlePage, TVideoThumbnail} from "../repositories/Common/types";
 import {getLogger} from "./logger";
+import { VideoControl } from "../components/VideoControl";
 
 function datoRichTextToReactNode(content: TStructuredText): ReactNode {
 
@@ -44,6 +45,35 @@ function datoRichTextToReactNode(content: TStructuredText): ReactNode {
             renderInlineRecord={({record}) => {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const {__typename, id, ...props} = record;
+
+                if (__typename === "VideoAndThumbnailRecord") {
+                    const videoRecord = record as {
+                        video?: {
+                            video?: TVideoThumbnail; // this is the actual Mux video object
+                        };
+                        thumbnailImage?: {
+                            responsiveImage?: {
+                                src: string;
+                            };
+                        };
+                    };
+                
+                    const video = videoRecord.video?.video;
+                    const thumbnail = videoRecord.thumbnailImage?.responsiveImage?.src;
+                
+                    if (video) {
+                        return (
+                            <VideoControl
+                                datoVideo={video}
+                                videoThumbnail={thumbnail}
+                                fullScreenOnClick={false}
+                                autoPlay={false}
+                            />
+                        );
+                    } else {
+                        return <p style={{ color: 'red' }}>Missing video data</p>;
+                    }
+                }
 
                 if (__typename === ContentType.NavigationGroup) {
                     const navItem = record as unknown as NavigationItem;
