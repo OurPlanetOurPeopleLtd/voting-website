@@ -20,7 +20,9 @@ mux-player {
     max-width: 75%;
 
     .video-container--with-pdf &,
-    .question-controls & {
+    .question-controls &,
+    .hub-panel-right &,
+    .thank-you-content & {
       max-width: 100%;
     }
   }
