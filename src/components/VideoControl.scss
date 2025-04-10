@@ -17,5 +17,11 @@ mux-player {
 @media (min-width: 768px) {
   #dato-video-player {
     aspect-ratio: 16 / 9;
+    max-width: 75%;
+
+    .video-container--with-pdf &,
+    .question-controls & {
+      max-width: 100%;
+    }
   }
 }

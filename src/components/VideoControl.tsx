@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
-import "./VideoControl.scss"
 import {Video} from "react-datocms/dist/types/VideoPlayer";
 import {VideoPlayer} from "react-datocms";
 import {getUserGuid} from "../repositories/utils/utilities";
 import {recordUse} from "../utils/analytics";
+
+import "./VideoControl.scss"
 
 export type TVideoProps = {
     onFinish?: () => void,
@@ -39,16 +40,16 @@ interface MuxPlayer {
 }
 
 export const VideoControl = ({
-                                 onFinish,
-                                 onPlay,
-                                 onPause,
-                                 onProgress,
-                                 datoVideo,
-                                 videoThumbnail,
-                                 fullScreenOnClick,
-                                 locale,
-                                 autoPlay = false
-                             }: TVideoProps) => {
+        onFinish,
+        onPlay,
+        onPause,
+        onProgress,
+        datoVideo,
+        videoThumbnail,
+        fullScreenOnClick,
+        locale,
+        autoPlay = false
+    }: TVideoProps) => {
 
     const [goFullScreenOnClick, setGoFullScreenOnClick] = useState(fullScreenOnClick)
 
@@ -175,8 +176,6 @@ export const VideoControl = ({
         
     }, []);
 
-
-
     function findElementInShadowRoot(root:HTMLElement, selector:string): HTMLElement | null {
         const element = root.querySelector(selector) as HTMLElement;
         if (element) {
@@ -214,19 +213,17 @@ export const VideoControl = ({
     
     return (<div id="dato-video-player">
         <div className="video-overlay"onClick={forcePause}></div>
-        <div className="video-frame" ></div>
-
-             <VideoPlayer
-              
-                thumbnailTime={0}
-                poster={videoThumbnail}
-                autoPlay={autoPlay}
-                onEnded={onVideoEnd}
-                onPlay={onVideoPlay}
-                onTimeUpdate={onVideoProgress}
-                onPause={onVideoPause}
-                accentColor="#57b3d9"
-                data={datoVideo}></VideoPlayer>
-
+        <div className="video-frame"></div>
+        <VideoPlayer
+            thumbnailTime={0}
+            poster={videoThumbnail}
+            autoPlay={autoPlay}
+            onEnded={onVideoEnd}
+            onPlay={onVideoPlay}
+            onTimeUpdate={onVideoProgress}
+            onPause={onVideoPause}
+            accentColor="#57b3d9"
+            data={datoVideo}>
+        </VideoPlayer>
     </div>)
 }
