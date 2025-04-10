@@ -4,16 +4,13 @@ import reportWebVitals from "./reportWebVitals";
 
 import { HelmetProvider } from "react-helmet-async";
 
-import "../src/fonts/RNS Sans/RNSSanz-Normal.woff";
 import "../src/fonts/RNS Sans/RNSSanz-Normal.woff2";
-import "../src/fonts/RNS Sans/RNSSanz-Light.woff";
 import "../src/fonts/RNS Sans/RNSSanz-Light.woff2";
-import "../src/fonts/RNS Sans/RNSSanz-Bold.woff";
 import "../src/fonts/RNS Sans/RNSSanz-Bold.woff2";
 import "./index.scss";
 
 import App from "./App";
-
+import PasswordGate from "./PasswordGate";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Failed to find the root element");
@@ -21,8 +18,10 @@ const root = ReactDOM.createRoot(rootElement);
 
 root.render(
     <React.StrictMode>
-        <HelmetProvider>    
-            <App></App>
+        <HelmetProvider>
+            <PasswordGate>   
+                <App></App>
+            </PasswordGate>
         </HelmetProvider>
     </React.StrictMode>
 );
