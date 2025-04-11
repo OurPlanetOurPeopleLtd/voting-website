@@ -391,67 +391,65 @@ interface Translations {
 
 const microCopyTranslations: Translations = {
     "en": {
-        "videoPrompt": "Please watch the short video to find out about sharing the cause. And/or go directly to the",
+        "videoPrompt": "To share our site via social media or direct contacts, visit our",
         "shareButton": "sharing page",
         "inDepthLink": "visiting our In Depth page",
         "orFindOutMore": "Or find out more by"
     },
-    "fr": {
-        "videoPrompt": "Veuillez regarder la courte vidéo ci-dessous et aider la",
-        "shareButton": "cause en partageant",
-        "inDepthLink": "visitant notre page Approfondie",
-        "orFindOutMore": "Ou en savoir plus en"
+   "fr": {
+        "videoPrompt": "Pour partager notre site via les réseaux sociaux ou des contacts directs, visitez notre",
+        "shareButton": "page de partage",
+        "inDepthLink": "en visitant notre page Approfondie",
+        "orFindOutMore": "Ou découvrez-en plus en"
     },
-        
-        "nl": {
-        "videoPrompt": "Bekijk de korte video hieronder en help de",
-            "shareButton": "zaak door te delen",
-            "inDepthLink": "onze In Depth-pagina te bezoeken",
-            "orFindOutMore": "Of kom meer te weten door"
+    "nl": {
+        "videoPrompt": "Om onze site te delen via sociale media of directe contacten, ga naar onze",
+        "shareButton": "deelpagina",
+        "inDepthLink": "door onze In Depth-pagina te bezoeken",
+        "orFindOutMore": "Of kom meer te weten door"
     },
     "sr": {
-        "videoPrompt": "Molimo vas da pogledate kratki video ispod i pomognete",
-            "shareButton": "cilju deljenjem",
-            "inDepthLink": "posetom naše In Depth stranice",
-            "orFindOutMore": "Ili saznajte više tako što ćete"
+        "videoPrompt": "Da biste podelili naš sajt putem društvenih mreža ili direktnih kontakata, posetite našu",
+        "shareButton": "stranicu za deljenje",
+        "inDepthLink": "posetom našoj In Depth stranici",
+        "orFindOutMore": "Ili saznajte više tako što ćete"
     },
     "hi": {
-        "videoPrompt": "कृपया नीचे दिया गया छोटा वीडियो देखें और मदद करें",
-            "shareButton": "साझा करके कारण",
-            "inDepthLink": "हमारे इन डेप्थ पेज पर जाकर",
-            "orFindOutMore": "या हमारे इन डेप्थ पेज पर जाकर अधिक जानकारी प्राप्त करें।"
+        "videoPrompt": "हमारी साइट को सोशल मीडिया या सीधे संपर्कों के माध्यम से साझा करने के लिए, कृपया हमारी",
+        "shareButton": "साझा करने वाला पृष्ठ",
+        "inDepthLink": "हमारे इन डेप्थ पेज पर जाकर",
+        "orFindOutMore": "या अधिक जानने के लिए"
     },
     "ja": {
-        "videoPrompt": "下の短いビデオを見て、助けてください",
-            "shareButton": "共有して原因",
-            "inDepthLink": "詳細ページをご覧ください",
-            "orFindOutMore": "詳細ページをご覧ください。"
+        "videoPrompt": "当サイトをSNSや直接の連絡で共有するには、こちらの",
+        "shareButton": "共有ページ",
+        "inDepthLink": "詳細ページをご覧ください",
+        "orFindOutMore": "または詳細ページをご覧ください"
     },
     "zh": {
-        "videoPrompt": "请观看下面的短片并帮助",
-            "shareButton": "通过分享原因",
-            "inDepthLink": "访问我们的深入页面",
-            "orFindOutMore": "或访问我们的深入页面了解更多信息。"
+        "videoPrompt": "若要通过社交媒体或直接联系人分享我们的网站，请访问我们的",
+        "shareButton": "分享页面",
+        "inDepthLink": "访问我们的深入页面",
+        "orFindOutMore": "或访问我们的深入页面以了解更多信息"
     },
     "es": {
-        "videoPrompt": "Por favor, vea el breve video a continuación y ayude a",
-            "shareButton": "la causa compartiendo",
-            "inDepthLink": "visitando nuestra página En profundidad",
-            "orFindOutMore": "O infórmese más visitando nuestra página En profundidad."
+        "videoPrompt": "Para compartir nuestro sitio a través de redes sociales o contactos directos, visite nuestra",
+        "shareButton": "página de compartir",
+        "inDepthLink": "visitando nuestra página En profundidad",
+        "orFindOutMore": "O descubra más visitando nuestra página En profundidad"
     },
     "pt": {
-        "videoPrompt": "Por favor, assista ao pequeno vídeo abaixo e ajude a",
-            "shareButton": "causa compartilhando",
-            "inDepthLink": "visitando nossa página Detalhada",
-            "orFindOutMore": "Ou saiba mais visitando nossa página Detalhada."
+        "videoPrompt": "Para compartilhar nosso site via redes sociais ou contatos diretos, visite nossa",
+        "shareButton": "página de compartilhamento",
+        "inDepthLink": "visitando nossa página Detalhada",
+        "orFindOutMore": "Ou saiba mais visitando nossa página Detalhada"
     },
     "no": {
-        "videoPrompt": "Vennligst se den korte videoen nedenfor og hjelp",
-            "shareButton": "saken ved å dele",
-            "inDepthLink": "ved å besøke vår In Depth-side",
-            "orFindOutMore": "Eller finn ut mer ved å besøke vår In Depth-side."
-    }
-    
+        "videoPrompt": "For å dele nettstedet vårt via sosiale medier eller direkte kontakter, besøk vår",
+        "shareButton": "delingsside",
+        "inDepthLink": "ved å besøke vår In Depth-side",
+        "orFindOutMore": "Eller finn ut mer ved å"
+    }   
 };
 
 export function getTranslation(languageCode: string, key: string): string {

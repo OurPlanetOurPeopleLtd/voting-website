@@ -91,24 +91,6 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                                         </button>
                                         .
                                     </p>
-                                    
-                                    <p>
-                                        {getTranslation(props.locale, "orFindOutMore")}{" "}
-
-                                        <a href="/in-depth">
-                                            {getTranslation(props.locale, "inDepthLink")}
-                                        </a>{"."}
-                                    </p>
-                                </div>
-
-                                <div className={"verticalFrameCentre"}>
-                                    <VideoControl locale={props.locale} fullScreenOnClick={true}
-                                                  datoVideo={props.videos?.thankYouVideo?.video?.video}
-                                                  onFinish={() => {
-                                                      if (props.watchedCallBack) props.watchedCallBack();
-                                                nextStage();
-                                            }} 
-                                            videoThumbnail={props.videos?.thankYouVideo.thumbnailImage?.responsiveImage.src}/>
                                 </div>
                             </div>
                         </Fade>
