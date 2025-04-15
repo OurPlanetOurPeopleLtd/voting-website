@@ -56,6 +56,10 @@
     flex-direction: column;
     border-radius: 12px;
     padding: 1.5rem;
+
+    ol > li + li {
+        margin-top: .5rem;
+    }
 }
 
 .hub-heading,
