@@ -83,8 +83,6 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
         
     }, [analyticsEnabled]);
 
-  
-
     function resetCookie(name: string, path?: string, domain?: string): void {
         let cookieString = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
 
@@ -104,7 +102,6 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
  
 // Example usage:
     const cookieName = "OurPeopleOurPlanetAnalyticsAcceptance";
-
     const onPrivacyPage = title.startsWith("Privacy"); //bit gross
     const cookieExists = getCookieConsentValue(cookieName) !== undefined;
     return (
@@ -163,8 +160,6 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                 onAccept={(acceptedByScrolling) => {
                     setAnalyticsEnabled(true)
                 }}
-      
-                
                 >
                 <h2>{cookieText.headerText}</h2>           
                 {cookieText.mainText}{" "}
@@ -184,8 +179,7 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                         padding: '10px 0', // Optional padding
                     }}
                     className={"CookieConsent"}
-                >
-                                    
+                >       
                     <Button onClick={() => resetCookie(cookieName)}>
                         {cookieText.resetText}
                     </Button>                    

@@ -18,10 +18,8 @@ const root = ReactDOM.createRoot(rootElement);
 
 root.render(
     <React.StrictMode>
-        <HelmetProvider>
-            <PasswordGate>   
-                <App></App>
-            </PasswordGate>
+        <HelmetProvider> 
+            <App></App>
         </HelmetProvider>
     </React.StrictMode>
 );
