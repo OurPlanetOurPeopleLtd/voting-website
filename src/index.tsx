@@ -19,7 +19,9 @@ const root = ReactDOM.createRoot(rootElement);
 root.render(
     <React.StrictMode>
         <HelmetProvider> 
-            <App></App>
+            <PasswordGate>   
+                <App></App>
+            </PasswordGate>
         </HelmetProvider>
     </React.StrictMode>
 );
