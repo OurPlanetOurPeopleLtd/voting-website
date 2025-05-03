@@ -10,7 +10,6 @@ import {VideoControl} from "../../components/VideoControl";
 import {VideoWithReference} from "../VideoWithReference";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {getNextTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
-import {HubComponent} from "../../components/HubComponent";
 import { TVotingPageExtended } from "../../repositories/VotingPage/model";
 
 import cryingEarth from "../../crying-earth.png";
@@ -30,16 +29,15 @@ export const StagedFlow = (props: TStagedFlowProps) => {
             setStage(parseInt(props.forceStage))
     }, [props.forceStage]);
    
-    const totalQuestions = 1;//(props.questions?.length ?? 0); (todo decide if we are making this dynamic)   
+    const totalQuestions = 1; //(props.questions?.length ?? 0); (todo decide if we are making this dynamic)   
        
     const openingStage = 0;
-    const hubStage = 1
-    const questionStage = 2;    
+    const questionStage = 1;    
     const videoStage = questionStage + totalQuestions;
     const shareStage = videoStage + 1;
     const detailStage = shareStage + 1;
     const donateStage = detailStage + 1;
-    const totalStages = donateStage+1; // Number of steps in the flow
+    const totalStages = donateStage + 1; // Number of steps in the flow
     
     const updateSearchParams = (newStage: number): number => {
         if(newStage === shareStage) { //todo use the query to do this
@@ -74,7 +72,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     }
 
     return (
-        <Container className={`frame ${stage === hubStage ? 'hub-page' : ''}`} style={{ position: "relative" }}>
+        <Container className="frame" style={{ position: "relative" }}>
                 <div>
                     <div className="frame-content vote-controls">
                         {/* Stage Video */}
@@ -110,22 +108,6 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                                 <div className="landing-content__image">
                                     <img src={cryingEarth} alt="" />
                                 </div>
-                            </div>
-                        </Fade>
-
-                        <Fade in={stage === hubStage} unmountOnExit>
-                            <div>
-                                <HubComponent 
-                                    id="hub-panel" 
-                                    heading={props.hubHeading} 
-                                    subheading={props.hubSubheading} 
-                                    introText={props.hubIntroText} 
-                                    secondaryText={props.hubSecondaryText} 
-                                    hubvideo={props.videos?.hubVideo ?? { video: { id: '', video: { url: '', thumbnail: '' } }, thumbnailImage: { responsiveImage: { src: '' } } }}
-                                    hubLinksHeading={props.hubLinksHeading}
-                                    panelLink={props.hubPanelLink}
-                                    locale={props.locale}
-                                />
                             </div>
                         </Fade>
 

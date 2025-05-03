@@ -50,9 +50,9 @@ const VotingPage = (queryProps: TVotingQueryProps) => {
         localStorage.setItem(localStorageWatchedIdKey, "true");
     }
 
-    function voteChanged(choice:Choice){}
+    function voteChanged(choice: Choice){}
 
-    const fullData:TVotingPageExtended = {
+    const fullData: TVotingPageExtended = {
         locale: queryProps.locale,
         voteChangedCallBack: voteChanged,
         voteResultCallBack: setVoted,    
@@ -60,7 +60,6 @@ const VotingPage = (queryProps: TVotingQueryProps) => {
         voted:voted,
         watched:watched,
         ...data
-
     }
     
     const fetchData = useCallback(async () => {
