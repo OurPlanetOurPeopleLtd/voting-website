@@ -20,6 +20,24 @@
   gap: 1rem;
 }
 
+.landing-content__buttons {
+  display: flex;
+  flex-direction: column;
+
+  > button {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    gap: 1rem;
+
+    > button {
+      width: auto;
+    }
+  }
+}
+
 @media screen and (min-width: 1024px) {
   .question-controls {
     display: flex;

@@ -323,40 +323,114 @@ export function getDonateTranslation(languageCode: string): string {
 
 
 const nextTranslations: { [key: string]: string } = {
-    "en": "Get Started",
-    "fr": "Commencer",
-    "nl": "Beginnen",
-    "sr": "Почни",
-    "hi": "शुरू करें",
-    "ja": "開始する",
-    "zh": "开始使用",
-    "es": "Comenzar",
-    "pt": "Começar",
-    "no": "Kom i gang",
-    "de": "Loslegen",
-    "it": "Inizia",
-    "ru": "Начать",
-    "ko": "시작하기",
-    "ar": "ابدأ",
-    "sv": "Kom igång",
-    "da": "Kom i gang",
-    "fi": "Aloita",
-    "pl": "Rozpocznij",
-    "tr": "Başla",
-    "el": "Ξεκίνα",
-    "id": "Mulai",
-    "uk": "Почати",
-    "vi": "Bắt đầu",
-    "th": "เริ่มต้น",
-    "he": "התחל",
-    "hu": "Kezdés",
-    "ro": "Începe",
-    "cs": "Začít",
-    "sk": "Začať"
+    "en": "Get started (video)",
+    "fr": "Commencer (vidéo)",
+    "nl": "Beginnen (video)",
+    "sr": "Почни (видео)",
+    "hi": "शुरू करें (वीडियो)",
+    "ja": "開始する（ビデオ）",
+    "zh": "开始使用（视频）",
+    "es": "Comenzar (video)",
+    "pt": "Começar (vídeo)",
+    "no": "Kom i gang (video)",
+    "de": "Loslegen (Video)",
+    "it": "Inizia (video)",
+    "ru": "Начать (видео)",
+    "ko": "시작하기 (비디오)",
+    "ar": "ابدأ (فيديو)",
+    "sv": "Kom igång (video)",
+    "da": "Kom i gang (video)",
+    "fi": "Aloita (video)",
+    "pl": "Rozpocznij (wideo)",
+    "tr": "Başla (video)",
+    "el": "Ξεκίνα (βίντεο)",
+    "id": "Mulai (video)",
+    "uk": "Почати (відео)",
+    "vi": "Bắt đầu (video)",
+    "th": "เริ่มต้น (วิดีโอ)",
+    "he": "התחל (וידאו)",
+    "hu": "Kezdés (videó)",
+    "ro": "Începe (video)",
+    "cs": "Začít (video)",
+    "sk": "Začať (video)"
 };
 
 export function getNextTranslation(languageCode: string): string {
     return nextTranslations[languageCode] || nextTranslations["en"];
+}
+
+const summaryTranslations: { [key: string]: string } = {
+    "en": "Summary (PDF)",
+    "fr": "Résumé (PDF)",
+    "nl": "Samenvatting (PDF)",
+    "sr": "Резиме (PDF)",
+    "hi": "सारांश (PDF)",
+    "ja": "概要（PDF）",
+    "zh": "摘要（PDF）",
+    "es": "Resumen (PDF)",
+    "pt": "Resumo (PDF)",
+    "no": "Sammendrag (PDF)",
+    "de": "Zusammenfassung (PDF)",
+    "it": "Riepilogo (PDF)",
+    "ru": "Резюме (PDF)",
+    "ko": "요약 (PDF)",
+    "ar": "ملخص (PDF)",
+    "sv": "Sammanfattning (PDF)",
+    "da": "Resumé (PDF)",
+    "fi": "Yhteenveto (PDF)",
+    "pl": "Podsumowanie (PDF)",
+    "tr": "Özet (PDF)",
+    "el": "Περίληψη (PDF)",
+    "id": "Ringkasan (PDF)",
+    "uk": "Резюме (PDF)",
+    "vi": "Tóm tắt (PDF)",
+    "th": "สรุป (PDF)",
+    "he": "תקציר (PDF)",
+    "hu": "Összefoglaló (PDF)",
+    "ro": "Rezumat (PDF)",
+    "cs": "Souhrn (PDF)",
+    "sk": "Zhrnutie (PDF)"
+};
+
+export function getSummaryTranslation(languageCode: string): string {
+    return summaryTranslations[languageCode] || summaryTranslations["en"];
+}
+
+const detailTranslations: { [key: string]: string } = {
+    "en": "Detail (PDF)",
+    "fr": "Détail (PDF)",
+    "nl": "Detail (PDF)",
+    "sr": "Детаљ (PDF)",
+    "hi": "विवरण (PDF)",
+    "ja": "詳細（PDF）",
+    "zh": "详细信息（PDF）",
+    "es": "Detalle (PDF)",
+    "pt": "Detalhe (PDF)",
+    "no": "Detalj (PDF)",
+    "de": "Detail (PDF)",
+    "it": "Dettaglio (PDF)",
+    "ru": "Детали (PDF)",
+    "ko": "세부정보 (PDF)",
+    "ar": "تفصيل (PDF)",
+    "sv": "Detalj (PDF)",
+    "da": "Detalje (PDF)",
+    "fi": "Yksityiskohta (PDF)",
+    "pl": "Szczegóły (PDF)",
+    "tr": "Detay (PDF)",
+    "el": "Λεπτομέρεια (PDF)",
+    "id": "Detail (PDF)",
+    "uk": "Деталі (PDF)",
+    "vi": "Chi tiết (PDF)",
+    "th": "รายละเอียด (PDF)",
+    "he": "פרט (PDF)",
+    "hu": "Részlet (PDF)",
+    "ro": "Detaliu (PDF)",
+    "cs": "Detail (PDF)",
+    "sk": "Detail (PDF)"
+};
+
+export function getDetailTranslation(languageCode: string): string {
+    return detailTranslations[languageCode] || detailTranslations["en"];
 }
 
 interface CountryResultsTranslations {

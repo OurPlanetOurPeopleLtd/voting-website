@@ -20,6 +20,8 @@ export interface TVotingPage {
     videos?: TVideos;
     donateText?: { value: StructuredTextDocument };
     openingText?: { value: StructuredTextDocument };
+    summaryPdf?: { url: string };
+    detailPdf?: { url: string };
     heading?: string;
     introText: string;
     mainVideo: { id: string, video: Video };
@@ -55,8 +57,6 @@ export interface TVotingPage {
     showSharePanel: boolean;
     showStatistics: boolean;
     videoThumbnail: { responsiveImage: { src: string } } | undefined;
-
-
 }
 
 export interface TVotingPageExtended extends TVotingPage {

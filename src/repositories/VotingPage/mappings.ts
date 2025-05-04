@@ -49,6 +49,8 @@ export async function mapVotingPage(result: QueryResult): Promise<TVotingPage> {
             resultsHeading: votingPage.resultsHeading ?? "",
             
             openingText: votingPage.openingText,
+            summaryPdf: votingPage.summaryPdf ?? undefined,
+            detailPdf: votingPage.detailPdf ?? undefined,
             heading: votingPage.heading,
             introText: votingPage.introductionText ?? "",
             mainVideo: votingPage.mainVideo,

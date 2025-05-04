@@ -1,9 +1,11 @@
 import React from "react";
 
 import {TVideoProps, VideoControl} from "../components/VideoControl";
-import "./VideoWithPdfs.scss";
 import {TPdfWrapper} from "../repositories/Common/types";
-type TPdfs = {pdfWrappers:TPdfWrapper[]}
+
+import "./VideoWithPdfs.scss";
+
+type TPdfs = {pdfWrappers: TPdfWrapper[]}
 type TVideoPdfs = TPdfs & TVideoProps;
 
 export const VideoWithPdfs = (props: TVideoPdfs) => {

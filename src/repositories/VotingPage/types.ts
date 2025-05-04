@@ -34,6 +34,8 @@ export interface VotingPageData {
 
     donateText: {value: StructuredTextDocument};
     openingText: {value: StructuredTextDocument};
+    summaryPdf: {url: string};
+    detailPdf: {url: string};
     mainVideo: { id: string, video: Video };
     postVoteVideo: { id: string, video: Video };
     postThankYou: { id: string, video: Video };    

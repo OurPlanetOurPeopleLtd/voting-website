@@ -26,5 +26,5 @@ export interface TStagedFlowProps extends TVotingPage {
     openingText?: { value: StructuredTextDocument };
     
     
-    forceStage?:string;
+    forceStage?: string;
 }

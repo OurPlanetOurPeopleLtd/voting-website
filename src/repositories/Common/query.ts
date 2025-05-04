@@ -169,6 +169,12 @@ const votingPage = `
             }
             
             openingText{value},
+            summaryPdf {
+             url
+            },
+            detailPdf {
+              url
+            },
             shareHeading,
             landingHeading,
             votingHeading,

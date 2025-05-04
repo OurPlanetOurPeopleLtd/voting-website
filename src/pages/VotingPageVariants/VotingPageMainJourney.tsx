@@ -9,7 +9,7 @@ import {TStagedFlowProps} from "./TStagedFlowProps";
 import {VideoControl} from "../../components/VideoControl";
 import {VideoWithReference} from "../VideoWithReference";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import {getNextTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
+import {getNextTranslation, getSummaryTranslation, getDetailTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
 import { TVotingPageExtended } from "../../repositories/VotingPage/model";
 
 import cryingEarth from "../../crying-earth.png";
@@ -102,7 +102,23 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                                         <StructuredText data={props.openingText}/>
                                     </div>
                                     
-                                    <Button className="btn btn--white" onClick={nextStage}>{getNextTranslation(props.locale)}</Button>
+                                    <div className="landing-content__buttons">
+                                        <a href={(`/${props.locale}/the-problem`)} className="btn btn--white">
+                                            {getNextTranslation(props.locale)}
+                                        </a>
+
+                                        {props.summaryPdf?.url && (
+                                            <a href={props.summaryPdf.url} target="_blank" className="btn btn--white">
+                                                {getSummaryTranslation(props.locale)}
+                                            </a>
+                                        )}
+
+                                        {props.detailPdf?.url && (
+                                            <a href={props.detailPdf.url} target="_blank" className="btn btn--white">
+                                                {getDetailTranslation(props.locale)}
+                                            </a>
+                                        )}
+                                    </div>
                                 </div>
 
                                 <div className="landing-content__image">

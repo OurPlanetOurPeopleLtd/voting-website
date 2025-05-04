@@ -13,7 +13,7 @@ export const getAllSlugs = async () => {
     return ["Original"];
 }
 
-export const getVotingPageJson = (slug: string, locale:string, staticData:boolean = true) => {
+export const getVotingPageJson = (slug: string, locale: string, staticData: boolean = true) => {
     const query = generateVotingPageQuery(slug, locale);
 
     const apiPromise = fetchDataDato<QueryResult>(query).then(mapVotingPage);
