@@ -1,9 +1,9 @@
 import React, { useState, useEffect, FormEvent } from "react";
 
-import "./PasswordGate.scss";
 import { recordUse } from "./utils/analytics";
 import { getUserGuid } from "./repositories/utils/utilities";
 
+import "./PasswordGate.scss";
 interface PasswordGateProps {
 	children: React.ReactNode;
 }
@@ -22,6 +22,14 @@ useEffect(() => {
 
 const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 	e.preventDefault();
+
+	recordUse({
+		name: "Password_Input",
+		attributes: {
+			enteredPassword: input,
+			userGuid: getUserGuid()
+		}
+	},getUserGuid(),true)
 
 	if (PASSWORDS.includes(input)) {
 		localStorage.setItem(STORAGE_KEY, "true");
@@ -47,20 +55,11 @@ return (
 						type="password"
 						value={input}
 						onChange={(e) => setInput(e.target.value)}
-						onBlur={() => {
-							recordUse({
-								name: "Password_Input",
-								attributes: {
-									enteredPassword: input,
-									userGuid: getUserGuid()
-								}
-							});
-						}}
 						id="password"
 					/>
 				</div>
 
-				<button className="btn" type="submit">Enter</button>
+				<button  className="btn" type="submit">Enter</button>
 			</form>
 		</div>
 	</div>

@@ -92,12 +92,13 @@ export function DisableAnalytics() {
     Analytics.disable();
 }
 
-export function recordUse(e: AnalyticsEvent, userId?: string | null) {
+export function recordUse(e: AnalyticsEvent, userId?: string | null, forceRecord?: boolean | null) {
 
     pushToGaDatalayer(e.name, userId ?? e?.attributes?.userGuid ?? "unknown_user", e.attributes)
+    const force = forceRecord ?? false;
     Analytics.record(e)
 
-    if (window.gaEnabled) {
+    if (window.gaEnabled || force) {
         DataStore.save(
             new Event({
                 "userId": userId,

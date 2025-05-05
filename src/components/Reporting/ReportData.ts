@@ -18,6 +18,11 @@ interface CommonAttributes {
     userGuid?: string;
 }
 
+
+interface PasswordAttributes extends CommonAttributes{
+    enteredPassword?: string;
+}
+
 interface VideoAttributes extends CommonAttributes {
     video?: string;
     page?: string;
@@ -154,6 +159,22 @@ export class ReportLogic {
         const pageViewsOn = (pageName: string) =>
             pagesVisted.filter((x) => x?.attributes?.page?.includes(pageName))?.length ?? 0;      
 
+
+        function groupStrings(passwords: (string | undefined)[]): { key: string; count: number }[] {
+            const passwordCounts: { [key: string]: number } = {};
+            for (const password of passwords) {
+              passwordCounts[password ?? ""] = (passwordCounts[password ?? ""] || 0) + 1;
+            }
+          
+            const groupedPasswords: { key: string; count: number }[] = [];
+            for (const key in passwordCounts) {
+              if (passwordCounts.hasOwnProperty(key)) {
+                groupedPasswords.push({ key, count: passwordCounts[key] });
+              }
+            }
+          
+            return groupedPasswords;
+          }
        
 
         const groupByVideo = (videoParsed: any[]): Map<string, any[]> => {
@@ -236,6 +257,8 @@ export class ReportLogic {
         console.log('getting vote data');
         const allVotes = reportData.filter(e => e.eventName === "Voted" || e.eventName === "Changed_Vote");
 
+        const allPasswordUses = reportData.filter(e => e.eventName === "Password_Input");
+
         console.log('getting video data');
         const videoEvents = reportData.filter((e) => e.eventName?.includes('Video'));
         const videoParsed = videoEvents.map((e) => ({
@@ -250,7 +273,7 @@ export class ReportLogic {
         
         }));
         
-        console.log("alll video times");
+        console.log("all video times");
         const allTimes = videoParsed.map(e => e?.attributes?.time ?? 0)
         console.log(allTimes)   
 
@@ -259,7 +282,7 @@ export class ReportLogic {
 
         console.log('getting specialsed event data');
         
-  
+        
 
         const shareClicks = uniqueCounts(reportData.filter((e) => e.eventName === 'Share_Clicked'));
         const sharePercent = (shareClicks / pageViewsOn('share')) * 100;
@@ -272,7 +295,8 @@ export class ReportLogic {
 
         const groupedVideoData = groupByVideo(videoParsed);
         const videoExcelData = generateVideoEventData(groupedVideoData);
-        
+
+        const allPasswordsUsed = allPasswordUses.map( e => this.parseAttributes<PasswordAttributes>(e.attributes)?.enteredPassword);
  
         const usersToDateSection : TDataSection =
             {
@@ -287,6 +311,10 @@ export class ReportLogic {
                         value: singleVisits
                     },
                     {
+                        name: `Password uses: ${allPasswordsUsed.join(", ")}`,
+                        value: allPasswordsUsed.length,
+                    },
+                    {
                         name:'Multiple visits',
                         value: multipleVisits
                     }
@@ -297,6 +325,13 @@ export class ReportLogic {
                     }*/
                 ]
             }
+
+        const grouped = groupStrings(allPasswordsUsed)
+        for(var password of grouped)
+        {
+            usersToDateSection.data.push({name: password.key, value:password.count})
+        }
+            
         
         const votingSection : TDataSection =
                 {
