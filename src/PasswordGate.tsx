@@ -23,17 +23,17 @@ useEffect(() => {
 const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 	e.preventDefault();
 
-	recordUse({
-		name: "Password_Input",
-		attributes: {
-			enteredPassword: input,
-			userGuid: getUserGuid()
-		}
-	},getUserGuid(),true)
-
 	if (PASSWORDS.includes(input)) {
 		localStorage.setItem(STORAGE_KEY, "true");
 		setUnlocked(true);
+
+		recordUse({
+			name: "Password_Input",
+			attributes: {
+				enteredPassword: input,
+				userGuid: getUserGuid()
+			}
+		},getUserGuid(),true)
 	} else {
 		alert("Incorrect password.");
 	}
