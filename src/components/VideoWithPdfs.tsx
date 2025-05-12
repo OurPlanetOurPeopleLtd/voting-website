@@ -16,9 +16,11 @@ export const VideoWithPdfs = (props: TVideoPdfs) => {
     
     return (
         <div className="video-reference-container">
-            <div className="video-container video-container--with-pdf">
-                <VideoControl {...props}  />
-            </div>
+            {props.datoVideo && (
+                <div className="video-container video-container--with-pdf">
+                    <VideoControl {...props} />
+                </div>
+            )}
 
             <div className="">
                 <ul className="pdf-list">
