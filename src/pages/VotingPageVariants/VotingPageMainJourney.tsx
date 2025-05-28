@@ -113,11 +113,9 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                                             </a>
                                         )}
 
-                                        {props.detailPdf?.url && (
-                                            <a href={props.detailPdf.url} target="_blank" className="btn btn--white">
-                                                {getDetailTranslation(props.locale)}
-                                            </a>
-                                        )}
+                                        <a href={(`/${props.locale}/registration`)} className="btn btn--white">
+                                            {getDetailTranslation(props.locale)}
+                                        </a>
                                     </div>
                                 </div>
 
