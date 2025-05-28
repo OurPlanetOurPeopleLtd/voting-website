@@ -5,10 +5,12 @@ import {v4 as generateGuid} from "uuid";
 import {recordUse} from "../utils/analytics";
 import {VideoControl} from "../components/VideoControl";
 
-import "./RegistrationPage.scss";
 import {getRegistrationPage} from "../repositories/Registration/request";
 import {TRegistrationPage, TRegistrationProps} from "../repositories/Registration/model";
 import {localStorageVotingIdKey} from "../repositories/utils/utilities";
+import { getTranslation } from "../repositories/utils/extraTranslations";
+
+import "./RegistrationPage.scss";
 
 export const RegistrationPage = ({locale}: TRegistrationProps) => {
     const [emailExistsError, setEmailExists] = useState(false);
@@ -120,11 +122,13 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                             <VideoControl fullScreenOnClick={false} datoVideo={data.mainVideo?.video?.video} pageTitle={data.title}
                                 videoThumbnail={data.mainVideo?.thumbnailImage.responsiveImage.src}
                                 videoTitle={data.mainVideo?.video?.video?.title ?? ""} />
+
+                            <p className="reg-helper">{getTranslation(locale, "registrationHelper")} <a href="mailto:generalcomments@OurPlanetOurPeople.com?subject=Members enquiry">generalcomments@OurPlanetOurPeople.com</a>.</p>
                     </div>
 
                     {
                         thankYouForRegister ? <div className="form-status-message" style={{marginTop: "1rem"}}><div style={{color: "#298e33", borderColor: "#298e33", fontWeight: "600"}}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={40} height={40} aria-hidden="true" fill="#298e33"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg><h2>{data.thankYou}</h2></div></div> :
-                        
+
                         (<div className={"form-container"}>
                             <div className="form-left">
                                 <h2>{data.registrationHeading}</h2>
@@ -192,7 +196,6 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                                         {showDeregisterMessage  === "showSuccess" ? <div aria-live="polite"><svg xmlns="http://www.w3.org/2000/svg" width={30} height={30} viewBox="0 0 512 512" aria-hidden="true"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>{data.deregisterMessage}</div> : null}
                                         {showDeregisterMessage  === "showFail" ? <div aria-live="polite"><svg xmlns="http://www.w3.org/2000/svg" width={30} height={30} viewBox="0 0 512 512" aria-hidden="true"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>{data.noEmailValidation}</div> : null}
                                         {showDeregisterMessage === "hide" ? <div aria-live="polite"></div> : null}
-
                                     </div>
 
                                     <div>

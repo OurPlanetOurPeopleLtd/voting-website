@@ -468,62 +468,72 @@ const microCopyTranslations: Translations = {
         "videoPrompt": "To share our site via social media or direct contacts, visit our",
         "shareButton": "sharing page",
         "inDepthLink": "visiting our In Depth page",
-        "orFindOutMore": "Or find out more by"
+        "orFindOutMore": "Or find out more by",
+        "registrationHelper": "For any enquiries related to the registration or de-registration process, please email us your query at"
     },
-   "fr": {
+    "fr": {
         "videoPrompt": "Pour partager notre site via les réseaux sociaux ou des contacts directs, visitez notre",
         "shareButton": "page de partage",
         "inDepthLink": "en visitant notre page Approfondie",
-        "orFindOutMore": "Ou découvrez-en plus en"
+        "orFindOutMore": "Ou découvrez-en plus en",
+        "registrationHelper": "Pour toute question relative au processus d'inscription ou de désinscription, veuillez nous envoyer votre demande par e-mail à"
     },
     "nl": {
         "videoPrompt": "Om onze site te delen via sociale media of directe contacten, ga naar onze",
         "shareButton": "deelpagina",
         "inDepthLink": "door onze In Depth-pagina te bezoeken",
-        "orFindOutMore": "Of kom meer te weten door"
+        "orFindOutMore": "Of kom meer te weten door",
+        "registrationHelper": "Voor vragen over het registratie- of deregistratieproces kunt u ons een e-mail sturen op"
     },
     "sr": {
         "videoPrompt": "Da biste podelili naš sajt putem društvenih mreža ili direktnih kontakata, posetite našu",
         "shareButton": "stranicu za deljenje",
         "inDepthLink": "posetom našoj In Depth stranici",
-        "orFindOutMore": "Ili saznajte više tako što ćete"
+        "orFindOutMore": "Ili saznajte više tako što ćete",
+        "registrationHelper": "Za sva pitanja u vezi sa procesom registracije ili odjave, pošaljite nam svoj upit putem e-pošte na"
     },
     "hi": {
         "videoPrompt": "हमारी साइट को सोशल मीडिया या सीधे संपर्कों के माध्यम से साझा करने के लिए, कृपया हमारी",
         "shareButton": "साझा करने वाला पृष्ठ",
         "inDepthLink": "हमारे इन डेप्थ पेज पर जाकर",
-        "orFindOutMore": "या अधिक जानने के लिए"
+        "orFindOutMore": "या अधिक जानने के लिए",
+        "registrationHelper": "पंजीकरण या डीरजिस्ट्रेशन प्रक्रिया से संबंधित किसी भी प्रश्न के लिए, कृपया हमें इस ईमेल पते पर अपनी क्वेरी भेजें"
     },
     "ja": {
         "videoPrompt": "当サイトをSNSや直接の連絡で共有するには、こちらの",
         "shareButton": "共有ページ",
         "inDepthLink": "詳細ページをご覧ください",
-        "orFindOutMore": "または詳細ページをご覧ください"
+        "orFindOutMore": "または詳細ページをご覧ください",
+        "registrationHelper": "登録または登録解除の手続きに関するご質問は、以下のメールアドレスまでお問い合わせください"
     },
     "zh": {
         "videoPrompt": "若要通过社交媒体或直接联系人分享我们的网站，请访问我们的",
         "shareButton": "分享页面",
         "inDepthLink": "访问我们的深入页面",
-        "orFindOutMore": "或访问我们的深入页面以了解更多信息"
+        "orFindOutMore": "或访问我们的深入页面以了解更多信息",
+        "registrationHelper": "如有关于注册或取消注册流程的任何疑问，请通过电子邮件将您的问题发送至"
     },
     "es": {
         "videoPrompt": "Para compartir nuestro sitio a través de redes sociales o contactos directos, visite nuestra",
         "shareButton": "página de compartir",
         "inDepthLink": "visitando nuestra página En profundidad",
-        "orFindOutMore": "O descubra más visitando nuestra página En profundidad"
+        "orFindOutMore": "O descubra más visitando nuestra página En profundidad",
+        "registrationHelper": "Para cualquier consulta relacionada con el proceso de registro o cancelación de registro, envíenos su consulta por correo electrónico a"
     },
     "pt": {
         "videoPrompt": "Para compartilhar nosso site via redes sociais ou contatos diretos, visite nossa",
         "shareButton": "página de compartilhamento",
         "inDepthLink": "visitando nossa página Detalhada",
-        "orFindOutMore": "Ou saiba mais visitando nossa página Detalhada"
+        "orFindOutMore": "Ou saiba mais visitando nossa página Detalhada",
+        "registrationHelper": "Para quaisquer dúvidas relacionadas ao processo de registro ou cancelamento, envie sua pergunta por e-mail para"
     },
     "no": {
         "videoPrompt": "For å dele nettstedet vårt via sosiale medier eller direkte kontakter, besøk vår",
         "shareButton": "delingsside",
         "inDepthLink": "ved å besøke vår In Depth-side",
-        "orFindOutMore": "Eller finn ut mer ved å"
-    }   
+        "orFindOutMore": "Eller finn ut mer ved å",
+        "registrationHelper": "For spørsmål knyttet til registrerings- eller avregistreringsprosessen, vennligst send oss din forespørsel på e-post til"
+    }
 };
 
 export function getTranslation(languageCode: string, key: string): string {
