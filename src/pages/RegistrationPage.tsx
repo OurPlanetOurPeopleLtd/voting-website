@@ -115,16 +115,17 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                 <h1>{data.title}</h1>
                 <p>{data.subtitle}</p>
 
-                <div className="reg-video">
-                        <VideoControl fullScreenOnClick={false} datoVideo={data.mainVideo?.video?.video} pageTitle={data.title}
-                              videoThumbnail={data.mainVideo?.thumbnailImage.responsiveImage.src}
-                              videoTitle={data.mainVideo?.video?.video?.title ?? ""} />
-                </div>
-            </div>
+                <div className="reg-container">
+                    <div className="reg-video">
+                            <VideoControl fullScreenOnClick={false} datoVideo={data.mainVideo?.video?.video} pageTitle={data.title}
+                                videoThumbnail={data.mainVideo?.thumbnailImage.responsiveImage.src}
+                                videoTitle={data.mainVideo?.video?.video?.title ?? ""} />
+                    </div>
 
-            {
-                thankYouForRegister ? <div className="form-status-message" style={{marginTop: "1rem"}}><div style={{color: "#298e33", borderColor: "#298e33", fontWeight: "600"}}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={40} height={40} aria-hidden="true" fill="#298e33"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg><h2>{data.thankYou}</h2></div></div> :
-                    (<div className={"form-container"}>
+                    {
+                        thankYouForRegister ? <div className="form-status-message" style={{marginTop: "1rem"}}><div style={{color: "#298e33", borderColor: "#298e33", fontWeight: "600"}}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={40} height={40} aria-hidden="true" fill="#298e33"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg><h2>{data.thankYou}</h2></div></div> :
+                        
+                        (<div className={"form-container"}>
                             <div className="form-left">
                                 <h2>{data.registrationHeading}</h2>
 
@@ -212,8 +213,9 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                                 </form>
                             </div>
                         </div>
-                    )
-            }
+                    )}
+                </div>
+            </div>
         </div>
     );
 }

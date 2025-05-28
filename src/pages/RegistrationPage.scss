@@ -85,18 +85,18 @@ label.register-form__privacy-label {
 }
 
 @media screen and (min-width: 1024px) {
+    .reg-container {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .reg-video {
+        flex: 1 1 100%;
+        max-width: 50%;
+    }
+
     .form-container {
-        flex-direction: row;
-    }
-
-    .register-form {
-        padding-right: 4rem;
-    }
-
-    .form-right {
-        padding-left: 4rem;
-        padding-top: 0;
-        border-top: 0;
-        border-left: 1px solid #e6e3e3;
+        margin-top: 0;
+        padding-top: .5rem;
     }
 }
