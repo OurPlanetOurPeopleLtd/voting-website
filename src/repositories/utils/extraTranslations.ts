@@ -397,7 +397,7 @@ export function getSummaryTranslation(languageCode: string): string {
 }
 
 const detailTranslations: { [key: string]: string } = {
-    "en": "Become a member",
+    "en": "Becoming a member",
     "fr": "Devenir membre",
     "nl": "Lid worden",
     "sr": "Постаните члан",
