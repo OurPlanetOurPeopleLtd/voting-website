@@ -134,6 +134,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                                                     datoVideo={props.videos?.summaryVideo?.video?.video}
                                                     videoThumbnail={props.videos?.summaryVideo?.thumbnailImage?.responsiveImage.src}
                                                     locale={props.locale}
+                                                    onFinish={() => setOpenDialog(null)}
                                                 />
                                             </DialogModal>
                                         </div>
@@ -160,6 +161,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                                                     datoVideo={props.videos?.membersVideo?.video?.video}
                                                     videoThumbnail={props.videos?.membersVideo?.thumbnailImage?.responsiveImage.src}
                                                     locale={props.locale}
+                                                    onFinish={() => setOpenDialog(null)}
                                                 />
                                             </DialogModal>
                                         </div>
