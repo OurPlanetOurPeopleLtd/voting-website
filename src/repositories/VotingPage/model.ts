@@ -9,6 +9,8 @@ export interface TVideos {
     thankYouVideo: TVideoThumbnail;
     landingVideo: TVideoThumbnail;
     hubVideo: TVideoThumbnail;
+    summaryVideo: TVideoThumbnail;
+    membersVideo: TVideoThumbnail;
 
     prop1: TVideoThumbnail;
     prop2: TVideoThumbnail;
@@ -16,12 +18,10 @@ export interface TVideos {
 }
 
 export interface TVotingPage {
-
     videos?: TVideos;
     donateText?: { value: StructuredTextDocument };
     openingText?: { value: StructuredTextDocument };
     summaryPdf?: { url: string };
-    detailPdf?: { url: string };
     heading?: string;
     introText: string;
     mainVideo: { id: string, video: Video };

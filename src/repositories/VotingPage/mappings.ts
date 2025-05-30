@@ -18,6 +18,8 @@ export async function mapVotingPage(result: QueryResult): Promise<TVotingPage> {
                 detailVideo: votingPage.detailVideo,
                 thankYouVideo: votingPage.thankYouVideo,
                 hubVideo: votingPage.hubVideo,
+                summaryVideo: votingPage.summaryVideo,
+                membersVideo: votingPage.membersVideo,
 
                 prop1: votingPage.proposition1,
                 prop2: votingPage.proposition2,
@@ -50,7 +52,6 @@ export async function mapVotingPage(result: QueryResult): Promise<TVotingPage> {
             
             openingText: votingPage.openingText,
             summaryPdf: votingPage.summaryPdf ?? undefined,
-            detailPdf: votingPage.detailPdf ?? undefined,
             heading: votingPage.heading,
             introText: votingPage.introductionText ?? "",
             mainVideo: votingPage.mainVideo,

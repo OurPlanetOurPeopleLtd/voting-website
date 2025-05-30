@@ -153,6 +153,14 @@ const votingPage = `
                 video${videoBlock}
                 thumbnailImage${imgBlock}
             }
+                summaryVideo{
+                video${videoBlock}
+                thumbnailImage${imgBlock}
+            }
+                membersVideo{
+                video${videoBlock}
+                thumbnailImage${imgBlock}
+            }
             
             
              proposition1{
@@ -171,9 +179,6 @@ const votingPage = `
             openingText{value},
             summaryPdf {
              url
-            },
-            detailPdf {
-              url
             },
             shareHeading,
             landingHeading,

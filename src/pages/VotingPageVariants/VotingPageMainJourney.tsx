@@ -8,6 +8,7 @@ import {StructuredText} from "react-datocms";
 import {TStagedFlowProps} from "./TStagedFlowProps";
 import {VideoControl} from "../../components/VideoControl";
 import {VideoWithReference} from "../VideoWithReference";
+import { DialogModal } from "../../components/DialogModal";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {getNextTranslation, getSummaryTranslation, getDetailTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
 import { TVotingPageExtended } from "../../repositories/VotingPage/model";
@@ -23,6 +24,8 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     const stageFromUrl = stageAsString ? parseInt(stageAsString) : undefined;
 
     const [stage, setStage] = useState(stageFromUrl?? 0);
+
+    const [openDialog, setOpenDialog] = useState<null | "summary" | "members">(null);
 
     useEffect(() => {
         if(props.forceStage)
@@ -103,9 +106,18 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                                     </div>
                                     
                                     <div className="landing-content__buttons">
-                                        <a href={(`/${props.locale}/the-problem`)} className="btn btn--white">
-                                            {getNextTranslation(props.locale)}
-                                        </a>
+                                        {props.videos?.summaryVideo && (
+                                            <div>                                      
+                                                <button onClick={() => setOpenDialog("summary")} className="btn btn--white">{getNextTranslation(props.locale)}</button>
+
+                                                <DialogModal open={openDialog === "summary"} onClose={() => setOpenDialog(null)}>
+                                                    <VideoControl locale={props.locale} fullScreenOnClick={true}
+                                                        datoVideo={ props.videos?.summaryVideo?.video?.video  }
+                                                        leftShift={-50}
+                                                        videoThumbnail={ props.videos?.summaryVideo.thumbnailImage?.responsiveImage.src} />
+                                                </DialogModal>
+                                            </div>
+                                        )}
 
                                         {props.summaryPdf?.url && (
                                             <a href={props.summaryPdf.url} target="_blank" className="btn btn--white">
@@ -113,9 +125,18 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                                             </a>
                                         )}
 
-                                        <a href={(`/${props.locale}/registration`)} className="btn btn--white">
-                                            {getDetailTranslation(props.locale)}
-                                        </a>
+                                        {props.videos?.membersVideo && (
+                                            <div>
+                                                <button onClick={() => setOpenDialog("members")} className="btn btn--white">{getDetailTranslation(props.locale)}</button>
+
+                                                <DialogModal open={openDialog === "members"} onClose={() => setOpenDialog(null)}>
+                                                    <VideoControl locale={props.locale} fullScreenOnClick={true}
+                                                        datoVideo={ props.videos?.membersVideo?.video?.video  }
+                                                        leftShift={-50}
+                                                        videoThumbnail={ props.videos?.membersVideo.thumbnailImage?.responsiveImage.src} />
+                                                </DialogModal>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
