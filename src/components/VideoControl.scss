@@ -23,7 +23,8 @@ mux-player {
     .question-controls &,
     .hub-panel-right &,
     .thank-you-content &,
-    .reg-video & {
+    .reg-video &,
+    .DialogModal & {
       max-width: 100%;
     }
   }

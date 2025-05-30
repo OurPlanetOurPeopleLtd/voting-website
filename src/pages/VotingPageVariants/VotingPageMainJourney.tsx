@@ -112,6 +112,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 
                                                 <DialogModal open={openDialog === "summary"} onClose={() => setOpenDialog(null)}>
                                                     <VideoControl locale={props.locale} fullScreenOnClick={true}
+                                                        isOpen={openDialog === "summary"}
                                                         datoVideo={ props.videos?.summaryVideo?.video?.video  }
                                                         leftShift={-50}
                                                         videoThumbnail={ props.videos?.summaryVideo.thumbnailImage?.responsiveImage.src} />
@@ -131,6 +132,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 
                                                 <DialogModal open={openDialog === "members"} onClose={() => setOpenDialog(null)}>
                                                     <VideoControl locale={props.locale} fullScreenOnClick={true}
+                                                        isOpen={openDialog === "members"}
                                                         datoVideo={ props.videos?.membersVideo?.video?.video  }
                                                         leftShift={-50}
                                                         videoThumbnail={ props.videos?.membersVideo.thumbnailImage?.responsiveImage.src} />

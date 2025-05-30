@@ -7,6 +7,7 @@ import {recordUse} from "../utils/analytics";
 import "./VideoControl.scss"
 
 export type TVideoProps = {
+    isOpen ?: boolean,
     onFinish?: () => void,
     onPause?: () => void,
     onPlay?: () => void,
@@ -40,6 +41,7 @@ interface MuxPlayer {
 }
 
 export const VideoControl = ({
+        isOpen,
         onFinish,
         onPlay,
         onPause,
@@ -52,6 +54,12 @@ export const VideoControl = ({
     }: TVideoProps) => {
 
     const [goFullScreenOnClick, setGoFullScreenOnClick] = useState(fullScreenOnClick)
+
+    useEffect(() => {
+        if (!isOpen) {
+          forcePause();
+        }
+      }, [isOpen]);
 
     // Function to toggle fullscreen
     function goFullScreen() {
