@@ -25,6 +25,8 @@ export const DialogModal = forwardRef<DialogModalRef, DialogModalProps>(
             if (videos.length > 0) {
               videos.forEach((video) => {
                 video.pause();
+                video.currentTime = 0; // Reset to start
+                video.load();
               });
             } else {
               // If no native videos found, try to pause mux-player(s)
@@ -32,9 +34,11 @@ export const DialogModal = forwardRef<DialogModalRef, DialogModalProps>(
               muxPlayers.forEach((player) => {
                 // mux-player supports .pause()
                 (player as any).pause?.();
+                (player as any).currentTime = 0; // Reset to start
+                (player as any).load?.();
               });
             }
-          }
+        }
     }));
 
     useEffect(() => {
