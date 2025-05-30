@@ -1,4 +1,4 @@
-﻿import React, {useEffect, useState} from "react";
+﻿import React, {useEffect, useRef, useState} from "react";
 import Donation from "../../components/Donation";
 import {SharingControls} from "../../components/SharingControls";
 import {Button, Container, Fade} from "react-bootstrap";
@@ -8,7 +8,7 @@ import {StructuredText} from "react-datocms";
 import {TStagedFlowProps} from "./TStagedFlowProps";
 import {VideoControl} from "../../components/VideoControl";
 import {VideoWithReference} from "../VideoWithReference";
-import { DialogModal } from "../../components/DialogModal";
+import { DialogModal, DialogModalRef } from "../../components/DialogModal";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {getNextTranslation, getSummaryTranslation, getDetailTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
 import { TVotingPageExtended } from "../../repositories/VotingPage/model";
@@ -23,15 +23,28 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     const stageAsString = props.forceStage ? props.forceStage : searchParams.get("stage");
     const stageFromUrl = stageAsString ? parseInt(stageAsString) : undefined;
 
-    const [stage, setStage] = useState(stageFromUrl?? 0);
-
-    const [openDialog, setOpenDialog] = useState<null | "summary" | "members">(null);
+    const [stage, setStage] = useState(stageFromUrl ?? 0);
 
     useEffect(() => {
         if(props.forceStage)
             setStage(parseInt(props.forceStage))
     }, [props.forceStage]);
-   
+
+    // State to track which modal/dialog is open or none
+    const [openDialog, setOpenDialog] = useState<null | "summary" | "members">(null);
+
+    // Create refs for each DialogModal instance
+    const summaryModalRef = useRef<DialogModalRef>(null);
+    const membersModalRef = useRef<DialogModalRef>(null);
+
+    // When modal closes, call pause() on all videos for safety
+    useEffect(() => {
+        if (openDialog === null) {
+            summaryModalRef.current?.pause();
+            membersModalRef.current?.pause();
+        }
+    }, [openDialog]);
+    
     const totalQuestions = 1; //(props.questions?.length ?? 0); (todo decide if we are making this dynamic)   
        
     const openingStage = 0;
@@ -76,140 +89,152 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 
     return (
         <Container className="frame" style={{ position: "relative" }}>
-                <div>
-                    <div className="frame-content vote-controls">
-                        {/* Stage Video */}
-                        <Fade in={stage === videoStage} unmountOnExit>
-                            <div className="thank-you-content">
-                                <div className="frame__intro">
-                                    <h1>{props.thanksHeading}</h1>
-                       
-                                    <p>
-                                        {getTranslation(props.locale, "videoPrompt")}{" "}
+            <div>
+                <div className="frame-content vote-controls">
+                    {/* Stage Video */}
+                    <Fade in={stage === videoStage} unmountOnExit>
+                        <div className="thank-you-content">
+                            <div className="frame__intro">
+                                <h1>{props.thanksHeading}</h1>
+                   
+                                <p>
+                                    {getTranslation(props.locale, "videoPrompt")}{" "}
 
-                                        <button onClick={nextStage}>
-                                            {getTranslation(props.locale, "shareButton")}
-                                        </button>
-                                        .
-                                    </p>
-                                </div>
+                                    <button onClick={nextStage}>
+                                        {getTranslation(props.locale, "shareButton")}
+                                    </button>
+                                    .
+                                </p>
                             </div>
-                        </Fade>
+                        </div>
+                    </Fade>
 
-                        <Fade in={stage === openingStage} unmountOnExit>
-                            <div className="landing-content">
-                                <div className={"verticalFrameCentre landing-content__text"}>
-                                    <h1 className="frame__heading">{props.landingHeading}</h1>
+                    <Fade in={stage === openingStage} unmountOnExit>
+                        <div className="landing-content">
+                            <div className={"verticalFrameCentre landing-content__text"}>
+                                <h1 className="frame__heading">{props.landingHeading}</h1>
 
-                                    <div style={{fontSize:"1.2rem"}}>
-                                        <StructuredText data={props.openingText}/>
-                                    </div>
-                                    
-                                    <div className="landing-content__buttons">
-                                        {props.videos?.summaryVideo && (
-                                            <div>                                      
-                                                <button onClick={() => setOpenDialog("summary")} className="btn btn--white">{getNextTranslation(props.locale)}</button>
-
-                                                <DialogModal open={openDialog === "summary"} onClose={() => setOpenDialog(null)}>
-                                                    <VideoControl locale={props.locale} fullScreenOnClick={true}
-                                                        isOpen={openDialog === "summary"}
-                                                        datoVideo={ props.videos?.summaryVideo?.video?.video  }
-                                                        leftShift={-50}
-                                                        videoThumbnail={ props.videos?.summaryVideo.thumbnailImage?.responsiveImage.src} />
-                                                </DialogModal>
-                                            </div>
-                                        )}
-
-                                        {props.summaryPdf?.url && (
-                                            <a href={props.summaryPdf.url} target="_blank" className="btn btn--white">
-                                                {getSummaryTranslation(props.locale)}
-                                            </a>
-                                        )}
-
-                                        {props.videos?.membersVideo && (
-                                            <div>
-                                                <button onClick={() => setOpenDialog("members")} className="btn btn--white">{getDetailTranslation(props.locale)}</button>
-
-                                                <DialogModal open={openDialog === "members"} onClose={() => setOpenDialog(null)}>
-                                                    <VideoControl locale={props.locale} fullScreenOnClick={true}
-                                                        isOpen={openDialog === "members"}
-                                                        datoVideo={ props.videos?.membersVideo?.video?.video  }
-                                                        leftShift={-50}
-                                                        videoThumbnail={ props.videos?.membersVideo.thumbnailImage?.responsiveImage.src} />
-                                                </DialogModal>
-                                            </div>
-                                        )}
-                                    </div>
+                                <div style={{fontSize:"1.2rem"}}>
+                                    <StructuredText data={props.openingText}/>
                                 </div>
+                                
+                                <div className="landing-content__buttons">
+                                    {props.videos?.summaryVideo && (
+                                        <div>                                      
+                                            <button onClick={() => setOpenDialog("summary")} className="btn btn--white">{getNextTranslation(props.locale)}</button>
 
-                                <div className="landing-content__image">
-                                    <img src={cryingEarth} alt="" />
-                                </div>
-                            </div>
-                        </Fade>
-
-                        {/* Stage Questions */}
-                        <Fade in={stage === questionStage } unmountOnExit>
-                            <div className={"vote-controls question-controls"}>
-                                <div className={"contentColumn"}>
-                                    <h1 className="frame__heading" style={{paddingLeft: "1rem"}}>{props.votingHeading}</h1>
-                                    <QuestionComponent {...props} {...questionOne} voteChangedCallBack={extendedVoteCallback}/>
-                                </div>
-        
-                                <div className={"videoColumn voteVideo"}>
-                                    <VideoControl locale={props.locale} fullScreenOnClick={true}
-                                                datoVideo={ props.videos?.prop1?.video?.video  }
-                                                leftShift={-50}
-                                                videoThumbnail={ props.videos?.prop1.thumbnailImage?.responsiveImage.src} />
-                               
-                                </div>
-                            </div>
-                        </Fade>
-                
-                        {/* Stage: Sharing */}
-                        <Fade in={stage === shareStage} unmountOnExit>
-                            <div>
-                                <div>
-                                    <SharingControls voted={true} shareHeading={props.shareHeading} shareSubHeading={props.shareSubHeading} shareButtonText="Share Now" />
-                                </div>
-                            </div>
-                        </Fade>
-
-                        {/* Stage Details */}
-                        <Fade in={stage === detailStage} unmountOnExit>
-                            <div>
-                                <div className={"verticalFrameCentre"}>
-                                    <VideoWithReference
-                                        references={[]}
-                                        locale={props.locale}
-                                        fullScreenOnClick={true}
-                                        datoVideo={props.videos?.detailVideo?.video?.video}
-                                        onFinish={() => {
-                                            if (props.watchedCallBack)
-                                                props.watchedCallBack();
-                                            nextStage();
-                                        }}
-                                        videoThumbnail={props.videos?.detailVideo.thumbnailImage?.responsiveImage.src}
-                                        currentTimeStamp={0}/>
-                                </div>
-                            </div>
-                        </Fade>
-                        
-                        {/* Stage: Donation */}
-                        <Fade in={stage === donateStage} unmountOnExit>
-                            <div>                           
-                                <div className={"verticalFrameCentre"}>
-                                    <div>
-                                        <div style={{textAlign: "center" }}>
-                                            <StructuredText data={props.donateText}/>
+                                            <DialogModal
+                                                ref={summaryModalRef}
+                                                open={openDialog === "summary"}
+                                                onClose={() => setOpenDialog(null)}
+                                            >
+                                                <VideoControl
+                                                    isOpen={openDialog === "summary"}
+                                                    fullScreenOnClick={true}
+                                                    datoVideo={props.videos?.summaryVideo?.video?.video}
+                                                    videoThumbnail={props.videos?.summaryVideo?.thumbnailImage?.responsiveImage.src}
+                                                    locale={props.locale}
+                                                />
+                                            </DialogModal>
                                         </div>
-                                        <Donation locale={props.locale}/>
-                                    </div>
+                                    )}
+
+                                    {props.summaryPdf?.url && (
+                                        <a href={props.summaryPdf.url} target="_blank" className="btn btn--white">
+                                            {getSummaryTranslation(props.locale)}
+                                        </a>
+                                    )}
+
+                                    {props.videos?.membersVideo && (
+                                        <div>
+                                            <button onClick={() => setOpenDialog("members")} className="btn btn--white">{getDetailTranslation(props.locale)}</button>
+
+                                            <DialogModal
+                                                ref={membersModalRef}
+                                                open={openDialog === "members"}
+                                                onClose={() => setOpenDialog(null)}
+                                            >
+                                                <VideoControl
+                                                    isOpen={openDialog === "members"}
+                                                    fullScreenOnClick={true}
+                                                    datoVideo={props.videos?.membersVideo?.video?.video}
+                                                    videoThumbnail={props.videos?.membersVideo?.thumbnailImage?.responsiveImage.src}
+                                                    locale={props.locale}
+                                                />
+                                            </DialogModal>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
-                        </Fade>
-                    </div>
+
+                            <div className="landing-content__image">
+                                <img src={cryingEarth} alt="" />
+                            </div>
+                        </div>
+                    </Fade>
+
+                    {/* Stage Questions */}
+                    <Fade in={stage === questionStage } unmountOnExit>
+                        <div className={"vote-controls question-controls"}>
+                            <div className={"contentColumn"}>
+                                <h1 className="frame__heading" style={{paddingLeft: "1rem"}}>{props.votingHeading}</h1>
+                                <QuestionComponent {...props} {...questionOne} voteChangedCallBack={extendedVoteCallback}/>
+                            </div>
+    
+                            <div className={"videoColumn voteVideo"}>
+                                <VideoControl locale={props.locale} fullScreenOnClick={true}
+                                            datoVideo={ props.videos?.prop1?.video?.video  }
+                                            leftShift={-50}
+                                            videoThumbnail={ props.videos?.prop1.thumbnailImage?.responsiveImage.src} />
+                           
+                            </div>
+                        </div>
+                    </Fade>
+            
+                    {/* Stage: Sharing */}
+                    <Fade in={stage === shareStage} unmountOnExit>
+                        <div>
+                            <div>
+                                <SharingControls voted={true} shareHeading={props.shareHeading} shareSubHeading={props.shareSubHeading} shareButtonText="Share Now" />
+                            </div>
+                        </div>
+                    </Fade>
+
+                    {/* Stage Details */}
+                    <Fade in={stage === detailStage} unmountOnExit>
+                        <div>
+                            <div className={"verticalFrameCentre"}>
+                                <VideoWithReference
+                                    references={[]}
+                                    locale={props.locale}
+                                    fullScreenOnClick={true}
+                                    datoVideo={props.videos?.detailVideo?.video?.video}
+                                    onFinish={() => {
+                                        if (props.watchedCallBack)
+                                            props.watchedCallBack();
+                                        nextStage();
+                                    }}
+                                    videoThumbnail={props.videos?.detailVideo.thumbnailImage?.responsiveImage.src}
+                                    currentTimeStamp={0}/>
+                            </div>
+                        </div>
+                    </Fade>
+                    
+                    {/* Stage: Donation */}
+                    <Fade in={stage === donateStage} unmountOnExit>
+                        <div>                           
+                            <div className={"verticalFrameCentre"}>
+                                <div>
+                                    <div style={{textAlign: "center" }}>
+                                        <StructuredText data={props.donateText}/>
+                                    </div>
+                                    <Donation locale={props.locale}/>
+                                </div>
+                            </div>
+                        </div>
+                    </Fade>
                 </div>
+            </div>
         </Container>
     );
 };
