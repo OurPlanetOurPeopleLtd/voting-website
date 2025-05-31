@@ -40,10 +40,11 @@ export const StagedFlow = (props: TStagedFlowProps) => {
     // When modal closes, call pause() on all videos for safety
     useEffect(() => {
         if (openDialog === null) {
-            summaryModalRef.current?.pause();
-            membersModalRef.current?.pause();
+          // Only reset modal videos
+          if (summaryModalRef.current?.resetVideo) summaryModalRef.current.resetVideo();
+          if (membersModalRef.current?.resetVideo) membersModalRef.current.resetVideo();
         }
-    }, [openDialog]);
+      }, [openDialog]);
     
     const totalQuestions = 1; //(props.questions?.length ?? 0); (todo decide if we are making this dynamic)   
        

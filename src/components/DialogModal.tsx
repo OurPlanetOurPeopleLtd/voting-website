@@ -10,6 +10,7 @@ interface DialogModalProps {
 
 export type DialogModalRef = {
   pause: () => void;
+  resetVideo: () => void;
 };
 
 export const DialogModal = forwardRef<DialogModalRef, DialogModalProps>(
@@ -17,28 +18,29 @@ export const DialogModal = forwardRef<DialogModalRef, DialogModalProps>(
     const dialogRef = useRef<HTMLDialogElement>(null);
 
     useImperativeHandle(ref, () => ({
-        pause() {
-            if (!dialogRef.current) return;
-          
-            // Try to pause all native <video> tags
-            const videos = dialogRef.current.querySelectorAll("video");
-            if (videos.length > 0) {
-              videos.forEach((video) => {
-                video.pause();
-                video.currentTime = 0; // Reset to start
-                video.load();
-              });
-            } else {
-              // If no native videos found, try to pause mux-player(s)
-              const muxPlayers = dialogRef.current.querySelectorAll("mux-player");
-              muxPlayers.forEach((player) => {
-                // mux-player supports .pause()
-                (player as any).pause?.();
-                (player as any).currentTime = 0; // Reset to start
-                (player as any).load?.();
-              });
-            }
+      pause() {
+        if (!dialogRef.current) return;
+
+        const videos = dialogRef.current.querySelectorAll("video");
+        if (videos.length > 0) {
+          videos.forEach((video) => {
+            video.pause();
+            video.currentTime = 0;
+            video.load(); // native video load to show poster
+          });
         }
+
+        const muxPlayers = dialogRef.current.querySelectorAll("mux-player");
+        muxPlayers.forEach((player) => {
+          (player as any).pause?.();
+          (player as any).currentTime = 0;
+
+          // DO NOT call .load() on mux-player — unsupported
+        });
+      },
+      resetVideo() {
+        this.pause();
+      }
     }));
 
     useEffect(() => {
@@ -53,7 +55,7 @@ export const DialogModal = forwardRef<DialogModalRef, DialogModalProps>(
       }
 
       const handleCancel = (e: Event) => {
-        e.preventDefault(); // Prevent default ESC close, call custom onClose
+        e.preventDefault(); // Prevent ESC from closing it without custom onClose
         onClose();
       };
 
