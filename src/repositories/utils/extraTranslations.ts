@@ -469,7 +469,7 @@ const microCopyTranslations: Translations = {
         "shareButton": "sharing page",
         "inDepthLink": "visiting our In Depth page",
         "orFindOutMore": "Or find out more by",
-        "registrationHelper": "For any enquiries related to the registration or de-registration process, please email us your query at"
+        "registrationHelper": "To reach me directly, please use the following email address"
     },
     "fr": {
         "videoPrompt": "Pour partager notre site via les réseaux sociaux ou des contacts directs, visitez notre",

@@ -123,7 +123,7 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                                 videoThumbnail={data.mainVideo?.thumbnailImage.responsiveImage.src}
                                 videoTitle={data.mainVideo?.video?.video?.title ?? ""} />
 
-                            <p className="reg-helper">{getTranslation(locale, "registrationHelper")} <a href="mailto:generalcomments@OurPlanetOurPeople.com?subject=Members enquiry">generalcomments@OurPlanetOurPeople.com</a>.</p>
+                            <p className="reg-helper">{getTranslation(locale, "registrationHelper")} <a href="mailto:patrick.gardner@OurPlanetOurPeople.com?subject=Members enquiry">generalcomments@OurPlanetOurPeople.com</a>.</p>
                     </div>
 
                     {
