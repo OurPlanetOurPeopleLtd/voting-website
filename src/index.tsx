@@ -4,9 +4,9 @@ import reportWebVitals from "./reportWebVitals";
 
 import { HelmetProvider } from "react-helmet-async";
 
-import "../src/fonts/RNS Sans/RNSSanz-Normal.woff2";
-import "../src/fonts/RNS Sans/RNSSanz-Light.woff2";
-import "../src/fonts/RNS Sans/RNSSanz-Bold.woff2";
+import "../src/fonts/rns-sans/RNSSanz-Normal.woff2";
+import "../src/fonts/rns-sans/RNSSanz-Light.woff2";
+import "../src/fonts/rns-sans/RNSSanz-Bold.woff2";
 import "./index.scss";
 
 import App from "./App";
