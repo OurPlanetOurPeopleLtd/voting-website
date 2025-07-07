@@ -39,3 +39,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline-offset: 4px !important;
+  outline: solid 4px currentColor !important;
+}

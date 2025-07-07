@@ -146,10 +146,8 @@ footer {
       color: #6a7070;
       font-weight: bold;
 
-      &:hover,
-      &:focus {
+      &:hover {
         text-decoration-line: underline;
-        text-decoration-color: var(--primary);
         text-decoration-thickness: 3px;
       }
     }
