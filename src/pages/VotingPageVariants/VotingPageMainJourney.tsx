@@ -1,7 +1,7 @@
-﻿import React, {useEffect, useRef, useState} from "react";
+﻿import React, { useEffect, useRef, useState } from "react";
 import Donation from "../../components/Donation";
 import {SharingControls} from "../../components/SharingControls";
-import {Button, Container, Fade} from "react-bootstrap";
+import {Container, Fade} from "react-bootstrap";
 import {QuestionComponent} from "../../components/QuestionComponent";
 import {Choice} from "../../models";
 import {StructuredText} from "react-datocms";
@@ -171,7 +171,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
                             </div>
 
                             <div className="landing-content__image">
-                                <img src={cryingEarth} alt="" />
+                                <img src={cryingEarth} alt="" width="528" height="528" />
                             </div>
                         </div>
                     </Fade>

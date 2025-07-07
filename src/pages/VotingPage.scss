@@ -20,6 +20,11 @@
   gap: 1rem;
 }
 
+.landing-content__image img {
+  width: 100%;
+  height: auto;
+}
+
 .landing-content__buttons {
   display: flex;
   flex-direction: column;
