@@ -189,7 +189,7 @@ img {
 }
 
 .navbar-toggler {
-  margin-right: -10px;
+  margin-right: -2.5rem;
 }
 
 .article-inline-image {
@@ -199,11 +199,6 @@ img {
 @media (max-width: 768px) {
   .container {
     padding-inline: 1rem;
-  }
-
-  .navbar-toggler {
-    margin-right: 0;
-    margin-left: auto;
   }
 }
 
@@ -218,6 +213,11 @@ img {
     max-width: 500px;
     margin-block: 10px;
     margin-left: 1rem;
+  }
+
+  .navbar-toggler {
+    margin-right: 0;
+    margin-left: auto;
   }
 }
 
