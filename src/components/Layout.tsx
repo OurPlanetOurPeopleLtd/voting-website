@@ -124,6 +124,10 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
 
                     <Navbar.Toggle onClick={toggleExpanded} aria-controls="responsive-navbar-nav" />
 
+                    <div className="main-nav__language">
+                        <FlagSelect currentLocale={locale ?? defaultLanguage}></FlagSelect>
+                    </div>
+                    
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="main-nav">
                             <DynamicNavList id={headerComponentId} locale={locale} onSelect={() => {
@@ -131,11 +135,9 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                                 return {}
                             }}></DynamicNavList>
                             
-                            <div className="main-nav__language">
-                                <FlagSelect currentLocale={locale ?? defaultLanguage}></FlagSelect>
-                            </div>
                         </Nav>
                     </Navbar.Collapse>
+                    
                 </Container>
             </Navbar>
 

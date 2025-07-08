@@ -169,14 +169,27 @@ img {
   }
 }
 
+.nav-right__container {
+  display: flex;
+  align-items: center;
+}
+
 .main-nav__language {
+  font-size: 2.25rem;
+  max-width: max-content;
+
   select {
-    width: 100px;
+    padding: 0;
   }
 
   .select-wrap svg {
     right: 0;
+    max-width: 18px;
   }
+}
+
+.navbar-toggler {
+  margin-right: -2rem;
 }
 
 .article-inline-image {
@@ -186,6 +199,11 @@ img {
 @media (max-width: 768px) {
   .container {
     padding-inline: 1rem;
+  }
+
+  .navbar-toggler {
+    margin-right: 0;
+    margin-left: auto;
   }
 }
 
@@ -209,12 +227,22 @@ img {
     align-items: center;
   }
 
+  .navbar-collapse {
+    order: 1;
+  }
+
   .main-nav__language {
     margin-left: auto;
+    order: 2;
 
     select {
-      padding-inline: 0;
+      padding-right: 15px;
       font-size: 1.5rem;
+    }
+
+    .select-wrap svg {
+      max-width: 25px;
+
     }
   }
 
