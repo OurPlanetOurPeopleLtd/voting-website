@@ -28,7 +28,7 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
    
  
     
-    const logoUrl = "https://ourplanetourpeople.com/logo.webp";
+    const logoUrl = "https://ourplanetourpeople.com/logo.png";
     useEffect(() => {
         if (linkAdded)
             return;
