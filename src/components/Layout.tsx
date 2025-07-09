@@ -1,4 +1,4 @@
-﻿import logo from "../logo.png";
+﻿import logo from "../logo.webp";
 
 import {Link,  Outlet} from "react-router-dom";
 import '@aws-amplify/ui-react/styles.css';
@@ -119,6 +119,8 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                             onClick={() => {
                                 setExpanded(false)
                             }}
+                            width="200"
+                            height="56"
                         />
                     </Link>
 
@@ -127,7 +129,7 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                     <div className="main-nav__language">
                         <FlagSelect currentLocale={locale ?? defaultLanguage}></FlagSelect>
                     </div>
-                    
+
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="main-nav">
                             <DynamicNavList id={headerComponentId} locale={locale} onSelect={() => {

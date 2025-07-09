@@ -13,7 +13,7 @@ import {useNavigate, useSearchParams} from "react-router-dom";
 import {getNextTranslation, getSummaryTranslation, getDetailTranslation, getTranslation} from "../../repositories/utils/extraTranslations";
 import { TVotingPageExtended } from "../../repositories/VotingPage/model";
 
-import cryingEarth from "../../crying-earth.png";
+import cryingEarth from "../../crying-earth.webp";
 import "../VotingPage.scss";
 
 export const StagedFlow = (props: TStagedFlowProps) => {
