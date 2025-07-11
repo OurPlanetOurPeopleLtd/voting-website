@@ -189,10 +189,17 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                                     </div>
 
                                     <div className="register-form__privacy">
-                                        <label className="register-form__privacy-label">
-                                            <input type="checkbox" name="privacy_policy" required />
-                                            {data.privacyPolicyLabel}
-                                        </label>
+                                    <div className="custom-checkbox">
+  <input
+    type="checkbox"
+    id="privacy_policy"
+    name="privacy_policy"
+    required
+  />
+  <label htmlFor="privacy_policy">
+    {data.privacyPolicyLabel}
+  </label>
+</div>
 
                                         <p>{data.privacyPolicyText} <a href={`/${locale}/privacy`}>{data.privacyPolicyLinkText}</a>.</p>
                                     </div>

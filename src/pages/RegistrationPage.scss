@@ -77,16 +77,57 @@ label.register-form__privacy-label {
     display: flex;
     align-items: center;
     gap: .5rem;
-
-    input[type="checkbox"] {
-        width: 30px;
-        height: 30px;
-    }
 }
 
 .reg-helper {
     margin-top: 1rem;
 }
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  
+  .custom-checkbox input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    border: 2px solid #0b0c0c;
+    background-color: #fff;
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .custom-checkbox input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    left: 10px;
+    top: 12px;
+    width: 20px;
+    height: 14px;
+    border: solid var(--tertiary);
+    border-width: 0 0 4px 4px;
+    transform: rotate(-45deg);
+    opacity: 0;
+  }
+  
+  .custom-checkbox input[type="checkbox"]:checked::after {
+    opacity: 1;
+  }
+  
+  .custom-checkbox label {
+    margin-bottom: 0;
+  }
+  
 
 @media screen and (min-width: 1024px) {
     .reg-container {
