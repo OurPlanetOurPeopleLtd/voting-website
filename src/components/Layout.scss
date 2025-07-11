@@ -90,8 +90,9 @@ nav {
     }
 
     &:focus-visible {
-      outline-color: var(--tertiary);
+      outline-color: var(--tertiary) !important;
       outline-width: 4px;
+      outline-offset: 2px;;
     }
 
     &:hover,
