@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState, useRef} from "react";
 import {DataStore} from "@aws-amplify/datastore";
 import {User} from "../models";
 import {v4 as generateGuid} from "uuid";
@@ -17,6 +17,8 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
     const [thankYouForRegister, setThankYouRegister] = useState(false);
     type TDeregisterState =  "showSuccess" | "showFail" | "hide";
     const [showDeregisterMessage, setDeregisterMessage] = useState<TDeregisterState>("hide");
+
+    const messageRef = useRef<HTMLDivElement | null>(null);
 
     const fetchData = useCallback(async () => {     
         let dataFetched = await getRegistrationPage("registration",locale);
@@ -53,6 +55,13 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
      
         if (idAlreadyExists) {
             setEmailExists(true);
+            setThankYouRegister(false);
+
+            // Scroll to error message after DOM update
+            setTimeout(() => {
+                messageRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 0);
+
             return;
         } 
         
@@ -74,7 +83,13 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
         await DataStore.save(
             new User({email: email, voterId: localGuid, name: name, comment: comment})
         ).then((x) => {
-            setThankYouRegister(true)
+            setThankYouRegister(true);
+            setEmailExists(false);
+
+            // Scroll to success message
+            setTimeout(() => {
+            messageRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 0);
         }).catch(e => console.log("Error saving" + e.toString()));
         
     };
@@ -127,13 +142,13 @@ export const RegistrationPage = ({locale}: TRegistrationProps) => {
                     </div>
 
                     {
-                        thankYouForRegister ? <div className="form-status-message" style={{marginTop: "1rem"}}><div style={{color: "#298e33", borderColor: "#298e33", fontWeight: "600"}}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={40} height={40} aria-hidden="true" fill="#298e33"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg><h2>{data.thankYou}</h2></div></div> :
+                        thankYouForRegister ? <div ref={messageRef} className="form-status-message" style={{marginTop: "1rem"}}><div style={{color: "#298e33", borderColor: "#298e33", fontWeight: "600"}}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width={40} height={40} aria-hidden="true" fill="#298e33"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg><h2>{data.thankYou}</h2></div></div> :
 
                         (<div className={"form-container"}>
                             <div className="form-left">
                                 <h2>{data.registrationHeading}</h2>
 
-                                <div className="form-status-message">
+                                <div className="form-status-message" ref={messageRef}>
                                     {emailExistsError ? <div aria-live="polite"><svg xmlns="http://www.w3.org/2000/svg" width={30} height={30} viewBox="0 0 512 512" aria-hidden="true"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>{data.emailValidation}</div> : <div aria-live="polite"></div> }
                                 </div>
 
