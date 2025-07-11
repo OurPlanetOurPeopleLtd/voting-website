@@ -7,7 +7,7 @@
   z-index: 2;
 
   button {
-    background-color: var(--secondary) !important;
+    background-color:var(--tertiary) !important;
     color: var(--white) !important;
     border-radius: 8px !important;
     font-weight: 600;
@@ -18,8 +18,9 @@
     }
 
     &:hover {
-      background-color: var(--tertiary) !important;
-      color: var(--white) !important;
+      background-color: transparent !important;
+      color: var(--tertiary) !important;
+      outline: 2px solid var(--tertiary) !important;
     }
   }
 
