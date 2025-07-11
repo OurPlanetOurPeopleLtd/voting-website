@@ -1,6 +1,6 @@
 ﻿import logo from "../logo.png";
 
-import {Link,  Outlet} from "react-router-dom";
+import {Link,  Outlet, useMatch} from "react-router-dom";
 import '@aws-amplify/ui-react/styles.css';
 import "./Layout.scss";
 import Container from 'react-bootstrap/Container';
@@ -26,7 +26,6 @@ import {localStorageVotingIdKey} from "../repositories/utils/utilities";
 import {defaultLanguage} from "../repositories/utils/languages";
 import {footerComponentId, headerComponentId} from "../repositories/utils/config";
 
-
 export interface ILayout extends PropsWithChildren
 {
     locale:string;
@@ -34,18 +33,13 @@ export interface ILayout extends PropsWithChildren
 }
 
 export const LayoutTs = ({children, locale, title} : ILayout) => {
-    
-    
     const [expanded, setExpanded] = useState(false);
     const [analyticsEnabled, setAnalyticsEnabled] = useState(getCookieConsentValue("OurPeopleOurPlanetAnalyticsAcceptance") ?? false);
-    
-   
     const toggleExpanded = () => setExpanded(!expanded);
 
     const [cookieText, setCookieText] = useState(getCookieBannerText(locale));
 
     useEffect(() => {
-            
         setCookieText(getCookieBannerText(locale));
     }, [locale])
   
@@ -59,7 +53,6 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
             userId: userGuid
         }
            
-
         Analytics.autoTrack('pageView', {
             enable: analyticsEnabled,
             autoSessionRecord: analyticsEnabled,
@@ -78,9 +71,6 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
             EnableAnalytics()
         else
             DisableAnalytics();
-
-
-        
     }, [analyticsEnabled]);
 
     function resetCookie(name: string, path?: string, domain?: string): void {
@@ -100,9 +90,8 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
         window.location.reload();
     }
  
-// Example usage:
     const cookieName = "OurPeopleOurPlanetAnalyticsAcceptance";
-    const onPrivacyPage = title.startsWith("Privacy"); //bit gross
+    const onPrivacyPage = Boolean(useMatch("/:locale/privacy"));
     const cookieExists = getCookieConsentValue(cookieName) !== undefined;
     return (
         <>
@@ -137,7 +126,6 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                             
                         </Nav>
                     </Navbar.Collapse>
-                    
                 </Container>
             </Navbar>
 
@@ -167,6 +155,7 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                 {cookieText.mainText}{" "}
                 (<a style={{color:"grey"}} href={`${locale}/privacy`}>{cookieText.privacyLinkText}</a>)
             </CookieConsent>
+
             {onPrivacyPage && cookieExists ? (
                 <div
                     style={{
@@ -177,7 +166,6 @@ export const LayoutTs = ({children, locale, title} : ILayout) => {
                         display: 'flex',
                         justifyContent: 'center', // Center horizontally
                         alignItems: 'center', // Center vertically (if needed)
-                       
                         padding: '10px 0', // Optional padding
                     }}
                     className={"CookieConsent"}
