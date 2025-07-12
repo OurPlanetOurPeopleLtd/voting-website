@@ -7,6 +7,11 @@ import { HelmetProvider } from "react-helmet-async";
 import "../src/fonts/rns-sans/RNSSanz-Normal.woff";
 import "../src/fonts/rns-sans/RNSSanz-Light.woff";
 import "../src/fonts/rns-sans/RNSSanz-Bold.woff";
+import "../src/fonts/rns-sans/RNSSanz-Normal.woff2";
+import "../src/fonts/rns-sans/RNSSanz-Light.woff2";
+import "../src/fonts/rns-sans/RNSSanz-Bold.woff2";
+
+
 import "./index.scss";
 
 import App from "./App";

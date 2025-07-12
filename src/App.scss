@@ -1,6 +1,7 @@
 @font-face {
   font-family: "RNS Sanz";
-  src: url("./fonts/rns-sans/RNSSanz-Normal.woff") format("woff");
+  src: url("./fonts/rns-sans/RNSSanz-Normal.woff") format("woff"),
+       url("./fonts/rns-sans/RNSSanz-Normal.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -8,7 +9,8 @@
 
 @font-face {
   font-family: "RNS Sanz";
-  src: url("./fonts/rns-sans/RNSSanz-Light.woff") format("woff");
+  src: url("./fonts/rns-sans/RNSSanz-Light.woff") format("woff"),
+       url("./fonts/rns-sans/RNSSanz-Light.woff2") format("woff2");
   font-style: normal;
   font-weight: 100;
   font-display: swap;
@@ -16,7 +18,8 @@
 
 @font-face {
   font-family: "RNS Sanz";
-  src: url("./fonts/rns-sans/RNSSanz-Bold.woff") format("woff");
+  src: url("./fonts/rns-sans/RNSSanz-Bold.woff") format("woff"),
+       url("./fonts/rns-sans/RNSSanz-Bold.woff2") format("woff2");
   font-style: normal;
   font-weight: bold;
   font-display: swap;
