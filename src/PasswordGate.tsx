@@ -12,7 +12,7 @@ interface PasswordGateProps {
 const PASSWORDS = [
 	"!1/#gn2qEm4.FVkSi33uM1>", "JamesBateson", "PatrickGardner",
 	"DavidKing", "ChrisPepper", "ProfJEH", "ProfJR",
-	"Magnus83", "BillMc", "CBLH", "ALEXANDLIAM"
+	"Magnus83", "BillMc", "CBLH", "ALEXANDLIAM", "JEH2025"
 ];
 const STORAGE_KEY = "site_unlocked";
 
