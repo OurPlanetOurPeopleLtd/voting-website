@@ -1,46 +1,43 @@
 @font-face {
-  font-family: "RNS Sanz";
-  src: url("./fonts/rns-sans/RNSSanz-Normal.woff2") format("woff2"),
-       url("./fonts/rns-sans/RNSSanz-Normal.woff") format("woff");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
+	font-family: 'RNS Sanz';
+	src: url('./fonts/rns-sans/RNSSanz-Normal.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: "RNS Sanz";
-  src: url("./fonts/rns-sans/RNSSanz-Light.woff2") format("woff2"),
-       url("./fonts/rns-sans/RNSSanz-Light.woff") format("woff");
-  font-style: normal;
-  font-weight: 100;
-  font-display: swap;
+	font-family: 'RNS Sanz';
+	src: url('./fonts/rns-sans/RNSSanz-Light.woff2') format('woff2');
+	font-style: normal;
+	font-weight: 100;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: "RNS Sanz";
-  src: url("./fonts/rns-sans/RNSSanz-Bold.woff2") format("woff2"),
-       url("./fonts/rns-sans/RNSSanz-Bold.woff") format("woff");
-  font-style: normal;
-  font-weight: bold;
-  font-display: swap;
+	font-family: 'RNS Sanz';
+	src: url('./fonts/rns-sans/RNSSanz-Bold.woff2') format('woff2');
+	font-style: normal;
+	font-weight: bold;
+	font-display: swap;
 }
 
 /* #region Bootstrap overrides */
-@import "bootstrap/scss/_functions";
+@import 'bootstrap/scss/_functions';
 
-$primary: #64CBD0; /* Turquoise */
-$secondary: #254C5F; /* Teal */
+$primary: #64cbd0; /* Turquoise */
+$secondary: #254c5f; /* Teal */
 $font-family-base: 'RNS Sanz', sans-serif;
 
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 /* #endregion Bootstrap overrides */
 
 body {
-  background-color: #f6f6f6;
-  margin: 0;
-  font-family: $font-family-base;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	background-color: #f6f6f6;
+	margin: 0;
+	font-family: $font-family-base;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 a:focus-visible,
@@ -48,6 +45,6 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline-offset: 4px !important;
-  outline: solid 4px currentColor !important;
+	outline-offset: 4px !important;
+	outline: solid 4px currentColor !important;
 }
