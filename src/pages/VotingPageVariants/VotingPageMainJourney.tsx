@@ -261,6 +261,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 									alt=''
 									width='528'
 									height='528'
+									fetchPriority='high'
 								/>
 							</div>
 						</div>
