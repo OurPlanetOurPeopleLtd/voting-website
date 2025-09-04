@@ -23,9 +23,9 @@ const root = ReactDOM.createRoot(rootElement);
 root.render(
 	<React.StrictMode>
 		<HelmetProvider>
-			{/* <PasswordGate> */}
+			<PasswordGate>
 			<App></App>
-			{/* </PasswordGate> */}
+			</PasswordGate>
 		</HelmetProvider>
 	</React.StrictMode>
 );
