@@ -195,17 +195,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 										</div>
 									)}
 
-									{props.summaryPdf?.url && (
-										<a
-											href={props.summaryPdf.url}
-											target='_blank'
-											className='btn btn--white'
-										>
-											{getSummaryTranslation(
-												props.locale
-											)}
-										</a>
-									)}
+                                   
 
 									{props.videos?.membersVideo && (
 										<div>
@@ -219,7 +209,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 													props.locale
 												)}
 											</button>
-
+                                      
 											<DialogModal
 												ref={membersModalRef}
 												open={openDialog === 'members'}
