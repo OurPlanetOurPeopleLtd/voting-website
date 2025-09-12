@@ -199,16 +199,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 
 									{props.videos?.membersVideo && (
 										<div>
-											<button
-												onClick={() =>
-													setOpenDialog('members')
-												}
-												className='btn btn--white'
-											>
-												{getDetailTranslation(
-													props.locale
-												)}
-											</button>
+								
                                       
 											<DialogModal
 												ref={membersModalRef}
