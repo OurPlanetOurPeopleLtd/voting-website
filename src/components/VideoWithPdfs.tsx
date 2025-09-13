@@ -12,9 +12,19 @@ export const VideoWithPdfs = (props: TVideoPdfs) => {
 
     const videos = props.datoVideos ?? [props.datoVideo];
     
+    function GetVideosJsx()
+    {
+        return videos.map((video, index) => (
+                <>
+                    {index <= 0 ? null : <h3>{video?.title}</h3>}
+                    <VideoControl key={index} {...props}  datoVideo={video} />
+                </>
+            ));
+    }
+    
     //if no pdfs just treat as normal control
     if(!props.pdfWrappers || props.pdfWrappers.length === 0){
-        return <VideoControl {...props}  />
+        return (<>{ GetVideosJsx() }</>)
     }
    
     
@@ -23,12 +33,7 @@ export const VideoWithPdfs = (props: TVideoPdfs) => {
           
             {videos.length > 0 && (
                 <div className="video-container video-container--with-pdf">
-                    {videos.map((video, index) => (
-                        <>
-                        <h1>hello {index}</h1>
-                        <VideoControl key={index} {...props}  datoVideo={video} />
-                        </>
-                    ))}
+                    {GetVideosJsx()}
                 </div>
             )}
 
