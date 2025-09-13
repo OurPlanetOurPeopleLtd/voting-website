@@ -42,7 +42,8 @@ const videoPage = `
                 mainVideo{
                 video${videoBlock}
                 thumbnailImage${imgBlock}
-                }    
+                }  
+        
             `;
 
 const registrationPage = `

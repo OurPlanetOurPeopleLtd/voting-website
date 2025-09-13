@@ -13,7 +13,7 @@ export interface Data {
 
 export interface VideoItem {
 
-    mainVideo: TVideoThumbnail,
+    mainVideo: TVideoThumbnail | TVideoThumbnail[],
     sys: Sys
     __typename: string
     slug: string
