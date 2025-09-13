@@ -24,6 +24,7 @@ const PASSWORDS = [
 	'JEH2025',
 ];
 const STORAGE_KEY = 'site_unlocked';
+const MAGIC_GUID = '43722bdd-325b-46e4-8c95-1fb95a784b5f'; 
 
 const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
 	const [input, setInput] = useState('');
@@ -31,8 +32,21 @@ const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 
 	useEffect(() => {
-		const isUnlocked = localStorage.getItem(STORAGE_KEY) === 'true';
-		setUnlocked(isUnlocked);
+		
+		// Then, check the URL for the magic GUID
+		const params = new URLSearchParams(window.location.search);
+		const magicGuidInUrl = params.get('guid');
+
+		if (magicGuidInUrl === MAGIC_GUID) {
+			setUnlocked(true);
+			localStorage.setItem(STORAGE_KEY, 'true');
+		}
+		else
+		{
+			const isUnlocked = localStorage.getItem(STORAGE_KEY) === 'true';
+			setUnlocked(isUnlocked);
+		}
+
 	}, []);
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
