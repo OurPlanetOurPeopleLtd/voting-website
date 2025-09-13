@@ -18,6 +18,7 @@ export const VideoWithPdfsPage = (props: TArticlePage) => {
         header: "",
         videoTitle: "UnknownVideo",
         mainVideo:  undefined,
+        mainVideos: undefined,
         introText: "",
         pdfs:[],
         followOnLink:""
@@ -52,12 +53,23 @@ export const VideoWithPdfsPage = (props: TArticlePage) => {
         fetchData().catch(console.error);
     }, [slug, fetchData]);
 
+    const datoVideos = data?.mainVideos?.map(x => x.video.video);
+    const mainDatoVideo =  data?.mainVideo?.video?.video;
     return (
         <>
             <h1>{data.header}</h1>  
             {data.introText ? <p className="introText">{data.introText}</p> : null}
 
-            <VideoWithPdfs pdfWrappers={data.pdfs} locale={locale} fullScreenOnClick={false} datoVideo={data?.mainVideo?.video?.video ?? undefined} pageTitle={props.title} videoTitle={data.videoTitle} videoThumbnail={data.mainVideo?.thumbnailImage.responsiveImage.src}  {...(slug.includes("in-depth") ? { onFinish: () => { handleFinish() } } : {})}></VideoWithPdfs>
+            <VideoWithPdfs pdfWrappers={data.pdfs} 
+                           locale={locale} 
+                           fullScreenOnClick={false}
+                           datoVideo={mainDatoVideo}
+                           datoVideos={datoVideos} 
+                           pageTitle={props.title} 
+                           videoTitle={data.videoTitle} 
+                           videoThumbnail={data.mainVideo?.thumbnailImage?.responsiveImage?.src}  {...(slug.includes("in-depth") ? { onFinish: () => { handleFinish() } } : {})}/>
+                
+         
         </>
     );
 };

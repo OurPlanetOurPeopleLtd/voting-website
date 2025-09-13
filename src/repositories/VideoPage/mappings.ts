@@ -12,7 +12,7 @@ export async function mapVideoData(result: QueryResult): Promise<TVideoPage> {
     if (!actualPost) {
         throw new Error("no video data");
     }
-    var mainVideo: TVideoThumbnail = actualPost.mainVideo as TVideoThumbnail;
+    var mainVideo: TVideoThumbnail | undefined= actualPost.mainVideo ? actualPost.mainVideo[0] : undefined;
     return {
         header: actualPost.title,
         introText: actualPost.introText,

@@ -19,16 +19,7 @@ export async function mapVideoWithPdfData(result: QueryResult): Promise<TVideoWi
             createdDate: new Date(original.pdf._createdAt)
         }
     }
-    var mainVideo: TVideoThumbnail | null = null;
- 
-    if(Array.isArray(mainVideo))
-    {
-        mainVideo = mainVideo[0] as TVideoThumbnail;
-    }
-    else
-    {
-        mainVideo  = actualPost.mainVideo as TVideoThumbnail;
-    }
+    var mainVideo: TVideoThumbnail | undefined= actualPost.mainVideo ? actualPost.mainVideo[0] : undefined;
     
     const data:TVideoWithPdfsPage =  {
         pdfs: actualPost.pdfs.map( decoratePdfWrapper),
@@ -36,6 +27,7 @@ export async function mapVideoWithPdfData(result: QueryResult): Promise<TVideoWi
         introText: actualPost.introText,
         videoTitle: mainVideo?.video?.video?.title ?? undefined,
         mainVideo: mainVideo,
+        mainVideos: actualPost.mainVideo,
         followOnLink : actualPost.followOnLink?.url ?? undefined,
     };
   

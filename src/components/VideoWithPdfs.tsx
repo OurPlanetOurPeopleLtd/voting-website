@@ -9,16 +9,26 @@ type TPdfs = {pdfWrappers: TPdfWrapper[]}
 type TVideoPdfs = TPdfs & TVideoProps;
 
 export const VideoWithPdfs = (props: TVideoPdfs) => {
+
+    const videos = props.datoVideos ?? [props.datoVideo];
+    
     //if no pdfs just treat as normal control
     if(!props.pdfWrappers || props.pdfWrappers.length === 0){
         return <VideoControl {...props}  />
     }
+   
     
     return (
         <div className="video-reference-container">
-            {props.datoVideo && (
+          
+            {videos.length > 0 && (
                 <div className="video-container video-container--with-pdf">
-                    <VideoControl {...props} />
+                    {videos.map((video, index) => (
+                        <>
+                        <h1>hello {index}</h1>
+                        <VideoControl key={index} {...props}  datoVideo={video} />
+                        </>
+                    ))}
                 </div>
             )}
 
