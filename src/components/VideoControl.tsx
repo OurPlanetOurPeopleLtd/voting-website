@@ -13,7 +13,6 @@ export type TVideoProps = {
     onPlay?: () => void,
     onProgress?: (time: number) => void,
     datoVideo?: Video | undefined,
-    datoVideos?: Video[] | undefined,
     videoThumbnail?: string,
     pageTitle?: string,
     videoTitle?: string,

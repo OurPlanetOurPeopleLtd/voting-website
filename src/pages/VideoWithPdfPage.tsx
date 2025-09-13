@@ -3,11 +3,12 @@
 import {useNavigate} from "react-router-dom";
 import {TArticlePage} from "../repositories/Common/types";
 import {getVideoWithPdfPageJson} from "../repositories/VideoWithPdfsPage/request";
-import {VideoWithPdfs} from "../components/VideoWithPdfs";
+import {PdfSidebarComponent} from "../components/PdfSidebarComponent";
 
 import "./Page.scss";
 import {getLastSlugPart} from "../repositories/utils/utilities";
 import {TVideoWithPdfsPage} from "../repositories/VideoWithPdfsPage/model";
+import {VideoControl} from "../components/VideoControl";
 
 
 export const VideoWithPdfsPage = (props: TArticlePage) => {
@@ -53,22 +54,48 @@ export const VideoWithPdfsPage = (props: TArticlePage) => {
         fetchData().catch(console.error);
     }, [slug, fetchData]);
 
-    const datoVideos = data?.mainVideos?.map(x => x.video.video);
-    const mainDatoVideo =  data?.mainVideo?.video?.video;
+
+    const videoWrappers = data?.mainVideos ?? [data?.mainVideo];
+
+    function GetVideosJsx()
+    {
+        return videoWrappers.map((videoWrapper, index) => (
+            <>
+                {index <= 0 ? null : <h3>{videoWrapper?.video.video.title}</h3>}
+                <VideoControl key={index}
+                              locale={locale}
+                              fullScreenOnClick={false}
+                              datoVideo={videoWrapper?.video.video}
+                              pageTitle={props.title}
+                              videoTitle={data.videoTitle}
+                              videoThumbnail={videoWrapper?.thumbnailImage?.responsiveImage?.src}
+                              {...(slug.includes("in-depth") ? { onFinish: () => { handleFinish() } } : {})}
+                
+                />
+            </>
+        ));
+    }
+    
+    function GetVideoSection()
+    {
+        if(!data.pdfs || data.pdfs .length === 0){
+            return (<>{ GetVideosJsx() }</>)
+        }
+
+        return (
+            <PdfSidebarComponent pdfWrappers={data.pdfs}>
+                { GetVideosJsx() }
+            </PdfSidebarComponent>
+        )
+         
+    }
+   
     return (
         <>
             <h1>{data.header}</h1>  
             {data.introText ? <p className="introText">{data.introText}</p> : null}
 
-            <VideoWithPdfs pdfWrappers={data.pdfs} 
-                           locale={locale} 
-                           fullScreenOnClick={false}
-                           datoVideo={mainDatoVideo}
-                           datoVideos={datoVideos} 
-                           pageTitle={props.title} 
-                           videoTitle={data.videoTitle} 
-                           videoThumbnail={data.mainVideo?.thumbnailImage?.responsiveImage?.src}  {...(slug.includes("in-depth") ? { onFinish: () => { handleFinish() } } : {})}/>
-                
+            {GetVideoSection()}
          
         </>
     );

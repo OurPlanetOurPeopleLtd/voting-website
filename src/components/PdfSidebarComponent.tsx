@@ -1,41 +1,18 @@
 import React from "react";
-
-import {TVideoProps, VideoControl} from "../components/VideoControl";
 import {TPdfWrapper} from "../repositories/Common/types";
-
-import "./VideoWithPdfs.scss";
-
+import "./VideoPdfs.scss";
 type TPdfs = {pdfWrappers: TPdfWrapper[]}
-type TVideoPdfs = TPdfs & TVideoProps;
+export const PdfSidebarComponent = (props: TPdfs  & { children?: React.ReactNode } ) => {
 
-export const VideoWithPdfs = (props: TVideoPdfs) => {
-
-    const videos = props.datoVideos ?? [props.datoVideo];
-    
-    function GetVideosJsx()
-    {
-        return videos.map((video, index) => (
-                <>
-                    {index <= 0 ? null : <h3>{video?.title}</h3>}
-                    <VideoControl key={index} {...props}  datoVideo={video} />
-                </>
-            ));
-    }
-    
-    //if no pdfs just treat as normal control
-    if(!props.pdfWrappers || props.pdfWrappers.length === 0){
-        return (<>{ GetVideosJsx() }</>)
-    }
-   
     
     return (
         <div className="video-reference-container">
           
-            {videos.length > 0 && (
-                <div className="video-container video-container--with-pdf">
-                    {GetVideosJsx()}
-                </div>
-            )}
+           
+            <div className="video-container video-container--with-pdf">
+                {props.children}
+            </div>
+            
 
             <div className="">
                 <ul className="pdf-list">
