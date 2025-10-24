@@ -32,7 +32,7 @@
   button,
   a {
     width: 100%;
-
+    margin-right: 10px;
     &:focus-visible {
       outline-color: var(--white) !important;
     }
@@ -45,6 +45,7 @@
     button,
     a {
       width: max-content;
+      margin-right: 10px;
     }
   }
 }

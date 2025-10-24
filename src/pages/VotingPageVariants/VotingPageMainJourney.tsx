@@ -14,7 +14,7 @@ import {
 	getNextTranslation,
 	getSummaryTranslation,
 	getDetailTranslation,
-	getTranslation,
+	getTranslation, getLandingSummaryTranslation,
 } from '../../repositories/utils/extraTranslations';
 import { TVotingPageExtended } from '../../repositories/VotingPage/model';
 
@@ -157,10 +157,21 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 												}
 												className='btn btn--white'
 											>
-												{getNextTranslation(
-													props.locale
+												{getLandingSummaryTranslation(
+													props.locale, "videoSummary"
 												)}
 											</button>
+											<button
+												onClick={() =>
+													setOpenDialog('members')
+												}
+												className='btn btn--white'
+											>
+												{getLandingSummaryTranslation(
+													props.locale, "climateSummary"
+												)}
+											</button>
+	
 
 											<DialogModal
 												ref={summaryModalRef}
@@ -195,12 +206,11 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 										</div>
 									)}
 
-                                   
 
 									{props.videos?.membersVideo && (
 										<div>
-								
-                                      
+
+
 											<DialogModal
 												ref={membersModalRef}
 												open={openDialog === 'members'}

@@ -358,6 +358,136 @@ const nextTranslations: { [key: string]: string } = {
 export function getNextTranslation(languageCode: string): string {
     return nextTranslations[languageCode] || nextTranslations["en"];
 }
+export const allTranslations: { [key: string]: { videoSummary: string, climateSummary: string } } = {
+    "en": {
+        "videoSummary": "Follow the money",
+        "climateSummary": "Climate summary"
+    },
+    "fr": {
+        "videoSummary": "Résumé de la vidéo",
+        "climateSummary": "Résumé climatique" // Climate Summary
+    },
+    "nl": {
+        "videoSummary": "Videosamenvatting",
+        "climateSummary": "Klimaatsamenvatting" // Climate Summary
+    },
+    "sr": {
+        "videoSummary": "Резиме видео снимка",
+        "climateSummary": "Климатски резиме" // Climate Summary (Klimatski rezime)
+    },
+    "hi": {
+        "videoSummary": "वीडियो सारांश",
+        "climateSummary": "जलवायु सारांश" // Climate Summary (Jalavaayu saaraansh)
+    },
+    "ja": {
+        "videoSummary": "ビデオの要約",
+        "climateSummary": "気候の要約" // Climate Summary (Kikō no yōyaku)
+    },
+    "zh": {
+        "videoSummary": "视频摘要",
+        "climateSummary": "气候摘要" // Climate Summary (Qìhòu zhāiyào)
+    },
+    "es": {
+        "videoSummary": "Resumen del video",
+        "climateSummary": "Resumen climático" // Climate Summary
+    },
+    "pt": {
+        "videoSummary": "Resumo do vídeo",
+        "climateSummary": "Resumo climático" // Climate Summary
+    },
+    "no": {
+        "videoSummary": "Videosammendrag",
+        "climateSummary": "Klimasammendrag" // Climate Summary
+    },
+    "de": {
+        "videoSummary": "Videozusammenfassung",
+        "climateSummary": "Klimazusammenfassung" // Climate Summary
+    },
+    "it": {
+        "videoSummary": "Riepilogo del video",
+        "climateSummary": "Riepilogo climatico" // Climate Summary
+    },
+    "ru": {
+        "videoSummary": "Краткое содержание видео",
+        "climateSummary": "Краткое содержание климата" // Climate Summary (Kratkoye soderzhaniye klimata)
+    },
+    "ko": {
+        "videoSummary": "비디오 요약",
+        "climateSummary": "기후 요약" // Climate Summary (Gihu yoyak)
+    },
+    "ar": {
+        "videoSummary": "ملخص الفيديو",
+        "climateSummary": "ملخص المناخ" // Climate Summary (Mulakhaṣ al-munākh)
+    },
+    "sv": {
+        "videoSummary": "Videosammanfattning",
+        "climateSummary": "Klimatsammanfattning" // Climate Summary
+    },
+    "da": {
+        "videoSummary": "Videosammendrag",
+        "climateSummary": "Klimaresumé" // Climate Summary
+    },
+    "fi": {
+        "videoSummary": "Videon yhteenveto",
+        "climateSummary": "Ilmaston yhteenveto" // Climate Summary
+    },
+    "pl": {
+        "videoSummary": "Podsumowanie wideo",
+        "climateSummary": "Podsumowanie klimatu" // Climate Summary
+    },
+    "tr": {
+        "videoSummary": "Video özeti",
+        "climateSummary": "İklim özeti" // Climate Summary
+    },
+    "el": {
+        "videoSummary": "Περίληψη βίντεο",
+        "climateSummary": "Κλιματική περίληψη" // Climate Summary (Klimatikí perílipsi)
+    },
+    "id": {
+        "videoSummary": "Ringkasan video",
+        "climateSummary": "Ringkasan iklim" // Climate Summary
+    },
+    "uk": {
+        "videoSummary": "Короткий зміст відео",
+        "climateSummary": "Короткий зміст клімату" // Climate Summary (Korotkyi zmist klimatu)
+    },
+    "vi": {
+        "videoSummary": "Tóm tắt video",
+        "climateSummary": "Tóm tắt khí hậu" // Climate Summary
+    },
+    "th": {
+        "videoSummary": "สรุปวิดีโอ",
+        "climateSummary": "สรุปสภาพภูมิอากาศ" // Climate Summary (Sarup saphāp phūm’ākāt)
+    },
+    "he": {
+        "videoSummary": "סיכום וידאו",
+        "climateSummary": "סיכום אקלים" // Climate Summary (Sikum aklīm)
+    },
+    "hu": {
+        "videoSummary": "Videó összefoglaló",
+        "climateSummary": "Éghajlati összefoglaló" // Climate Summary
+    },
+    "ro": {
+        "videoSummary": "Rezumat video",
+        "climateSummary": "Rezumat climatic" // Climate Summary
+    },
+    "cs": {
+        "videoSummary": "Shrnutí videa",
+        "climateSummary": "Shrnutí klimatu" // Climate Summary
+    },
+    "sk": {
+        "videoSummary": "Zhrnutie videa",
+        "climateSummary": "Zhrnutie klímy" // Climate Summary
+    }
+};
+
+export function getLandingSummaryTranslation(languageCode: string, key: 'videoSummary' | 'climateSummary'): string {
+    const langData = allTranslations[languageCode];
+    if (langData) {
+        return langData[key] || allTranslations["en"][key];
+    }
+    return allTranslations["en"][key]; // Fallback to English translation
+}
 
 const summaryTranslations: { [key: string]: string } = {
     "en": "PDF summary",
