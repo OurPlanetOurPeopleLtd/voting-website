@@ -71,6 +71,7 @@ export const VideoHubCard = (props: TVideoHubCard) => {
 
                 <VideoControl fullScreenOnClick={true} datoVideo={props.mainVideo?.video?.video} pageTitle={props.pageTitle}
                               videoThumbnail={props.mainVideo?.thumbnailImage.responsiveImage.src}
+                        
                               videoTitle={props.mainVideo?.video?.video?.title ?? ""} />
 
             </div>

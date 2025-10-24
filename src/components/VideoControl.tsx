@@ -6,6 +6,19 @@ import { recordUse } from "../utils/analytics";
 
 import "./VideoControl.scss"
 
+
+// Declare a module augmentation for 'react-datocms'
+declare module 'react-datocms' {
+
+    // @ts-ignore
+    export interface VideoPlayerProps {
+        defaultTextTrack?: string;
+
+    }
+
+
+}
+
 export type TVideoProps = {
     isOpen?: boolean,
     onFinish?: () => void,
@@ -200,7 +213,8 @@ export const VideoControl = ({
         if (!locale) return;
 
         const intervalId = setInterval(() => {
-            interface VideoPlayerType extends HTMLElement { src: string }
+            interface VideoPlayerType extends HTMLElement { src: string;
+                textTracks: TextTrackList;}
             const videoParent = document.querySelector("mux-player") as HTMLElement;
 
             function findElementInShadowRoot(root: HTMLElement, selector: string): HTMLElement | null {
@@ -212,6 +226,22 @@ export const VideoControl = ({
 
             const videoPlayer = findElementInShadowRoot(videoParent, "mux-video") as VideoPlayerType;
             if (!videoPlayer) return;
+
+            const tracks = videoPlayer.textTracks;
+
+            for (let i = 0; i < tracks.length; i++) {
+                const track = tracks[i];
+
+                // Set all tracks to 'hidden' first, as we need to explicitly enable one.
+                if (track.mode !== 'disabled') {
+                    track.mode = 'hidden';
+                }
+
+                // Find the track matching the current locale and set its mode to 'showing'.
+                if (track.language === locale) {
+                    track.mode = 'showing';
+                }
+            }
 
             clearInterval(intervalId);
         }, 500);
@@ -233,6 +263,7 @@ export const VideoControl = ({
                 onTimeUpdate={onVideoProgress}
                 onPause={onVideoPause}
                 accentColor="#57b3d9"
+                
                 data={datoVideo}
             />
         </div>
