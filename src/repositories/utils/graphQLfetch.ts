@@ -10,7 +10,7 @@ export const APP_CONTENTFUL_ACCESS_TOKEN = process.env.REACT_APP_CONTENTFUL_ACCE
 export const APP_CONTENTFUL_ENVIRONMENT = process.env.REACT_APP_CONTENTFUL_ENVIRONMENT ?? node_env === "development" ? developmentSpace : "main";
 
 const TOKEN = APP_CONTENTFUL_ACCESS_TOKEN;
-const ENVIRONMENT = "";// APP_CONTENTFUL_ENVIRONMENT;
+const ENVIRONMENT = "ai";// APP_CONTENTFUL_ENVIRONMENT;
 export const CONTENT_URL = 'https://graphql.datocms.com/'; //`https://graphql.contentful.com/content/v1/spaces/${SPACE}/environments/${ENVIRONMENT}`;
 
 export const fetchDataDato = <TType>(query: string) => {
