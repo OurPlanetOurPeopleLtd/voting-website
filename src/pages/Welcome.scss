@@ -1,0 +1,30 @@
+.frame {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: unset;
+
+
+  width: 90vw;  
+  height: 90vh;  
+  margin-left: 5vw; 
+  margin-right: 5vw; 
+  margin-top: 5vh; 
+  margin-bottom: 5vh; 
+
+}
+
+.frame__heading {
+
+  font-size: 3em; 
+  margin-bottom: 30px;
+}
+
+/* You might need to add this for the 100vh to work correctly */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}

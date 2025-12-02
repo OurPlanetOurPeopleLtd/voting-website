@@ -23,6 +23,7 @@ import PageTransition from "./PageTransition";
 
 import {ReportPage} from "./components/Reporting/ReportPage";
 import {defaultLanguage, getSupportedLocales} from "./repositories/utils/languages";
+import Welcome from "./pages/Welcome";
 
 
 const Reset = () => {
@@ -191,7 +192,14 @@ function Routing() {
                         <LayoutTs locale={locale} title={"Unknown Page"} >
                         <ReportPage/>
                         </LayoutTs>
-                    }></Route>
+                        }>
+                    </Route>
+                    <Route key="weclome" path="/welcome" element={
+           
+                            <Welcome/>
+                  
+                    }>
+                    </Route>
                     <Route key="api" path="/reset/patrickonly/277205bc-fdf9-4bcb-be07-14a3a3bcc7f4" element={<Reset/>}></Route>
                                  
                 </Routes>
