@@ -161,16 +161,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 													props.locale, "videoSummary"
 												)}
 											</button>
-											<button
-												onClick={() =>
-													setOpenDialog('members')
-												}
-												className='btn btn--white'
-											>
-												{getLandingSummaryTranslation(
-													props.locale, "climateSummary"
-												)}
-											</button>
+											
 	
 
 											<DialogModal
