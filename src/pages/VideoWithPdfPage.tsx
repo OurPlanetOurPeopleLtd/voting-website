@@ -56,7 +56,7 @@ export const VideoWithPdfsPage = (props: TArticlePage) => {
 
 
     const videoWrappers = data?.mainVideos ?? [data?.mainVideo];
-
+    const showVideoSquare = videoWrappers?.length > 0 && videoWrappers[0];
     function GetVideosJsx()
     {
         return videoWrappers.map((videoWrapper, index) => (
@@ -95,7 +95,17 @@ export const VideoWithPdfsPage = (props: TArticlePage) => {
             <h1>{data.header}</h1>  
             {data.introText ? <p className="introText">{data.introText}</p> : null}
 
-            {GetVideoSection()}
+            
+            {
+                (showVideoSquare) ? 
+            
+                GetVideoSection():
+                  
+                    <PdfSidebarComponent pdfWrappers={data.pdfs}>
+   
+                    </PdfSidebarComponent>
+                   
+            }
          
         </>
     );

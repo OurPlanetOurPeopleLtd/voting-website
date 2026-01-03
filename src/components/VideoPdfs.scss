@@ -2,7 +2,23 @@
   display: flex;
   gap: 1rem;
   flex-direction: column;
+  
+
+  &.full-width-grid {
+    display: block; // Stop side-by-side flex
+
+    .pdf-section {
+      width: 100%; // Make PDF section full width
+    }
+
+    .pdf-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr; // FORCES 2 COLUMNS
+      gap: 1.5rem;
+    }
+  }
 }
+
 
 .pdf-list {
   list-style: none;
@@ -12,6 +28,8 @@
   li + li {
     margin-top: 1rem;
   }
+  
+  
 }
 
 .pdf-link {
