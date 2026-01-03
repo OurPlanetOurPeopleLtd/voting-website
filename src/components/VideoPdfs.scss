@@ -15,6 +15,9 @@
       display: grid;
       grid-template-columns: 1fr 1fr; // FORCES 2 COLUMNS
       gap: 1.5rem;
+      li + li {
+        margin-top: 0; // This removes the gap you are seeing!
+      }
     }
   }
 }
