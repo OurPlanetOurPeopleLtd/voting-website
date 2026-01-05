@@ -54,6 +54,8 @@ export const DynamicNavList = (props: TDynamicNav) => {
                                 key={key}
                                 href={navItem.url ?? ""}
                                 className="nav-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 data-test="full link"
                             >
                                 {navItem.title}
