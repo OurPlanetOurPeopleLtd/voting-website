@@ -123,7 +123,6 @@ export const LayoutTs = ({ children, locale, title }: ILayout) => {
 							}}
 						/>
 					</Link>
-
 					<Navbar.Toggle
 						onClick={toggleExpanded}
 						aria-controls='responsive-navbar-nav'

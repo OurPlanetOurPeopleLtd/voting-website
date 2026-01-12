@@ -1,6 +1,4 @@
-:root {
-	--primary: #64cbd0;
-}
+
 
 .CookieConsent {
 	background-color: var(--tertiary) !important;
@@ -61,7 +59,7 @@ body {
 }
 
 nav {
-	background-color: #fff;
+	background-color: var(--background);
 	box-shadow: 0 10px 11px -6px rgba(0, 0, 0, 0.1);
 
 	img {
