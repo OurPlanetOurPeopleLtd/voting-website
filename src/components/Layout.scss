@@ -160,8 +160,8 @@ footer {
 }
 
 .CookieConsent {
-	background-color: var(--primary) !important;
-	color: var(--tertiary) !important;
+	background-color: var(--tertiary) !important;
+	color: var(--secondary) !important;
 	align-items: center !important;
 	padding: 0 !important;
 
@@ -171,15 +171,26 @@ footer {
 	}
 
 	a {
-		color: var(--tertiary) !important;
+		color: var(--secondary) !important;
 
 		&:hover {
+			color: var(--primary) !important;
 			text-decoration: none;
 		}
 	}
 
 	button + button {
 		margin-top: 0 !important;
+	}
+	
+	button{
+		
+		&:hover {
+			background-color:  #00643b!important; /* Brandy Yellow */
+			color: #fcb900  !important;
+	
+			text-decoration: none;
+		}
 	}
 
 	@media screen and (min-width: 1024px) {
