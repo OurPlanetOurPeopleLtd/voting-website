@@ -252,7 +252,7 @@ svg {
 /* Targets only the main content containers to avoid global layout issues */
 .frame.container,
 .frame-content {
-  padding-top:0px  !important;
+  padding-top:0  !important;
   padding-bottom: 10px  !important;
   margin-bottom: 0 !important;
 }
