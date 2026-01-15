@@ -252,7 +252,8 @@ svg {
 /* Targets only the main content containers to avoid global layout issues */
 .frame.container,
 .frame-content {
-  padding-bottom: 0 !important;
+  padding-top:0px  !important;
+  padding-bottom: 10px  !important;
   margin-bottom: 0 !important;
 }
 
@@ -263,12 +264,12 @@ footer {
 footer {
   background-color: white; /*var(--primary);  Uses your dark blue theme color */
 
-  margin-top: auto; /* Pushes footer to bottom if page content is short */
+  
   width: 100%;
   margin-bottom: 0 !important;
   display: block;
   z-index: 10;
-  position: relative;
+  position: fixed;
 
   ul {
     margin: 0; /* Ensures the list doesn't push the footer up */

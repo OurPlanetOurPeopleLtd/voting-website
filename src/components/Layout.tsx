@@ -112,17 +112,7 @@ export const LayoutTs = ({ children, locale, title }: ILayout) => {
 				fixed='top'
 			>
 				<Container style={{ position: 'relative' }}>
-					<Link to={`/${locale}`} className='navbar-brand'>
-						<img
-							alt='Our Planet Our People'
-							src={logo}
-							width='200'
-							height='50'
-							onClick={() => {
-								setExpanded(false);
-							}}
-						/>
-					</Link>
+		
 					<Navbar.Toggle
 						onClick={toggleExpanded}
 						aria-controls='responsive-navbar-nav'

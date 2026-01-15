@@ -16,14 +16,15 @@ h1, h2, h3 {
 }
 
 h1 {
+  padding-top: 50px;
   line-height: 1;
 }
 
 main .container {
-  padding: 1.5rem 0;
+  padding: 0.1rem 0;
 
   @media screen and (min-width: 768px) {
-    padding: .5rem 0 1.5rem;
+    padding: .2rem 0 1.5rem;
     
   }
 }
@@ -196,6 +197,8 @@ img {
 
 
 .navbar.fixed-top {
+  
+
   position: fixed;
   top: 0;
   width: 100%;
@@ -230,7 +233,7 @@ img {
   color: #ffffff !important;
   text-decoration: none !important;
   font-weight: 900;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   transition: background 0.2s ease;
 }
 
