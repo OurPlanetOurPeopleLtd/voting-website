@@ -12,8 +12,9 @@ export function getShareText(locale:string)
         "es": "Y/o compartir a través de las redes sociales",
         "pt": "E/ou compartilhar através das redes sociais",
         "no": "Og/eller del via sosiale medier",
+        "cy": "Ac/neu rhannu trwy gyfryngau cymdeithasol",
     };
-      
+
 
     const translation = socialShareTranslations[locale];
 
@@ -36,16 +37,17 @@ const resultTranslations: { [key: string]: string } = {
     "es": "Resultado",
     "pt": "Resultado",
     "no": "Resultat",
-    "de": "Ergebnis", //Added German
-    "it": "Risultato", //Added Italian
-    "ru": "Результат", //Added Russian
-    "ko": "결과", // Added Korean
-    "ar": "نتيجة", //Added Arabic
-    "sv": "Resultat", // Added Swedish
-    "da": "Resultat", // Added Danish
-    "fi": "Tulos", // Added Finnish
-    "pl": "Wynik", // Added Polish
-    "tr": "Sonuç" //Added Turkish
+    "de": "Ergebnis",
+    "it": "Risultato",
+    "ru": "Результат",
+    "ko": "결과",
+    "ar": "نتيجة",
+    "sv": "Resultat",
+    "da": "Resultat",
+    "fi": "Tulos",
+    "pl": "Wynik",
+    "tr": "Sonuç",
+    "cy": "Canlyniad"
 };
 
 
@@ -58,9 +60,6 @@ export type TCookieBannerText = {
     resetText?:string;
 }
 export const getCookieBannerText = (locale: string): TCookieBannerText => {
-   /* const englishMainText = "We use a single cookie for the sole purpose of protecting against misuse of the voting process.\n" +
-        "We'd also like, but only if you agree, to set analytics cookies solely to understand how you use this\n" +
-        "site. We do this to make the site work better.";*/
 
     const englishMainText = "We use cookies to give you the best online experience. Strictly necessary cookies are on by default. Additional cookies are off by default."
     const englishApproveText = "Accept non-essential cookies";
@@ -138,7 +137,7 @@ export const getCookieBannerText = (locale: string): TCookieBannerText => {
             declineText: "Rejeitar cookies não essenciais",
             mainText: "Usamos cookies para lhe proporcionar a melhor experiência online. Os cookies estritamente necessários estão ativados por padrão. Os cookies adicionais estão desativados por padrão.",
             headerText: "Cookies no OurPlanetOurPeople",
-            privacyLinkText: "Consulte a política de privacidade para obter detalhes",
+            privacyLinkText: "Consulte a política de privacidad para obter detalhes",
             resetText: "Redefinir cookies"
         },
         "no": {
@@ -228,6 +227,14 @@ export const getCookieBannerText = (locale: string): TCookieBannerText => {
             headerText: "OurPlanetOurPeople'daki Çerezler",
             privacyLinkText: "Ayrıntılar için gizlilik politikasına bakın",
             resetText: "Çerezleri sıfırla"
+        },
+        "cy": {
+            approveText: "Derbyn cwcis dewisol",
+            declineText: "Gwrthod cwcis dewisol",
+            mainText: "Rydym yn defnyddio cwcis i roi'r profiad ar-lein gorau i chi. Mae cwcis cwbl angenrheidiol ymlaen yn ddiofyn. Mae cwcis ychwanegol i ffwrdd yn ddiofyn.",
+            headerText: "Cwcis ar OurPlanetOurPeople",
+            privacyLinkText: "Gweler y polisi preifatrwydd am fanylion",
+            resetText: "Ailosod Cwcis"
         }
     };
 
@@ -259,7 +266,8 @@ const yesTranslations: { [key: string]: string } = {
     "da": "Ja",
     "fi": "Kyllä",
     "pl": "Tak",
-    "tr": "Evet"
+    "tr": "Evet",
+    "cy": "Ie"
 };
 
 const noTranslations: { [key: string]: string } = {
@@ -282,7 +290,8 @@ const noTranslations: { [key: string]: string } = {
     "da": "Nej",
     "fi": "Ei",
     "pl": "Nie",
-    "tr": "Hayır"
+    "tr": "Hayır",
+    "cy": "Na"
 };
 
 export function getYesTranslation(languageCode: string): string {
@@ -313,7 +322,8 @@ const donateTranslations: { [key: string]: string } = {
     "da": "Donér",
     "fi": "Lahjoita",
     "pl": "Podaruj",
-    "tr": "Bağış Yap"
+    "tr": "Bağış Yap",
+    "cy": "Cyfrannu"
 };
 
 // Example usage:
@@ -352,7 +362,8 @@ const nextTranslations: { [key: string]: string } = {
     "hu": "Videó összefoglaló",
     "ro": "Rezumat video",
     "cs": "Shrnutí videa",
-    "sk": "Zhrnutie videa"
+    "sk": "Zhrnutie videa",
+    "cy": "Crynodeb fideo"
 };
 
 export function getNextTranslation(languageCode: string): string {
@@ -365,119 +376,123 @@ export const allTranslations: { [key: string]: { videoSummary: string, climateSu
     },
     "fr": {
         "videoSummary": "Résumé de la vidéo",
-        "climateSummary": "Résumé climatique" // Climate Summary
+        "climateSummary": "Résumé climatique"
     },
     "nl": {
         "videoSummary": "Videosamenvatting",
-        "climateSummary": "Klimaatsamenvatting" // Climate Summary
+        "climateSummary": "Klimaatsamenvatting"
     },
     "sr": {
         "videoSummary": "Резиме видео снимка",
-        "climateSummary": "Климатски резиме" // Climate Summary (Klimatski rezime)
+        "climateSummary": "Климатски резиме"
     },
     "hi": {
         "videoSummary": "वीडियो सारांश",
-        "climateSummary": "जलवायु सारांश" // Climate Summary (Jalavaayu saaraansh)
+        "climateSummary": "जलवायु सारांश"
     },
     "ja": {
         "videoSummary": "ビデオの要約",
-        "climateSummary": "気候の要約" // Climate Summary (Kikō no yōyaku)
+        "climateSummary": "気候の要約"
     },
     "zh": {
         "videoSummary": "视频摘要",
-        "climateSummary": "气候摘要" // Climate Summary (Qìhòu zhāiyào)
+        "climateSummary": "气候摘要"
     },
     "es": {
         "videoSummary": "Resumen del video",
-        "climateSummary": "Resumen climático" // Climate Summary
+        "climateSummary": "Resumen climático"
     },
     "pt": {
         "videoSummary": "Resumo do vídeo",
-        "climateSummary": "Resumo climático" // Climate Summary
+        "climateSummary": "Resumo climático"
     },
     "no": {
         "videoSummary": "Videosammendrag",
-        "climateSummary": "Klimasammendrag" // Climate Summary
+        "climateSummary": "Klimasammendrag"
     },
     "de": {
         "videoSummary": "Videozusammenfassung",
-        "climateSummary": "Klimazusammenfassung" // Climate Summary
+        "climateSummary": "Klimazusammenfassung"
     },
     "it": {
         "videoSummary": "Riepilogo del video",
-        "climateSummary": "Riepilogo climatico" // Climate Summary
+        "climateSummary": "Riepilogo climatico"
     },
     "ru": {
         "videoSummary": "Краткое содержание видео",
-        "climateSummary": "Краткое содержание климата" // Climate Summary (Kratkoye soderzhaniye klimata)
+        "climateSummary": "Краткое содержание климата"
     },
     "ko": {
         "videoSummary": "비디오 요약",
-        "climateSummary": "기후 요약" // Climate Summary (Gihu yoyak)
+        "climateSummary": "기후 요약"
     },
     "ar": {
         "videoSummary": "ملخص الفيديو",
-        "climateSummary": "ملخص المناخ" // Climate Summary (Mulakhaṣ al-munākh)
+        "climateSummary": "ملخص المناخ"
     },
     "sv": {
         "videoSummary": "Videosammanfattning",
-        "climateSummary": "Klimatsammanfattning" // Climate Summary
+        "climateSummary": "Klimatsammanfattning"
     },
     "da": {
         "videoSummary": "Videosammendrag",
-        "climateSummary": "Klimaresumé" // Climate Summary
+        "climateSummary": "Klimaresumé"
     },
     "fi": {
         "videoSummary": "Videon yhteenveto",
-        "climateSummary": "Ilmaston yhteenveto" // Climate Summary
+        "climateSummary": "Ilmaston yhteenveto"
     },
     "pl": {
         "videoSummary": "Podsumowanie wideo",
-        "climateSummary": "Podsumowanie klimatu" // Climate Summary
+        "climateSummary": "Podsumowanie klimatu"
     },
     "tr": {
         "videoSummary": "Video özeti",
-        "climateSummary": "İklim özeti" // Climate Summary
+        "climateSummary": "İklim özeti"
     },
     "el": {
         "videoSummary": "Περίληψη βίντεο",
-        "climateSummary": "Κλιματική περίληψη" // Climate Summary (Klimatikí perílipsi)
+        "climateSummary": "Κλιματική περίληψη"
     },
     "id": {
         "videoSummary": "Ringkasan video",
-        "climateSummary": "Ringkasan iklim" // Climate Summary
+        "climateSummary": "Ringkasan iklim"
     },
     "uk": {
         "videoSummary": "Короткий зміст відео",
-        "climateSummary": "Короткий зміст клімату" // Climate Summary (Korotkyi zmist klimatu)
+        "climateSummary": "Короткий зміст клімату"
     },
     "vi": {
         "videoSummary": "Tóm tắt video",
-        "climateSummary": "Tóm tắt khí hậu" // Climate Summary
+        "climateSummary": "Tóm tắt khí hậu"
     },
     "th": {
         "videoSummary": "สรุปวิดีโอ",
-        "climateSummary": "สรุปสภาพภูมิอากาศ" // Climate Summary (Sarup saphāp phūm’ākāt)
+        "climateSummary": "สรุปสภาพภูมิอากาศ"
     },
     "he": {
         "videoSummary": "סיכום וידאו",
-        "climateSummary": "סיכום אקלים" // Climate Summary (Sikum aklīm)
+        "climateSummary": "סיכום אקלים"
     },
     "hu": {
         "videoSummary": "Videó összefoglaló",
-        "climateSummary": "Éghajlati összefoglaló" // Climate Summary
+        "climateSummary": "Éghajlati összefoglaló"
     },
     "ro": {
         "videoSummary": "Rezumat video",
-        "climateSummary": "Rezumat climatic" // Climate Summary
+        "climateSummary": "Rezumat climatic"
     },
     "cs": {
         "videoSummary": "Shrnutí videa",
-        "climateSummary": "Shrnutí klimatu" // Climate Summary
+        "climateSummary": "Shrnutí klimatu"
     },
     "sk": {
         "videoSummary": "Zhrnutie videa",
-        "climateSummary": "Zhrnutie klímy" // Climate Summary
+        "climateSummary": "Zhrnutie klímy"
+    },
+    "cy": {
+        "videoSummary": "Cyflwyniad",
+        "climateSummary": "Crynodeb o'r hinsawdd"
     }
 };
 
@@ -519,7 +534,8 @@ const summaryTranslations: { [key: string]: string } = {
     "hu": "PDF összefoglaló",
     "ro": "Rezumat PDF",
     "cs": "PDF souhrn",
-    "sk": "PDF zhrnutie"
+    "sk": "PDF zhrnutie",
+    "cy": "Crynodeb PDF"
 };
 
 export function getSummaryTranslation(languageCode: string): string {
@@ -541,7 +557,7 @@ const detailTranslations: { [key: string]: string } = {
     "it": "Il coinvolgimento del popolo",
     "ru": "Участие народа",
     "ko": "사람들의 참여",
-    "ar": "مشاركة الناس",
+    "ar": "mشاركة الناس",
     "sv": "Folkets engagemang",
     "da": "Folkets engagement",
     "fi": "Ihmisten osallistuminen",
@@ -556,7 +572,8 @@ const detailTranslations: { [key: string]: string } = {
     "hu": "Az emberek részvétele",
     "ro": "Implicarea oamenilor",
     "cs": "Zapojení lidí",
-    "sk": "Zapojenie ľudí"
+    "sk": "Zapojenie ľudí",
+    "cy": "Ymlyniad y bobl"
 };
 
 export function getDetailTranslation(languageCode: string): string {
@@ -577,7 +594,8 @@ const countryResultsTranslations: CountryResultsTranslations = {
     "zh": "所有国家的结果",
     "es": "Resultados de todos los países",
     "pt": "Resultados de todos os países",
-    "no": "Resultater for alle land"
+    "no": "Resultater for alle land",
+    "cy": "Canlyniadau Pob Gwlad"
 };
 
 export function getCountryResultsTranslation(languageCode: string): string {
@@ -586,7 +604,7 @@ export function getCountryResultsTranslation(languageCode: string): string {
 
 
 interface LanguageTranslations {
-    [key: string]: string; // Allows any string key with a string value
+    [key: string]: string;
 }
 
 interface Translations {
@@ -625,7 +643,7 @@ const microCopyTranslations: Translations = {
     "hi": {
         "videoPrompt": "हमारी साइट को सोशल मीडिया या सीधे संपर्कों के माध्यम से साझा करने के लिए, कृपया हमारी",
         "shareButton": "साझा करने वाला पृष्ठ",
-        "inDepthLink": "हमारे इन डेप्थ पेज पर जाकर",
+        "inDepthLink": "हमारे इन डेप्th पेज पर जाकर",
         "orFindOutMore": "या अधिक जानने के लिए",
         "registrationHelper": "पंजीकरण या डीरजिस्ट्रेशन प्रक्रिया से संबंधित किसी भी प्रश्न के लिए, कृपया हमें इस ईमेल पते पर अपनी क्वेरी भेजें"
     },
@@ -663,11 +681,18 @@ const microCopyTranslations: Translations = {
         "inDepthLink": "ved å besøke vår In Depth-side",
         "orFindOutMore": "Eller finn ut mer ved å",
         "registrationHelper": "For spørsmål knyttet til registrerings- eller avregistreringsprosessen, vennligst send oss din forespørsel på e-post til"
+    },
+    "cy": {
+        "videoPrompt": "I rannu ein gwefan trwy gyfryngau cymdeithasol neu gysylltiadau uniongyrchol, ewch i'n",
+        "shareButton": "tudalen rannu",
+        "inDepthLink": "trwy fynd i'n tudalen In Depth",
+        "orFindOutMore": "Neu dysgwch fwy trwy",
+        "registrationHelper": "Ar gyfer unrhyw ymholiadau sy'n ymwneud â'r broses gofrestru neu ddadgofrestru, anfonwch eich ymholiad atom trwy e-bost at"
     }
 };
 
 export function getTranslation(languageCode: string, key: string): string {
-   
+
     const languageTranslations = microCopyTranslations[languageCode];
     if (languageTranslations && languageTranslations[key]) {
         return languageTranslations[key];
