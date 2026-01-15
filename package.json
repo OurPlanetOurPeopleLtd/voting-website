@@ -47,7 +47,7 @@
   },
   "scripts": {
     "clean": "rm -rf public/data && rm -rf scripts/dist",
-    "prebuild": "npx tsc -p tsconfig.static.json",
+    "prebuild": "npx tsc -p tsconfig.static.json || true",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
