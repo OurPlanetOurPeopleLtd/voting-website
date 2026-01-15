@@ -18,6 +18,6 @@ export const getVideoWithPdfPageJson = (slug: string, locale:string, staticData:
     const query = generateVideoWithPdfPageQuery(slug, locale);
     const apiPromise =  fetchDataDato<QueryResult>(query).then(mapVideoWithPdfData);
 
-    return getStaticOrFetch<TVideoWithPdfsPage>("VideoWithPdfsPage", apiPromise, locale, slug, staticData);
+    return getStaticOrFetch<TVideoWithPdfsPage>("VideoWithPdfsPage", apiPromise, locale, slug);
 };
 

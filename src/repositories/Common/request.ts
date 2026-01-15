@@ -57,5 +57,5 @@ export const getAllNavData = (slug:string, locale:string, staticData:boolean = t
 
     
 
-    return getStaticOrFetch<NavigationItem[]>("Common", apiPromise, locale, slug, staticData);
+    return getStaticOrFetch<NavigationItem[]>("Common", apiPromise, locale, slug);
 };

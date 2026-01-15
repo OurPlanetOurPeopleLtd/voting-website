@@ -8,7 +8,7 @@ export const getNavigationJson = (id: string, locale:string, staticData:boolean 
     const query = generateNavQuery(id,locale);
     
     const apiPromise = fetchDataDato<QueryResult>(query).then(mapNavData);
-    return getStaticOrFetch<NavigationItem[]>("Navigation", apiPromise, locale, id, staticData);
+    return getStaticOrFetch<NavigationItem[]>("Navigation", apiPromise, locale, id);
 };
 
 export const getAllSlugs = async () =>

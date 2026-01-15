@@ -16,6 +16,6 @@ export const getVideoPageJson = (slug: string, locale:string, staticData:boolean
     const query = generateVideoPageQuery(slug, locale);
     const apiPromise = fetchDataDato<QueryResult>(query).then(mapVideoData);
 
-    return getStaticOrFetch<TVideoPage>("VideoPage", apiPromise, locale, slug, staticData);
+    return getStaticOrFetch<TVideoPage>("VideoPage", apiPromise, locale, slug);
 };
 

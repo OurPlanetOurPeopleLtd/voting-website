@@ -2896,17 +2896,4 @@ export function getCountry() {
     return countryObject ? getCountryName(countryObject) : "United Kingdom";
 }
 
-function getState() {
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-    if (timezone === "" || !timezone) {
-        return null;
-    }
-
-    const state = timezone.split("/")[1].replace("_", " ")
-
-    return state
-
-}
-
 

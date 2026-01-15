@@ -17,5 +17,5 @@ export const getRegistrationPage = (slug:string, locale:string, staticData:boole
     const query = generateRegistrationPageQuery( locale);
     const apiPromise = fetchDataDato<QueryResult>(query).then( mapRegistration);
 
-    return getStaticOrFetch<TRegistrationPage>("Registration", apiPromise, locale, slug, staticData);
+    return getStaticOrFetch<TRegistrationPage>("Registration", apiPromise, locale, slug);
 };

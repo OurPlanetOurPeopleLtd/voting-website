@@ -70,8 +70,7 @@ export async function getStaticOrFetch<T>(
     fileNamePrefix: string,
     apiPromise: Promise<T>,
     locale: string,
-    slug: string,
-    staticData: boolean = false
+    slug: string
 ): Promise<T> {
   /*  if (staticData) {
         

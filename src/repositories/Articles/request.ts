@@ -23,5 +23,5 @@ export const getPageJson = (slug: string, locale: string, staticData:boolean = t
 
 
  
-    return getStaticOrFetch<TPage | null>("Articles", apiPromise, locale, slug, staticData);
+    return getStaticOrFetch<TPage | null>("Articles", apiPromise, locale, slug);
 };
