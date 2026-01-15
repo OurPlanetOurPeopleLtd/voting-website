@@ -1,4 +1,4 @@
-﻿import {  Outlet, useMatch } from 'react-router-dom';
+import { Outlet, useMatch } from 'react-router-dom';
 import '@aws-amplify/ui-react/styles.css';
 import './Layout.scss';
 import Container from 'react-bootstrap/Container';
@@ -153,7 +153,7 @@ export const LayoutTs = ({ children, locale, title }: ILayout) => {
 				onDecline={() => {
 					setAnalyticsEnabled(false);
 				}}
-				onAccept={(acceptedByScrolling) => {
+				onAccept={() => {
 					setAnalyticsEnabled(true);
 				}}
 			>
