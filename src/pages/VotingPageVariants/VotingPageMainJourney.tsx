@@ -144,7 +144,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 									{props.landingHeading}
 								</h1>
 
-								<div style={{ fontSize: '1.2rem' }}>
+								<div style={{ fontSize: '0.95rem' }}>
 									<StructuredText data={props.openingText} />
 								</div>
 

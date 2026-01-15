@@ -2,7 +2,7 @@
   --frame-colour: #00643b;
   --background: #00a658; 
   --tertiary: #97d700;
-  --link-colour:#00a658;
+  --link-colour:#00643b;
   --white: #fff;
   --spacingBase: 1rem;
 }
@@ -80,7 +80,7 @@ a:not([id]):not([class]) {
 
 .frame__heading {
   font-weight: 600;
-  font-size: 2rem;
+  font-size: 1rem;
   margin-bottom: 1.5rem;
   line-height: 1.25;
 }
