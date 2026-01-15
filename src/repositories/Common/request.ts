@@ -2,9 +2,6 @@ import {fetchDataDato, getStaticOrFetch} from "../utils/graphQLfetch";
 import {allNavigationParts, QueryResult} from "./types";
 import {NavigationItem} from "../Navigation/types";
 import {LogErrors} from "../utils/utilities";
-import {footerComponentId, headerComponentId} from "../utils/config";
-import {mapRegistration} from "../Registration/mappings";
-import {TRegistrationPage} from "../Registration/model";
 
 const getNavBlocks = (locale:string):string =>  allNavigationParts.map(name =>
       ` ${name}(locale:${locale}, fallbackLocales:[en]){

@@ -11,9 +11,6 @@ import { VideoWithReference } from '../VideoWithReference';
 import { DialogModal, DialogModalRef } from '../../components/DialogModal';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
-	getNextTranslation,
-	getSummaryTranslation,
-	getDetailTranslation,
 	getTranslation, getLandingSummaryTranslation,
 } from '../../repositories/utils/extraTranslations';
 import { TVotingPageExtended } from '../../repositories/VotingPage/model';

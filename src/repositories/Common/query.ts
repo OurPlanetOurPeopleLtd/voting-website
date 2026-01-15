@@ -1,6 +1,6 @@
 
 
-import {AllContentTypes, AllContentTypesInNavigation, ContentType} from "../Navigation/types";
+import {AllContentTypesInNavigation, ContentType} from "../Navigation/types";
 
 const blogPost = `title
             slug`;

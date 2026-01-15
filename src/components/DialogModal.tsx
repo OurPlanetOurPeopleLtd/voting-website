@@ -76,7 +76,6 @@ export const DialogModal = forwardRef<DialogModalRef, DialogModalProps>(
         onClick={handleDialogClick}
         className="DialogModal"
         aria-modal="true"
-        role="dialog"
       >
         <div className="DialogModal__header">
           <button autoFocus onClick={onClose} className="btn btn--white">

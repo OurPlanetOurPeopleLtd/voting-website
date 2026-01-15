@@ -1,7 +1,6 @@
 //generate by
 //https://app.contentful.com/spaces/fojlfyn3xufg/environments/staging/entries/1n9FMvYa8MWstVI19atW2w
 
-import {getPreview} from "../utils/preview";
 import {QueryBlocks} from "../Common/query";
 import {LogQuery} from "../utils/utilities";
 

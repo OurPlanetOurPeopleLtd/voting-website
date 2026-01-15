@@ -1,11 +1,9 @@
-import {mapBlogData, mapBlogPost} from "./mappings";
+import {mapBlogData,} from "./mappings";
 import {QueryResult} from "./types";
-import {generatePostQuery, generatePostQueryPaginated} from "./query";
+import {generatePostQuery} from "./query";
 import {fetchDataDato, getStaticOrFetch} from "../utils/graphQLfetch";
 import {getAllItems} from "../Navigation/request";
-import {ContentType, NavigationItem} from "../Navigation/types";
-import {generateNavQuery} from "../Navigation/query";
-import {mapNavData} from "../Navigation/mappings";
+import {ContentType} from "../Navigation/types";
 import {TPage} from "./model";
 
 
@@ -15,7 +13,7 @@ export const getAllSlugs = async () =>
     return items.filter(x => x.__typename === ContentType.BlogPost).map( x=> x.slug);  
 }
 
-export const getPageJson = (slug: string, locale: string, staticData:boolean = true) => {
+export const getPageJson = (slug: string, locale: string) => {
     const query = generatePostQuery(slug, locale);
     const apiPromise = fetchDataDato<QueryResult>(query).then((root: QueryResult) => {
         return mapBlogData(root,locale); //todo handle failure outside of function

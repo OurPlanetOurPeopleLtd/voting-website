@@ -44,8 +44,7 @@ export const getSupportedCountries = async ()  => {
     const locales = await getSupportedLocales();
     const supportedCountries:CountryFlag[] = [];
     locales.forEach( (supportedLanguage) => 
-    {
-      
+    {      
         let supportedLanguageForFlag = supportedLanguage .replace("_","-")
         if(supportedLanguageForFlag === "en")
         {

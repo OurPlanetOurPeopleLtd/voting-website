@@ -3,7 +3,6 @@ import { Col, Row } from "react-bootstrap";
 import {
     FaFacebook,
     FaTwitter,
-    FaLinkedin,
     FaShareAlt,
     FaWhatsapp,
 } from "react-icons/fa";
@@ -23,7 +22,7 @@ export interface ISharingControls {
 
 export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText}: ISharingControls) => {
     const [linkAdded, setLinkAdded] = useState(false);
-    const [pageUrl, setPageUrl] = useState( "https://www.ourplanetourpeople.com");
+    const [pageUrl] = useState( "https://www.ourplanetourpeople.com");
     
    
  

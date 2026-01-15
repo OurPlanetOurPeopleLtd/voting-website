@@ -1,4 +1,4 @@
-import {ContentType, NavigationItem, QueryResult} from "./types";
+import {NavigationItem, QueryResult} from "./types";
 import {generateNavQuery} from "./query";
 import {fetchDataDato, getStaticOrFetch} from "../utils/graphQLfetch";
 import {mapNavData} from "./mappings";

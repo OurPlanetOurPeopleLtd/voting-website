@@ -1,4 +1,4 @@
-import {StructuredText, StructuredTextDocument} from "react-datocms";
+import {StructuredText} from "react-datocms";
 import React from "react";
 import {Choice} from "../models";
 import { VoteControls} from "./VoteControls";

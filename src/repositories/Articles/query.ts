@@ -110,7 +110,6 @@ function generatePostQueryFrom(locale:string, shortBlog: boolean, sentSlug: stri
 }
 
 export function generatePostQuery(slug: string, locale: string) {
-    const isPreview = getPreview();
     const first: number = 1;
     const skip: number = 0;
     const sentSlug: string | undefined = slug;

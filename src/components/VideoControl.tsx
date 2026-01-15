@@ -70,7 +70,6 @@ export const VideoControl = ({
 }: TVideoProps) => {
 
     const [goFullScreenOnClick, setGoFullScreenOnClick] = useState(fullScreenOnClick);
-    const [playing, setPlaying] = useState(false);
 
     // Removed this problematic effect that caused pause/reset on isOpen change
     // useEffect(() => {
@@ -123,7 +122,7 @@ export const VideoControl = ({
     };
 
     const onVideoPlay = (event: any) => {
-        setPlaying(true);
+     
 
         if (goFullScreenOnClick) {
             goFullScreen();
@@ -161,7 +160,7 @@ export const VideoControl = ({
     };
 
     const onVideoPause = (event: any) => {
-        setPlaying(false);
+
 
         if (onPause)
             onPause();
@@ -193,21 +192,6 @@ export const VideoControl = ({
         }
       };
 
-    const forcePlay = () => {
-        const videoPlayer = document.querySelector("mux-player") as unknown as MuxPlayer;
-        if (videoPlayer) {
-            videoPlayer.play();
-        }
-    };
-
-    const resetVideo = () => {
-        const videoPlayer = document.querySelector("mux-player") as unknown as MuxPlayer;
-        if (videoPlayer) {
-            videoPlayer.pause();
-            videoPlayer.currentTime = 0;
-            // DO NOT call .load() on mux-player — unsupported
-        }
-    };
 
     useEffect(() => {
         if (!locale) return;

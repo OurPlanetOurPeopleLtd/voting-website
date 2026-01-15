@@ -1,6 +1,4 @@
-﻿import logo from '../logo.webp';
-
-import { Link, Outlet, useMatch } from 'react-router-dom';
+﻿import {  Outlet, useMatch } from 'react-router-dom';
 import '@aws-amplify/ui-react/styles.css';
 import './Layout.scss';
 import Container from 'react-bootstrap/Container';
@@ -15,8 +13,7 @@ import { Analytics } from 'aws-amplify';
 import { v4 as generateGuid } from 'uuid';
 import {
 	DisableAnalytics,
-	EnableAnalytics,
-	recordUse,
+	EnableAnalytics
 } from '../utils/analytics';
 
 import { DynamicNavList } from './DynamicNavList';

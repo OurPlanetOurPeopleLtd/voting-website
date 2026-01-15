@@ -1,6 +1,5 @@
-import * as XLSX from 'xlsx';
 import { DataStore } from '@aws-amplify/datastore';
-import { Event, LazyEvent } from '../../models';
+import { Event } from '../../models';
 import { SortDirection } from 'aws-amplify';
 
 export interface ReportData {

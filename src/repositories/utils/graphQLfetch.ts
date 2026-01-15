@@ -52,19 +52,6 @@ interface Result<T> {
     error?: Error;
 }
 
-// Function to read JSON from the public/data directory
-async function readStaticJson<T>(filePath: string): Promise<Result<T>> {
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json() as T;
-        return { success: true, data };
-    } catch (error) {
-        return { success: false, error: error as Error };
-    }
-}
 
 export async function getStaticOrFetch<T>(
     fileNamePrefix: string,
