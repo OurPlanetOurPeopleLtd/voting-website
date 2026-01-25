@@ -29,7 +29,8 @@ const PASSWORDS = [
 	'George.Monbiot',
 	'Carla.D',
 	'Zak.P',
-	'Anthony.S'
+	'Anthony.S',
+	'anthony.s'
 ];
 const STORAGE_KEY = 'site_unlocked';
 const MAGIC_GUID = '43722bdd-325b-46e4-8c95-1fb95a784b5f'; 
