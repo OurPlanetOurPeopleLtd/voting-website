@@ -18,7 +18,7 @@ export const fetchDataDato = <TType>(query: string) => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            'X-Environment': ENVIRONMENT,
+            'X-Environment': "green-party-version",
             Accept: "application/json",
             Authorization: `Bearer ${TOKEN}`,
         },
