@@ -36,8 +36,7 @@ const VideoOverlay = (props: TOverlayVideoProps) => {
                 <div className="video-frame"></div>
                 <VideoControl {...props} onFinish={() => setUseAlt(true)} datoVideo={ props.datoVideo} autoPlay={true}/>
                
-                <SharingControls className={"overlay-share-buttons"} voted={true} shareHeading={"Please share...."?? ""}
-                              shareButtonText={"Please share!"}/>
+                <SharingControls className={"overlay-share-buttons"} voted={true} shareHeading={"Please share...."?? ""}/>
               
                 <div className={"share-text"}>
                     Watch our full <a href="#" onClick={() => setUseAlt(true)} className={"share-link"}>Climate Change Crisis</a> explanation video

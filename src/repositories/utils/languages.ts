@@ -1,6 +1,6 @@
-
 import countryCodeToFlagEmoji from "country-code-to-flag-emoji";
 import {fetchDataDato} from "./graphQLfetch";
+
 export const defaultLanguage = "en";
 
 
@@ -33,9 +33,7 @@ export const defaultFlag = {code:"en", flag:countryCodeToFlagEmoji("en")}
 export const getSupportedLocales = async (): Promise<string[]> => {
    
     const root: QueryResult = await fetchDataDato<QueryResult>(localesQuery);
-    const supportedLanguages = root.data._site.locales;   
-
-    return supportedLanguages;
+    return root.data._site.locales;
 };
 
 export const getSupportedCountries = async ()  => {
@@ -44,10 +42,9 @@ export const getSupportedCountries = async ()  => {
     const locales = await getSupportedLocales();
     const supportedCountries:CountryFlag[] = [];
     locales.forEach( (supportedLanguage) => 
-    {
-      
+    {      
         let supportedLanguageForFlag = supportedLanguage .replace("_","-")
-        if(supportedLanguageForFlag == "en")
+        if(supportedLanguageForFlag === "en")
         {
             supportedLanguageForFlag = "en-gb";
         }

@@ -1,8 +1,7 @@
 import {DataStore} from "@aws-amplify/datastore";
 import {Choice, Vote} from "../models";
 import {useCallback, useEffect, useState} from "react";
-import {Button, Col, Row} from "react-bootstrap";
-import {v4 as generateGuid} from "uuid";
+import {Button} from "react-bootstrap";
 import {FaThumbsDown, FaThumbsUp} from "react-icons/fa";
 
 import {recordUse} from "../utils/analytics";
@@ -49,7 +48,7 @@ export const VoteControls = ({
     const [fetchedVotes, setFetchedVotes] = useState(false);
     const [voteChoice, setVoteChoice] = useState<Choice | undefined>(undefined)
 
-    const voted = voteChoice != undefined;
+    const voted = voteChoice !== undefined;
     const fetchVoteCounts = useCallback(async () => {
         const localGuid = localStorage.getItem(localStorageVotingIdKey);
         const votes = await DataStore.query(Vote, (v) => v.and(v => [v.voterId.eq(localGuid), v.questionId.eq(questionId)]));

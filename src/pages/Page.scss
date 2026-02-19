@@ -1,8 +1,20 @@
 ﻿:root {
-  --secondary: #538177;
+  --frame-colour: #123e50;
+  --background: #fff;
   --tertiary: #123e50;
+  --link-colour:#fff;
   --white: #fff;
   --spacingBase: 1rem;
+  --secondary: #538177;
+
+
+  --secondary20Brighter: #6ea296;
+  --tertiary20Brighter: #217293;
+
+  --secondary50Brighter: #a4c5be;
+  //button hover
+  --tertiary50Brighter: #57b3d9;
+  --bs-navbar-nav-link-padding-x: 5rem;
 }
 
 html {
@@ -14,14 +26,15 @@ h1, h2, h3 {
 }
 
 h1 {
+  padding-top: 50px;
   line-height: 1;
 }
 
 main .container {
-  padding: 1.5rem 0;
+  padding: 0.1rem 0;
 
   @media screen and (min-width: 768px) {
-    padding: .5rem 0 1.5rem;
+    padding: .2rem 0 1.5rem;
     
   }
 }
@@ -54,7 +67,7 @@ a:not([id]):not([class]) {
 }
 
 .frame {
-  background-color: var(--tertiary);
+  background-color: var(--frame-colour);
   border-radius: 12px;
 
   .frame-content {
@@ -78,7 +91,7 @@ a:not([id]):not([class]) {
 
 .frame__heading {
   font-weight: 600;
-  font-size: 2rem;
+  font-size: 1rem;
   margin-bottom: 1.5rem;
   line-height: 1.25;
 }
@@ -225,6 +238,7 @@ img {
   .main-nav {
     flex: 1;
     align-items: center;
+
   }
 
   .navbar-collapse {

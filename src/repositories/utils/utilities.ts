@@ -4,7 +4,6 @@ import {getNavigationJson} from "../Navigation/request";
 import {DEBUG_QUERY} from "./preview";
 import {getLogger} from "../../utils/logger";
 import {v4 as generateGuid} from "uuid";
-import {defaultLanguage} from "./languages";
 
 function isEmptyOrSpaces(str: string) {
     return str === null || str.match(/^ *$/) !== null;

@@ -3,7 +3,6 @@ import { Col, Row } from "react-bootstrap";
 import {
     FaFacebook,
     FaTwitter,
-    FaLinkedin,
     FaShareAlt,
     FaWhatsapp,
 } from "react-icons/fa";
@@ -21,9 +20,9 @@ export interface ISharingControls {
     mainQuestionText?: string;
 }
 
-export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText}: ISharingControls) => {
+export const SharingControls = ({shareHeading, mainQuestionText}: ISharingControls) => {
     const [linkAdded, setLinkAdded] = useState(false);
-    const [pageUrl, setPageUrl] = useState( "https://www.ourplanetourpeople.com");
+    const [pageUrl] = useState( "https://www.ourplanetourpeople.com");
     
    
  
@@ -36,12 +35,6 @@ export const SharingControls = ({shareHeading, shareSubHeading, mainQuestionText
         const copyLink = document.getElementById('copy-link') as HTMLLinkElement;
         if(!copyLink)
             return;
-
-        function getCurrentPage():string
-        {
-            const cleanUrl = window.location.origin + window.location.pathname;
-            return encodeURIComponent(cleanUrl);        
-        }
         
 
         copyLink.addEventListener('click', (event) => {

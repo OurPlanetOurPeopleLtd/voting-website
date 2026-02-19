@@ -1,4 +1,4 @@
-﻿interface ILogger {
+interface ILogger {
     info: (msg: string) => void;
     error: (msg: string | unknown) => void;
 }

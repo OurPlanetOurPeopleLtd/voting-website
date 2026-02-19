@@ -1,9 +1,4 @@
-﻿import {useEffect, useState} from "react";
-import {NavigationItem} from "../repositories/Navigation/types";
-import {getAllNavData} from "../repositories/Common/request";
-
-import {getLastSlugPart, LogLinks} from "../repositories/utils/utilities";
-import {Navigate, useLocation} from "react-router-dom";
+﻿import {Navigate} from "react-router-dom";
 
 const NoPage = () => {
 

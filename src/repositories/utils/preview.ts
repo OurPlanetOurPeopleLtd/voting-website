@@ -1,4 +1,4 @@
-﻿let preview = false;
+let preview = false;
 
 export function getPreview() {
     return preview

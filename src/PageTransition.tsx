@@ -8,13 +8,12 @@ const PageTransition = ({ children }: { children: React.ReactNode }) => {
     const [visible, setVisible] = useState(false);
     const location = useLocation();
     const [pathName, setPathName] = useState<string>()
-    const [locale, setLocale] = useState<string>();
-    
+  
     useEffect(() => {
         //scroll to top
         window.scrollTo(0, 0);      
         const slug = getLastSlugPart(location.pathname)
-        if(slug != pathName)
+        if(slug !== pathName)
         {
             setVisible(false);
             setTimeout(() => setVisible(true), 300); // Delay to trigger CSS transition

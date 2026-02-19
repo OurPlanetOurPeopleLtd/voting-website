@@ -6,14 +6,12 @@ import {NavDropdown} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
 import "./MegaMenu.scss";
 
-
 export type TDynamicNav = {
     id: string;
     onSelect?: () => {};
     itemGroup?: NavigationItem[];
     locale?: string;
 };
-
 
 export const DynamicNavList = (props: TDynamicNav) => {
     const {id, itemGroup, locale, onSelect} = props;

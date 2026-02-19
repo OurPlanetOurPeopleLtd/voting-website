@@ -44,7 +44,7 @@ function datoRichTextToReactNode(content: TStructuredText): ReactNode {
             ]}
             renderInlineRecord={({record}) => {
                 // Check for undefined __typename and log it for debugging
-    const { __typename, id, ...props } = record;
+    const { __typename } = record;
     
     if (!__typename) {
         console.warn("Record missing __typename:", record);

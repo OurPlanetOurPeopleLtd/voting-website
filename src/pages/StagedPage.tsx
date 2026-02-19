@@ -1,5 +1,4 @@
 ﻿import {useCallback, useEffect, useState} from "react";
-
 import "./Page.scss";
 import {getSpecialPageJson} from "../repositories/StagedPage/request";
 import {StagedFlow} from "./VotingPageVariants/VotingPageMainJourney";

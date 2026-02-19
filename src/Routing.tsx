@@ -44,7 +44,7 @@ const Reset = () => {
 function Routing() {
     const [pageNavigateData, setPageNavigateData] = useState<NavigationItem[] | null>(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+
     const [locale, setLocale] = useState(defaultLanguage);
     const [languageArray, setLanguageArray] = useState<(string | undefined)[]>([]);
     
@@ -61,7 +61,6 @@ function Routing() {
             setLoading(false); // Data loaded successfully
         } catch (err) {
             console.error("Error fetching navigation data:", err);
-            setError(true)       
             setLoading(false); // Loading failed
     
         }

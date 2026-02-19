@@ -11,9 +11,6 @@ import { VideoWithReference } from '../VideoWithReference';
 import { DialogModal, DialogModalRef } from '../../components/DialogModal';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
-	getNextTranslation,
-	getSummaryTranslation,
-	getDetailTranslation,
 	getTranslation, getLandingSummaryTranslation,
 } from '../../repositories/utils/extraTranslations';
 import { TVotingPageExtended } from '../../repositories/VotingPage/model';
@@ -144,7 +141,7 @@ export const StagedFlow = (props: TStagedFlowProps) => {
 									{props.landingHeading}
 								</h1>
 
-								<div style={{ fontSize: '1.2rem' }}>
+								<div style={{ fontSize: '1.5rem' }}>
 									<StructuredText data={props.openingText} />
 								</div>
 

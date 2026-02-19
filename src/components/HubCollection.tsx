@@ -2,7 +2,6 @@ import {createAnchorLinkFromTitle} from "../repositories/utils/utilities";
 import "./HubCollection.scss";
 
 import {ContentType, NavigationItem} from "../repositories/Navigation/types";
-import {Video} from "react-datocms";
 import {VideoControl} from "./VideoControl";
 import {TVideoThumbnail} from "../repositories/Common/types";
 
@@ -55,7 +54,7 @@ export const HubCard = (props: THubCard) => {
                     ? <h2 className="card-title" font-overridded={!!overrideFontSizeTo}
                           style={{fontSize: overrideFontSizeTo}}>{title}</h2>
                     : <h2 className="card-title">{title}</h2>}
-                {props.pageImageSrc ? <img src={props.pageImageSrc}/> : null }
+                {props.pageImageSrc ? <img src={props.pageImageSrc} alt={"page source"}/> : null }
             </div>
         </a>)
 }
@@ -81,8 +80,6 @@ export const HubCollection = (props: THubCollection) => {
     let subHubCollections: any[] = [];
     let mainHubCards: any[] = [];
     createHubCards(props.items);
-    const pageTitle = props.pageTitle ?? props.parentTitle ?? "hub_page";
-
 
     function createHubCards(items: NavigationItem[]) {
         if (!items)

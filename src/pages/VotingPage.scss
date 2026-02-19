@@ -1,13 +1,3 @@
-:root {
-  --secondary: #538177;
-  --tertiary: #123e50;
-
-  --secondary20Brighter: #6ea296;
-  --tertiary20Brighter: #217293;
-
-  --secondary50Brighter: #a4c5be;
-  --tertiary50Brighter: #57b3d9;
-}
 
 .voteControlRow {
   display: flex;
@@ -262,7 +252,8 @@ svg {
 /* Targets only the main content containers to avoid global layout issues */
 .frame.container,
 .frame-content {
-  padding-bottom: 0 !important;
+  padding-top:0  !important;
+  padding-bottom: 10px  !important;
   margin-bottom: 0 !important;
 }
 
@@ -273,12 +264,12 @@ footer {
 footer {
   background-color: white; /*var(--primary);  Uses your dark blue theme color */
 
-  margin-top: auto; /* Pushes footer to bottom if page content is short */
+  
   width: 100%;
   margin-bottom: 0 !important;
   display: block;
   z-index: 10;
-  position: relative;
+  position: fixed;
 
   ul {
     margin: 0; /* Ensures the list doesn't push the footer up */
@@ -294,6 +285,7 @@ footer {
     color: var(--bs-body-color) !important;
     text-decoration: none;
     font-size: 0.9rem;
+
 
     &:hover {
       color: var(--tertiary50Brighter) !important;

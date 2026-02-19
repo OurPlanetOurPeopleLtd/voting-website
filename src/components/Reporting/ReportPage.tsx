@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {ReportData, ReportLogic, TDataSection} from "./ReportData";
+import {ReportLogic, TDataSection} from "./ReportData";
 import {DataColumn} from "./DataColumn";
 import {Button, Col, Row} from "react-bootstrap";
 
@@ -28,7 +28,6 @@ export const ReportPage = () => {
     const [refreshing, setRefreshing] = useState<RefreshingDictionary>();
     const [dataColumns, setDataColumns] = useState<DataDictionary>();
     const [datePairColumns, setDatePairColumns] = useState<DatePairDictionary>();
-    const [reportData, setReportData] = useState<ReportData[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -51,10 +50,7 @@ export const ReportPage = () => {
             [key]: newData,
         }));
     };
-
-    const getData = (key: string): TDataSection[] | undefined => {
-        return dataColumns ? dataColumns[key] : undefined;
-    };
+    
 
     const reportLogic = new ReportLogic();
 
@@ -62,10 +58,7 @@ export const ReportPage = () => {
          handleAddColumn().catch(e => console.log(e));
          
      }, []);
-
-    const handleGenerateExcel = () => {
-        reportLogic.downloadDataAsExcel().catch((e) => console.log(e));
-    };
+     
 
     const getExcelColumnName = (columnNumber: number): string => {
         let columnName = '';

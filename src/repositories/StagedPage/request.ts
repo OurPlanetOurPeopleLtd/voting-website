@@ -17,6 +17,6 @@ export const getSpecialPageJson = (slug: string, locale:string, staticData:boole
     const query = generateSpecialPageQuery(slug, locale);
     const apiPromise = fetchDataDato<QueryResult>(query).then(mapSpecialPage);
 
-    return getStaticOrFetch<TStagePage>("StagedPage", apiPromise, locale, slug, staticData);
+    return getStaticOrFetch<TStagePage>("StagedPage", apiPromise, locale, slug);
 };
 

@@ -27,8 +27,6 @@ export const DynamicFooter = ({id,locale}) => {
                     let slugPrefix = x.link?.includes( gslugPrefix) ? "" : gslugPrefix;
                     if(x.link?.startsWith("/") && slugPrefix?.endsWith("/"))
                         slugPrefix = locale ?? ""
-
-                    const key =index +  (locale ?? "");
                    
                     return (
                         <li key={locale+index}>

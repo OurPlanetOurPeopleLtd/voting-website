@@ -10,7 +10,6 @@ export const APP_CONTENTFUL_ACCESS_TOKEN = process.env.REACT_APP_CONTENTFUL_ACCE
 export const APP_CONTENTFUL_ENVIRONMENT = process.env.REACT_APP_CONTENTFUL_ENVIRONMENT ?? node_env === "development" ? developmentSpace : "main";
 
 const TOKEN = APP_CONTENTFUL_ACCESS_TOKEN;
-const ENVIRONMENT = "";// APP_CONTENTFUL_ENVIRONMENT;
 export const CONTENT_URL = 'https://graphql.datocms.com/'; //`https://graphql.contentful.com/content/v1/spaces/${SPACE}/environments/${ENVIRONMENT}`;
 
 export const fetchDataDato = <TType>(query: string) => {
@@ -18,7 +17,6 @@ export const fetchDataDato = <TType>(query: string) => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            'X-Environment': ENVIRONMENT,
             Accept: "application/json",
             Authorization: `Bearer ${TOKEN}`,
         },
@@ -34,9 +32,6 @@ const fetchData = async <TType>(
     query: string,
     options: RequestInit
 ): Promise<TType> => {
- 
-    //console.log("Fetching data " + count++ );
-    
 
     return await fetch(url, options).then((res) => {
         const result = res.json();
@@ -52,40 +47,14 @@ interface Result<T> {
     error?: Error;
 }
 
-// Function to read JSON from the public/data directory
-async function readStaticJson<T>(filePath: string): Promise<Result<T>> {
-    try {
-        const response = await fetch(filePath);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json() as T;
-        return { success: true, data };
-    } catch (error) {
-        return { success: false, error: error as Error };
-    }
-}
 
 export async function getStaticOrFetch<T>(
     fileNamePrefix: string,
     apiPromise: Promise<T>,
     locale: string,
-    slug: string,
-    staticData: boolean = false
+    slug: string
 ): Promise<T> {
-  /*  if (staticData) {
-        
-        const fileName = `${fileNamePrefix}_${locale}_${slug}.json`;
-        const filePath = `/data/${fileName}`;
 
-        const staticResult = await readStaticJson<T>(filePath);
-
-        if (staticResult.success && staticResult?.data) {
-            return staticResult.data;
-        } else {
-            console.log('\x1b[33m%s\x1b[0m',`Falling back to API for ${fileName}:`, staticResult.error);
-        }
-    }*/
 
     return apiPromise;
 }

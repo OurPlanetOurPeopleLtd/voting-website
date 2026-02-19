@@ -1,4 +1,4 @@
-import {ContentType, NavigationItem, QueryResult} from "./types";
+import {NavigationItem, QueryResult} from "./types";
 import {generateNavQuery} from "./query";
 import {fetchDataDato, getStaticOrFetch} from "../utils/graphQLfetch";
 import {mapNavData} from "./mappings";
@@ -8,7 +8,7 @@ export const getNavigationJson = (id: string, locale:string, staticData:boolean 
     const query = generateNavQuery(id,locale);
     
     const apiPromise = fetchDataDato<QueryResult>(query).then(mapNavData);
-    return getStaticOrFetch<NavigationItem[]>("Navigation", apiPromise, locale, id, staticData);
+    return getStaticOrFetch<NavigationItem[]>("Navigation", apiPromise, locale, id);
 };
 
 export const getAllSlugs = async () =>
