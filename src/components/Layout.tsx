@@ -1,4 +1,6 @@
-import { Outlet, useMatch } from 'react-router-dom';
+﻿import logo from '../logo.webp';
+
+import { Link, Outlet, useMatch } from 'react-router-dom';
 import '@aws-amplify/ui-react/styles.css';
 import './Layout.scss';
 import Container from 'react-bootstrap/Container';
@@ -13,7 +15,8 @@ import { Analytics } from 'aws-amplify';
 import { v4 as generateGuid } from 'uuid';
 import {
 	DisableAnalytics,
-	EnableAnalytics
+	EnableAnalytics,
+	recordUse,
 } from '../utils/analytics';
 
 import { DynamicNavList } from './DynamicNavList';
@@ -109,7 +112,18 @@ export const LayoutTs = ({ children, locale, title }: ILayout) => {
 				fixed='top'
 			>
 				<Container style={{ position: 'relative' }}>
-		
+					<Link to={`/${locale}`} className='navbar-brand'>
+						<img
+							alt='Our Planet Our People'
+							src={logo}
+							width='200'
+							height='50'
+							onClick={() => {
+								setExpanded(false);
+							}}
+						/>
+					</Link>
+
 					<Navbar.Toggle
 						onClick={toggleExpanded}
 						aria-controls='responsive-navbar-nav'
@@ -153,7 +167,7 @@ export const LayoutTs = ({ children, locale, title }: ILayout) => {
 				onDecline={() => {
 					setAnalyticsEnabled(false);
 				}}
-				onAccept={() => {
+				onAccept={(acceptedByScrolling) => {
 					setAnalyticsEnabled(true);
 				}}
 			>

@@ -371,7 +371,7 @@ export function getNextTranslation(languageCode: string): string {
 }
 export const allTranslations: { [key: string]: { videoSummary: string, climateSummary: string } } = {
     "en": {
-        "videoSummary": "Introductory Video",
+        "videoSummary": "Summary",
         "climateSummary": "Climate summary"
     },
     "fr": {

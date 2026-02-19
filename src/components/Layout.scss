@@ -57,6 +57,25 @@ body {
 		margin-top: -1.5rem;
 	}
 }
+.navbar-nav {
+  gap: 0.5rem; /* Remove the gap so the hover states can touch if needed */
+}
+
+.navbar-nav .nav-link {
+  /* Find your longest button and set this value slightly larger */
+  min-width: 120px; 
+  
+  /* Ensure the text stays centered inside that fixed width */
+  text-align: center;
+  
+  /* Standardize vertical height */
+  padding: 0.5rem 0; 
+  
+  /* Optional: visual consistency */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 nav {
 	background-color: var(--background);
@@ -110,7 +129,7 @@ main {
 	margin: 6rem 1rem 3rem;
 
 	@media (min-width: 1024px) {
-		margin: 6rem 0 0 0;
+		margin: 6rem 0 4rem 0;
 	}
 
 	.container {
