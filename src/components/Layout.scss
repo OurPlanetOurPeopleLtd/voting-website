@@ -179,8 +179,8 @@ footer {
 }
 
 .CookieConsent {
-	background-color: var(--tertiary) !important;
-	color: var(--secondary) !important;
+	background-color: var(--primary) !important;
+	color: var(--tertiary) !important;
 	align-items: center !important;
 	padding: 0 !important;
 	z-index: 100;
@@ -203,15 +203,7 @@ footer {
 		margin-top: 0 !important;
 	}
 	
-	button{
-		
-		&:hover {
-			background-color:  #00643b!important; /* Brandy Yellow */
-			color: #fcb900  !important;
-	
-			text-decoration: none;
-		}
-	}
+
 
 	@media screen and (min-width: 1024px) {
 		padding-bottom: 0 !important;

@@ -79,6 +79,9 @@ export const VideoControl = ({
     //     }
     // }, [isOpen, playing]);
 
+    console.log("Showing video...")
+    console.log(JSON.stringify(datoVideo))
+
     function goFullScreen() {
         const player = document.querySelector("mux-player");
         const videoElement = player as unknown as MuxPlayer;

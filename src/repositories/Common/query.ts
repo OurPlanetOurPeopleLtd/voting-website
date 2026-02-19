@@ -10,12 +10,16 @@ const blogPost = `title
 const videoBlock = `{
                    id,
                    video {
-                    muxPlaybackId
-                    title
-                    width
-                    height
-                    blurUpThumb
+                      muxPlaybackId
+                      title
+                      width
+                      height
+                      blurUpThumb
+                      muxAssetId
+                      mp4Url
+                      streamingUrl
                   }
+                    
               }`
 
 const imgBlock = `{responsiveImage
@@ -91,16 +95,7 @@ const votingPage = `
     hubIntroText
     hubSecondaryText
     hubVideo {
-      video {
-        id
-        video {
-          muxPlaybackId
-          title
-          width
-          height
-          blurUpThumb
-        }
-      }
+      video ${videoBlock  }
     thumbnailImage {
         responsiveImage {
           src
