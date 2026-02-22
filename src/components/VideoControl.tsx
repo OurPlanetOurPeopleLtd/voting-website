@@ -195,38 +195,28 @@ export const VideoControl = ({
         }
       };
 
+    const onPlayerReady = () =>
+    {
+        const player = document.querySelector("mux-player") as any;
+        if (!player) return;
 
-    useEffect(() => {
-    if (!locale) return;
-
-    // Use a cleaner event-based approach instead of a blind interval
-    const player = document.querySelector("mux-player") as any;
-    if (!player) return;
-
-    const syncTracks = () => {
-        // Mux exposes tracks on the parent element for convenience
         const tracks = player.textTracks;
-        if (!tracks || tracks.length === 0) return;
+        // Check if our specific track is missing (length 3 means it is)
+        const isManualTrackMissing = !Array.from(tracks).some((t: any) => t.kind === "subtitles");
 
-        for (let i = 0; i < tracks.length; i++) {
-            const track = tracks[i];
-            // Match the language code (e.g., 'en', 'es')
-            if (track.language === locale || track.label.toLowerCase().includes(locale.toLowerCase())) {
-                track.mode = 'showing';
-            } else {
-                track.mode = 'disabled'; // Use 'disabled' instead of 'hidden' to keep the UI clean
-            }
+        if (isManualTrackMissing) {
+            console.log("subtiles missing")
+            // We use the Mux API method instead of HTML tags.
+            // This injects the track directly into the Shadow DOM engine.
+           /* player.addRemoteTextTrack({
+                kind: 'subtitles',
+                src: "https://stream.mux.com/yodT9rujInG8cIpBOx7DGFxeKnWvjjIB/text/rwVehijaiCWdhE4y3r7ONnmkFEoF21avb00gtWCaF7p2mD02400dBzM00A.vtt",
+                label: 'English Test',
+                language: 'en',
+                default: true 
+            }, false); */
         }
-    };
-
-    // Chrome handles 'loadedmetadata' better for track initialization
-    player.addEventListener('loadedmetadata', syncTracks);
-    
-    // Also try immediately in case it's already loaded
-    //syncTracks();
-
-    return () => player.removeEventListener('loadedmetadata', syncTracks);
-}, [locale]);
+    }
 
     return (
         <div id="dato-video-player">
@@ -240,6 +230,7 @@ export const VideoControl = ({
                 onEnded={onVideoEnd}
                 onPlay={onVideoPlay}
                 onTimeUpdate={onVideoProgress}
+                onLoadedMetadata={onPlayerReady}
                 onPause={onVideoPause}
                 accentColor="#57b3d9"
                 
@@ -248,6 +239,7 @@ export const VideoControl = ({
             >
             
             </VideoPlayer>
+
         </div>
     );
 };
