@@ -197,44 +197,36 @@ export const VideoControl = ({
 
 
     useEffect(() => {
-        if (!locale) return;
+    if (!locale) return;
 
-        const intervalId = setInterval(() => {
-            interface VideoPlayerType extends HTMLElement { src: string;
-                textTracks: TextTrackList;}
-            const videoParent = document.querySelector("mux-player") as HTMLElement;
+    // Use a cleaner event-based approach instead of a blind interval
+    const player = document.querySelector("mux-player") as any;
+    if (!player) return;
 
-            function findElementInShadowRoot(root: HTMLElement, selector: string): HTMLElement | null {
-                const element = root.querySelector(selector) as HTMLElement;
-                if (element) return element;
-                if (root.shadowRoot) return findElementInShadowRoot(root.shadowRoot as unknown as HTMLElement, selector);
-                return null;
+    const syncTracks = () => {
+        // Mux exposes tracks on the parent element for convenience
+        const tracks = player.textTracks;
+        if (!tracks || tracks.length === 0) return;
+
+        for (let i = 0; i < tracks.length; i++) {
+            const track = tracks[i];
+            // Match the language code (e.g., 'en', 'es')
+            if (track.language === locale || track.label.toLowerCase().includes(locale.toLowerCase())) {
+                track.mode = 'showing';
+            } else {
+                track.mode = 'disabled'; // Use 'disabled' instead of 'hidden' to keep the UI clean
             }
+        }
+    };
 
-            const videoPlayer = findElementInShadowRoot(videoParent, "mux-video") as VideoPlayerType;
-            if (!videoPlayer) return;
+    // Chrome handles 'loadedmetadata' better for track initialization
+    player.addEventListener('loadedmetadata', syncTracks);
+    
+    // Also try immediately in case it's already loaded
+    //syncTracks();
 
-            const tracks = videoPlayer.textTracks;
-
-            for (let i = 0; i < tracks.length; i++) {
-                const track = tracks[i];
-
-                // Set all tracks to 'hidden' first, as we need to explicitly enable one.
-                if (track.mode !== 'disabled') {
-                    track.mode = 'hidden';
-                }
-
-                // Find the track matching the current locale and set its mode to 'showing'.
-                if (track.language === locale) {
-                    track.mode = 'showing';
-                }
-            }
-
-            clearInterval(intervalId);
-        }, 500);
-
-        return () => clearInterval(intervalId);
-    }, [locale]);
+    return () => player.removeEventListener('loadedmetadata', syncTracks);
+}, [locale]);
 
     return (
         <div id="dato-video-player">
@@ -252,7 +244,10 @@ export const VideoControl = ({
                 accentColor="#57b3d9"
                 
                 data={datoVideo}
-            />
+                crossOrigin="anonymous"
+            >
+            
+            </VideoPlayer>
         </div>
     );
 };
