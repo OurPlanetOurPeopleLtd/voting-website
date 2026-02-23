@@ -201,20 +201,10 @@ export const VideoControl = ({
         if (!player) return;
 
         const tracks = player.textTracks;
-        // Check if our specific track is missing (length 3 means it is)
         const isManualTrackMissing = !Array.from(tracks).some((t: any) => t.kind === "subtitles");
 
         if (isManualTrackMissing) {
             console.log("subtiles missing")
-            // We use the Mux API method instead of HTML tags.
-            // This injects the track directly into the Shadow DOM engine.
-           /* player.addRemoteTextTrack({
-                kind: 'subtitles',
-                src: "https://stream.mux.com/yodT9rujInG8cIpBOx7DGFxeKnWvjjIB/text/rwVehijaiCWdhE4y3r7ONnmkFEoF21avb00gtWCaF7p2mD02400dBzM00A.vtt",
-                label: 'English Test',
-                language: 'en',
-                default: true 
-            }, false); */
         }
     }
 
@@ -233,8 +223,17 @@ export const VideoControl = ({
                 onLoadedMetadata={onPlayerReady}
                 onPause={onVideoPause}
                 accentColor="#57b3d9"
+                metadata={{
+                    video_id: datoVideo?.id,
+                    video_title: datoVideo?.title,
+                }}
                 
-                data={datoVideo}
+                data={{ 
+                    ...datoVideo, 
+                    
+                    attributes: { ...datoVideo?.attributes, placeholder: null } 
+                }}
+
                 crossOrigin="anonymous"
             >
             
@@ -242,4 +241,7 @@ export const VideoControl = ({
 
         </div>
     );
+    
+
+    
 };

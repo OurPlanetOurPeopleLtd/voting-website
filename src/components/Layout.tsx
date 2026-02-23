@@ -103,6 +103,8 @@ export const LayoutTs = ({ children, locale, title }: ILayout) => {
 		<>
 			<Helmet>
 				<title>{title ?? 'Home'} - Our Planet Our People</title>
+				<link rel="preconnect" href="https://manifest-oci-us-ashburn-1-vop1.fastly.mux.com" crossOrigin="anonymous" />
+				<link rel="preconnect" href="https://stream.mux.com" crossOrigin="anonymous" />
 			</Helmet>
 
 			<Navbar

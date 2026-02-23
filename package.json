@@ -16,6 +16,7 @@
     "lucide-react": "^0.407.0",
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",
+    "@mux/mux-player-react": "^3.11.4",
     "react-bootstrap": "^2.7.0",
     "react-chartjs-2": "^5.2.0",
     "react-cookie-consent": "^8.0.1",

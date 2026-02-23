@@ -13,6 +13,11 @@ mux-player {
   }
 }
 
+mux-player::part(captions-button) {
+    display: flex !important;
+    visibility: visible !important;
+}
+
 /* Prevent .fullscreen styles on mobile */
 @media (min-width: 768px) {
   #dato-video-player {
