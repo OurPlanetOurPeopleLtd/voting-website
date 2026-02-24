@@ -1,4 +1,4 @@
-type Event @model @auth(rules: [{allow: public}]) {
+type Event @model @auth(rules: [{allow: public, provider: identityPool}]) {
   id: ID!
   userId: ID
   eventName: String
@@ -10,7 +10,7 @@ enum Choice {
   NO
 }
 
-type Vote @model @auth(rules: [{allow: public}]) {
+type Vote @model @auth(rules: [{allow: public, provider: identityPool}]) {
   id: ID!
   voterId: ID
   choice: Choice!
@@ -18,7 +18,7 @@ type Vote @model @auth(rules: [{allow: public}]) {
   country: String
 }
 
-type User @model @auth(rules: [{allow: public}]) {
+type User @model @auth(rules: [{allow: public, provider: identityPool}]) {
   id: ID!
   email: AWSEmail
   comment:String
