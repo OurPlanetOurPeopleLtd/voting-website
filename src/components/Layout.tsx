@@ -131,11 +131,6 @@ export const LayoutTs = ({ children, locale, title }: ILayout) => {
 						aria-controls='responsive-navbar-nav'
 					/>
 
-					<div className='main-nav__language'>
-						<FlagSelect
-							currentLocale={locale ?? defaultLanguage}
-						></FlagSelect>
-					</div>
 
 					<Navbar.Collapse id='responsive-navbar-nav'>
 						<Nav className='main-nav'>
