@@ -20,9 +20,7 @@ type RefreshingDictionary = {
 export const ReportPage = () => {
 
 
-    const today = new Date();
-    const sevenDaysAgo = new Date(today);
-    sevenDaysAgo.setDate(today.getDate() - 7);
+    
 
     //TDataColumn 
     const [refreshing, setRefreshing] = useState<RefreshingDictionary>();
@@ -54,8 +52,10 @@ export const ReportPage = () => {
 
     const reportLogic = new ReportLogic();
 
+    
+
      useEffect(() => {
-         handleAddColumn().catch(e => console.log(e));
+         addDefaultColumns().catch(e => console.log(e));
          
      }, []);
      
@@ -73,6 +73,10 @@ export const ReportPage = () => {
         return columnName;
     };
 
+    const today = new Date();
+    const sevenDaysAgo = new Date(today);
+    sevenDaysAgo.setDate(today.getDate() - 7);
+
     const handleAddColumn = async () => {
         console.log("Adding Column")
         const colNumber = dataColumns ? Object.keys(dataColumns).length : 0;
@@ -80,6 +84,28 @@ export const ReportPage = () => {
         //updateData(label, []);
         //updateDatePair(label, {startDate:today, endDate:sevenDaysAgo});
         await handleDateRangeChange(label, sevenDaysAgo, today );
+    };
+
+    const addDefaultColumns = async () => {
+        //const today = new Date();
+        
+        // Define our offsets in milliseconds
+        const MS_PER_HOUR = 60 * 60 * 1000;
+        const MS_PER_DAY = 24 * MS_PER_HOUR;
+
+        // Create new dates by subtracting milliseconds from the current timestamp
+        const hourAgo = new Date(today.getTime() - MS_PER_HOUR);
+        const halfdayAgo = new Date(today.getTime() - (12 * MS_PER_HOUR));
+        const dayAgo = new Date(today.getTime() - MS_PER_DAY);
+
+        console.log("Adding default Columns");
+
+        // Using Promise.all so they run in parallel (faster if these are API calls)
+       
+        await handleDateRangeChange("Past 1 hour", hourAgo, today)
+        await handleDateRangeChange("Past 12 Hours", halfdayAgo, today)
+        await handleDateRangeChange("Past 24 Hours", dayAgo, today)
+        
     };
 
     const handleDateRangeChange = async (key: string, startDate: Date, endDate: Date) => {

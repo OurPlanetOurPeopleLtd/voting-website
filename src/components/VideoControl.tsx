@@ -116,7 +116,7 @@ export const VideoControl = ({
                 attributes: {
                     page: window.location.pathname,
                     userGuid: getUserGuid(),
-                    video: datoVideo?.title ?? "",
+                    video: datoVideo?.title ?? datoVideo?.muxPlaybackId ?? window?.location?.pathname ?? "",
                     time: currentTime.toString(),
                     percentage: percentage?.toString() ?? "",
                 },
@@ -140,7 +140,7 @@ export const VideoControl = ({
             attributes: {
                 page: window.location.pathname,
                 userGuid: getUserGuid(),
-                video: datoVideo?.title ?? "",
+                video: datoVideo?.title ?? datoVideo?.muxPlaybackId ?? window?.location?.pathname ?? "",
                 time: Math.floor(event.target.currentTime).toString()
             }
         });
@@ -155,7 +155,7 @@ export const VideoControl = ({
             attributes: {
                 page: window.location.pathname,
                 userGuid: getUserGuid(),
-                video: datoVideo?.title ?? "",
+                video: datoVideo?.title ?? datoVideo?.muxPlaybackId ?? window?.location?.pathname ?? "",
                 time: Math.floor(event.target.currentTime).toString(),
                 percentage: "100",
             }
@@ -177,7 +177,7 @@ export const VideoControl = ({
             attributes: {
                 page: window.location.pathname,
                 userGuid: getUserGuid(),
-                video: datoVideo?.title ?? "",
+                video: datoVideo?.title ?? datoVideo?.muxPlaybackId ?? window?.location?.pathname ?? "",
                 time: currentTime.toString(),
                 percentage: percentage?.toString() ?? "",
             }

@@ -173,7 +173,8 @@ export class ReportLogic {
     const groupByVideo = (videoParsed: any[]): Map<string, any[]> => {
       const grouped = new Map<string, any[]>();
       videoParsed.forEach((event) => {
-        const videoName = event.attributes?.video;
+        let videoName = event.attributes?.video;
+    
         if (videoName) {
           if (!grouped.has(videoName)) {
             grouped.set(videoName, []);
@@ -316,12 +317,12 @@ export class ReportLogic {
 
     return [
       usersToDateSection,
-      votingSection,
+     // votingSection,
       passwordSection,
       ...videoExcelData,
-      shareSection,
-      donateSection,
-      regSection,
+     // shareSection,
+    //  donateSection,
+     // regSection,
     ];
   }
 

@@ -70,6 +70,10 @@ const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
 			localStorage.setItem(STORAGE_KEY, 'true');
 			setUnlocked(true);
 
+			if(input == "ChrisPepper")
+			{
+				return;
+			}
 			recordUse(
 				{
 					name: 'Password_Input',
