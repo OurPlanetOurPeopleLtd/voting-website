@@ -54,7 +54,7 @@ const MAGIC_GUID = '43722bdd-325b-46e4-8c95-1fb95a784b5f';
 
 const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
 	const [input, setInput] = useState('');
-	const [unlocked, setU''nlocked] = useState<boolean>(false);
+	const [unlocked, setUnlocked] = useState<boolean>(false);
 	const [showPassword, setShowPassword] = useState<boolean>(false);
 
 	useEffect(() => {
