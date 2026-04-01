@@ -2,7 +2,9 @@ import React, { useState, useEffect, FormEvent } from 'react';
 
 import { recordUse } from './utils/analytics';
 import { getUserGuid } from './repositories/utils/utilities';
+import {fetchDataDato} from "./repositories/utils/graphQLfetch";
 
+import {QueryResult} from "./repositories/utils/types";
 import './PasswordGate.scss';
 
 interface PasswordGateProps {
@@ -53,6 +55,31 @@ const PASSWORDS = [
 const STORAGE_KEY = 'site_unlocked';
 const MAGIC_GUID = '43722bdd-325b-46e4-8c95-1fb95a784b5f'; 
 
+
+
+const generatePassQuery = (pwd:string) =>
+{
+	const query = `query passwordQuery
+					{
+						passwordEntry(filter: { password: { eq: "${pwd}" } }) {
+							password
+						}					
+					}
+					`
+
+	return query;
+}
+
+
+const datoPassword = async (pwd:string) =>
+{
+
+	const query = generatePassQuery( pwd);
+	const result = await fetchDataDato<QueryResult<{passwordEntry:string}>>(query)
+
+	return result?.data?.passwordEntry ?? false;
+}
+
 const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
 	const [input, setInput] = useState('');
 	const [unlocked, setUnlocked] = useState<boolean>(false);
@@ -76,14 +103,16 @@ const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
 
 	}, []);
 
-	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
-		if (PASSWORDS.includes(input)) {
+		
+		
+		
+		if (PASSWORDS.includes(input) || await datoPassword(input)) {
 			localStorage.setItem(STORAGE_KEY, 'true');
 			setUnlocked(true);
 
-			if(input == "ChrisPepper")
+			if(input === "ChrisPepper")
 			{
 				return;
 			}
