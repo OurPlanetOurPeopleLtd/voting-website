@@ -17,7 +17,6 @@ const PASSWORDS = [
 	'DavidKing',
 	'ChrisPepper',
 	'ProfJEH',
-	'ProfJR',
 	'Magnus83',
 	'BillMc',
 	'CBLH',
