@@ -13,7 +13,6 @@ interface PasswordGateProps {
 
 const PASSWORDS = [
 	'!1/#gn2qEm4.FVkSi33uM1>',
-	'JamesBateson',
 	'PatrickGardner',
 	'DavidKing',
 	'ChrisPepper',
