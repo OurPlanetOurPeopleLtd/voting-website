@@ -14,7 +14,7 @@ import '../src/fonts/rns-sans/RNSSanz-Bold.woff2';
 import './index.scss';
 
 import App from './App';
-import PasswordGate from './PasswordGate';
+
 
 const rootElement = document.getElementById('root');
 if (!rootElement) throw new Error('Failed to find the root element');
@@ -23,9 +23,9 @@ const root = ReactDOM.createRoot(rootElement);
 root.render(
 	<React.StrictMode>
 		<HelmetProvider>
-			<PasswordGate>
+			
 			<App></App>
-			</PasswordGate>
+			
 		</HelmetProvider>
 	</React.StrictMode>
 );
