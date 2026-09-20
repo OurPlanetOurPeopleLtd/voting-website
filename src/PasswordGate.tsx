@@ -11,45 +11,7 @@ interface PasswordGateProps {
 	children: React.ReactNode;
 }
 
-const PASSWORDS = [
-	'!1/#gn2qEm4.FVkSi33uM1>',
-	'PatrickGardner',
-	'DavidKing',
-	'ChrisPepper',
-	'ProfJEH',
-	'Magnus83',
-	'BillMc',
-	'CBLH',
-	'ALEXANDLIAM',
-	'JEH2025',
-	'George_Monbiot',
-	'George-Monbiot',
-	'GeorgeM',
-	'GeorgeMonbiot',
-	'George.Monbiot',
-	'Carla.D',
-	'Zak.P',
-	'Anthony.S',
-	'anthony.s',
-	'Anthony.s',
-	'alastairandrory',
-	'Alastairandrory',
-	'AlastairandRory',
-	'AlastairAndRory',
-	'greenrachel',
-	'GreenRachel',
-	'TheGuardian1943',
-	'SNP2027',
-	'sfsdfes',
-	'ClimateBreakthrough',
-	'ClimateLead',
-	'EdMiliband',
-	'edmiliband',
-	'MagnusL',
-	'SuttonStott',
-	'DavidKing',
-	'Laudato'
-];
+
 const STORAGE_KEY = 'site_unlocked';
 const MAGIC_GUID = '43722bdd-325b-46e4-8c95-1fb95a784b5f'; 
 
@@ -106,7 +68,7 @@ const PasswordGate: React.FC<PasswordGateProps> = ({ children }) => {
 		
 		
 		
-		if (PASSWORDS.includes(input) || await datoPassword(input)) {
+		if (await datoPassword(input)) {
 			localStorage.setItem(STORAGE_KEY, 'true');
 			setUnlocked(true);
 
